@@ -10,7 +10,7 @@ function App() {
 
 
   return (
-    <ThemeProvider theme={theme}>ㅁ
+    <ThemeProvider theme={theme}>
     <Router>
       <ScrollToTop />
       <Routes>
