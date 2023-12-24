@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useTheme } from "../../../contexts/ThemeContext.js"; // Context APi 적용
+import TopNavBar from "../common/TopNavBar.js";
 
 // theme 파일 폰트 적용 방법 + style-components 사용
 const Header1 = styled.div`
@@ -25,6 +26,7 @@ const WebHome = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <TopNavBar />
       <Header1>홈 웹 페이지</Header1>
       <Header2>
         이 화면에서는 context api를 통해 theme data를 전달하였습니다.
