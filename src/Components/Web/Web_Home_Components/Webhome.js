@@ -1,13 +1,39 @@
 import React from "react";
 import styled from "styled-components";
 
+
+const CLIENT_ID = '941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com';
+const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/google';
+
 const WebHome = () => {
   return (
     <>
-      <Header1>홈 웹 페이지</Header1>
-      <Header2>
-        이 화면에서는 context api를 통해 theme data를 전달하였습니다.
-      </Header2>
+      <Container>
+ 
+        <HeaderText>
+          <StyledText>
+            “Everybody has a plan {" "}
+            <ItalicPart>until they get punched </ItalicPart>in the face”
+          </StyledText>  
+        </HeaderText>
+
+        <TestStart>
+          <LoginLink href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+            지금 바로 ~하기
+          </LoginLink>
+        </TestStart>
+
+        <OnBoading>
+          <img src="Rectangle28.png"></img>
+        </OnBoading>
+
+        <TestStart2>
+          <LoginLink2 href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+            지금 바로 ~하기
+          </LoginLink2> 
+        </TestStart2>
+
+      </Container>
     </>
   );
 };
@@ -29,4 +55,83 @@ const Header2 = styled.div`
   line-height: ${({ theme }) => theme.LineHeight.Header2};
   color: ${({ theme }) => theme.colors.accent};
   font-family: "Pretendard";
+`;
+
+const StyledText = styled.div`
+  color: var(--black, #101010);
+  text-align: center;
+  font-family: "Manrope";
+  font-size: 60px;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -2.4px;
+`;
+
+const ItalicPart = styled.span`
+  color: var(--black, #101010);
+  font-family: "Playfair Display";
+  font-size: 60px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -2.4px;
+`;
+const Container =styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #FFF;
+  align-items: center;
+`;
+const HeaderText = styled.div`
+  width:50%;
+  height:164px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 132px;
+`;
+const TestStart = styled.div`
+  width:250px;
+  height:51px;
+  border-radius: 100px;
+  background: var(--btn, #2B2D36);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 132px;
+`;
+const LoginLink = styled.a`
+  color: var(--White, #FFF);
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
+`;
+const OnBoading = styled.div`
+  margin-top: 25px;
+`;
+const TestStart2 = styled.div`
+  width:194px;
+  height:51px;
+  border-radius: 25.5px;
+  background: var(--btn, #2B2D36);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 58px;
+`;
+const LoginLink2 = styled.a`
+  color: var(--White, #FFF);
+  font-family: "Pretendard Variable";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
 `;
