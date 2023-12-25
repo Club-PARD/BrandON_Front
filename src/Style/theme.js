@@ -119,7 +119,7 @@ export const theme = {
     text: "#2c3e50",
   },
   Web_fontSizes: {
-    Header1: "32px",
+    Header1: "40px",
     Header2: "18px",
     Header3: "24px",
     Header4: "20px",
@@ -135,7 +135,7 @@ export const theme = {
     Caption4: "16px",
   },
   fontWeights: {
-    Header1: "700",
+    Header1: "400",
     Header2: "600",
     Header3: "400",
     Header4: "700",
