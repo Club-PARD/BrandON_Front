@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import ProgressBar from "./ProgressBar";
+import Input from "./Input";
 
 const WebChat = () => {
   return (
     <Column>
       <ProgressBar />
+      <div style={{ flex: 1 }} />
+      <Input />
     </Column>
   );
 };
