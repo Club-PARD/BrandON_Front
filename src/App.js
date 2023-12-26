@@ -20,7 +20,7 @@ function App() {
             <Routes>
               {/* 기본 화면 설정 */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<ChatPage />} />
+              <Route path="/chat" element={<ChatPage />} />
               <Route path="/history" element={<HistoryPage />} />
             </Routes>
           </Main>
