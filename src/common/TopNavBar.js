@@ -13,7 +13,7 @@ const TopNavBar = () => {
         <Body1>홈</Body1>
       </Link>
       <div style={{ width: "66px" }} />
-      <Link to="/about" style={{ all: "unset", cursor: "pointer" }}>
+      <Link to="/chat" style={{ all: "unset", cursor: "pointer" }}>
         <Body1>채팅</Body1>
       </Link>
       <div style={{ width: "66px" }} />
