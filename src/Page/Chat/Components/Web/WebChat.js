@@ -7,11 +7,14 @@ const WebChat = () => {
   const [input, setInput] = useState("");
 
   return (
-    <Column>
-      <ProgressBar />
-      <div />
-      <Input input={input} setInput={setInput} />
-    </Column>
+    <>
+      <Overlay />
+      <Column>
+        <ProgressBar />
+        <div />
+        <Input input={input} setInput={setInput} />
+      </Column>
+    </>
   );
 };
 
@@ -34,4 +37,13 @@ const Column = styled.div`
   height: 92vh;
   padding: 13px 0;
   color: white;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 투명한 레이어 색상 및 투명도 조절 */
 `;

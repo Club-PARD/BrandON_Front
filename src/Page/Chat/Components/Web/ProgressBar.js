@@ -17,7 +17,8 @@ const ProgressBar = () => {
 
   return (
     <Container>
-      <h1>나 이해도</h1>
+      <Header4>나 이해도</Header4>
+      <div style={{ height: "10px" }} />
       <Row>
         <div
           style={{
@@ -36,7 +37,7 @@ const ProgressBar = () => {
             }}
           ></div>
         </div>
-        <h2>{progress}%</h2>
+        <Header3>{progress}%</Header3>
       </Row>
     </Container>
   );
@@ -46,7 +47,7 @@ export default ProgressBar;
 
 const Container = styled.div`
   width: 940px;
-  padding: 22px 20px;
+  padding: 16px 20px;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
@@ -57,4 +58,16 @@ const Row = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+`;
+
+const Header4 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
+  font-weight: ${({ theme }) => theme.fontWeights.Header4};
+  font-family: "Pretendard";
+`;
+
+const Header3 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header3};
+  font-weight: ${({ theme }) => theme.fontWeights.Header3};
+  font-family: "Pretendard";
 `;

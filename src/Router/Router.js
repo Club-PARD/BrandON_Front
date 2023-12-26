@@ -49,7 +49,8 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-image: url("background.jpg");
-  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-repeat: repeat;
   background-size: cover;
 `;
 
