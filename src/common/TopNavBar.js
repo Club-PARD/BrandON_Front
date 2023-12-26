@@ -75,11 +75,13 @@ export default TopNavBar;
 
 const Div = styled.div`
   display: flex;
+  position: fixed;
+  z-index: 1000;
   align-items: center;
   padding: 12px 48px;
   width: 100%;
   height: 72px;
-  background-color: black;
+  background-color: transparent;
   color: white;
 `;
 

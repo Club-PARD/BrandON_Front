@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ProgressBar from "./ProgressBar";
 import Input from "./Input";
 
 const WebChat = () => {
+  const [input, setInput] = useState("");
+
   return (
     <Column>
       <ProgressBar />
-      <div style={{ flex: 1 }} />
-      <Input />
+      <div />
+      <Input input={input} setInput={setInput} />
     </Column>
   );
 };
@@ -27,6 +29,9 @@ const Header1 = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  height: 100%;
+  height: 92vh;
+  padding: 13px 0;
+  color: white;
 `;

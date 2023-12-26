@@ -47,8 +47,8 @@ export default ProgressBar;
 const Container = styled.div`
   width: 940px;
   padding: 22px 20px;
-  border-radius: 0px 0px 20px 20px;
-  background: rgba(242, 247, 255, 0.9);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
 `;
 

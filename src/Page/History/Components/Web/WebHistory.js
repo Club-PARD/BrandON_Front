@@ -27,7 +27,7 @@ const WebHistory = () => {
     },
   ]);
   return (
-    <Div style={{ padding: "28px" }}>
+    <Div>
       <Div
         style={{
           flexDirection: "column",
@@ -85,7 +85,6 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  background-color: white;
   /* border: 0.5px solid black; */
   border-radius: 0px;
   box-sizing: content-box;
@@ -98,4 +97,6 @@ const Div = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const A = styled.a``;
+const A = styled.a`
+  color: white;
+`;

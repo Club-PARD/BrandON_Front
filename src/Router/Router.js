@@ -33,8 +33,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const Main = styled.div`
   flex: 1;
+  margin-top: 72px;
 `;
