@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AboutPage from "./Page/AboutPage";
-import HomePage from "./Page/HomePage";
-import HistoryPage from "./Page/HistoryPage";
+import ChatPage from "./Page/Chat";
+import HomePage from "./Page/Home";
+import HistoryPage from "./Page/History";
 import ScrollToTop from "./ScrollToTop";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./Style/theme";
 import styled from "styled-components";
-import TopNavBar from "./Components/Web/common/TopNavBar.js";
+import TopNavBar from "./common/TopNavBar";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Routes>
               {/* 기본 화면 설정 */}
               <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
+              <Route path="/about" element={<ChatPage />} />
               <Route path="/history" element={<HistoryPage />} />
             </Routes>
           </Main>

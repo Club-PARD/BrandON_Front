@@ -1,24 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import WoochalDead from "../../../Assets/Woochal_Dead.png"
+import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 
 const WebHistoryFeed = (props) => {
   return (
-    <Div style={{ display: "block", width: "450px", height: "450px", fontSize: "32px", margin: "10px" }}>
-      {props.imgURL === ""
-        ?
+    <Div
+      style={{
+        display: "block",
+        width: "450px",
+        height: "450px",
+        fontSize: "32px",
+        margin: "10px",
+      }}
+    >
+      {props.imgURL === "" ? (
         <Div style={{ display: "block", position: "relative" }}>
           <Img src={WoochalDead}></Img>
-          <Div style={{ position: "absolute", backgroundColor: "#000000", opacity: "70%", top: "0", left: "0", zIndex: "1" }}></Div>
+          <Div
+            style={{
+              position: "absolute",
+              backgroundColor: "#000000",
+              opacity: "70%",
+              top: "0",
+              left: "0",
+              zIndex: "1",
+            }}
+          ></Div>
         </Div>
-        :
-        <Img src={props.imgURL}></Img>}
+      ) : (
+        <Img src={props.imgURL}></Img>
+      )}
     </Div>
   );
 };
 
 export default WebHistoryFeed;
-
 
 const Div = styled.div`
   display: flex;
@@ -41,8 +57,8 @@ const Div = styled.div`
 `;
 
 const Img = styled.img`
-  width: ${props => props.width || '100%'};
-  height: ${props => props.height || '100%'};
-  border-radius : 10px;
-  position: ${props => props.position || ''};
+  width: ${(props) => props.width || "100%"};
+  height: ${(props) => props.height || "100%"};
+  border-radius: 10px;
+  position: ${(props) => props.position || ""};
 `;

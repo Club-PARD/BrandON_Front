@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const WebAbout = () => {
+const WebChat = () => {
   return (
     <>
-      <Header1>소개 웹 페이지</Header1>
+      <Header1>채팅 웹 페이지</Header1>
     </>
   );
 };
 
-export default WebAbout;
+export default WebChat;
 
 // theme 파일 폰트 적용 방법 + style-components 사용
 const Header1 = styled.div`

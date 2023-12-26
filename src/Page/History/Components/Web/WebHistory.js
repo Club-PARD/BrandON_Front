@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import WebAboutFeed from "./WebHistoryFeed";
-import Woochal from "../../../Assets/Woochal.png"
+import Woochal from "../../../../Assets/Woochal.png";
 
 const WebHistory = () => {
   const [feeds, setFeeds] = useState([
@@ -28,21 +28,40 @@ const WebHistory = () => {
   ]);
   return (
     <Div>
-      <Div style={{ flexDirection: "column", width: "960px", margin: "100px 0 0 0" }}>
+      <Div
+        style={{
+          flexDirection: "column",
+          width: "960px",
+          margin: "100px 0 0 0",
+        }}
+      >
         <Div style={{ justifyContent: "start" }}>
-          <Div style={{ width: "50%", fontSize: "32px", justifyContent: "start", margin: "0 0 40px 0" }}>
+          <Div
+            style={{
+              width: "50%",
+              fontSize: "32px",
+              justifyContent: "start",
+              margin: "0 0 40px 0",
+            }}
+          >
             <A>브랜딩 히스토리</A>
           </Div>
         </Div>
-        <Div style={{ display: "grid", boxSizing: "border-box", padding: "10px", backgroundColor: "#2B2D36", borderRadius: "10px" }}>
-
+        <Div
+          style={{
+            display: "grid",
+            boxSizing: "border-box",
+            padding: "10px",
+            backgroundColor: "#2B2D36",
+            borderRadius: "10px",
+          }}
+        >
           {feeds.map((feed, index) => (
             <WebAboutFeed feedNum={feed.feedNum} imgURL={feed.imgURL} />
           ))}
-
         </Div>
       </Div>
-    </Div >
+    </Div>
   );
 };
 
@@ -75,10 +94,8 @@ const Div = styled.div`
   line-height: ${({ theme }) => theme.LineHeight.Header1};
   font-family: Pretendard;
   /* color: ${({ theme }) => theme.colors.secondary}; */
-  grid-Template-Rows: 1fr;
-  grid-Template-Columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
 `;
 
-const A = styled.a`
-
-`;
+const A = styled.a``;
