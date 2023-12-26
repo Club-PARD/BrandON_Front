@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { createGlobalStyle } from 'styled-components';
 
 const CLIENT_ID = '941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com';
 const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/google';
@@ -8,6 +8,7 @@ const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/google';
 const WebHome = () => {
   return (
     <>
+    <GlobalStyle />
       <Container>
  
         <HeaderText>
@@ -27,11 +28,11 @@ const WebHome = () => {
           <img src="Rectangle28.png"></img>
         </OnBoading>
 
-        <TestStart2>
-          <LoginLink2 href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+        <TestStart>
+          <LoginLink href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
             지금 바로 ~하기
-          </LoginLink2> 
-        </TestStart2>
+          </LoginLink> 
+        </TestStart>
 
       </Container>
     </>
@@ -76,11 +77,20 @@ const ItalicPart = styled.span`
   line-height: normal;
   letter-spacing: -2.4px;
 `;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-image: url('/magenta.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`;
 const Container =styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #FFF;
   align-items: center;
 `;
 const HeaderText = styled.div`
@@ -105,33 +115,13 @@ const TestStart = styled.div`
 `;
 const LoginLink = styled.a`
   color: var(--White, #FFF);
-  font-family: "Pretendard Variable";
-  font-size: 18px;
+  font-family: "Pretendard";
+  font-size: ${({theme}) => theme.Web_fontSizes.Header2};
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${({theme}) => theme.fontWeights.Header4};
   line-height: normal;
   text-decoration: none;
 `;
 const OnBoading = styled.div`
   margin-top: 25px;
-`;
-const TestStart2 = styled.div`
-  width:194px;
-  height:51px;
-  border-radius: 25.5px;
-  background: var(--btn, #2B2D36);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin-top: 58px;
-`;
-const LoginLink2 = styled.a`
-  color: var(--White, #FFF);
-  font-family: "Pretendard Variable";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-decoration: none;
 `;
