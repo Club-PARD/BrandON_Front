@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import ProgressBar from "./ProgressBar";
 
 const WebChat = () => {
   return (
-    <>
-      <Header1>채팅 웹 페이지</Header1>
-    </>
+    <Column>
+      <ProgressBar />
+    </Column>
   );
 };
 
@@ -18,4 +19,11 @@ const Header1 = styled.div`
   line-height: ${({ theme }) => theme.LineHeight.Header1};
   color: ${({ theme }) => theme.colors.secondary};
   font-family: "Pretendard";
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 `;

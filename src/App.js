@@ -40,5 +40,4 @@ const Container = styled.div`
 
 const Main = styled.div`
   flex: 1;
-  padding: 28px;
 `;

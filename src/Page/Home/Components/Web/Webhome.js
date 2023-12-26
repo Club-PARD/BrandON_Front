@@ -1,25 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-const CLIENT_ID = '941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com';
-const REDIRECT_URI = 'http://localhost:8080/login/oauth2/code/google';
+const CLIENT_ID =
+  "941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com";
+const REDIRECT_URI = "http://localhost:8080/login/oauth2/code/google";
 
 const WebHome = () => {
   return (
     <>
-    <GlobalStyle />
+      <GlobalStyle />
       <Container>
- 
         <HeaderText>
           <StyledText>
-            “Everybody has a plan {" "}
+            “Everybody has a plan{" "}
             <ItalicPart>until they get punched </ItalicPart>in the face”
-          </StyledText>  
+          </StyledText>
         </HeaderText>
 
         <TestStart>
-          <LoginLink href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+          <LoginLink
+            href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+          >
             지금 바로 ~하기
           </LoginLink>
         </TestStart>
@@ -29,11 +31,12 @@ const WebHome = () => {
         </OnBoading>
 
         <TestStart>
-          <LoginLink href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+          <LoginLink
+            href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+          >
             지금 바로 ~하기
-          </LoginLink> 
+          </LoginLink>
         </TestStart>
-
       </Container>
     </>
   );
@@ -87,15 +90,16 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 `;
-const Container =styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 28px;
 `;
 const HeaderText = styled.div`
-  width:50%;
-  height:164px;
+  width: 50%;
+  height: 164px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,10 +107,10 @@ const HeaderText = styled.div`
   margin-top: 132px;
 `;
 const TestStart = styled.div`
-  width:250px;
-  height:51px;
+  width: 250px;
+  height: 51px;
   border-radius: 100px;
-  background: var(--btn, #2B2D36);
+  background: var(--btn, #2b2d36);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,11 +118,11 @@ const TestStart = styled.div`
   margin-top: 132px;
 `;
 const LoginLink = styled.a`
-  color: var(--White, #FFF);
+  color: var(--White, #fff);
   font-family: "Pretendard";
-  font-size: ${({theme}) => theme.Web_fontSizes.Header2};
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
   font-style: normal;
-  font-weight: ${({theme}) => theme.fontWeights.Header4};
+  font-weight: ${({ theme }) => theme.fontWeights.Header4};
   line-height: normal;
   text-decoration: none;
 `;
