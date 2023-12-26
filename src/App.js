@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./Style/theme";
 import styled from "styled-components";
 import TopNavBar from "./common/TopNavBar";
+import LoadingPage from "./Page/Loading";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/history" element={<HistoryPage />} />
+              <Route path="/loading" element={<LoadingPage />} />
             </Routes>
           </Main>
         </Container>
