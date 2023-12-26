@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const TopNavBar = () => {
@@ -8,19 +8,64 @@ const TopNavBar = () => {
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
         <Header1>로고</Header1>
       </Link>
-      <div style={{ width: "100px" }} />
-      <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
-        <Body1>홈</Body1>
-      </Link>
-      <div style={{ width: "66px" }} />
-      <Link to="/chat" style={{ all: "unset", cursor: "pointer" }}>
-        <Body1>채팅</Body1>
-      </Link>
-      <div style={{ width: "66px" }} />
-      <Link to="/history" style={{ all: "unset", cursor: "pointer" }}>
-        <Body1>결과</Body1>
-      </Link>
       <div style={{ flex: 1 }} />
+      <NavLink
+        to="/"
+        style={({ isActive }) =>
+          isActive
+            ? {
+                all: "unset",
+                cursor: "pointer",
+                color: "skyblue",
+              }
+            : {
+                all: "unset",
+                cursor: "pointer",
+                color: "white",
+              }
+        }
+      >
+        <Body1>홈</Body1>
+      </NavLink>
+      <div style={{ width: "66px" }} />
+      <NavLink
+        to="/chat"
+        style={({ isActive }) =>
+          isActive
+            ? {
+                all: "unset",
+                cursor: "pointer",
+                color: "skyblue",
+              }
+            : {
+                all: "unset",
+                cursor: "pointer",
+                color: "white",
+              }
+        }
+      >
+        <Body1>채팅</Body1>
+      </NavLink>
+      <div style={{ width: "66px" }} />
+      <NavLink
+        to="/history"
+        style={({ isActive }) =>
+          isActive
+            ? {
+                all: "unset",
+                cursor: "pointer",
+                color: "skyblue",
+              }
+            : {
+                all: "unset",
+                cursor: "pointer",
+                color: "white",
+              }
+        }
+      >
+        <Body1>결과</Body1>
+      </NavLink>
+      <div style={{ width: "100px" }} />
       <Body1>로그인</Body1>
     </Div>
   );
@@ -34,7 +79,7 @@ const Div = styled.div`
   padding: 12px 48px;
   width: 100%;
   height: 72px;
-  background-color: #2b2d36;
+  background-color: black;
   color: white;
 `;
 
@@ -50,6 +95,5 @@ const Body1 = styled.div`
   font-size: ${({ theme }) => theme.Web_fontSizes.Body1};
   font-weight: ${({ theme }) => theme.fontWeights.Body1};
   line-height: ${({ theme }) => theme.LineHeight.Body1};
-  color: white;
   font-family: "Pretendard";
 `;
