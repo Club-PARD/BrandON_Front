@@ -5,13 +5,19 @@ import styled from "styled-components";
 const TopNavBar = () => {
   return (
     <Div>
-      <Header1>로고</Header1>
+      <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
+        <Header1>로고</Header1>
+      </Link>
       <div style={{ width: "100px" }} />
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
-        <Body1>채팅</Body1>
+        <Body1>홈</Body1>
       </Link>
       <div style={{ width: "66px" }} />
       <Link to="/about" style={{ all: "unset", cursor: "pointer" }}>
+        <Body1>채팅</Body1>
+      </Link>
+      <div style={{ width: "66px" }} />
+      <Link to="/history" style={{ all: "unset", cursor: "pointer" }}>
         <Body1>결과</Body1>
       </Link>
       <div style={{ flex: 1 }} />
