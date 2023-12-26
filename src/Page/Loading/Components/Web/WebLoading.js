@@ -4,10 +4,14 @@ import BackgroundImg from "../../../../Assets/Loading_Background.jpg"
 
 const WebLoading = () => {
 
+  // document.body.style.overflow = "hidden";
+
   return (
     <Div>
-      <Img src={BackgroundImg}></Img>
-      <Div></Div>
+      <Div style={{ display: "relative" }}>
+        <Img src={BackgroundImg} style={{ zIndex: "0" }}></Img>
+        <Div style={{ backgroundColor: "black", opacity: "70%", display: "absolute", height: "1024px", top: "0", left: "0", zIndex: "1", }}></Div>
+      </Div>
     </Div>
   );
 };
@@ -43,6 +47,7 @@ const Div = styled.div`
   /* color: ${({ theme }) => theme.colors.secondary}; */
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
+  overflow: visible;
 `;
 
 const A = styled.a``;
