@@ -4,12 +4,12 @@ import WoochalDead from "../../../Assets/Woochal_Dead.png"
 
 const WebHistoryFeed = (props) => {
   return (
-    <Div display="block" width="450px" height="450px" fontSize="32px" margin="10px">
+    <Div style={{ display: "block", width: "450px", height: "450px", fontSize: "32px", margin: "10px" }}>
       {props.imgURL === ""
         ?
-        <Div display="block" position="relative">
+        <Div style={{ display: "block", position: "relative" }}>
           <Img src={WoochalDead}></Img>
-          <Div position="absolute" backgroundColor="#000000" opacity="70%" top="0" left="0" zIndex="1"></Div>
+          <Div style={{ position: "absolute", backgroundColor: "#000000", opacity: "70%", top: "0", left: "0", zIndex: "1" }}></Div>
         </Div>
         :
         <Img src={props.imgURL}></Img>}
@@ -20,30 +20,24 @@ const WebHistoryFeed = (props) => {
 export default WebHistoryFeed;
 
 
-
 const Div = styled.div`
-  display: ${props => props.display || 'flex'};
-  flex-direction: ${props => props.flexDirection || 'row'};
-  justify-content: ${props => props.justifyContent || 'center'};
-  align-items: ${props => props.alignItems || 'center'};
-  width: ${props => props.width || '100%'};
-  height: ${props => props.height || '100%'};
-  margin: ${props => props.margin || '0vh 0vh 0vh 0vh'};
-  padding: ${props => props.padding || '0vh 0vh 0vh 0vh'};
-  background-color: ${props => props.backgroundColor || 'white'};
-  /* border: ${props => props.border || '0.5px solid black'}; */
-  border-radius: ${props => props.borderRadius || '10px'};
-  box-sizing: ${props => props.boxSizing || 'content-box'};
-  font-size: ${props => props.fontSize || '14px'};
-  font-weight: ${props => props.fontWeight || '400'};
-  /* font-family: ${props => props.fontFamily || 'AppleSDGothicNeo'}; */
-  overflow: ${props => props.overflow || ''};
-  opacity: ${props => props.opacity || '100%'};
-  position: ${props => props.position || ''};
-  top: ${props => props.top || ''};
-  left: ${props => props.left || ''};
-  z-Index: ${props => props.zIndex || ''};
-  top: ${props => props.top || ''};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0vh 0vh 0vh 0vh;
+  padding: 0vh 0vh 0vh 0vh;
+  background-color: white;
+  /* border: 0.5px solid black; */
+  border-radius: 10px;
+  box-sizing: content-box;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
+  font-weight: ${({ theme }) => theme.fontWeights.Header1};
+  line-height: ${({ theme }) => theme.LineHeight.Header1};
+  font-family: Pretendard;
+  /* color: ${({ theme }) => theme.colors.secondary}; */
 `;
 
 const Img = styled.img`

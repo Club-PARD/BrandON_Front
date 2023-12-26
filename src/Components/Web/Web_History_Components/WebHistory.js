@@ -28,13 +28,13 @@ const WebHistory = () => {
   ]);
   return (
     <Div>
-      <Div flexDirection="column" width="960px" margin="100px 0 0 0">
-        <Div justifyContent="start">
-          <Div width="50%" fontSize="32px" justifyContent="start" margin="0 0 40px 0">
+      <Div style={{ flexDirection: "column", width: "960px", margin: "100px 0 0 0" }}>
+        <Div style={{ justifyContent: "start" }}>
+          <Div style={{ width: "50%", fontSize: "32px", justifyContent: "start", margin: "0 0 40px 0" }}>
             <A>브랜딩 히스토리</A>
           </Div>
         </Div>
-        <Div display="grid" boxSizing="border-box" padding="10px" backgroundColor="#2B2D36" borderRadius="10px">
+        <Div style={{ display: "grid", boxSizing: "border-box", padding: "10px", backgroundColor: "#2B2D36", borderRadius: "10px" }}>
 
           {feeds.map((feed, index) => (
             <WebAboutFeed feedNum={feed.feedNum} imgURL={feed.imgURL} />
@@ -58,25 +58,25 @@ const Header1 = styled.div`
 `;
 
 const Div = styled.div`
-  display: ${props => props.display || 'flex'};
-  flex-direction: ${props => props.flexDirection || 'row'};
-  justify-content: ${props => props.justifyContent || 'center'};
-  align-items: ${props => props.alignItems || 'center'};
-  width: ${props => props.width || '100%'};
-  height: ${props => props.height || '100%'};
-  margin: ${props => props.margin || '0vh 0vh 0vh 0vh'};
-  padding: ${props => props.padding || '0vh 0vh 0vh 0vh'};
-  background-color: ${props => props.backgroundColor || 'white'};
-  /* border: ${props => props.border || '0.5px solid black'}; */
-  border-radius: ${props => props.borderRadius || ''};
-  box-sizing: ${props => props.boxSizing || 'content-box'};
-  font-size: ${props => props.fontSize || '14px'};
-  font-weight: ${props => props.fontWeight || '400'};
-  /* font-family: ${props => props.fontFamily || 'AppleSDGothicNeo'}; */
-  overflow: ${props => props.overflow || ''};
-  grid-Template-Rows: ${props => props.gridTemplateRows || '1fr'};
-  grid-Template-Columns: ${props => props.gridTemplateColumns || '1fr 1fr'};
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0vh 0vh 0vh 0vh;
+  padding: 0vh 0vh 0vh 0vh;
+  background-color: white;
+  /* border: 0.5px solid black; */
+  border-radius: 0px;
+  box-sizing: content-box;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
+  font-weight: ${({ theme }) => theme.fontWeights.Header1};
+  line-height: ${({ theme }) => theme.LineHeight.Header1};
+  font-family: Pretendard;
+  /* color: ${({ theme }) => theme.colors.secondary}; */
+  grid-Template-Rows: 1fr;
+  grid-Template-Columns: 1fr 1fr;
 `;
 
 const A = styled.a`
