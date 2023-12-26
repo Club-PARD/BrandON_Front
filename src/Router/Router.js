@@ -26,7 +26,7 @@ const Router = () => {
   }, []);
 
   return (
-    <Container>
+    <Container home={pathname === "/"}>
       <ScrollToTop />
       {pathname === "/loading" ? null : <TopNavBar isScrolled={isScrolled} />}
       <Main>
@@ -48,9 +48,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("background.jpg");
+  background-image: ${(props) =>
+    props.home ? `url("magenta.gif")` : `url("background.jpg")`};
   background-attachment: fixed;
-  background-repeat: repeat;
   background-size: cover;
 `;
 
