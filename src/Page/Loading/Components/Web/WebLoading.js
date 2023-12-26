@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BackgroundImg from "../../../../Assets/Loading_Background"
+import BackgroundImg from "../../../../Assets/Loading_Background.jpg"
 
 const WebLoading = () => {
 
