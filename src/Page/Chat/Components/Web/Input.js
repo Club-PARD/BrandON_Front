@@ -17,7 +17,7 @@ const Input = ({ input, setInput, handleSubmit }) => {
       />
       <Button
         style={{ position: "absolute", top: 0, right: 20, height: "100%" }}
-        onClick={input.length === 0 ? () => {} : () => handleSubmit}
+        onClick={input.length === 0 ? () => {} : handleSubmit}
       >
         {input.length === 0 ? (
           <img src={inputDisabled} alt="입력 불가" />
