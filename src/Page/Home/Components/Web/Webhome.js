@@ -84,6 +84,7 @@ const Container = styled.div`
   align-items: center;
   padding: 28px;
 `;
+
 const HeaderText = styled.div`
   width: 50%;
   height: 164px;
@@ -93,6 +94,7 @@ const HeaderText = styled.div`
   text-align: center;
   margin-top: 132px;
 `;
+
 const TestStart = styled.div`
   width: 250px;
   height: 51px;
@@ -104,6 +106,7 @@ const TestStart = styled.div`
   text-align: center;
   margin-top: 132px;
 `;
+
 const LoginLink = styled.a`
   color: var(--White, #fff);
   font-family: "Pretendard";
@@ -113,6 +116,7 @@ const LoginLink = styled.a`
   line-height: normal;
   text-decoration: none;
 `;
+
 const OnBoading = styled.div`
   margin-top: 25px;
 `;
