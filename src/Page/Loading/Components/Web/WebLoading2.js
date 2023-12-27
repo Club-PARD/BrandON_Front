@@ -115,37 +115,53 @@ const BrandonIn = keyframes`
   }
 `;
 
-const lineUp = keyframes` 
-  0% {
-    opacity: 0;
-    transform: translateY(80%);
+const typing = keyframes` 
+  0%{
+      width: 0%;
   }
-  20% {
-    opacity: 0;
+  100%{
+
+      width: 48%;
+      opacity: 1;
   }
-  50% {
-    opacity: 1;
-    transform: translateY(0%);
+`;
+const typing2 = keyframes` 
+  0%{
+      width: 0%;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0%);
+  100%{
+
+      width: 72%;
+      opacity: 1;
+  }
+`;
+const typing3 = keyframes` 
+  0%{
+      width: 0%;
+  }
+  100%{
+
+      width: 67%;
+      opacity: 1;
+  }
+`;
+const typing4 = keyframes` 
+  0%{
+      width: 0%;
+  }
+  100%{
+
+      width: 56%;
+      opacity: 1;
   }
 `;
 
-
 const textRemove = keyframes` 
-  0% {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-  20% {
+  0%{
     opacity: 1;
   }
- 
-  100% {
+  100%{
     opacity: 0;
-    transform: translateY(-180%);
   }
 `;
 
@@ -181,26 +197,34 @@ const Wrapper = styled.div`
 `
 const Text = styled.div`
   position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s ease-out 2s forwards, ${textRemove} 1s ease-in 5s forwards;
+  width: 0%;
+  overflow: hidden;
+  white-Space: nowrap;
+  animation: ${typing} 2s steps(30, end) 2s forwards, ${textRemove} 0.3s linear 5s forwards;
 `;
 
 const Text2 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 5.5s forwards, ${textRemove} 1s ease-in 8.5s forwards;
+position: absolute;
+  width: 0%;
+  overflow: hidden;
+  white-Space: nowrap;
+  animation: ${typing2} 2s steps(30, end) 5.5s forwards, ${textRemove} 0.3s linear 8.5s forwards;
 `;
 
 const Text3 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 9s forwards, ${textRemove} 1s ease-in 12s forwards;
+position: absolute;
+  width: 0%;
+  overflow: hidden;
+  white-Space: nowrap;
+  animation: ${typing3} 2s steps(30, end) 9s forwards, ${textRemove} 0.3s linear 12s forwards;
 `;
 
 const Text4 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 12.5s forwards;
+position: absolute;
+  width: 0%;
+  overflow: hidden;
+  white-Space: nowrap;
+  animation: ${typing4} 2s steps(30, end) 12.5s forwards;
 `;
 
 const BrandonImg = styled.img`
