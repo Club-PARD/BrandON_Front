@@ -6,6 +6,7 @@ import HistoryPage from "../Page/History";
 import LoadingPage from "../Page/Loading";
 import TopNavBar from "../common/TopNavBar";
 import styled from "styled-components";
+import NamePage from "../Page/Name";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -13,7 +14,7 @@ const Router = () => {
   return (
     <Container>
       <ScrollToTop />
-      {pathname === "/loading" ? null : <TopNavBar />}
+      {pathname === "/loading" || pathname === "/name" ? null : <TopNavBar />}
       <Main>
         <Routes>
           {/* 기본 화면 설정 */}
@@ -21,6 +22,7 @@ const Router = () => {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/loading" element={<LoadingPage />} />
+          <Route path="/name" element={<NamePage/>} />
         </Routes>
       </Main>
     </Container>
