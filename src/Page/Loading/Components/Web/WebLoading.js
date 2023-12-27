@@ -192,19 +192,19 @@ const Text = styled.div`
 const Text2 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 6.5s forwards, ${textRemove} 1s ease-in 10.5s forwards;
+  animation: ${lineUp} 2s steps(30, end) 6.2s forwards, ${textRemove} 1s ease-in 10.2s forwards;
 `;
 
 const Text3 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 11s forwards, ${textRemove} 1s ease-in 15s forwards;
+  animation: ${lineUp} 2s steps(30, end) 10.4s forwards, ${textRemove} 1s ease-in 14.4s forwards;
 `;
 
 const Text4 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 15.5s forwards;
+  animation: ${lineUp} 2s steps(30, end) 14.6s forwards;
 `;
 
 const BrandonImg = styled.img`
