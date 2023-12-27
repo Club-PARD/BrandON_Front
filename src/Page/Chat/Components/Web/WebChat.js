@@ -122,7 +122,7 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 92vh;
+  height: 89vh;
   padding: 13px 0;
   color: white;
 `;

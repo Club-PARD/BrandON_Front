@@ -29,7 +29,9 @@ const Router = () => {
   return (
     <Container home={pathname === "/"}>
       <ScrollToTop />
-      {pathname === "/loading" || pathname === "/name" ? null : <TopNavBar />}
+      {pathname === "/loading" || pathname === "/name" ? null : (
+        <TopNavBar isScrolled={isScrolled} />
+      )}
       <Main>
         <Routes>
           {/* 기본 화면 설정 */}
@@ -37,7 +39,7 @@ const Router = () => {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/loading" element={<LoadingPage />} />
-          <Route path="/name" element={<NamePage/>} />
+          <Route path="/name" element={<NamePage />} />
         </Routes>
       </Main>
     </Container>
