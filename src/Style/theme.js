@@ -137,8 +137,8 @@ export const theme = {
   fontWeights: {
     Header1: "400",
     Header2: "600",
-    Header3: "400",
-    Header4: "700",
+    Header3: "700",
+    Header4: "600",
     Body1: "600",
     Body2: "500",
     Body3: "600",

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
 
 const CLIENT_ID =
   "941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com";
@@ -8,37 +7,34 @@ const REDIRECT_URI = "http://localhost:8080/login/oauth2/code/google";
 
 const WebHome = () => {
   return (
-    <>
-      <GlobalStyle />
-      <Container>
-        <HeaderText>
-          <StyledText>
-            “Everybody has a plan{" "}
-            <ItalicPart>until they get punched </ItalicPart>in the face”
-          </StyledText>
-        </HeaderText>
+    <Container>
+      <HeaderText>
+        <StyledText>
+          “Everybody has a plan <ItalicPart>until they get punched </ItalicPart>
+          in the face”
+        </StyledText>
+      </HeaderText>
 
-        <TestStart>
-          <LoginLink
-            href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
-          >
-            지금 바로 ~하기
-          </LoginLink>
-        </TestStart>
+      <TestStart>
+        <LoginLink
+          href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+        >
+          지금 바로 ~하기
+        </LoginLink>
+      </TestStart>
 
-        <OnBoading>
-          <img src="Rectangle28.png"></img>
-        </OnBoading>
+      <OnBoading>
+        <img src="Rectangle28.png"></img>
+      </OnBoading>
 
-        <TestStart>
-          <LoginLink
-            href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
-          >
-            지금 바로 ~하기
-          </LoginLink>
-        </TestStart>
-      </Container>
-    </>
+      <TestStart>
+        <LoginLink
+          href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+        >
+          지금 바로 ~하기
+        </LoginLink>
+      </TestStart>
+    </Container>
   );
 };
 
@@ -80,16 +76,7 @@ const ItalicPart = styled.span`
   line-height: normal;
   letter-spacing: -2.4px;
 `;
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-image: url('/magenta.gif');
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,6 +84,7 @@ const Container = styled.div`
   align-items: center;
   padding: 28px;
 `;
+
 const HeaderText = styled.div`
   width: 50%;
   height: 164px;
@@ -106,6 +94,7 @@ const HeaderText = styled.div`
   text-align: center;
   margin-top: 132px;
 `;
+
 const TestStart = styled.div`
   width: 250px;
   height: 51px;
@@ -117,6 +106,7 @@ const TestStart = styled.div`
   text-align: center;
   margin-top: 132px;
 `;
+
 const LoginLink = styled.a`
   color: var(--White, #fff);
   font-family: "Pretendard";
@@ -126,6 +116,7 @@ const LoginLink = styled.a`
   line-height: normal;
   text-decoration: none;
 `;
+
 const OnBoading = styled.div`
   margin-top: 25px;
 `;

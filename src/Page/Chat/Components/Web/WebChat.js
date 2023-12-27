@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ProgressBar from "./ProgressBar";
 import Input from "./Input";
 
 const WebChat = () => {
+  const [input, setInput] = useState("");
+
   return (
-    <Column>
-      <ProgressBar />
-      <div style={{ flex: 1 }} />
-      <Input />
-    </Column>
+    <>
+      <Overlay />
+      <Column>
+        <ProgressBar />
+        <div />
+        <Input input={input} setInput={setInput} />
+      </Column>
+    </>
   );
 };
 
@@ -27,6 +32,18 @@ const Header1 = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  height: 92vh;
+  padding: 13px 0;
+  color: white;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 투명한 레이어 색상 및 투명도 조절 */
 `;

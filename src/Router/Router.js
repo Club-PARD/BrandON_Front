@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "../ScrollToTop";
 import HomePage from "../Page/Home";
 import ChatPage from "../Page/Chat";
@@ -7,12 +7,27 @@ import LoadingPage from "../Page/Loading";
 import TopNavBar from "../common/TopNavBar";
 import styled from "styled-components";
 import NamePage from "../Page/Name";
+import { useEffect, useState } from "react";
 
 const Router = () => {
   const { pathname } = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <Container>
+    <Container home={pathname === "/"}>
       <ScrollToTop />
       {pathname === "/loading" || pathname === "/name" ? null : <TopNavBar />}
       <Main>
@@ -35,8 +50,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: ${(props) =>
+    props.home ? `url("magenta.gif")` : `url("background.jpg")`};
+  background-attachment: fixed;
+  background-size: cover;
 `;
 
 const Main = styled.div`
   flex: 1;
+  margin-top: 72px;
 `;

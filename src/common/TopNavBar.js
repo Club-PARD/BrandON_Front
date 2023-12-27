@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 
-const TopNavBar = () => {
+const TopNavBar = ({ isScrolled }) => {
   return (
-    <Div>
+    <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
         <Header1>로고</Header1>
       </Link>
@@ -75,11 +75,16 @@ export default TopNavBar;
 
 const Div = styled.div`
   display: flex;
+  position: fixed;
+  z-index: 1000;
   align-items: center;
   padding: 12px 48px;
   width: 100%;
   height: 72px;
-  background-color: black;
+  background-color: ${(props) =>
+    props.scrolled ? "rgba(0, 0, 0, 0.2)" : "transparent"};
+  backdrop-filter: ${(props) => (props.scrolled ? "blur(5px)" : "none")};
+  transition: background-color 0.3s;
   color: white;
 `;
 
