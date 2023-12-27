@@ -21,6 +21,7 @@ const ProgressBar = ({ progress }) => {
               background: "#2B2D36",
               height: "100%",
               borderRadius: 50,
+              transition: "width 1s",
             }}
           ></div>
         </div>
