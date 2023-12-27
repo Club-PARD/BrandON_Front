@@ -11,10 +11,9 @@ import { AIMessage } from "langchain/schema";
 
 const WebChat = () => {
   const [input, setInput] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [submitAnswer, setSubmitAnswer] = useState("");
   const [chatModelResult, setChatModelResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -78,25 +77,17 @@ const WebChat = () => {
 
   useEffect(() => {
     async function fetchData() {
-      // const formattedChatPrompt = await chatPrompt.formatMessages({
-      //   target: "eunoia",
-      // // });
-      // console.log(formattedChatPrompt);
-      // setFormattedChatPrompt(formattedChatPrompt);
       setIsLoading(true);
       const res = await chain.predict({ answer: "start" });
-      console.log([new AIMessage(res)]);
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
-      // const result = await runnable.invoke(formattedChatPrompt);
-      // console.log(result);
-      // setChatModelResult(result);
     }
     // fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
     setInput("");
+    setProgress((prev) => prev + 10);
     setIsLoading(true);
     const res = await chain.predict({ answer: input });
     console.log(res);
@@ -107,7 +98,7 @@ const WebChat = () => {
     <>
       <Overlay />
       <Column>
-        <ProgressBar />
+        <ProgressBar progress={progress} />
         <Chatting />
         <Input input={input} setInput={setInput} handleSubmit={handleSubmit} />
       </Column>

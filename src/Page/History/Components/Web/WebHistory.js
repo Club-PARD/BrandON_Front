@@ -27,7 +27,7 @@ const WebHistory = () => {
     },
   ]);
   return (
-    <Div style={{ padding: "28px" }}>
+    <Div>
       <Div
         style={{
           flexDirection: "column",

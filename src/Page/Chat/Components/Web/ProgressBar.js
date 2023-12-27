@@ -1,20 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const ProgressBar = () => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    // 예시로 1초에 한 번씩 10%씩 증가하도록 설정
-    const interval = setInterval(() => {
-      if (progress < 100) {
-        setProgress((prevProgress) => prevProgress + 10);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [progress]);
-
+const ProgressBar = ({ progress }) => {
   return (
     <Container>
       <Header4>나 이해도</Header4>
