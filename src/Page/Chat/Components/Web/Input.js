@@ -3,7 +3,7 @@ import styled from "styled-components";
 import inputDisabled from "../../../../Assets/input_disabled.svg";
 import inputEnabled from "../../../../Assets/input_enabled.svg";
 
-const Input = ({ input, setInput }) => {
+const Input = ({ input, setInput, handleSubmit }) => {
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
@@ -17,6 +17,7 @@ const Input = ({ input, setInput }) => {
       />
       <Button
         style={{ position: "absolute", top: 0, right: 20, height: "100%" }}
+        onClick={input.length === 0 ? () => {} : () => handleSubmit}
       >
         {input.length === 0 ? (
           <img src={inputDisabled} alt="입력 불가" />
@@ -32,7 +33,7 @@ export default Input;
 
 const InputText = styled.input`
   all: unset;
-  width: 900px;
+  width: 860px;
   padding: 20px;
   border-radius: 10px;
   border: 2px solid var(--stroke, #d2d2d2);
