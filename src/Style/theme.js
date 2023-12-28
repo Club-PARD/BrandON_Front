@@ -144,7 +144,7 @@ export const theme = {
     Body3: "600",
     Body4: "400",
     Body5: "500",
-    Body6: "600",
+    Body6: "500",
     Caption1: "500",
     Caption2: "600",
     Caption3: "700",

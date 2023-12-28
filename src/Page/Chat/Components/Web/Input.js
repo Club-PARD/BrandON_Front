@@ -9,6 +9,22 @@ const Input = ({ input, setInput, handleSubmit }) => {
     setInput(e.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    // Enter 키가 눌리고 Shift 키도 눌려있을 때
+    if (event.key === "Enter" && event.shiftKey) {
+      // 텍스트에 줄 바꿈 문자를 추가
+      input += "\n";
+    }
+
+    // Enter 키가 눌렸을 때
+    else if (event.key === "Enter") {
+      // 기본 동작을 방지
+      event.preventDefault();
+      handleSubmit();
+      // 여기에서 추가적인 동작을 수행하거나 아무것도 하지 않음
+    }
+  };
+
   return (
     <Paper
       component="form"
@@ -26,6 +42,7 @@ const Input = ({ input, setInput, handleSubmit }) => {
       <InputBase
         multiline
         maxRows={4}
+        onKeyDown={handleKeyDown}
         placeholder="Message Brandon..."
         value={input}
         onChange={handleInputChange}
@@ -39,10 +56,7 @@ const Input = ({ input, setInput, handleSubmit }) => {
           backgroundColor: "transparent",
         }}
       />
-      <Button
-        disabled={input === ""}
-        onClick={input === "" ? () => {} : handleSubmit}
-      >
+      <Button disabled={input === ""} onClick={handleSubmit}>
         {input === "" ? (
           <img src={inputDisabled} alt="입력 불가" />
         ) : (

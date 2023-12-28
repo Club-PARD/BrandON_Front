@@ -108,6 +108,10 @@ const WebChat = () => {
           preInput={preInput}
         />
         <Input input={input} setInput={setInput} handleSubmit={handleSubmit} />
+        <Body6>
+          Brandon이 부정확한 정보를 표시할 수 있으므로 입력을 한 번 더
+          확인하세요.
+        </Body6>
       </Column>
     </>
   );
@@ -132,4 +136,10 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3); /* 투명한 레이어 색상 및 투명도 조절 */
+`;
+
+const Body6 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Body6};
+  font-weight: ${({ theme }) => theme.fontWeights.Body6};
+  line-height: ${({ theme }) => theme.LineHeight.Body6};
 `;

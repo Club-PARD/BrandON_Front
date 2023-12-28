@@ -25,7 +25,9 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
                     </Body4>
                   </ChatName>
                   <div style={{ height: "0.625rem" }} />
-                  <ChatBubbleBrandon>{chat.content}</ChatBubbleBrandon>
+                  <ChatBubbleBrandon>
+                    <Text>{chat.content}</Text>
+                  </ChatBubbleBrandon>
                 </ChatContainerBrandon>
               </LeftRow>
             </>
@@ -33,7 +35,9 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
         } else {
           return (
             <RightRow>
-              <ChatBubbleUser>{chat.content}</ChatBubbleUser>
+              <ChatBubbleUser>
+                <Text>{chat.content}</Text>
+              </ChatBubbleUser>
             </RightRow>
           );
         }
@@ -41,7 +45,9 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
       {isLoading && chatModelResult.length > 0 ? (
         <>
           <RightRow>
-            <ChatBubbleUser>{preInput}</ChatBubbleUser>
+            <ChatBubbleUser>
+              <Text>{preInput}</Text>
+            </ChatBubbleUser>
           </RightRow>
           <LeftRow>
             <ChatContainerBrandon>
@@ -155,6 +161,7 @@ const Body4 = styled.div`
   font-size: ${({ theme }) => theme.Web_fontSizes.Body4};
   font-weight: ${({ theme }) => theme.fontWeights.Body4};
   line-height: ${({ theme }) => theme.LineHeight.Body4};
+  font-family: "Pretendard";
 `;
 
 const ChatBubbleBrandon = styled.div`
@@ -172,4 +179,10 @@ const ChatBubbleUser = styled.div`
   border-radius: 0.625rem 0.625rem 0 0.625rem;
   background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(3.125rem);
+`;
+
+const Text = styled.pre`
+  all: unset;
+  white-space: pre-wrap;
+  font-family: "Pretendard";
 `;
