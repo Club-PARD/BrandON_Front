@@ -83,7 +83,7 @@ const WebChat = () => {
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
     }
-    fetchData();
+    // fetchData();
   }, []);
 
   const handleSubmit = async () => {

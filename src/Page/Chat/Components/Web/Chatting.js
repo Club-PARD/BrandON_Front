@@ -12,7 +12,7 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
   return (
     <Column ref={chatRef}>
       {chatModelResult.map((chat, i) => {
-        if (i % 2 == 0) {
+        if (i % 2 === 0) {
           return (
             <>
               <LeftRow>
@@ -118,7 +118,7 @@ const LeftRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 30%;
+  height: 40%;
 `;
 
 const RightRow = styled.div`
@@ -126,7 +126,7 @@ const RightRow = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 50%;
 `;
 
 const BrandonIn = keyframes` 
