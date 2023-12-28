@@ -8,7 +8,6 @@ import TopNavBar from "../common/TopNavBar";
 import styled from "styled-components";
 import NamePage from "../Page/Name";
 import { useEffect, useState } from "react";
-import NamePage from "../Page/Name";
 
 const Router = () => {
   const { pathname } = useLocation();
