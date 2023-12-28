@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import WoochalDead from "../../../../Assets/Woochal_Dead.png";
+import CardDefault from "../../../../Assets/Card_Default.png";
 
-const WebHistoryFeed = (props) => {
+const WebHistoryCard = (props) => {
 
   const [card, setCard] = useState({ null_safety: "" });
 
@@ -28,13 +29,19 @@ const WebHistoryFeed = (props) => {
           }}
         >
           <Div style={{ alignItems: "end", padding: "0px 18px 0px 18px", height: "45%", boxSizing: "border-box" }}>
-            <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>{props.brandCard.name}</Div>
+            <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
+              {props.undefined === true ? "" : props.brandCard.name}
+            </Div>
           </Div>
           <Div style={{ alignItems: "center", padding: "0px 18px 0px 18px", height: "20%", boxSizing: "border-box" }}>
-            <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>{props.brandCard.brandConcept}</Div>
+            <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
+              {props.undefined === true ? "" : props.brandCard.brandConcept}
+            </Div>
           </Div>
           <Div style={{ alignItems: "start", padding: "0px 18px 0px 18px", height: "35%", boxSizing: "border-box" }}>
-            <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>{props.brandCard.conceptDetail}</Div>
+            <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
+              {props.undefined === true ? "" : props.brandCard.conceptDetail}
+            </Div>
           </Div>
         </Div>
         <Div
@@ -48,13 +55,14 @@ const WebHistoryFeed = (props) => {
             flexDirection: "column",
           }}
         />
-        <Img src={WoochalDead}></Img>
+        {props.undefined === true ? <Img src={CardDefault}></Img> : <Img src={WoochalDead}></Img>}
       </Div>
     </Div>
   );
 };
 
-export default WebHistoryFeed;
+export default WebHistoryCard;
+
 
 const Div = styled.div`
   display: flex;
@@ -83,7 +91,7 @@ const Img = styled.img`
   border-radius: 10px;
   position: ${(props) => props.position || ""};
   object-fit: cover;
-  &:hover {
+  /* &:hover {
     box-shadow: 0 0 10px 10px rgb(0, 0, 0, 0.2);;
-  }
+  } */
 `;
