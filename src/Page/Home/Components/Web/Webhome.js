@@ -1,12 +1,47 @@
 import React from "react";
 import styled from "styled-components";
-
-const CLIENT_ID =
-  "941001632953-ja7dpvnsusm7r287su9top3otp939dla.apps.googleusercontent.com";
-const REDIRECT_URI = "http://localhost:8080/login/oauth2/code/google";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
+import { useGoogleLogin} from "@react-oauth/google";
 
 const WebHome = () => {
+
+
+  const sendUserDataToServer = async (token) => {
+    try {
+       //const jsonUserData = JSON.stringify(userData);
+
+        // const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google', jsonUserData, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // });
+        const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/oauth2/code/google',{
+          token
+        });
+        console.log('서버 응답:', response.data); // reesponse.data 이 userID
+    } catch (error) {
+        console.error('서버 요청 에러:', error);
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess : (res) => {
+        console.log(res);
+        const token = res.access_token;
+        console.log(token);
+        
+        sendUserDataToServer(token);
+
+    },
+    onFailure : (err) => {
+        console.log(err);
+    }
+  });
+
   return (
+    
     <Container>
       <HeaderText>
         <StyledText>
@@ -15,13 +50,11 @@ const WebHome = () => {
         </StyledText>
       </HeaderText>
 
-      <TestStart>
-        <LoginLink
-          href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
-        >
-          지금 바로 ~하기
-        </LoginLink>
-      </TestStart>
+      
+        <TestStart>
+          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
+          {/* <LoginLink onClick={login}>지금 바로 ~하기</LoginLink> */}
+        </TestStart>
 
       <OnBoading>
         <img src="Rectangle28.png"></img>
@@ -29,7 +62,7 @@ const WebHome = () => {
 
       <TestStart>
         <LoginLink
-          href={`https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+          href={`http://localhost:8080/login/google`}
         >
           지금 바로 ~하기
         </LoginLink>
@@ -107,8 +140,9 @@ const TestStart = styled.div`
   margin-top: 132px;
 `;
 
-const LoginLink = styled.a`
+const LoginLink = styled.button`
   color: var(--White, #fff);
+  background-color: inherit;
   font-family: "Pretendard";
   font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
   font-style: normal;
