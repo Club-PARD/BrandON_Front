@@ -15,7 +15,7 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
         if (i % 2 == 0) {
           return (
             <>
-              <Row>
+              <LeftRow>
                 <ChatContainerBrandon>
                   <ChatName>
                     <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
@@ -27,23 +27,23 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
                   <div style={{ height: "0.625rem" }} />
                   <ChatBubbleBrandon>{chat.content}</ChatBubbleBrandon>
                 </ChatContainerBrandon>
-              </Row>
+              </LeftRow>
             </>
           );
         } else {
           return (
-            <Row style={{ justifyContent: "flex-end" }}>
+            <RightRow>
               <ChatBubbleUser>{chat.content}</ChatBubbleUser>
-            </Row>
+            </RightRow>
           );
         }
       })}
       {isLoading && chatModelResult.length > 0 ? (
         <>
-          <Row style={{ justifyContent: "flex-end" }}>
+          <RightRow>
             <ChatBubbleUser>{preInput}</ChatBubbleUser>
-          </Row>
-          <Row>
+          </RightRow>
+          <LeftRow>
             <ChatContainerBrandon>
               <ChatName>
                 <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
@@ -57,11 +57,11 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
                 분석 중이다. 기다려라. 이 짜식아.
               </ChatBubbleBrandon>
             </ChatContainerBrandon>
-          </Row>
+          </LeftRow>
         </>
       ) : null}
       {isLoading && chatModelResult.length === 0 ? (
-        <Row>
+        <LeftRow>
           <ChatContainerBrandon>
             <ChatName>
               <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
@@ -75,7 +75,7 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
               로딩 중이다. 기다려라. 이 짜식아.
             </ChatBubbleBrandon>
           </ChatContainerBrandon>
-        </Row>
+        </LeftRow>
       ) : null}
     </Column>
   );
@@ -91,7 +91,7 @@ const Column = styled.div`
   width: 56.25rem;
   padding: 0.625rem 0;
   min-height: 60vh;
-  height: 65vh;
+  height: 70vh;
   color: white;
   overflow-y: scroll;
   z-index: 10;
@@ -108,11 +108,19 @@ const ChatName = styled.div`
   align-items: center;
 `;
 
-const Row = styled.div`
+const LeftRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 20vh;
+  height: 30%;
+`;
+
+const RightRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const BrandonIn = keyframes` 

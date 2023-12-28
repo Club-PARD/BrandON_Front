@@ -2,43 +2,60 @@ import React from "react";
 import styled from "styled-components";
 import inputDisabled from "../../../../Assets/input_disabled.svg";
 import inputEnabled from "../../../../Assets/input_enabled.svg";
+import { InputBase, Paper } from "@mui/material";
 
 const Input = ({ input, setInput, handleSubmit }) => {
-  const handleOnChange = (e) => {
+  const handleInputChange = (e) => {
     setInput(e.target.value);
   };
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      <InputText
-        placeholder="입력하라"
+    <Paper
+      component="form"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        width: "56.25rem",
+        borderRadius: "10px",
+        border: "2px solid #FFFFFF",
+        overflow: "hidden",
+        backgroundColor: "transparent",
+        zIndex: 3,
+      }}
+    >
+      <InputBase
+        multiline
+        maxRows={4}
+        placeholder="Message Brandon..."
         value={input}
-        onChange={handleOnChange}
+        onChange={handleInputChange}
+        sx={{
+          ml: 1,
+          flex: 1,
+          fontSize: "1rem",
+          fontWeight: "bold",
+          color: "white",
+          textAlign: "right",
+          backgroundColor: "transparent",
+        }}
       />
       <Button
-        style={{ position: "absolute", top: 0, right: 20, height: "100%" }}
-        onClick={input.length === 0 ? () => {} : handleSubmit}
+        disabled={input === ""}
+        onClick={input === "" ? () => {} : handleSubmit}
       >
-        {input.length === 0 ? (
+        {input === "" ? (
           <img src={inputDisabled} alt="입력 불가" />
         ) : (
           <img src={inputEnabled} alt="입력" />
         )}
       </Button>
-    </div>
+    </Paper>
   );
 };
 
 export default Input;
 
-const InputText = styled.input`
-  all: unset;
-  width: 860px;
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid var(--stroke, #d2d2d2);
-`;
-
 const Button = styled.button`
   all: unset;
+  margin: 10px;
 `;
