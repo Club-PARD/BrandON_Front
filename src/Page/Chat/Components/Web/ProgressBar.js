@@ -10,17 +10,18 @@ const ProgressBar = ({ progress }) => {
         <div
           style={{
             width: "90%",
-            background: "white",
+            borderRadius: `var(--text-field-blur, 100px)`,
+            background: `var(--ver-2-text-field, rgba(255, 255, 255, 0.10))`,
+            backdropFilter: `blur(50px)`,
             height: "27px",
-            borderRadius: 50,
           }}
         >
           <div
             style={{
               width: `${progress}%`,
-              background: "#2B2D36",
+              background: "white",
               height: "100%",
-              borderRadius: 49,
+              borderRadius: 50,
               transition: "width 1s",
             }}
           ></div>
