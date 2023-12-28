@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import Brandon from "../../../../Assets/brandon_final.gif";
 
-const Chatting = ({ chatModelResult }) => {
+const Chatting = ({ chatModelResult, isLoading, preInput }) => {
+  const chatRef = useRef(null);
+
+  useEffect(() => {
+    chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  }, [chatModelResult, isLoading, preInput]);
+
   return (
-    <Column>
+    <Column ref={chatRef}>
       {chatModelResult.map((chat, i) => {
         if (i % 2 == 0) {
           return (
@@ -13,26 +19,64 @@ const Chatting = ({ chatModelResult }) => {
                 <ChatContainerBrandon>
                   <ChatName>
                     <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
-                    <div style={{ width: "10px" }} />
+                    <div style={{ width: "0.625rem" }} />
                     <Body4>
                       브랜딩 어시스턴트 <b>Brandon</b>
                     </Body4>
                   </ChatName>
-                  <div style={{ height: "10px" }} />
+                  <div style={{ height: "0.625rem" }} />
                   <ChatBubbleBrandon>{chat.content}</ChatBubbleBrandon>
                 </ChatContainerBrandon>
               </Row>
-              <div style={{ height: "50px" }} />
             </>
           );
         } else {
           return (
-            <>
+            <Row style={{ justifyContent: "flex-end" }}>
               <ChatBubbleUser>{chat.content}</ChatBubbleUser>
-            </>
+            </Row>
           );
         }
       })}
+      {isLoading && chatModelResult.length > 0 ? (
+        <>
+          <Row style={{ justifyContent: "flex-end" }}>
+            <ChatBubbleUser>{preInput}</ChatBubbleUser>
+          </Row>
+          <Row>
+            <ChatContainerBrandon>
+              <ChatName>
+                <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
+                <div style={{ width: "0.625rem" }} />
+                <Body4>
+                  브랜딩 어시스턴트 <b>Brandon</b>
+                </Body4>
+              </ChatName>
+              <div style={{ height: "0.625rem" }} />
+              <ChatBubbleBrandon>
+                분석 중이다. 기다려라. 이 짜식아.
+              </ChatBubbleBrandon>
+            </ChatContainerBrandon>
+          </Row>
+        </>
+      ) : null}
+      {isLoading && chatModelResult.length === 0 ? (
+        <Row>
+          <ChatContainerBrandon>
+            <ChatName>
+              <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
+              <div style={{ width: "0.625rem" }} />
+              <Body4>
+                브랜딩 어시스턴트 <b>Brandon</b>
+              </Body4>
+            </ChatName>
+            <div style={{ height: "0.625rem" }} />
+            <ChatBubbleBrandon>
+              로딩 중이다. 기다려라. 이 짜식아.
+            </ChatBubbleBrandon>
+          </ChatContainerBrandon>
+        </Row>
+      ) : null}
     </Column>
   );
 };
@@ -42,13 +86,15 @@ export default Chatting;
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  width: 900px;
-  padding: 50px 0;
-  height: 100%;
+  width: 56.25rem;
+  padding: 0.625rem 0;
+  min-height: 60vh;
+  height: 65vh;
   color: white;
   overflow-y: scroll;
-  scrollbar-color: transparent transparent;
+  z-index: 10;
 `;
 
 const ChatContainerBrandon = styled.div`
@@ -66,7 +112,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 20vh;
 `;
 
 const BrandonIn = keyframes` 
@@ -89,9 +135,9 @@ const BrandonIn = keyframes`
 `;
 
 const BrandonImg = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 1.875rem;
   object-fit: cover;
   animation: ${BrandonIn} 1.5s linear 1s forwards;
 `;
@@ -101,21 +147,21 @@ const Body4 = styled.div`
   font-size: ${({ theme }) => theme.Web_fontSizes.Body4};
   font-weight: ${({ theme }) => theme.fontWeights.Body4};
   line-height: ${({ theme }) => theme.LineHeight.Body4};
-  color: white;
 `;
 
 const ChatBubbleBrandon = styled.div`
-  width: 785px;
-  padding: 24px;
-  border-radius: 0px 10px 10px 10px;
+  width: 49.0625rem;
+  padding: 1.5rem;
+  border-radius: 0 0.625rem 0.625rem 0.625rem;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(calc(var(--text-field-blur, 100px) / 2));
+  backdrop-filter: blur(calc(var(--text-field-blur, 6.25rem) / 2));
 `;
 
 const ChatBubbleUser = styled.div`
-  width: 785px;
-  padding: 24px;
-  border-radius: 10px 10px 0px 10px;
+  width: 49.0625rem;
+  padding: 1.5rem;
+  margin: 3.125rem 0;
+  border-radius: 0.625rem 0.625rem 0 0.625rem;
   background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(3.125rem);
 `;

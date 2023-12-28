@@ -20,7 +20,7 @@ const ProgressBar = ({ progress }) => {
               width: `${progress}%`,
               background: "#2B2D36",
               height: "100%",
-              borderRadius: 50,
+              borderRadius: 49,
               transition: "width 1s",
             }}
           ></div>
@@ -35,7 +35,7 @@ export default ProgressBar;
 
 const Container = styled.div`
   width: 940px;
-  padding: 16px 20px;
+  padding: 9px 20px;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);

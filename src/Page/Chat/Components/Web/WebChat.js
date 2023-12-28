@@ -11,6 +11,7 @@ import { AIMessage } from "langchain/schema";
 
 const WebChat = () => {
   const [input, setInput] = useState("");
+  const [preInput, setPreInput] = useState("");
   const [chatModelResult, setChatModelResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -85,12 +86,14 @@ const WebChat = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
+    setPreInput(input);
     setInput("");
-    setProgress((prev) => prev + 10);
+    if (progress < 100) {
+      setProgress((prev) => prev + 10);
+    }
     setIsLoading(true);
-    const res = await chain.predict({ answer: input });
-    console.log(res);
+    await chain.predict({ answer: input });
     setIsLoading(false);
   };
 
@@ -99,7 +102,11 @@ const WebChat = () => {
       <Overlay />
       <Column>
         <ProgressBar progress={progress} />
-        <Chatting chatModelResult={chatModelResult} />
+        <Chatting
+          chatModelResult={chatModelResult}
+          isLoading={isLoading}
+          preInput={preInput}
+        />
         <Input input={input} setInput={setInput} handleSubmit={handleSubmit} />
       </Column>
     </>
@@ -111,11 +118,11 @@ export default WebChat;
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   height: 89vh;
-  padding: 13px 0;
   color: white;
+  z-index: 1;
 `;
 
 const Overlay = styled.div`
