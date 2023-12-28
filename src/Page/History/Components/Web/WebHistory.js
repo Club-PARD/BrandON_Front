@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import WebAboutFeed from "./WebHistoryFeed";
+import WebHistoryFeed from "./WebHistoryFeed";
 import Woochal from "../../../../Assets/Woochal.png";
 
 const WebHistory = () => {
@@ -8,22 +8,50 @@ const WebHistory = () => {
     {
       feedNum: 1,
       imgURL: Woochal,
+      brandCard: {
+        name: "박우찰",
+        brandConcept: "혁신적인 백수",
+        conceptDetail: "방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람."
+      },
+      brandStory: {
+        storytelling: "",
+        resources: "",
+        slogan: "",
+        suggestion: "",
+        niche: "",
+      },
     },
     {
-      feedNum: 2,
-      imgURL: "",
+      feedNum: 1,
+      imgURL: Woochal,
+      brandCard: {
+        name: "박우찰",
+        brandConcept: "혁신적인 백수",
+        conceptDetail: "방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람."
+      },
+      brandStory: {
+        storytelling: "",
+        resources: "",
+        slogan: "",
+        suggestion: "",
+        niche: "",
+      },
     },
     {
-      feedNum: 3,
-      imgURL: "",
-    },
-    {
-      feedNum: 4,
-      imgURL: "",
-    },
-    {
-      feedNum: 5,
-      imgURL: "",
+      feedNum: 1,
+      imgURL: Woochal,
+      brandCard: {
+        name: "박우찰",
+        brandConcept: "혁신적인 백수",
+        conceptDetail: "방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람."
+      },
+      brandStory: {
+        storytelling: "",
+        resources: "",
+        slogan: "",
+        suggestion: "",
+        niche: "",
+      },
     },
   ]);
   return (
@@ -31,33 +59,31 @@ const WebHistory = () => {
       <Div
         style={{
           flexDirection: "column",
-          width: "960px",
+          width: "940px",
           margin: "100px 0 0 0",
         }}
       >
-        <Div style={{ justifyContent: "start" }}>
+        <Div style={{}}>
           <Div
             style={{
-              width: "50%",
-              fontSize: "32px",
-              justifyContent: "start",
+              fontSize: "250px",
+              fontWeight: "bold",
               margin: "0 0 40px 0",
             }}
           >
-            <A>브랜딩 히스토리</A>
+            <A>Output</A>
           </Div>
         </Div>
         <Div
           style={{
             display: "grid",
             boxSizing: "border-box",
-            padding: "10px",
-            backgroundColor: "#2B2D36",
             borderRadius: "10px",
+            gridGap: "30px 40px",
           }}
         >
           {feeds.map((feed, index) => (
-            <WebAboutFeed feedNum={feed.feedNum} imgURL={feed.imgURL} />
+            <WebHistoryFeed feedNum={feed.feedNum} imgURL={feed.imgURL} brandCard={feed.brandCard} brandConcept={feed.brandConcept} />
           ))}
         </Div>
       </Div>
@@ -85,7 +111,7 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  /* border: 0.5px solid black; */
+  border: 0.5px solid black;
   border-radius: 0px;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
@@ -99,4 +125,6 @@ const Div = styled.div`
 
 const A = styled.a`
   color: white;
+  mix-blend-mode: soft-light;
+  letter-Spacing: -10px
 `;

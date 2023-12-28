@@ -142,6 +142,10 @@ const textRemove = keyframes`
   20% {
     opacity: 1;
   }
+
+  50% {
+    opacity: 0;
+  }
  
   100% {
     opacity: 0;
@@ -182,25 +186,25 @@ const Wrapper = styled.div`
 const Text = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s ease-out 2s forwards, ${textRemove} 1s ease-in 5s forwards;
+  animation: ${lineUp} 2s ease-out 2s forwards, ${textRemove} 1s ease-in 6s forwards;
 `;
 
 const Text2 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 5.5s forwards, ${textRemove} 1s ease-in 8.5s forwards;
+  animation: ${lineUp} 2s steps(30, end) 6.2s forwards, ${textRemove} 1s ease-in 10.2s forwards;
 `;
 
 const Text3 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 9s forwards, ${textRemove} 1s ease-in 12s forwards;
+  animation: ${lineUp} 2s steps(30, end) 10.4s forwards, ${textRemove} 1s ease-in 14.4s forwards;
 `;
 
 const Text4 = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 12.5s forwards;
+  animation: ${lineUp} 2s steps(30, end) 14.6s forwards;
 `;
 
 const BrandonImg = styled.img`
