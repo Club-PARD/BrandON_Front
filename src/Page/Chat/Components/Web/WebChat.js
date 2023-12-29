@@ -84,18 +84,22 @@ const WebChat = () => {
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
     }
-    // fetchData();
+    fetchData();
   }, []);
 
   const handleSubmit = async () => {
     setPreInput(input);
     setWrapCount(0);
     setInput("");
+    setIsLoading(true);
+    const res = await chain.predict({ answer: input });
+    if (progress === 90 && !res.includes("Brandon의 키워드")) {
+      setProgress((prev) => prev - 10);
+    }
+
     if (progress < 100) {
       setProgress((prev) => prev + 10);
     }
-    setIsLoading(true);
-    await chain.predict({ answer: input });
     setIsLoading(false);
   };
 
