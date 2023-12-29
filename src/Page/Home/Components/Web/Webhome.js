@@ -1,44 +1,93 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import { atom, useRecoilState } from 'recoil';
 import { useEffect, useState } from "react";
 import { useGoogleLogin} from "@react-oauth/google";
 
+export const isLogined = atom ({
+  key: 'isLogined',
+  default: false,
+});
+export const accessTokenState = atom({
+  key: 'accessTokenState',
+  default: null,
+});
+
 const WebHome = () => {
 
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  const sendUserDataToServer = async (token) => {
+  const handleLogin = (token) => {
+    localStorage.setItem('accessToken',token);
+    setIsLoggedIn(true);
+    sendUserDataToGoogle(token);
+  }
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken'); 
+    setAccessToken(null); 
+    setIsLoggedIn(false); 
+  };
+
+  const userData = {
+    name: '',
+    email: '',
+    picture: '',
+  };
+
+  const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
     try {
-       //const jsonUserData = JSON.stringify(userData);
+        const jsonUserData = JSON.stringify(userData);
 
-        // const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google', jsonUserData, {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // });
-        const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/oauth2/code/google',{
-          token
+        const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google', jsonUserData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
-        console.log('서버 응답:', response.data); // reesponse.data 이 userID
+        console.log('서버 응답2:', response.data); 
     } catch (error) {
         console.error('서버 요청 에러:', error);
     }
-  };
+};
+  const sendUserDataToGoogle = async (token) => { //구글에게 억세스토큰 보내서 사용자정보 받아옴 
+    try {
+        const response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log('서버 응답:', response.data); 
+        userData.name = response.data.name;
+        userData.email = response.data.email;
+        userData.picture = response.data.picture;
+        sendUserDataToServer(userData); // 빋은 데이터를 서버로 보내서 디비에 저장 
+    } catch (error) {
+        console.error('서버 요청 에러:', error);
+    }
+};
 
-  const login = useGoogleLogin({
+  const login = useGoogleLogin({ // 구글 로그인 실행 
     onSuccess : (res) => {
-        console.log(res);
         const token = res.access_token;
-        console.log(token);
-        
-        sendUserDataToServer(token);
-
+        handleLogin(token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
     },
     onFailure : (err) => {
         console.log(err);
     }
   });
+
+  useEffect(() => {
+    // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
+    const storedToken = localStorage.getItem('accessToken');
+    if (storedToken) {
+      setAccessToken(storedToken); 
+      setIsLoggedIn(true); 
+      sendUserDataToGoogle(storedToken); 
+    } else {
+      setIsLoggedIn(false); 
+    }
+  }, []);
 
   return (
     
@@ -50,22 +99,22 @@ const WebHome = () => {
         </StyledText>
       </HeaderText>
 
-      
+      {isLoggedIn ? (
+        <TestStart>
+          <LoginLink href='/chat'>지금 바로 ~하기</LoginLink>
+        </TestStart>
+      ): (
         <TestStart>
           <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
-          {/* <LoginLink onClick={login}>지금 바로 ~하기</LoginLink> */}
         </TestStart>
-
+      )}
+      
       <OnBoading>
         <img src="Rectangle28.png"></img>
       </OnBoading>
 
       <TestStart>
-        <LoginLink
-          href={`http://localhost:8080/login/google`}
-        >
-          지금 바로 ~하기
-        </LoginLink>
+        <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
       </TestStart>
     </Container>
   );
@@ -140,9 +189,8 @@ const TestStart = styled.div`
   margin-top: 132px;
 `;
 
-const LoginLink = styled.button`
+const LoginLink = styled.a`
   color: var(--White, #fff);
-  background-color: inherit;
   font-family: "Pretendard";
   font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
   font-style: normal;
