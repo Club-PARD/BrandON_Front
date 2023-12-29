@@ -4,20 +4,13 @@ import axios from "axios";
 import { atom, useRecoilState } from 'recoil';
 import { useEffect, useState } from "react";
 import { useGoogleLogin} from "@react-oauth/google";
-
-export const isLogined = atom ({
-  key: 'isLogined',
-  default: false,
-});
-export const accessTokenState = atom({
-  key: 'accessTokenState',
-  default: null,
-});
+import { isLogined, accessTokenState, recoilUserID } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [userID, setUserID] = useRecoilState(recoilUserID)
 
   const handleLogin = (token) => {
     localStorage.setItem('accessToken',token);
@@ -45,7 +38,9 @@ const WebHome = () => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('서버 응답2:', response.data); 
+        console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
+        setUserID(response.data);
+        localStorage.setItem('userID',response.data);
     } catch (error) {
         console.error('서버 요청 에러:', error);
     }
