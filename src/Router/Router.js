@@ -8,6 +8,7 @@ import TopNavBar from "../common/TopNavBar";
 import styled from "styled-components";
 import NamePage from "../Page/Name";
 import { useEffect, useState } from "react";
+import OutputPage from "../Page/Output";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -40,6 +41,7 @@ const Router = () => {
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/name" element={<NamePage />} />
+          <Route path="/output" element={<OutputPage />} />
         </Routes>
       </Main>
     </Container>
