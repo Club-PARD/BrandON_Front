@@ -1,23 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { atom, useRecoilState } from 'recoil';
-import { useEffect, useState } from "react";
+import { useRecoilState } from 'recoil';
+import { useEffect } from "react";
 import { useGoogleLogin} from "@react-oauth/google";
-
-export const isLogined = atom ({
-  key: 'isLogined',
-  default: false,
-});
-export const accessTokenState = atom({
-  key: 'accessTokenState',
-  default: null,
-});
+import { isLogined, accessTokenState, recoilUserID } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [userID, setUserID] = useRecoilState(recoilUserID);
 
   const handleLogin = (token) => {
     localStorage.setItem('accessToken',token);
@@ -26,6 +19,7 @@ const WebHome = () => {
   }
   const handleLogout = () => {
     localStorage.removeItem('accessToken'); 
+    localStorage.removeItem('userID')
     setAccessToken(null); 
     setIsLoggedIn(false); 
   };
@@ -35,7 +29,7 @@ const WebHome = () => {
     email: '',
     picture: '',
   };
-
+  
   const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
     try {
         const jsonUserData = JSON.stringify(userData);
@@ -45,9 +39,11 @@ const WebHome = () => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('서버 응답2:', response.data); 
+        console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
+        setUserID(response.data.userId);
+        localStorage.setItem('userID',response.data);
     } catch (error) {
-        console.error('서버 요청 에러:', error);
+        console.error('서버 요청 에러2:', error);
     }
 };
   const sendUserDataToGoogle = async (token) => { //구글에게 억세스토큰 보내서 사용자정보 받아옴 
@@ -69,8 +65,8 @@ const WebHome = () => {
 
   const login = useGoogleLogin({ // 구글 로그인 실행 
     onSuccess : (res) => {
-        const token = res.access_token;
-        handleLogin(token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+        setAccessToken(res.access_token);
+        handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
     },
     onFailure : (err) => {
         console.log(err);

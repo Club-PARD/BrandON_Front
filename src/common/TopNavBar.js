@@ -1,15 +1,104 @@
 import React from "react";
+import axios from "axios";
 import { NavLink, Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { useGoogleLogin} from "@react-oauth/google";
+import { isLogined,accessTokenState, recoilUserID } from "../atom/loginAtom";
+import { useState } from "react";
 
 const TopNavBar = ({ isScrolled }) => {
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [isDropdownView, setDropdownView] = useState(false);
+  const [userID, setUserID] = useRecoilState(recoilUserID);
+
+  const handleLogin = (token) => {
+    localStorage.setItem('accessToken',token);
+    setIsLoggedIn(true);
+    sendUserDataToGoogle(token);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken'); 
+    localStorage.removeItem('userID');
+    setAccessToken(null); 
+    setIsLoggedIn(false); 
+  };
+  
+  const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
+    try {
+        const jsonUserData = JSON.stringify(userData);
+
+        const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google', jsonUserData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
+        setUserID(response.data.userId);
+        localStorage.setItem('userID',response.data);
+    } catch (error) {
+        console.error('서버 요청 에러2:', error);
+    }
+};
+  const sendUserDataToGoogle = async (token) => { //구글에게 억세스토큰 보내서 사용자정보 받아옴 
+    try {
+        const response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log('서버 응답:', response.data); 
+        userData.name = response.data.name;
+        userData.email = response.data.email;
+        userData.picture = response.data.picture;
+        sendUserDataToServer(userData); // 빋은 데이터를 서버로 보내서 디비에 저장 
+    } catch (error) {
+        console.error('서버 요청 에러:', error);
+    }
+};
+
+  const login = useGoogleLogin({ // 구글 로그인 실행 
+    onSuccess : (res) => {
+        setAccessToken(res.access_token);
+        handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+    },
+    onFailure : (err) => {
+        console.log(err);
+    }
+  });
+
+  const handleClickContainer = () => {
+    setDropdownView(!isDropdownView)
+  };
+
+  const handleBlurContainer = () => {
+    setTimeout(() => {
+      setDropdownView(false)
+    }, 200);
+  };
+
+  const userData = {
+    name: '',
+    email: '',
+    picture: '',
+  };
   return (
     <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
         <Header1>로고</Header1>
       </Link>
       <div style={{ flex: 1 }} />
-      <NavLink
+      
+      {!isLoggedIn &&(
+        <>
+          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
+        </>
+      )}
+      {isLoggedIn && (
+        <>
+        <NavLink
         to="/"
         style={({ isActive }) =>
           isActive
@@ -28,7 +117,7 @@ const TopNavBar = ({ isScrolled }) => {
         <Body1>홈</Body1>
       </NavLink>
       <div style={{ width: "66px" }} />
-      <NavLink
+        <NavLink
         to="/chat"
         style={({ isActive }) =>
           isActive
@@ -65,8 +154,26 @@ const TopNavBar = ({ isScrolled }) => {
       >
         <Body1>결과</Body1>
       </NavLink>
-      <div style={{ width: "100px" }} />
-      <Body1>로그인</Body1>
+
+      <div style={{ width: "100px" }} onBlur={handleBlurContainer}>
+      <label onClick={handleClickContainer}>
+        <button style={{all: "unset", color: "white", cursor: "pointer"}}><Body1>로그인</Body1></button>
+      </label>
+      {isDropdownView && (
+      <ul style={{ position: 'absolute', listStyle: 'none', padding: 0 }}>
+        <li style={{ marginBottom: '10px' }}>
+          <Link to='/history'>마이 페이지</Link>
+        </li>
+        <li style={{ marginBottom: '10px', cursor: 'pointer' }} onClick={handleLogout}>
+          로그아웃
+        </li>
+      </ul>
+      )}
+      </div>
+        </>
+      )}
+
+      {/* <Body1>로그인</Body1> */}
     </Div>
   );
 };
