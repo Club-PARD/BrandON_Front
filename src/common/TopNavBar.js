@@ -1,31 +1,89 @@
 import React from "react";
+import axios from "axios";
 import { NavLink, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { isLogined,accessTokenState } from "../atom/loginAtom";
+import { useGoogleLogin} from "@react-oauth/google";
+import { isLogined,accessTokenState, recoilUserID } from "../atom/loginAtom";
 import { useState } from "react";
 
 const TopNavBar = ({ isScrolled }) => {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [isDropdownView, setDropdownView] = useState(false)
+  const [isDropdownView, setDropdownView] = useState(false);
+  const [userID, setUserID] = useRecoilState(recoilUserID);
 
-  const handleClickContainer = () => {
-    setDropdownView(!isDropdownView)
-  }
+  const handleLogin = (token) => {
+    localStorage.setItem('accessToken',token);
+    setIsLoggedIn(true);
+    sendUserDataToGoogle(token);
+  };
 
-  const handleBlurContainer = () => {
-    setTimeout(() => {
-      setDropdownView(false)
-    }, 200);
-  }
   const handleLogout = () => {
     localStorage.removeItem('accessToken'); 
     localStorage.removeItem('userID');
     setAccessToken(null); 
     setIsLoggedIn(false); 
   };
+  
+  const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
+    try {
+        const jsonUserData = JSON.stringify(userData);
 
+        const response = await axios.post('http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google', jsonUserData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
+        setUserID(response.data.userId);
+        localStorage.setItem('userID',response.data);
+    } catch (error) {
+        console.error('서버 요청 에러2:', error);
+    }
+};
+  const sendUserDataToGoogle = async (token) => { //구글에게 억세스토큰 보내서 사용자정보 받아옴 
+    try {
+        const response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log('서버 응답:', response.data); 
+        userData.name = response.data.name;
+        userData.email = response.data.email;
+        userData.picture = response.data.picture;
+        sendUserDataToServer(userData); // 빋은 데이터를 서버로 보내서 디비에 저장 
+    } catch (error) {
+        console.error('서버 요청 에러:', error);
+    }
+};
+
+  const login = useGoogleLogin({ // 구글 로그인 실행 
+    onSuccess : (res) => {
+        setAccessToken(res.access_token);
+        handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+    },
+    onFailure : (err) => {
+        console.log(err);
+    }
+  });
+
+  const handleClickContainer = () => {
+    setDropdownView(!isDropdownView)
+  };
+
+  const handleBlurContainer = () => {
+    setTimeout(() => {
+      setDropdownView(false)
+    }, 200);
+  };
+
+  const userData = {
+    name: '',
+    email: '',
+    picture: '',
+  };
   return (
     <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
@@ -33,6 +91,11 @@ const TopNavBar = ({ isScrolled }) => {
       </Link>
       <div style={{ flex: 1 }} />
       
+      {!isLoggedIn &&(
+        <>
+          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
+        </>
+      )}
       {isLoggedIn && (
         <>
         <NavLink

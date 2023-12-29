@@ -10,7 +10,7 @@ const WebHome = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [userID, setUserID] = useRecoilState(recoilUserID)
+  const [userID, setUserID] = useRecoilState(recoilUserID);
 
   const handleLogin = (token) => {
     localStorage.setItem('accessToken',token);
@@ -29,7 +29,7 @@ const WebHome = () => {
     email: '',
     picture: '',
   };
-
+  
   const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
     try {
         const jsonUserData = JSON.stringify(userData);
@@ -65,8 +65,8 @@ const WebHome = () => {
 
   const login = useGoogleLogin({ // 구글 로그인 실행 
     onSuccess : (res) => {
-        const token = res.access_token;
-        handleLogin(token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+        setAccessToken(res.access_token);
+        handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
     },
     onFailure : (err) => {
         console.log(err);
