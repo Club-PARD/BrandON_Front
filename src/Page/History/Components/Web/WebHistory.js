@@ -4,6 +4,7 @@ import WebHistoryCard from "./WebHistoryCard";
 import Woochal from "../../../../Assets/Woochal.png";
 import ButtonCard from "../../../../Assets/Button_Card.png";
 import Brandon from "../../../../Assets/brandon_final.gif"
+import { useNavigate } from "react-router-dom";
 
 const WebHistory = () => {
   const [cards, setCards] = useState([
@@ -157,9 +158,18 @@ const WebHistory = () => {
       },
     },
   ]);
-  const [forTest, setForTest] = useState(undefined)
+  const [forTest, setForTest] = useState(1)
   const [selectCardNum, setSelectCardNum] = useState([0, 1, 2, 3]);
   const [selectedCard, setSelectedCard] = useState([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]]);
+  const navigate = useNavigate();
+
+  const chatButtonHandler = () => {
+    navigate("/chat");
+  }
+
+  const cardClickHandler = () => {
+    navigate("/output");
+  }
 
   const rightButtonHandler = () => {
     setSelectCardNum((prev) => (prev).map(num => num + 4))
@@ -192,7 +202,7 @@ const WebHistory = () => {
           </Div>
           <Div style={{ height: "30vh", alignItems: "start" }}>
             <Div style={{ height: "5vh", fontSize: "28px", fontWeight: "300", color: "white" }}>
-              <Button >
+              <Button onClick={chatButtonHandler}>
                 <Div style={{ width: "40%", justifyContent: "end" }}><BrandonImg src={Brandon} /></Div>
                 <Div style={{ width: "60%", justifyContent: "start", margin: "2px 0 0 20px", color: "white", fontFamily: "Pretendard Variable", fontStyle: "normal", fontWeight: "700", fontSize: "18px", lineHeight: "21px", left: "calc(50% - 94px/2 + 28px)", top: "calc(50% - 21px/2 + 165.5px)" }}>채팅하러가기</Div>
               </Button>
@@ -246,7 +256,7 @@ const WebHistory = () => {
                     <WebHistoryCard undefined={true} />
                     :
                     <WebHistoryCard undefined={false} card={card} cardNum={card.cardNum} imgURL={card.imgURL} brandCard={card.brandCard} brandConcept={card.brandConcept} />}
-                  <Overlay />
+                  <Overlay onClick={cardClickHandler} />
                 </Card>
               ))}
             </Div>
@@ -351,6 +361,7 @@ const Overlay = styled.div`
   z-Index: 3;
   &:hover {
     opacity: 0.3;
+    cursor: pointer;
   }
 `;
 
