@@ -131,7 +131,7 @@ const FloatingButton = styled.button`
     5.3125rem + ${(props) => (props.wrapCount ? props.wrapCount : 0)} *
       0.9375rem
   );
-  right: 11.5625rem;
+  right: 14vw;
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;

@@ -118,7 +118,7 @@ const LeftRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 40%;
+  height: 100%;
 `;
 
 const RightRow = styled.div`
