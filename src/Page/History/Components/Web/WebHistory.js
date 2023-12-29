@@ -191,20 +191,20 @@ const WebHistory = () => {
       {forTest === undefined ?
         <Div style={{ flexDirection: "column" }}>
           <Div style={{ height: "40vh", alignItems: "end" }}>
-            <Div style={{ height: "10vh", fontSize: "40px", fontWeight: "600", color: "white" }}>
+            <Div style={{ height: "10vh", fontSize: "2.5rem", fontWeight: "600", color: "white" }}>
               아직 결과물이 없어요
             </Div>
           </Div>
           <Div style={{ height: "15vh", alignItems: "start" }}>
-            <Div style={{ height: "5vh", fontSize: "28px", fontWeight: "300", color: "white" }}>
+            <Div style={{ height: "5vh", fontSize: "1.75rem", fontWeight: "300", color: "white" }}>
               Brandon과 이야기해서 결과물을 만들어보세요.
             </Div>
           </Div>
           <Div style={{ height: "30vh", alignItems: "start" }}>
-            <Div style={{ height: "5vh", fontSize: "28px", fontWeight: "300", color: "white" }}>
+            <Div style={{ height: "5vh", fontSize: "1.75rem", fontWeight: "300", color: "white" }}>
               <Button onClick={chatButtonHandler}>
                 <Div style={{ width: "40%", justifyContent: "end" }}><BrandonImg src={Brandon} /></Div>
-                <Div style={{ width: "60%", justifyContent: "start", margin: "2px 0 0 20px", color: "white", fontFamily: "Pretendard Variable", fontStyle: "normal", fontWeight: "700", fontSize: "18px", lineHeight: "21px", left: "calc(50% - 94px/2 + 28px)", top: "calc(50% - 21px/2 + 165.5px)" }}>채팅하러가기</Div>
+                <Div style={{ width: "60%", justifyContent: "start", margin: "0.125rem 0 0 1.25rem", color: "white", fontFamily: "Pretendard Variable", fontStyle: "normal", fontWeight: "700", fontSize: "1.125rem", lineHeight: "1.3125rem", left: "calc(50% - 5.875rem/2 + 1.75rem)", top: "calc(50% - 1.3125rem/2 + 10.3438rem)" }}>채팅하러가기</Div>
               </Button>
             </Div>
           </Div>
@@ -216,10 +216,10 @@ const WebHistory = () => {
               ? ""
               :
               <Div style={{ position: "relative", width: "50%", justifyContent: "end" }}>
-                <Div style={{ position: "absolute", top: "200px", left: "40px", width: "95px", height: "95px", borderRadius: "50px", backgroundColor: "rgba(255, 255, 255, 0.3)", backdropFilter: "blur(10px)" }}>
+                <Div style={{ position: "absolute", top: "12.5rem", left: "2.5rem", width: "5.9375rem", height: "5.9375rem", borderRadius: "3.125rem", backgroundColor: "rgba(255, 255, 255, 0.3)", backdropFilter: "blur(0.625rem)" }}>
                   <Img src={ButtonCard} style={{ transform: "rotate(180deg)", margin: "0 0 0 0" }} />
                 </Div>
-                <Overlay onClick={leftButtonHandler} style={{ position: "absolute", top: "200px", left: "40px", width: "95px", height: "95px", borderRadius: "50px", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
+                <Overlay onClick={leftButtonHandler} style={{ position: "absolute", top: "12.5rem", left: "2.5rem", width: "5.9375rem", height: "5.9375rem", borderRadius: "3.125rem", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
                 </Overlay>
               </Div>
             }
@@ -228,15 +228,15 @@ const WebHistory = () => {
           <Div
             style={{
               flexDirection: "column",
-              width: "940px",
-              margin: "80px 0 0 0",
+              width: "58.75rem",
+              margin: "5rem 0 0 0",
             }}
           >
             <Div style={{}}>
               <Div
                 style={{
-                  fontSize: "24px",
-                  margin: "0 0 20px 0",
+                  fontSize: "1.5rem",
+                  margin: "0 0 1.25rem 0",
                 }}
               >
                 <A>현재 1개의 가나다라마바사님의 브랜드 컨셉이 있어요</A>
@@ -246,8 +246,8 @@ const WebHistory = () => {
               style={{
                 display: "grid",
                 boxSizing: "border-box",
-                borderRadius: "10px",
-                gridGap: "30px 40px",
+                borderRadius: "0.625rem",
+                gridGap: "1.875rem 2.5rem",
               }}
             >
               {selectedCard.map((card, index) => (
@@ -266,10 +266,10 @@ const WebHistory = () => {
               ? ""
               :
               <Div style={{ position: "relative", width: "50%", justifyContent: "end" }}>
-                <Div style={{ position: "absolute", top: "200px", right: "40px", width: "95px", height: "95px", borderRadius: "50px", backgroundColor: "rgba(255, 255, 255, 0.3)", backdropFilter: "blur(10px)" }}>
+                <Div style={{ position: "absolute", top: "12.5rem", right: "2.5rem", width: "5.9375rem", height: "5.9375rem", borderRadius: "3.125rem", backgroundColor: "rgba(255, 255, 255, 0.3)", backdropFilter: "blur(0.625rem)" }}>
                   <Img src={ButtonCard} style={{ margin: "0 0 0 0" }} />
                 </Div>
-                <Overlay onClick={rightButtonHandler} style={{ position: "absolute", top: "200px", right: "40px", width: "95px", height: "95px", borderRadius: "50px", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
+                <Overlay onClick={rightButtonHandler} style={{ position: "absolute", top: "12.5rem", right: "2.5rem", width: "5.9375rem", height: "5.9375rem", borderRadius: "3.125rem", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
                 </Overlay>
               </Div>
 
@@ -304,7 +304,7 @@ const Div = styled.div`
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
   /* border: 0.5px solid black; */
-  border-radius: 0px;
+  border-radius: 0rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
   font-weight: ${({ theme }) => theme.fontWeights.Header1};
@@ -326,7 +326,7 @@ const Card = styled.div`
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
   /* border: 0.5px solid black; */
-  border-radius: 10px;
+  border-radius: 0.625rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
   font-weight: ${({ theme }) => theme.fontWeights.Header1};
@@ -347,7 +347,7 @@ const Overlay = styled.div`
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
   /* border: 0.5px solid black; */
-  border-radius: 10px;
+  border-radius: 0.625rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
   font-weight: ${({ theme }) => theme.fontWeights.Header1};
@@ -399,9 +399,9 @@ const A = styled.a`
 `;
 
 const Img = styled.img`
-  width: 20px;
-  margin: 110px 0 0 40px;
-  border-radius: 10px;
+  width: 1.25rem;
+  margin: 6.875rem 0 0 2.5rem;
+  border-radius: 0.625rem;
   object-fit: cover;
   &:hover {
     filter: brightness(0.7);
@@ -411,22 +411,22 @@ const Img = styled.img`
 const Button = styled.button`
 box-sizing: border-box;
 position: absolute;
-width: 325px;
-height: 51px;
-left: calc(50% - 325px/2 + 0.5px);
-top: 530px;
+width: 20.3125rem;
+height: 3.1875rem;
+left: calc(50% - 20.3125rem/2 + 0.0313rem);
+top: 33.125rem;
 
 background: rgba(255, 255, 255, 0.1);
-border: 1px solid rgba(255, 255, 255, 0.2);
-box-shadow: inset 25.3667px -25.3667px 25.3667px rgba(194, 194, 194, 0.1), inset -25.3667px 25.3667px 25.3667px rgba(255, 255, 255, 0.1);
-backdrop-filter: blur(25.3667px);
+border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+box-shadow: inset 1.5854rem -1.5854rem 1.5854rem rgba(194, 194, 194, 0.1), inset -1.5854rem 1.5854rem 1.5854rem rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(1.5854rem);
 /* Note: backdrop-filter has minimal browser support */
-border-radius: 20px;
+border-radius: 1.25rem;
 
 display: flex;
 `;
 
 const BrandonImg = styled.img`
-  width: 36px;
+  width: 2.25rem;
 
 `;

@@ -13,7 +13,7 @@ const WebHistoryCard = (props) => {
         display: "block",
         width: "28.125rem",
         height: "15.625rem",
-        fontSize: "32px",
+        fontSize: "2rem",
       }}
     >
       <Div style={{ display: "block", position: "relative" }}>
@@ -28,17 +28,17 @@ const WebHistoryCard = (props) => {
             flexDirection: "column",
           }}
         >
-          <Div style={{ alignItems: "end", padding: "0px 18px 0px 18px", height: "45%", boxSizing: "border-box" }}>
+          <Div style={{ alignItems: "end", padding: "0rem 1.125rem 0rem 1.125rem", height: "45%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
               {props.undefined === true ? "" : props.brandCard.name}
             </Div>
           </Div>
-          <Div style={{ alignItems: "center", padding: "0px 18px 0px 18px", height: "20%", boxSizing: "border-box" }}>
+          <Div style={{ alignItems: "center", padding: "0rem 1.125rem 0rem 1.125rem", height: "20%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
               {props.undefined === true ? "" : props.brandCard.brandConcept}
             </Div>
           </Div>
-          <Div style={{ alignItems: "start", padding: "0px 18px 0px 18px", height: "35%", boxSizing: "border-box" }}>
+          <Div style={{ alignItems: "start", padding: "0rem 1.125rem 0rem 1.125rem", height: "35%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
               {props.undefined === true ? "" : props.brandCard.conceptDetail}
             </Div>
@@ -75,7 +75,7 @@ const Div = styled.div`
   padding: 0vh 0vh 0vh 0vh;
   background-color: none;
   /* border: 0.5px solid black; */
-  border-radius: 10px;
+  border-radius: 0.625rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
   font-weight: ${({ theme }) => theme.fontWeights.Header1};
@@ -88,7 +88,7 @@ const Img = styled.img`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "100%"};
   /* border: 1px solid #555555; */
-  border-radius: 10px;
+  border-radius: 0.625rem;
   position: ${(props) => props.position || ""};
   object-fit: cover;
   /* &:hover {
