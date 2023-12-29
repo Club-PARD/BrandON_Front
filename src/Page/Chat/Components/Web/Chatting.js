@@ -165,7 +165,7 @@ const Body4 = styled.div`
 `;
 
 const ChatBubbleBrandon = styled.div`
-  width: 49.0625rem;
+  width: 48.75rem;
   padding: 1.5rem;
   border-radius: 0 0.625rem 0.625rem 0.625rem;
   background: rgba(0, 0, 0, 0.5);
@@ -173,7 +173,7 @@ const ChatBubbleBrandon = styled.div`
 `;
 
 const ChatBubbleUser = styled.div`
-  width: 49.0625rem;
+  width: 48.75rem;
   padding: 1.5rem;
   margin: 3.125rem 0;
   border-radius: 0.625rem 0.625rem 0 0.625rem;

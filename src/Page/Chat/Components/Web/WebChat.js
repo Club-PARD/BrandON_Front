@@ -15,6 +15,7 @@ const WebChat = () => {
   const [chatModelResult, setChatModelResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [wrapCount, setWrapCount] = useState(0);
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -88,6 +89,7 @@ const WebChat = () => {
 
   const handleSubmit = async () => {
     setPreInput(input);
+    setWrapCount(0);
     setInput("");
     if (progress < 100) {
       setProgress((prev) => prev + 10);
@@ -107,7 +109,14 @@ const WebChat = () => {
           isLoading={isLoading}
           preInput={preInput}
         />
-        <Input input={input} setInput={setInput} handleSubmit={handleSubmit} />
+        <Input
+          input={input}
+          setInput={setInput}
+          handleSubmit={handleSubmit}
+          wrapCount={wrapCount}
+          setWrapCount={setWrapCount}
+          progress={progress}
+        />
         <Body6>
           Brandon이 부정확한 정보를 표시할 수 있으므로 입력을 한 번 더
           확인하세요.
