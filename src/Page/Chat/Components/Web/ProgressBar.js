@@ -13,7 +13,7 @@ const ProgressBar = ({ progress }) => {
             borderRadius: `var(--text-field-blur, 100px)`,
             background: `var(--ver-2-text-field, rgba(255, 255, 255, 0.10))`,
             backdropFilter: `blur(50px)`,
-            height: "27px",
+            height: "1.6875rem",
           }}
         >
           <div
@@ -35,8 +35,8 @@ const ProgressBar = ({ progress }) => {
 export default ProgressBar;
 
 const Container = styled.div`
-  width: 940px;
-  padding: 9px 20px;
+  width: 58.75rem;
+  padding: 0.5625rem 1.25rem;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
