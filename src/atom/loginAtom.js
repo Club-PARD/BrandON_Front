@@ -12,4 +12,5 @@ export const isLogined = atom ({
   export const recoilUserID = atom ({
     key: 'recoilUserID',
     default: localStorage.getItem('userID'),
-  })
+  });
+ 

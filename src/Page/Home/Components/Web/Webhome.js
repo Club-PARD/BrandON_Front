@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { atom, useRecoilState } from 'recoil';
-import { useEffect, useState } from "react";
+import { useRecoilState } from 'recoil';
+import { useEffect } from "react";
 import { useGoogleLogin} from "@react-oauth/google";
 import { isLogined, accessTokenState, recoilUserID } from "../../../../atom/loginAtom";
 
@@ -19,6 +19,7 @@ const WebHome = () => {
   }
   const handleLogout = () => {
     localStorage.removeItem('accessToken'); 
+    localStorage.removeItem('userID')
     setAccessToken(null); 
     setIsLoggedIn(false); 
   };
@@ -39,10 +40,10 @@ const WebHome = () => {
             },
         });
         console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
-        setUserID(response.data);
+        setUserID(response.data.userId);
         localStorage.setItem('userID',response.data);
     } catch (error) {
-        console.error('서버 요청 에러:', error);
+        console.error('서버 요청 에러2:', error);
     }
 };
   const sendUserDataToGoogle = async (token) => { //구글에게 억세스토큰 보내서 사용자정보 받아옴 
