@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 
 const TopNavBar = ({ isScrolled }) => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [isDropdownView, setDropdownView] = useState(false);
@@ -30,6 +31,7 @@ const TopNavBar = ({ isScrolled }) => {
     localStorage.removeItem("userID");
     setAccessToken(null);
     setIsLoggedIn(false);
+    navigate("/");
   };
 
   const sendUserDataToServer = async (userData) => {
