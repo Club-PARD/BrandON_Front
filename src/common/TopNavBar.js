@@ -127,7 +127,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "skyblue",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
@@ -146,7 +146,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "skyblue",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
@@ -165,7 +165,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "skyblue",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
@@ -176,13 +176,24 @@ const TopNavBar = ({ isScrolled }) => {
           >
             <Body1>결과</Body1>
           </NavLink>
-          <div style={{ width: "100px" }} />
+          <div style={{ width: "4.25rem" }} />
           <div onBlur={handleBlurContainer}>
             <label onClick={handleClickContainer}>
               <button
                 style={{ all: "unset", color: "white", cursor: "pointer" }}
               >
-                <Body1><img src={userData.picture} style={{width:'30px', height:'30px', borderRadius:'30px'}}></img>{userData.name}</Body1>
+                <Body1>
+                  <img
+                    src={userData.picture}
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "30px",
+                    }}
+                  ></img>
+                  <div style={{ width: "0.9375rem" }} />
+                  {userData.name}
+                </Body1>
               </button>
             </label>
             {isDropdownView && (
