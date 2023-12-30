@@ -8,8 +8,10 @@ import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
 import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage } from "langchain/schema";
+import { useNavigate } from "react-router-dom";
 
 const WebChat = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [preInput, setPreInput] = useState("");
   const [chatModelResult, setChatModelResult] = useState([]);
@@ -76,6 +78,13 @@ const WebChat = () => {
     prompt: chatPrompt,
     memory: memory,
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
