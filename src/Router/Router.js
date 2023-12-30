@@ -55,7 +55,7 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-image: ${(props) =>
-    props.home ? `url("magenta.gif")` : `url("background.jpg")`};
+    props.home ? `url("magenta.gif")` : `url("Background_Final.png")`};
   background-attachment: fixed;
   background-size: cover;
 `;
