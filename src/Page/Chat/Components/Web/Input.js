@@ -80,9 +80,14 @@ const Input = ({
           alignItems: "center",
           width: "56.25rem",
           borderRadius: "10px",
-          border: "2px solid #D2D2D2",
+          border: "2px solid transparent",
+          backgroundImage:
+            input === ""
+              ? "linear-gradient(#2B2D36, #2B2D36), linear-gradient(#D2D2D2, #D2D2D2)"
+              : "linear-gradient(#2B2D36, #2B2D36), linear-gradient(to right, #009FFF 0%, #9D48FF 39.68%, #EC2F4B 66.69%, #FF43B4 100%)",
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box, border-box",
           overflow: "hidden",
-          backgroundColor: `rgba(255, 255, 255, 0.10)`,
           zIndex: 3,
         }}
       >
@@ -99,7 +104,6 @@ const Input = ({
             ml: 1,
             flex: 1,
             fontSize: "1rem",
-            fontWeight: "bold",
             color: "white",
             textAlign: "right",
             backgroundColor: "transparent",
