@@ -5,8 +5,40 @@ import Woochal from "../../../../Assets/Woochal.png";
 import ButtonCard from "../../../../Assets/Button_Card.png";
 import Brandon from "../../../../Assets/brandon_final.gif"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const WebHistory = () => {
+  const [userData, setUserData] = useState("");
+  const getUserData = async () => {
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_URL}/user/1/allResults`)
+      console.log(data.data);
+      setUserData(data.data);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(userData);
+  console.log(userData.chatRooms);
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  useEffect(() => {
+    setChatrooms(userData.chatRooms)
+  }, [userData])
+
+
+
+  const [chatrooms, setChatrooms] = useState([1, 2]);
+  console.log(chatrooms);
+
+  useEffect(() => {
+    console.log(chatrooms[0]);
+  }, [chatrooms])
+
   const [cards, setCards] = useState([
     {
       cardNum: 1,
@@ -158,6 +190,7 @@ const WebHistory = () => {
       },
     },
   ]);
+
   const [forTest, setForTest] = useState(1)
   const [selectCardNum, setSelectCardNum] = useState([0, 1, 2, 3]);
   const [selectedCard, setSelectedCard] = useState([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]]);

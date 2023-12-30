@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Woochal from "../../../../Assets/Woochal.png";
-import ButtonCard from "../../../../Assets/Button_Card.png";
+import ButtonCard from "../../../../Assets/Arrow.png";
 import Brandon from "../../../../Assets/brandon_final.gif"
 import { useNavigate } from "react-router-dom";
 import WoochalDead from "../../../../Assets/Woochal_Dead.png";
@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 
 const WebOutput = () => {
 
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(true);
   const storyToggleHandler = () => {
     setToggle(false);
@@ -36,11 +37,17 @@ const WebOutput = () => {
     document.body.removeChild(link);
   };
 
+  const arrowHandler = () => {
+    navigate("/history")
+  }
 
   return (
     <Div>
       {toggle ? <Div style={{}}>
-        <Div style={{ width: "20%", height: "90vh" }}>
+        <Div style={{ width: "20%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+          <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
+            <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
+          </Div>
         </Div>
         <Div style={{ width: "60%", height: "90vh", alignItems: "start" }}>
           <Div style={{ flexDirection: "column", width: "41.875rem", height: "39.375rem", background: "rgba(0, 0, 0, 0.4)", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
@@ -123,7 +130,10 @@ const WebOutput = () => {
       </Div>
         :
         <Div style={{}}>
-          <Div style={{ width: "20%", height: "90vh" }}>
+          <Div style={{ width: "20%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+            <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
+              <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
+            </Div>
           </Div>
           <Div style={{ width: "60%", height: "90vh", alignItems: "start" }}>
             <Div style={{ flexDirection: "column", width: "41.875rem", height: "39.375rem", background: "rgba(0, 0, 0, 0.4)", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
@@ -412,4 +422,17 @@ const Img = styled.img`
   /* &:hover {
     box-shadow: 0 0 10px 10px rgb(0, 0, 0, 0.2);;
   } */
+`;
+
+const ArrowImg = styled.img`
+  width: 1.25rem;
+  /* margin: 6.875rem 0 0 2.5rem; */
+  border-radius: 0.625rem;
+  object-fit: cover;
+  &:hover {
+    filter: brightness(0.7);
+    cursor: pointer;
+  }
+
+  
 `;
