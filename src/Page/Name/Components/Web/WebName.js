@@ -192,6 +192,12 @@ const InputName = styled.input`
   height:100%;
   flex-shrink: 0;
   background-color: transparent;
+  color: var(--Grey_Scale-0, #FFF);
+  font-family: 'Pretendard';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   &::placeholder {
     color: var(--Gray-10, #ABABAB);
     font-family: 'Pretendard';
