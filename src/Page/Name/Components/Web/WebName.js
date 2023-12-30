@@ -1,19 +1,34 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
+const Counter = ({value, maxLength}) => (
+  <span>{value.length}/{maxLength}글자</span>
+);
+const YourComponent = () => {
+  const [text, setText] = useState('');
+  const maxLength = 7; // 최대 글자 수
+
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value;
+    if (inputValue.length <= maxLength) {
+      setText(inputValue);
+    }
+  };
+}
 const WebName = () => {
   return (
     <>
     <Container>
       <Container2>
         <Header>
-          <BrandPont>BRAND
-            <img src="on.png" ></img>
-            N {' '}         
+          <BrandPont>
+          <WelcomePont> <HeaderImg src="NavLogo.png" ></HeaderImg> 에 오신 걸 환영합니다.</WelcomePont>
+                 
           </BrandPont>
-          <WelcomePont> 에 오신 걸 환영합니다.</WelcomePont>
+          
         </Header>
 
         <BrandImg>
@@ -25,9 +40,9 @@ const WebName = () => {
           <IntroducePont>‘Brand Story'와 ‘Brand Concept'에 들어갈 이름을 입력해주세요.</IntroducePont>
         </IntroduceDiv>
 
-        <div>
-          test3
-        </div>
+        <WriteNameDiv>
+          <InputName placeholder="이름을 입력해주세요"></InputName>
+        </WriteNameDiv>
        
       </Container2>
     </Container>
@@ -104,6 +119,10 @@ const Header = styled.div`
   padding:0;
   margin-top: 8%;
 `;
+const HeaderImg = styled.img`
+  width:28%;
+  height:12.5%;
+`;
 const BrandImg = styled.div`
   display: flex;
   flex-direction: row;
@@ -116,8 +135,27 @@ const IntroduceDiv = styled.div`
   margin-left: 13%;
 `;
 const WriteNameDiv = styled.div`
+  width:74%;
+  height:8%;
+  margin-left: 13%;
+  margin-bottom: 6%;
+  
 `;
 const InputName = styled.input`
-
+  border-radius: 10px;
+  border: 1.5px solid var(--stroke, #D2D2D2);
+  width:79%;
+  height:100%;
+  flex-shrink: 0;
+  background-color: transparent;
+  &::placeholder {
+    color: var(--Gray-10, #ABABAB);
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;  
+    padding-left: 4%;
+  }
 `;
 
