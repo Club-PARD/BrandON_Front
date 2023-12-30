@@ -2,33 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useRecoilState } from 'recoil';
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useEffect,useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGoogleLogin} from "@react-oauth/google";
-import { isLogined, accessTokenState, recoilUserID } from "../../../../atom/loginAtom";
+import { isLogined, accessTokenState, recoilUserID, recoilUserData, isFirstLogin } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
-
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userID, setUserID] = useRecoilState(recoilUserID);
+  const [userData, setUserData] = useRecoilState(recoilUserData);
+  const [isFirstLoggedin, setIsFirstLoggedin] = useState();
 
   const handleLogin = (token) => {
     localStorage.setItem('accessToken',token);
     setIsLoggedIn(true);
     sendUserDataToGoogle(token);
   }
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken'); 
-    localStorage.removeItem('userID')
-    setAccessToken(null); 
-    setIsLoggedIn(false); 
-  };
-
-  const userData = {
-    name: '',
-    email: '',
-    picture: '',
-  };
   
   const sendUserDataToServer = async (userData) => { //유저의 구글정보를 서버로 보내서 디비에 저장 
     try {
@@ -41,6 +33,8 @@ const WebHome = () => {
         });
         console.log('서버 응답2:', response.data); //response.data = 유저 아이디.
         setUserID(response.data.userId);
+        console.log('첫로그인 1',response.data.firstLogin);
+        setIsFirstLoggedin(response.data.firstLogin);
         localStorage.setItem('userID',response.data);
     } catch (error) {
         console.error('서버 요청 에러2:', error);
@@ -54,10 +48,16 @@ const WebHome = () => {
             }
         });
         console.log('서버 응답:', response.data); 
-        userData.name = response.data.name;
-        userData.email = response.data.email;
-        userData.picture = response.data.picture;
-        sendUserDataToServer(userData); // 빋은 데이터를 서버로 보내서 디비에 저장 
+        setUserData({
+          name: response.data.name,
+          email: response.data.email,
+          picture: response.data.picture,
+        });
+        sendUserDataToServer({
+          name: response.data.name,
+          email: response.data.email,
+          picture: response.data.picture,
+        }); // 빋은 데이터를 서버로 보내서 디비에 저장 
     } catch (error) {
         console.error('서버 요청 에러:', error);
     }
@@ -67,6 +67,9 @@ const WebHome = () => {
     onSuccess : (res) => {
         setAccessToken(res.access_token);
         handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+        if(!isFirstLoggedin){
+          navigate('/name');
+        }
     },
     onFailure : (err) => {
         console.log(err);
@@ -76,6 +79,7 @@ const WebHome = () => {
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
     const storedToken = localStorage.getItem('accessToken');
+    console.log('첫로그인2', isFirstLoggedin)
     if (storedToken) {
       setAccessToken(storedToken); 
       setIsLoggedIn(true); 
@@ -97,11 +101,15 @@ const WebHome = () => {
 
       {isLoggedIn ? (
         <TestStart>
-          <LoginLink href='/chat'>지금 바로 ~하기</LoginLink>
+          {isFirstLoggedin ? (
+            <LoginLink to='/name'>지금 바로 시작하기</LoginLink>
+          ): (
+            <LoginLink to='/name'>지금 바로 시작하기</LoginLink>
+          )}
         </TestStart>
       ): (
         <TestStart>
-          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
+          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>지금 바로 시작하기</button>
         </TestStart>
       )}
       
@@ -109,9 +117,19 @@ const WebHome = () => {
         <img src="Rectangle28.png"></img>
       </OnBoading>
 
-      <TestStart>
-        <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>구글 로그인</button>
-      </TestStart>
+      {isLoggedIn ? (
+        <TestStart>
+          {isFirstLoggedin ? (
+            <LoginLink to='/chat'>지금 바로 시작하기</LoginLink>
+          ): (
+            <LoginLink to='/name'>지금 바로 시작하기</LoginLink>
+          )}
+        </TestStart>
+      ): (
+        <TestStart>
+          <button style={{all: "unset", color: "white", cursor: "pointer"}} onClick={login}>지금 바로 시작하기</button>
+        </TestStart>
+      )}
     </Container>
   );
 };
@@ -185,7 +203,7 @@ const TestStart = styled.div`
   margin-top: 132px;
 `;
 
-const LoginLink = styled.a`
+const LoginLink = styled(Link)`
   color: var(--White, #fff);
   font-family: "Pretendard";
   font-size: ${({ theme }) => theme.Web_fontSizes.Header2};

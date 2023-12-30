@@ -182,7 +182,7 @@ const TopNavBar = ({ isScrolled }) => {
               <button
                 style={{ all: "unset", color: "white", cursor: "pointer" }}
               >
-                <Body1>{userData.name}</Body1>
+                <Body1><img src={userData.picture} style={{width:'30px', height:'30px', borderRadius:'30px'}}></img>{userData.name}</Body1>
               </button>
             </label>
             {isDropdownView && (
@@ -237,4 +237,7 @@ const Body1 = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.Body1};
   line-height: ${({ theme }) => theme.LineHeight.Body1};
   font-family: "Pretendard";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

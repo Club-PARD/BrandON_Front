@@ -21,3 +21,7 @@ export const recoilUserData = atom({
     picture: "",
   },
 });
+export const isFirstLogin = atom ({
+  key:"isFirstLogin",
+  default: false,
+});
