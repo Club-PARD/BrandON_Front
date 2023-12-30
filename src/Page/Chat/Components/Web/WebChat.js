@@ -93,7 +93,7 @@ const WebChat = () => {
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
     }
-    fetchData();
+    // fetchData();
   }, []);
 
   const handleSubmit = async () => {
@@ -114,7 +114,6 @@ const WebChat = () => {
 
   return (
     <>
-      <Overlay />
       <Column>
         <ProgressBar progress={progress} />
         <Chatting
@@ -149,15 +148,6 @@ const Column = styled.div`
   height: 89vh;
   color: white;
   z-index: 1;
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* 투명한 레이어 색상 및 투명도 조절 */
 `;
 
 const Body6 = styled.div`

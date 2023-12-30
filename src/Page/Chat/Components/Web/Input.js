@@ -79,16 +79,46 @@ const Input = ({
           display: "flex",
           alignItems: "center",
           width: "56.25rem",
-          borderRadius: "10px",
-          border: "2px solid transparent",
-          backgroundImage:
-            input === ""
-              ? "linear-gradient(#2B2D36, #2B2D36), linear-gradient(#D2D2D2, #D2D2D2)"
-              : "linear-gradient(#2B2D36, #2B2D36), linear-gradient(to right, #009FFF 0%, #9D48FF 39.68%, #EC2F4B 66.69%, #FF43B4 100%)",
-          backgroundOrigin: "border-box",
-          backgroundClip: "content-box, border-box",
-          overflow: "hidden",
           zIndex: 3,
+          borderRadius: "10px",
+          border: "none",
+          position: "relative",
+          letterSpacing: "1px",
+          background:
+            input === ""
+              ? "linear-gradient(#D2D2D2, #D2D2D2),  linear-gradient(#D2D2D2, #D2D2D2)"
+              : "linear-gradient(to right, #009FFF 0%, #9D48FF 39.68%, #EC2F4B 66.69%, #FF43B4 100%), linear-gradient(to right, #009FFF 0%, #9D48FF 39.68%, #EC2F4B 66.69%, #FF43B4 100%)",
+          backgroundPosition: "10px 0, 10px 100%",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "calc(100% - 10px - 10px) 2px",
+
+          "&:before": {
+            content: '""',
+            position: "absolute",
+            display: "block",
+            width: "10px",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            border: input === "" ? "2px solid #D2D2D2" : "2px solid #009FFF",
+            borderTopLeftRadius: "10px",
+            borderBottomLeftRadius: "10px",
+            borderRightColor: "transparent",
+          },
+
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            display: "block",
+            width: "10px",
+            top: 0,
+            bottom: 0,
+            right: 0,
+            border: input === "" ? "2px solid #D2D2D2" : "2px solid #FF43B4",
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "10px",
+            borderLeftColor: "transparent",
+          },
         }}
       >
         <InputBase
