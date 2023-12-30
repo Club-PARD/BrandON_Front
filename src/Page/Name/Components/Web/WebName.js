@@ -6,9 +6,6 @@ import { createGlobalStyle } from "styled-components";
 const WebName = () => {
   return (
     <>
-      <Logo>
-        <BrandPont>BRAND</BrandPont><OnPont>ON</OnPont>
-      </Logo>
 
         <Container2>안녕</Container2>
  
@@ -41,12 +38,6 @@ const OnPont = styled.span`
   font-style: italic;
   font-weight: 700;
   line-height: normal;
-`;
-const Logo = styled.div`
-  width: 14vw;
-  height: 7vh;
-  margin-left: 9.7rem;
-  margin-top: -4vh;
 `;
 
 const Container2 = styled.div`
