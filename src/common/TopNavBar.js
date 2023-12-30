@@ -197,19 +197,19 @@ const TopNavBar = ({ isScrolled }) => {
               </button>
             </label>
             {isDropdownView && (
-              <ul
-                style={{ position: "absolute", listStyle: "none", padding: 0 }}
-              >
+              <Ul>
                 <li style={{ marginBottom: "10px" }}>
-                  <Link to="/history">마이 페이지</Link>
+                  <Link
+                    to="/history"
+                    style={{ all: "unset", cursor: "pointer" }}
+                  >
+                    마이페이지
+                  </Link>
                 </li>
-                <li
-                  style={{ marginBottom: "10px", cursor: "pointer" }}
-                  onClick={handleLogout}
-                >
+                <li style={{ cursor: "pointer" }} onClick={handleLogout}>
                   로그아웃
                 </li>
-              </ul>
+              </Ul>
             )}
           </div>
         </>
@@ -251,4 +251,16 @@ const Body1 = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const Ul = styled.ul`
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  padding: 10px;
+  margin-left: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(50px);
+  border-radius: 5px;
 `;
