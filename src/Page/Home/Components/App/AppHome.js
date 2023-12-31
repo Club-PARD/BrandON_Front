@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 const AppHome = () => {
   return (
     <>
-      <Header1>홈 모바일 페이지</Header1>
-      <Link to="/chat">채팅 페이지</Link>
+      <Header1>모바일 환경은 준비중입니다. PC환경에서 사용해주세요</Header1>
     </>
   );
 };

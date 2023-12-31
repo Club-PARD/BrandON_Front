@@ -20,7 +20,7 @@ const WebHome = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
-  const [isFirstLoggedin, setIsFirstLoggedin] = useState();
+  const [isFirstLoggedin, setIsFirstLoggedin] = useState(false);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -43,10 +43,9 @@ const WebHome = () => {
         }
       );
       console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
-      setUserID(response.data.userId);
-      console.log("첫로그인 1", response.data.firstLogin);
+      setUserID(response.data.userId.toString());
       setIsFirstLoggedin(response.data.firstLogin);
-      localStorage.setItem("userID", response.data);
+      localStorage.setItem("userID", response.data.userId.toString());
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -83,7 +82,10 @@ const WebHome = () => {
     onSuccess: (res) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
-      if (!isFirstLoggedin) {
+      if (!isFirstLoggedin) { //FirstLogin이 false이면 원래페이지
+        navigate("/chat"); //chat으로 이동하게 수정해야함.
+      }
+      else{ //FirstLogin이 true이면 이름 온보딩페이지
         navigate("/name");
       }
     },
@@ -95,7 +97,7 @@ const WebHome = () => {
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
     const storedToken = localStorage.getItem("accessToken");
-    console.log("첫로그인2", isFirstLoggedin);
+    
     if (storedToken) {
       setAccessToken(storedToken);
       setIsLoggedIn(true);
@@ -119,7 +121,7 @@ const WebHome = () => {
           {isFirstLoggedin ? (
             <LoginLink to="/name">지금 바로 시작하기</LoginLink>
           ) : (
-            <LoginLink to="/name">지금 바로 시작하기</LoginLink>
+            <LoginLink to="/chat">지금 바로 시작하기</LoginLink>
           )}
         </TestStart>
       ) : (
@@ -140,9 +142,9 @@ const WebHome = () => {
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/chat">지금 바로 시작하기</LoginLink>
-          ) : (
             <LoginLink to="/name">지금 바로 시작하기</LoginLink>
+          ) : (
+            <LoginLink to="/chat">지금 바로 시작하기</LoginLink>
           )}
         </TestStart>
       ) : (
