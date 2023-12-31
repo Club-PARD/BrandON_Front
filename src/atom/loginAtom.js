@@ -25,3 +25,7 @@ export const isFirstLogin = atom ({
   key:"isFirstLogin",
   default: false,
 });
+export const nickname = atom ({
+  key:"nickname",
+  default: '',
+});

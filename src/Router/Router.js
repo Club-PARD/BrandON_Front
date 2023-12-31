@@ -9,6 +9,7 @@ import styled from "styled-components";
 import NamePage from "../Page/Name";
 import { useEffect, useState } from "react";
 import OutputPage from "../Page/Output";
+import WebCheck from "../Page/Name/Components/Web/WebCheck";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -30,7 +31,7 @@ const Router = () => {
   return (
     <Container home={pathname === "/"}>
       <ScrollToTop />
-      {pathname === "/loading" || pathname === "/name" ? null : (
+      {pathname === "/loading" || pathname === "/name" || pathname === "/check"? null : (
         <TopNavBar isScrolled={isScrolled} />
       )}
       <Main>
@@ -41,6 +42,7 @@ const Router = () => {
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/name" element={<NamePage />} />
+          <Route path="/check" element={<WebCheck />} />
           <Route path="/output" element={<OutputPage />} />
         </Routes>
       </Main>

@@ -9,6 +9,7 @@ import {
   accessTokenState,
   recoilUserID,
   recoilUserData,
+  nickname,
 } from "../atom/loginAtom";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ const TopNavBar = ({ isScrolled }) => {
   const [isDropdownView, setDropdownView] = useState(false);
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
+  const [userNickname, setUserNickname] = useRecoilState(nickname);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -194,7 +196,7 @@ const TopNavBar = ({ isScrolled }) => {
                     }}
                   ></img>
                   <div style={{ width: "0.9375rem" }} />
-                  {userData.name}
+                  {localStorage.getItem('nickname')}
                 </Body1>
               </button>
             </label>

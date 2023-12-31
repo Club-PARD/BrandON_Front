@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { useEffect } from "react";
+import axios from "axios";
+import { nickname,recoilUserID } from "../../../../atom/loginAtom";
+import { useRecoilState } from "recoil";
 
 const Counter = ({value, maxLength}) => (
   <span style={{
@@ -12,16 +16,20 @@ const Counter = ({value, maxLength}) => (
     fontStyle: 'normal',
     fontWeight: '500',
     lineHeight: 'normal',
-    marginLeft:'-13%'}}>
+    marginLeft:'-17%'}}>
     {value.length}/{maxLength}글자
   </span>
 );
 
+
 const WebName = () => {
 
   const [text, setText] = useState('');
-  const maxLength = 7; // 최대 글자 수
-
+  const maxLength = 7; 
+  const navigate = useNavigate();
+  const [userNickname,setUserNickname] = useRecoilState(nickname);
+  const [userId,setUserId] = useRecoilState(recoilUserID);
+  
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     if (inputValue.length <= maxLength) {
@@ -29,6 +37,34 @@ const WebName = () => {
     }
   };
 
+  const handleConfirmButton = () =>{
+    setUserNickname(text);
+    saveUserNickName(text);
+  };
+
+  const saveUserNickName = async (userNickname) =>{
+    try{
+      const usernameData = {
+        userNickname
+      };
+      const response = await axios.post(
+        `http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/user/27/saveNickname`,
+        usernameData,
+      );
+      console.log("서버 응답1(닉네임):",response.data.userNickname);
+      localStorage.setItem('nickname',response.data.userNickname);
+      console.log(localStorage.getItem('nickname'));
+    }catch (error){
+      console.log("닉네임 요청 에러:",error);
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+  }, []);
   return (
     <>
     <Container>
@@ -64,10 +100,11 @@ const WebName = () => {
           </InputDiv>
 
           <ButtonDiv>
-            <Button disabled={text.length !== 7}>
+            <Button disabled={text.length < 1} onClick={handleConfirmButton}>
               <ConfirmPont>확인</ConfirmPont>
             </Button>
           </ButtonDiv>
+
         </WriteNameDiv>
        
       </Container2>
@@ -85,15 +122,6 @@ const Header1 = styled.div`
   line-height: ${(props) => props.theme.LineHeight.Header1};
   color: ${(props) => props.theme.colors.secondary};
   font-family: "Pretendard";
-`;
-const BrandPont = styled.span`
-  color: var(--White, var(--Grey_Scale-0, #FFF));
-  font-family: 'Dr';
-  font-size: 52.5px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 150%; /* 78.75px */
-  text-transform: uppercase;
 `;
 const WelcomePont = styled.span`
   color: var(--Grey_Scale-0, #FFF);
@@ -198,6 +226,7 @@ const InputName = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  padding-left: 4%;
   &::placeholder {
     color: var(--Gray-10, #ABABAB);
     font-family: 'Pretendard';
@@ -205,7 +234,6 @@ const InputName = styled.input`
     font-style: normal;
     font-weight: 400;
     line-height: normal;  
-    padding-left: 4%;
   }
 `;
 const ButtonDiv =styled.div`
@@ -229,6 +257,9 @@ const Button = styled.button`
   }
   &:disabled:hover{
     background-color: #2B2D36;
+  }
+  &:hover{
+    background-color: #7925D1;
   }
 `;
 
