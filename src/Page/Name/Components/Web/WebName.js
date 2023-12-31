@@ -40,6 +40,7 @@ const WebName = () => {
   const handleConfirmButton = () =>{
     setUserNickname(text);
     saveUserNickName(text);
+    navigate("/check");
   };
 
   const saveUserNickName = async (userNickname) =>{
