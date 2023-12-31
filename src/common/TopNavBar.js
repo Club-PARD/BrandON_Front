@@ -115,7 +115,12 @@ const TopNavBar = ({ isScrolled }) => {
   return (
     <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
-        <Header1>로고</Header1>
+        <img
+          src="NavLogo.png"
+          alt="Brand On 로고"
+          width={180}
+          style={{ marginTop: "10px" }}
+        />
       </Link>
       <div style={{ flex: 1 }} />
 
@@ -188,7 +193,7 @@ const TopNavBar = ({ isScrolled }) => {
             <Body1>결과</Body1>
           </NavLink>
           <div style={{ width: "4.25rem" }} />
-          <div onBlur={handleBlurContainer}>
+          <div onBlur={handleBlurContainer} style={{ marginTop: "3px" }}>
             <label onClick={handleClickContainer}>
               <button
                 style={{ all: "unset", color: "white", cursor: "pointer" }}
@@ -237,6 +242,7 @@ const Div = styled.div`
   position: fixed;
   z-index: 1000;
   align-items: center;
+  vertical-align: middle;
   padding: 12px 48px;
   width: 100%;
   height: 72px;
@@ -271,6 +277,7 @@ const Ul = styled.ul`
   padding: 0;
   text-align: center;
   padding: 10px;
+  margin-top: 25px;
   margin-left: 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);

@@ -4,29 +4,29 @@ import styled from "styled-components";
 const ProgressBar = ({ progress }) => {
   return (
     <Container>
-      <Header4>나 이해도</Header4>
-      <div style={{ height: "10px" }} />
       <Row>
+        <Caption2>나 이해도</Caption2>
+        <div style={{ width: "8px" }} />
         <div
           style={{
-            width: "90%",
-            borderRadius: `var(--text-field-blur, 100px)`,
+            width: "18.75rem",
+            borderRadius: "300px",
             background: `var(--ver-2-text-field, rgba(255, 255, 255, 0.10))`,
             backdropFilter: `blur(50px)`,
-            height: "1.6875rem",
+            height: "0.5rem",
           }}
         >
           <div
             style={{
               width: `${progress}%`,
-              background: "white",
+              background: "#8F2EFF",
               height: "100%",
               borderRadius: 50,
               transition: "width 1s",
             }}
           ></div>
         </div>
-        <Header3>{progress}%</Header3>
+        <Body3>{progress}%</Body3>
       </Row>
     </Container>
   );
@@ -35,9 +35,9 @@ const ProgressBar = ({ progress }) => {
 export default ProgressBar;
 
 const Container = styled.div`
-  width: 58.75rem;
-  padding: 0.5625rem 1.25rem;
-  border-radius: 20px;
+  width: 29.75rem;
+  padding: 18px 34px;
+  border-radius: 300px;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
 `;
@@ -49,14 +49,14 @@ const Row = styled.div`
   width: 100%;
 `;
 
-const Header4 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
-  font-weight: ${({ theme }) => theme.fontWeights.Header4};
+const Caption2 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Caption2};
+  font-weight: ${({ theme }) => theme.fontWeights.Caption2};
   font-family: "Pretendard";
 `;
 
-const Header3 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header3};
-  font-weight: ${({ theme }) => theme.fontWeights.Header3};
+const Body3 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Body3};
+  font-weight: ${({ theme }) => theme.fontWeights.Body3};
   font-family: "Pretendard";
 `;

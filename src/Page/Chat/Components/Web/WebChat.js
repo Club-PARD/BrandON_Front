@@ -20,7 +20,6 @@ const WebChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [wrapCount, setWrapCount] = useState(0);
-  const [userData, setUserData] = useRecoilState(recoilUserData);
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -28,7 +27,7 @@ const WebChat = () => {
     temperature: 0.2,
   });
 
-  const user = userData.name;
+  const user = localStorage.getItem("nickname");
 
   const template = `I am building a service that helps people discover their purpose in life, their passions, their strengths and unique selling points they do not know they have, in a chat with GPT, and you'll be the one asking the questions. From now on, act as a personal branding counselor who helps ${user} find who they are and help ${user} build their personal brand. You have been doing this job for more than 20 years and you are a top expert in this field. With your help, ${user} should have fully explored themselves, know who they are, understand how to start and continue their personal branding, find a direction or a niche for their own brand identity and how to brand themselves in the future.
 
@@ -60,37 +59,35 @@ After the questions, show [groups] to ${user} and then ask ${user} to give more 
 1. Comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 7 things below ([Identity], [Identity explanation], [Brand Keyword], [Story], [Competency], [Target], [Online Content Recommendation]) in Korean as a JSON object.
 
 {{
+[Identity]: Based on all the answers of the ${user}, generate an original job title that insightfully pinpoints what should be emphasized considering the ${user}'s main characteristics, mission, goals in ${user}’s career and what benefit ${user} can offer to the market. This job title should be able to give the ${user} a good position to gather an audience in his field of interest.
 
-[Identity] : Based on all the answers of the ${user}, generate an original job title that insightfully pinpoints what should be emphasized considering the ${user}'s main characteristics, mission, goals in ${user}’s career and what benefit ${user} can offer to the market. This job title should be able to give the ${user} a good position to gather an audience in his field of interest.
+[Identity explanation]: Comprehensively analyze all of the ${user}’s answers and generate a sentence that weaves together three elements ([reason], [target], [benefit]) into one sentence. Do not show the three elements below.
 
-[Identity explanation] : Comprehensively analyze all of the ${user}’s answers and generate a sentence that weaves together three elements ([reason], [target], [benefit]) into one sentence. Do not show the three elements below.
+[reason]: ${user}’s past experiences or characteristics that can be used to support [Identity], [Identity explanation], and [benefit]. [target] : Target audiences or partners that the ${user} can serve and help. [benefit] : Benefit that the ${user} can bring to the world and how the ${user} can make a positive impact.
 
-[reason] : ${user}’s past experiences or characteristics that can be used to support [Identity], [Identity explanation], and [benefit]. [target] : Target audiences or partners that the ${user} can serve and help. [benefit] : Benefit that the ${user} can bring to the world and how the ${user} can make a positive impact.
+[Brand Keyword]: 5 [final_keywords] that best support [Identity] and [Identity explanation]
 
-[Brand Keyword] : 5 [final_keywords] that best support [Identity] and [Identity explanation]
+[Keywords]: Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
 
-[Keywords] : Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
+[final_keywords]: Sum of [keyword] and additional user input keywords.
 
-[final_keywords] : Sum of [keyword] and additional user input keywords.
+[groups]: Grouped [final_keywords] based on similarity and context. Each group should contain brand messages for ${user} using each [groups]’s keyword. There should be one brand message per group and each message should be less than 10 words. Messages should represent who the ${user} is.
 
-[groups] : Grouped [final_keywords] based on similarity and context. Each group should contain brand messages for ${user} using each [groups]’s keyword. There should be one brand message per group and each message should be less than 10 words. Messages should represent who the ${user} is.
+[Story]: Comprehensively analyze all of the ${user}’s answers and provide a elaborate personal brand story that will be used to support [Identity] and [Identity explanation] in which you incorporate three elements : [observation], [reflection], and [insight]. 
 
-[Story] : Comprehensively analyze all of the ${user}’s answers and provide a elaborate personal brand story that will be used to support [Identity] and [Identity explanation] in which you incorporate three elements : [observation], [reflection], and [insight]. 
+[observation]: Detailed description of experiences and events that were pivotal to ${user}’s discovery of ${user}’s purpose and [job explanation]. Write a elaborate paragraph and include a short headline for the paragraph.
 
-[observation] : Detailed description of experiences and events that were pivotal to ${user}’s discovery of ${user}’s purpose and [job explanation]. Write a elaborate paragraph and include a short headline for the paragraph.
+[reflection]: Detailed and precise reflection about ${user}’s [observation], describing thoughts and feelings ${user} had during and after ${user}’s experiences. Write a elaborate paragraph and include a short headline for the paragraph.
 
-[reflection] : Detailed and precise reflection about ${user}’s [observation], describing thoughts and feelings ${user} had during and after ${user}’s experiences. Write a elaborate paragraph and include a short headline for the paragraph.
+[insight]: Insights that the ${user} gathered through [reflection] that ultimately leads to discovering the most essential reason for becoming [Identity] and [Identity explanation]. Write a elaborate paragraph and include a short headline for the paragraph.
 
-[insight] : Insights that the ${user} gathered through [reflection] that ultimately leads to discovering the most essential reason for becoming [Identity] and [Identity explanation]. Write a elaborate paragraph and include a short headline for the paragraph.
+[Competency]: Comprehensively analyze all of the ${user}’s answers and provide ${user}'s differentiation and competitiveness, positive resources and abilities that ${user} uniquely possesses, such as knowledge, skills, experience, career, personality, academic background, characteristics that the ${user} has or will need to have in order to realize [Identity] and [Identity explanation]. Be elaborate.
 
-[Competency] : Comprehensively analyze all of the ${user}’s answers and provide ${user}'s differentiation and competitiveness, positive resources and abilities that ${user} uniquely possesses, such as knowledge, skills, experience, career, personality, academic background, characteristics that the ${user} has or will need to have in order to realize [Identity] and [Identity explanation]. Be elaborate.
-
-[Target] : Comprehensively analyze all of the ${user}’s answers and define the target audience or industry that the [Identity] and [Identity explanation] would be most effective in terms of gathering attention or garnering partnerships. Give a few options for who the [Target] may be and elaborate on each [Target] option by giving demographics such as age, gender, income, occupation, and education, online channel [Target] is active in, such as Instagram, X, Facebook, Reddit, Youtube and other online SNS communities and channels, hobbies, interests, or activities [Target] engages in, behavioral patterns of [Target], psychographics such as values, attitudes, lifestyles, and beliefs, and engagement patterns such as how [Target] interacts with brands. Be elaborate.
+[Target]: Comprehensively analyze all of the ${user}’s answers and define the target audience or industry that the [Identity] and [Identity explanation] would be most effective in terms of gathering attention or garnering partnerships. Give a few options for who the [Target] may be and elaborate on each [Target] option by giving demographics such as age, gender, income, occupation, and education, online channel [Target] is active in, such as Instagram, X, Facebook, Reddit, Youtube and other online SNS communities and channels, hobbies, interests, or activities [Target] engages in, behavioral patterns of [Target], psychographics such as values, attitudes, lifestyles, and beliefs, and engagement patterns such as how [Target] interacts with brands. Be elaborate.
 
 [Target] should be in one paragraph.
 
-[Online Content Recommendation] : Analyze all of the ${user}’s answers and recommend a detailed direction for future online content that is appropriate for [Identity], [Identity explanation], and [Target]. This recommendation should be in one paragraph, in which there are elements of theme, tone of voice, online content format, online channel, and how to use what the user has as experience, skill, values, characteristics for future online content. Be elaborate.
-
+[Online Content Recommendation]: Analyze all of the ${user}’s answers and recommend a detailed direction for future online content that is appropriate for [Identity], [Identity explanation], and [Target]. This recommendation should be in one paragraph, in which there are elements of theme, tone of voice, online content format, online channel, and how to use what the user has as experience, skill, values, characteristics for future online content. Be elaborate.
 }}
 
 Proceed in the following order. All of the process must be done in only Korean.
@@ -133,7 +130,7 @@ You must only ask questions. Do not answer your questions.
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
     }
-    fetchData();
+    // fetchData();
   }, []);
 
   const handleSubmit = async () => {
