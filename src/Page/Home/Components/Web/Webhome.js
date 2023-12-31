@@ -20,7 +20,7 @@ const WebHome = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
-  const [isFirstLoggedin, setIsFirstLoggedin] = useState(false);
+  const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -82,11 +82,12 @@ const WebHome = () => {
     onSuccess: (res) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
-      if (!isFirstLoggedin) { //FirstLogin이 false이면 원래페이지
-        navigate("/chat"); //chat으로 이동하게 수정해야함.
-      }
-      else{ //FirstLogin이 true이면 이름 온보딩페이지
+      if (isFirstLoggedin) {
+        //FirstLogin이 true이면 이름 온보딩페이지
         navigate("/name");
+      } else {
+        //FirstLogin이 false이면 원래페이지
+        navigate("/chat");
       }
     },
     onFailure: (err) => {
@@ -97,7 +98,7 @@ const WebHome = () => {
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
     const storedToken = localStorage.getItem("accessToken");
-    
+
     if (storedToken) {
       setAccessToken(storedToken);
       setIsLoggedIn(true);

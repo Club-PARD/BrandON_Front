@@ -9,7 +9,7 @@ import {
   accessTokenState,
   recoilUserID,
   recoilUserData,
-  nickname,
+  isFirstLogin,
 } from "../atom/loginAtom";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ const TopNavBar = ({ isScrolled }) => {
   const [isDropdownView, setDropdownView] = useState(false);
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
-  const [userNickname, setUserNickname] = useRecoilState(nickname);
+  const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -89,6 +89,13 @@ const TopNavBar = ({ isScrolled }) => {
     onSuccess: (res) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+      if (isFirstLoggedin) {
+        //FirstLogin이 true이면 이름 온보딩페이지
+        navigate("/name");
+      } else {
+        //FirstLogin이 false이면 원래페이지
+        navigate("/chat");
+      }
     },
     onFailure: (err) => {
       console.log(err);
@@ -196,7 +203,7 @@ const TopNavBar = ({ isScrolled }) => {
                     }}
                   ></img>
                   <div style={{ width: "0.9375rem" }} />
-                  {localStorage.getItem('nickname')}
+                  {localStorage.getItem("nickname")}
                 </Body1>
               </button>
             </label>
