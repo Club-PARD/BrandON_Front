@@ -28,6 +28,10 @@ const WebCheck = () => {
         }
     };
 
+    const clickConfirmButton = () => {
+        navigate("/");
+    };
+
     useEffect(() => {
         if (localStorage.getItem("accessToken") === null) {
           alert("로그인이 필요합니다.");
@@ -86,7 +90,7 @@ const WebCheck = () => {
                 </AgreeDiv3>
                 
             </Container2>
-            <Confirm disabled={isAbleButton}>
+            <Confirm onClick={clickConfirmButton}>
                 <ConfirmPont>확인</ConfirmPont>
             </Confirm>
         </Container>
@@ -161,7 +165,7 @@ const Container2 = styled.div`
     box-shadow: -25.367px 25.367px 25.367px 0px rgba(255, 255, 255, 0.10) inset, 25.367px -25.367px 25.367px 0px rgba(194, 194, 194, 0.10) inset, 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(25.366666793823242px);
 `;
-const Confirm = styled.Button`
+const Confirm = styled.button`
     width: 31vw;
     height: 6vh;
     border-radius: 10px;
@@ -174,10 +178,10 @@ const Confirm = styled.Button`
     justify-content: center;
     align-items: center;
     cursor:pointer;
-    color:#8F2EFF;
+    color:#FFFFFF33;
 
     &:disabled{
-    background-color: #FFFFFF33;
+    background-color: rgba(255, 255, 255, 0.10);
     }
     &:disabled:hover{
         background-color: #2B2D36;
