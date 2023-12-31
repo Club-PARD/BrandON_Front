@@ -196,6 +196,7 @@ const TopNavBar = ({ isScrolled }) => {
                 <Body1>
                   <img
                     src={userData.picture}
+                    alt="프로필 사진"
                     style={{
                       width: "30px",
                       height: "30px",
@@ -270,7 +271,7 @@ const Ul = styled.ul`
   padding: 0;
   text-align: center;
   padding: 10px;
-  margin-left: 40px;
+  margin-left: 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);
   border-radius: 5px;
