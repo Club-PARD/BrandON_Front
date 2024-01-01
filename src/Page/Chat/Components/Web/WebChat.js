@@ -243,11 +243,19 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
     const res = await chain.predict({ answer: input });
     setRes(res);
     setChatMessage([...chatMessage, input, res]);
-    if (progress === 90 && !res.includes("{") && !res.includes("}")) {
+    if (
+      progress === 90 &&
+      (!res.includes("{") || !res.includes("}") || !res.includes(":"))
+    ) {
       setProgress((prev) => prev - 10);
     }
 
-    if (progress !== 90 && res.includes("{") && res.includes("}")) {
+    if (
+      progress !== 90 &&
+      res.includes("{") &&
+      res.includes("}") &&
+      res.includes(":")
+    ) {
       setProgress(100);
     }
 
@@ -274,6 +282,7 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
           wrapCount={wrapCount}
           setWrapCount={setWrapCount}
           progress={progress}
+          chatMessage={chatMessage}
         />
         <div style={{ height: "10px" }} />
         <Body6>

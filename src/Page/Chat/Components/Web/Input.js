@@ -11,6 +11,7 @@ const Input = ({
   wrapCount,
   setWrapCount,
   progress,
+  chatMessage,
 }) => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -53,6 +54,30 @@ const Input = ({
     }
   };
 
+  const handleAnalyticsClick = () => {
+    const message = chatMessage[chatMessage.length - 1];
+    // 앞에서부터 "{"를 찾는 인덱스
+    const startIndex = message.indexOf("{");
+
+    // 뒤에서부터 "}"를 찾는 인덱스
+    const endIndex = message.lastIndexOf("}");
+
+    if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+      // "{"와 "}" 사이의 문자열 추출
+      const jsonString = message.slice(startIndex, endIndex + 1).trim();
+
+      try {
+        // 추출된 JSON 문자열을 파싱
+        const parsedObject = JSON.parse(jsonString);
+        console.log("JSON 객체:", parsedObject);
+      } catch (error) {
+        console.error("JSON 파싱 오류:", error);
+      }
+    } else {
+      console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
+    }
+  };
+
   return (
     <>
       <Tooltip
@@ -62,6 +87,7 @@ const Input = ({
       >
         <FloatingButton
           disabled={progress < 100}
+          onClick={handleAnalyticsClick}
           style={
             progress < 100
               ? {
