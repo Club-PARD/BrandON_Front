@@ -84,8 +84,8 @@ const WebName = () => {
 
         <IntroduceDiv>
           <IntroducePont>사용하시기 전에,</IntroducePont>
-          <IntroducePont>‘<IntroduceBoldPont>Brand Story</IntroduceBoldPont>'와 '
-          <IntroduceBoldPont>Brand Concept</IntroduceBoldPont>'에 들어갈 이름을 입력해주세요.</IntroducePont>
+          <IntroducePont><IntroduceBoldPont>브랜드 스토리</IntroduceBoldPont>와 
+          <IntroduceBoldPont> 브랜드 아이덴티티</IntroduceBoldPont>에 들어갈 이름을 입력해주세요.</IntroducePont>
         </IntroduceDiv>
 
         <WriteNameDiv>
@@ -216,7 +216,7 @@ const InputDiv = styled.div`
 `;
 const InputName = styled.input`
   border-radius: 10px;
-  border: 1.5px solid var(--stroke, #D2D2D2);
+  border: 1.5px solid var(--White, #FFF);
   width:100%;
   height:100%;
   flex-shrink: 0;
