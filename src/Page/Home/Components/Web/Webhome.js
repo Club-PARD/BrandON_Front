@@ -111,18 +111,19 @@ const WebHome = () => {
   return (
     <Container>
       <HeaderText>
-        <StyledText>
-          “Everybody has a plan <ItalicPart>until they get punched </ItalicPart>
-          in the face”
-        </StyledText>
+        <img src="HomeCatchPrize.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/name">지금 바로 시작하기</LoginLink>
+            <LoginLink to="/name">지금 바로 시작하기
+              <Arrow src="Arrow2.png"></Arrow>
+            </LoginLink>
           ) : (
-            <LoginLink to="/chat">지금 바로 시작하기</LoginLink>
+            <LoginLink to="/chat">지금 바로 시작하기
+              <Arrow src="Arrow2.png"></Arrow>
+            </LoginLink>
           )}
         </TestStart>
       ) : (
@@ -132,6 +133,7 @@ const WebHome = () => {
             onClick={login}
           >
             지금 바로 시작하기
+            <Arrow src="Arrow2.png"></Arrow>
           </button>
         </TestStart>
       )}
@@ -143,9 +145,13 @@ const WebHome = () => {
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/name">지금 바로 시작하기</LoginLink>
+            <LoginLink to="/chat">지금 바로 시작하기
+              <Arrow src="Arrow2.png"></Arrow>
+            </LoginLink>
           ) : (
-            <LoginLink to="/chat">지금 바로 시작하기</LoginLink>
+            <LoginLink to="/chat">지금 바로 시작하기
+              <Arrow src="Arrow2.png"></Arrow>
+            </LoginLink>
           )}
         </TestStart>
       ) : (
@@ -155,6 +161,7 @@ const WebHome = () => {
             onClick={login}
           >
             지금 바로 시작하기
+            <Arrow src="Arrow2.png"></Arrow>
           </button>
         </TestStart>
       )}
@@ -210,8 +217,8 @@ const Container = styled.div`
 `;
 
 const HeaderText = styled.div`
-  width: 50%;
-  height: 164px;
+  width: 78%;
+  height: 144px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -220,15 +227,19 @@ const HeaderText = styled.div`
 `;
 
 const TestStart = styled.div`
-  width: 250px;
+  width: 23%;
   height: 51px;
-  border-radius: 100px;
-  background: var(--btn, #2b2d36);
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: -25.367px 25.367px 25.367px 0px rgba(255, 255, 255, 0.10) inset, 25.367px -25.367px 25.367px 0px rgba(194, 194, 194, 0.10) inset;
+  backdrop-filter: blur(25.366666793823242px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-top: 132px;
+  margin-top: 55px;
 `;
 
 const LoginLink = styled(Link)`
@@ -242,5 +253,9 @@ const LoginLink = styled(Link)`
 `;
 
 const OnBoading = styled.div`
-  margin-top: 25px;
+  margin-top: 78px;
+`;
+
+const Arrow = styled.img`
+  margin-left: 7%;
 `;
