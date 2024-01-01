@@ -9,11 +9,13 @@ import axios from "axios";
 
 const WebHistory = () => {
   const [userData, setUserData] = useState("");
+  const [chatrooms, setChatrooms] = useState([]);
   const getUserData = async () => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_URL}/user/1/allResults`)
+      const data = await axios.get(`${process.env.REACT_APP_URL}/user/26/allResults`)
       console.log(data.data);
       setUserData(data.data);
+      setChatrooms(data.data.chatRooms)
     }
     catch (error) {
       console.log(error);
@@ -21,22 +23,23 @@ const WebHistory = () => {
   }
   console.log(userData);
   console.log(userData.chatRooms);
+  console.log(chatrooms);
 
   useEffect(() => {
     getUserData()
   }, [])
 
   useEffect(() => {
-    setChatrooms(userData.chatRooms)
-  }, [userData])
-
-
-
-  const [chatrooms, setChatrooms] = useState([1, 2]);
-  console.log(chatrooms);
+    if (chatrooms.length <= 0) {
+      setNoCard(false)
+    }
+  }, [])
 
   useEffect(() => {
-    console.log(chatrooms[0]);
+    if (chatrooms && chatrooms.length > 0) {
+      console.log(chatrooms[0]);
+      setSelectedCard([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]]);
+    }
   }, [chatrooms])
 
   const [cards, setCards] = useState([
@@ -191,7 +194,7 @@ const WebHistory = () => {
     },
   ]);
 
-  const [forTest, setForTest] = useState(1)
+  const [noCard, setNoCard] = useState(true);
   const [selectCardNum, setSelectCardNum] = useState([0, 1, 2, 3]);
   const [selectedCard, setSelectedCard] = useState([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]]);
   const navigate = useNavigate();
@@ -200,7 +203,9 @@ const WebHistory = () => {
     navigate("/chat");
   }
 
-  const cardClickHandler = () => {
+  const cardClickHandler = (event, e) => {
+    console.log(e);
+    localStorage.setItem("chatRoomId", e);
     navigate("/output");
   }
 
@@ -213,7 +218,7 @@ const WebHistory = () => {
   }
 
   useEffect(() => {
-    setSelectedCard([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]])
+    setSelectedCard([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]])
   }, [selectCardNum]);
 
   // console.log(selectCardNum);
@@ -221,7 +226,7 @@ const WebHistory = () => {
 
   return (
     <Div>
-      {forTest === undefined ?
+      {noCard ?
         <Div style={{ flexDirection: "column" }}>
           <Div style={{ height: "40vh", alignItems: "end" }}>
             <Div style={{ height: "10vh", fontSize: "2.5rem", fontWeight: "600", color: "white" }}>
@@ -272,7 +277,7 @@ const WebHistory = () => {
                   margin: "0 0 1.25rem 0",
                 }}
               >
-                <A>현재 1개의 가나다라마바사님의 브랜드 컨셉이 있어요</A>
+                <A>현재 1개의 {userData.nickname}의 브랜드 컨셉이 있어요</A>
               </Div>
             </Div>
             <Div
@@ -288,14 +293,14 @@ const WebHistory = () => {
                   {card === undefined ?
                     <WebHistoryCard undefined={true} />
                     :
-                    <WebHistoryCard undefined={false} card={card} cardNum={card.cardNum} imgURL={card.imgURL} brandCard={card.brandCard} brandConcept={card.brandConcept} />}
-                  <Overlay onClick={cardClickHandler} />
+                    <WebHistoryCard undefined={false} card={card} cardNum={card.chatRoomId} name={card.chatNickName} imgURL={card.imgURL} brandCard={card.brandCard} brandConcept={card.brandStory} />}
+                  <Overlay onClick={(event) => cardClickHandler(event, card.chatRoomId)} />
                 </Card>
               ))}
             </Div>
           </Div>
           <Div style={{ width: "18%", justifyContent: "end", height: "50vh" }}>
-            {selectedCard[3] === undefined
+            {chatrooms[selectCardNum[3] + 1] === undefined
               ? ""
               :
               <Div style={{ position: "relative", width: "50%", justifyContent: "end" }}>

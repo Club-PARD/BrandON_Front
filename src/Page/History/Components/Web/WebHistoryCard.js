@@ -30,17 +30,17 @@ const WebHistoryCard = (props) => {
         >
           <Div style={{ alignItems: "end", padding: "0rem 1.125rem 0rem 1.125rem", height: "45%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
-              {props.undefined === true ? "" : props.brandCard.name}
+              {props.undefined === true ? "" : props.name}
             </Div>
           </Div>
           <Div style={{ alignItems: "center", padding: "0rem 1.125rem 0rem 1.125rem", height: "20%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-              {props.undefined === true ? "" : props.brandCard.brandConcept}
+              {props.undefined === true ? "" : props.brandCard.brandJob}
             </Div>
           </Div>
           <Div style={{ alignItems: "start", padding: "0rem 1.125rem 0rem 1.125rem", height: "35%", boxSizing: "border-box" }}>
             <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
-              {props.undefined === true ? "" : props.brandCard.conceptDetail}
+              {props.undefined === true ? "" : props.brandCard.jobDetail}
             </Div>
           </Div>
         </Div>

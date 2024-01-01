@@ -34,8 +34,8 @@ const WebLoading = () => {
   return (
     <Div>
       <Div style={{ display: "relative" }}>
-        <Img src={BackgroundImg} style={{ zIndex: "0" }}></Img>
-        <Div style={{ backgroundColor: "black", opacity: "60%", position: "absolute", height: "100%", top: "0", left: "0", zIndex: "1", }}></Div>
+        {/* <Img src={BackgroundImg} style={{ zIndex: "0" }}></Img> */}
+        {/* <Div style={{ backgroundColor: "black", opacity: "60%", position: "absolute", height: "100%", top: "0", left: "0", zIndex: "1", }}></Div> */}
         <Wrapper>
           {/* <Text key={animationKey}>{currentText}</Text> */}
           <Text >{TextList[0]}</Text>
@@ -170,13 +170,13 @@ const Wrapper = styled.div`
   /* color: ${({ theme }) => theme.colors.secondary}; */
   background-Color: initial;
   color: white;
-  font-Size: 40px; 
+  font-Size: 2.5rem; 
   z-Index: 2 ;
-  border-Radius: 100px;
+  border-Radius: 6.25rem;
   width: 100%;
-  height: 100px;
+  height: 6.25rem;
   position: absolute;
-  top: 45%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 100vh;
@@ -208,13 +208,13 @@ const Text4 = styled.div`
 `;
 
 const BrandonImg = styled.img`
-  width: 80px;
-  height: 80px;
-  border-Radius: 1000px;
+  width: 9.625rem;
+  height: 9.625rem;
+  border-Radius: 62.5rem;
   position: absolute;
   object-fit: cover;
   opacity: 0;
-  top: 55%;
+  top: 60%;
   left: 50%;
   transform-origin: 0% 0%;
   animation: ${BrandonIn} 1.5s linear 1s forwards;
