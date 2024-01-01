@@ -59,7 +59,9 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
                 </Body4>
               </ChatName>
               <div style={{ height: "0.625rem" }} />
-              <ChatBubbleBrandon>분석 중입니다!</ChatBubbleBrandon>
+              <ChatBubbleBrandon>
+                분석 중이다. 기다려라. 이 짜식아.
+              </ChatBubbleBrandon>
             </ChatContainerBrandon>
           </LeftRow>
         </>
@@ -75,7 +77,9 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
               </Body4>
             </ChatName>
             <div style={{ height: "0.625rem" }} />
-            <ChatBubbleBrandon>로딩 중입니다!</ChatBubbleBrandon>
+            <ChatBubbleBrandon>
+              로딩 중이다. 기다려라. 이 짜식아.
+            </ChatBubbleBrandon>
           </ChatContainerBrandon>
         </LeftRow>
       ) : null}

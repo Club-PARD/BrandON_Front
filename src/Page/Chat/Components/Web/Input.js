@@ -162,10 +162,9 @@ const FloatingButton = styled.button`
   z-index: 10;
   position: fixed;
   bottom: calc(
-    5.3125rem + ${(props) => (props.wrapCount ? props.wrapCount : 0)} *
-      0.9375rem
+    90px + ${(props) => (props.wrapCount ? props.wrapCount : 0)} * 0.9375rem
   );
-  right: 14vw;
+  right: calc(175px + (100vw - 1250px) / 2);
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;

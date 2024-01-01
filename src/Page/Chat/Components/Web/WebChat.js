@@ -131,6 +131,7 @@ You must only ask questions. Do not answer your questions.
       setIsLoading(false);
     }
     // fetchData();
+    console.log(175 + window.innerWidth - 1250);
   }, []);
 
   const handleSubmit = async () => {
@@ -166,6 +167,7 @@ You must only ask questions. Do not answer your questions.
           setWrapCount={setWrapCount}
           progress={progress}
         />
+        <div style={{ height: "10px" }} />
         <Body6>
           Brandon이 부정확한 정보를 표시할 수 있으므로 입력을 한 번 더
           확인하세요.
