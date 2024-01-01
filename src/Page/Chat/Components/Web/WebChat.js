@@ -7,7 +7,7 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
 import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
-import { AIMessage } from "langchain/schema";
+import { AIMessage, HumanMessage } from "langchain/schema";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ const WebChat = () => {
   const [progress, setProgress] = useState(0);
   const [wrapCount, setWrapCount] = useState(0);
   const userID = localStorage.getItem("userID");
-  const [chatRoomId, setChatRoomId] = useState(null);
+  const [chatRoom, setChatRoom] = useState({ answers: [], init: true });
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -95,6 +95,7 @@ After the questions, show [groups] to ${user} and then ask ${user} to give more 
 Proceed in the following order. All of the process must be done in only Korean.
 
 You must only ask questions. Do not answer your questions.
+Must not read the prompts, just ask the questions in [question_list] one at a time.
 
 [Final] must be generated as a JSON object.`;
 
@@ -123,32 +124,91 @@ You must only ask questions. Do not answer your questions.
       alert("로그인이 필요합니다.");
       navigate("/");
     }
+
+    const getRoom = async () => {
+      try {
+        const response = await axios.get(
+          process.env.REACT_APP_URL + `/user/${userID}/recentChatRoom`
+        );
+        console.log("chatRoom:", response.data); //response.data = chatRoom
+        setChatRoom(response.data);
+      } catch (error) {
+        console.error("서버 요청 에러:", error);
+      }
+    };
+
+    getRoom();
   }, []);
 
   useEffect(() => {
-    async function fetchData() {
+    const createRoom = async () => {
+      try {
+        const response = await axios.post(
+          process.env.REACT_APP_URL + `/${userID}/chatRoom`
+        );
+        console.log("chatRoom:", response.data); //response.data = chatRoomId
+        setChatRoom({
+          answers: [],
+          brandCard: null,
+          brandStory: null,
+          chatNickName: null,
+          chatRoomId: response.data,
+          finishChat: false,
+          keywords: [],
+          userId: userID,
+          progress: 0,
+        });
+      } catch (error) {
+        console.error("서버 요청 에러:", error);
+      }
+    };
+
+    const fetchData = async () => {
       setIsLoading(true);
       const res = await chain.predict({ answer: "start" });
       setChatModelResult([new AIMessage(res)]);
       setChatMessage([res]);
       setIsLoading(false);
-    }
-
-    async function createRoom() {
       try {
         const response = await axios.post(
-          process.env.REACT_APP_URL + `/${userID}/chatRoom`
+          process.env.REACT_APP_URL +
+            `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
+          { progress: progress, answers: [res] },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
-        console.log("chatRoomId:", response.data); //response.data = chatRoomId
-        setChatRoomId(response.data);
+        console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
       } catch (error) {
         console.error("서버 요청 에러:", error);
       }
-    }
+    };
 
-    createRoom();
-    // fetchData();
-  }, []);
+    if (!chatRoom.init) {
+      if (chatRoom.finishChat) {
+        createRoom();
+        fetchData();
+      } else {
+        if (chatRoom.answers.length === 0) {
+          fetchData();
+        } else {
+          setChatMessage(chatRoom.answers);
+          const chatHistory = [];
+          chatRoom.answers.forEach((message, i) => {
+            if (i % 2 === 0) {
+              chatHistory.push(new AIMessage(message));
+            } else {
+              chatHistory.push(new HumanMessage(message));
+            }
+          });
+          setChatModelResult(chatHistory);
+          setProgress(chatRoom.progress);
+        }
+      }
+    }
+  }, [chatRoom]);
 
   const handleSubmit = async () => {
     setPreInput(input);
@@ -169,6 +229,21 @@ You must only ask questions. Do not answer your questions.
       setProgress((prev) => prev + 10);
     }
     setIsLoading(false);
+    try {
+      const response = await axios.post(
+        process.env.REACT_APP_URL +
+          `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
+        { progress: progress, answers: [input, res] },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("chatRoom:", response.data); //response.data = chatRoomId
+    } catch (error) {
+      console.error("서버 요청 에러:", error);
+    }
   };
 
   return (
