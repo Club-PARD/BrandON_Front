@@ -95,9 +95,9 @@ const Column = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 56.25rem;
-  padding: 0.625rem 0;
+  padding: 56px 0 0 0;
   min-height: 60vh;
-  height: 70vh;
+  height: calc(70vh + 56px);
   color: white;
   overflow-y: scroll;
   z-index: 10;
@@ -118,7 +118,7 @@ const LeftRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 200%;
 `;
 
 const RightRow = styled.div`
@@ -126,7 +126,7 @@ const RightRow = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: 100%;
 `;
 
 const BrandonIn = keyframes` 

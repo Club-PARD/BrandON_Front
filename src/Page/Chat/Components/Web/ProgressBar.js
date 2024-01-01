@@ -35,7 +35,11 @@ const ProgressBar = ({ progress }) => {
 export default ProgressBar;
 
 const Container = styled.div`
-  width: 29.75rem;
+  z-index: 100;
+  position: fixed;
+  top: 72px;
+  left: calc(50vw - 238px);
+  width: 476px;
   padding: 18px 34px;
   border-radius: 300px;
   background: rgba(0, 0, 0, 0.2);

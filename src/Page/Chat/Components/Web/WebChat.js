@@ -9,8 +9,6 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage } from "langchain/schema";
 import { useNavigate } from "react-router-dom";
-import { recoilUserData } from "../../../../atom/loginAtom";
-import { useRecoilState } from "recoil";
 
 const WebChat = () => {
   const navigate = useNavigate();
@@ -130,8 +128,7 @@ You must only ask questions. Do not answer your questions.
       setChatModelResult([new AIMessage(res)]);
       setIsLoading(false);
     }
-    // fetchData();
-    console.log(175 + window.innerWidth - 1250);
+    fetchData();
   }, []);
 
   const handleSubmit = async () => {
@@ -140,8 +137,12 @@ You must only ask questions. Do not answer your questions.
     setInput("");
     setIsLoading(true);
     const res = await chain.predict({ answer: input });
-    if (progress === 90 && !res.includes("Brandon의 키워드")) {
+    if (progress === 90 && !res.includes("{") && !res.includes("}")) {
       setProgress((prev) => prev - 10);
+    }
+
+    if (progress !== 90 && res.includes("{") && res.includes("}")) {
+      setProgress(100);
     }
 
     if (progress < 100) {
@@ -159,6 +160,7 @@ You must only ask questions. Do not answer your questions.
           isLoading={isLoading}
           preInput={preInput}
         />
+        <div style={{ height: "10px" }} />
         <Input
           input={input}
           setInput={setInput}
