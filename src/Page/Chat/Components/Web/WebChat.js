@@ -22,6 +22,7 @@ const WebChat = () => {
   const [wrapCount, setWrapCount] = useState(0);
   const userID = localStorage.getItem("userID");
   const [chatRoom, setChatRoom] = useState({ answers: [], init: true });
+  const [res, setRes] = useState("");
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -173,7 +174,7 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
         const response = await axios.post(
           process.env.REACT_APP_URL +
             `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
-          { progress: progress, answers: [res] },
+          { progress: 0, answers: [res] },
           {
             headers: {
               "Content-Type": "application/json",
@@ -210,12 +211,37 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
     }
   }, [chatRoom]);
 
+  useEffect(() => {
+    const autoSave = async () => {
+      if (preInput !== "" && res !== "") {
+        try {
+          const response = await axios.post(
+            process.env.REACT_APP_URL +
+              `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
+            { progress: progress, answers: [preInput, res] },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log("chatRoom:", response.data); //response.data = chatRoomId
+        } catch (error) {
+          console.error("서버 요청 에러:", error);
+        }
+      }
+    };
+
+    autoSave();
+  }, [progress]);
+
   const handleSubmit = async () => {
     setPreInput(input);
     setWrapCount(0);
     setInput("");
     setIsLoading(true);
     const res = await chain.predict({ answer: input });
+    setRes(res);
     setChatMessage([...chatMessage, input, res]);
     if (progress === 90 && !res.includes("{") && !res.includes("}")) {
       setProgress((prev) => prev - 10);
@@ -229,21 +255,6 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
       setProgress((prev) => prev + 10);
     }
     setIsLoading(false);
-    try {
-      const response = await axios.post(
-        process.env.REACT_APP_URL +
-          `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
-        { progress: progress, answers: [input, res] },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("chatRoom:", response.data); //response.data = chatRoomId
-    } catch (error) {
-      console.error("서버 요청 에러:", error);
-    }
   };
 
   return (
