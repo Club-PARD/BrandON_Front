@@ -52,7 +52,7 @@ const TopNavBar = ({ isScrolled }) => {
       );
       console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
       setUserID(response.data.userId);
-      localStorage.setItem("userID", response.data);
+      localStorage.setItem("userID", response.data.userId);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }

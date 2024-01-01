@@ -9,15 +9,19 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage } from "langchain/schema";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const WebChat = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [preInput, setPreInput] = useState("");
   const [chatModelResult, setChatModelResult] = useState([]);
+  const [chatMessage, setChatMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [wrapCount, setWrapCount] = useState(0);
+  const userID = localStorage.getItem("userID");
+  const [chatRoomId, setChatRoomId] = useState(null);
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -126,9 +130,24 @@ You must only ask questions. Do not answer your questions.
       setIsLoading(true);
       const res = await chain.predict({ answer: "start" });
       setChatModelResult([new AIMessage(res)]);
+      setChatMessage([res]);
       setIsLoading(false);
     }
-    fetchData();
+
+    async function createRoom() {
+      try {
+        const response = await axios.post(
+          process.env.REACT_APP_URL + `/${userID}/chatRoom`
+        );
+        console.log("chatRoomId:", response.data); //response.data = chatRoomId
+        setChatRoomId(response.data);
+      } catch (error) {
+        console.error("서버 요청 에러:", error);
+      }
+    }
+
+    createRoom();
+    // fetchData();
   }, []);
 
   const handleSubmit = async () => {
@@ -137,6 +156,7 @@ You must only ask questions. Do not answer your questions.
     setInput("");
     setIsLoading(true);
     const res = await chain.predict({ answer: input });
+    setChatMessage([...chatMessage, input, res]);
     if (progress === 90 && !res.includes("{") && !res.includes("}")) {
       setProgress((prev) => prev - 10);
     }
@@ -156,7 +176,7 @@ You must only ask questions. Do not answer your questions.
       <Column>
         <ProgressBar progress={progress} />
         <Chatting
-          chatModelResult={chatModelResult}
+          chatMessage={chatMessage}
           isLoading={isLoading}
           preInput={preInput}
         />

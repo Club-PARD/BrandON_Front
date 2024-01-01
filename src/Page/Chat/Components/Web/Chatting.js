@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import Brandon from "../../../../Assets/brandon_final.gif";
 
-const Chatting = ({ chatModelResult, isLoading, preInput }) => {
+const Chatting = ({ chatMessage, isLoading, preInput }) => {
   const chatRef = useRef(null);
 
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  }, [chatModelResult, isLoading, preInput]);
+  }, [chatMessage, isLoading, preInput]);
 
   return (
     <Column ref={chatRef}>
-      {chatModelResult.map((chat, i) => {
+      {chatMessage.map((chat, i) => {
         if (i % 2 === 0) {
           return (
             <>
@@ -26,7 +26,7 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
                   </ChatName>
                   <div style={{ height: "0.625rem" }} />
                   <ChatBubbleBrandon>
-                    <Text>{chat.content}</Text>
+                    <Text>{chat}</Text>
                   </ChatBubbleBrandon>
                 </ChatContainerBrandon>
               </LeftRow>
@@ -36,13 +36,13 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
           return (
             <RightRow>
               <ChatBubbleUser>
-                <Text>{chat.content}</Text>
+                <Text>{chat}</Text>
               </ChatBubbleUser>
             </RightRow>
           );
         }
       })}
-      {isLoading && chatModelResult.length > 0 ? (
+      {isLoading && chatMessage.length > 0 ? (
         <>
           <RightRow>
             <ChatBubbleUser>
@@ -66,7 +66,7 @@ const Chatting = ({ chatModelResult, isLoading, preInput }) => {
           </LeftRow>
         </>
       ) : null}
-      {isLoading && chatModelResult.length === 0 ? (
+      {isLoading && chatMessage.length === 0 ? (
         <LeftRow>
           <ChatContainerBrandon>
             <ChatName>
