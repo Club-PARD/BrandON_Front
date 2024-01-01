@@ -7,8 +7,27 @@ import { useNavigate } from "react-router-dom";
 import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import html2canvas from 'html2canvas';
+import axios from "axios";
 
 const WebOutput = () => {
+
+  const [chatroom, setChatroom] = useState([]);
+  const getChatroomData = async () => {
+    try {
+      const chatRoomId = localStorage.getItem("chatRoomId");
+      const data = await axios.get(`${process.env.REACT_APP_URL}/26/${chatRoomId}/myResult`)
+      console.log(data.data);
+      setChatroom(data.data)
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(chatroom);
+
+  useEffect(() => {
+    getChatroomData()
+  }, [])
 
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(true);
@@ -87,17 +106,17 @@ const WebOutput = () => {
                   >
                     <Div style={{ alignItems: "end", padding: "0rem 1.125rem 0rem 1.125rem", height: "45%", boxSizing: "border-box" }}>
                       <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
-                        박우찰
+                        {chatroom.chatNickName}
                       </Div>
                     </Div>
                     <Div style={{ alignItems: "center", padding: "0rem 1.125rem 0rem 1.125rem", height: "20%", boxSizing: "border-box" }}>
                       <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                        혁신적인 백수
+                        {chatroom?.brandCard?.brandJob || ""}
                       </Div>
                     </Div>
                     <Div style={{ alignItems: "start", padding: "0rem 1.125rem 0rem 1.125rem", height: "35%", boxSizing: "border-box" }}>
                       <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
-                        방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람.
+                        {chatroom?.brandCard?.jobDetail || ""}
                       </Div>
                     </Div>
                   </Div>
@@ -130,13 +149,13 @@ const WebOutput = () => {
       </Div>
         :
         <Div style={{}}>
-          <Div style={{ width: "20%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+          <Div style={{ width: "10%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
             <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
               <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
             </Div>
           </Div>
-          <Div style={{ width: "60%", height: "90vh", alignItems: "start" }}>
-            <Div style={{ flexDirection: "column", width: "41.875rem", height: "39.375rem", background: "rgba(0, 0, 0, 0.4)", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
+          <Div style={{ width: "80%", height: "90vh", alignItems: "start" }}>
+            <Div style={{ flexDirection: "column", width: "100%", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
               <Div style={{ height: "15%", alignItems: "start" }}>
                 <Div style={{ width: "27.5rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0" }}>
                   <Concept onClick={conceptToggleHandler} style={{ width: "48%", }}>
@@ -148,61 +167,11 @@ const WebOutput = () => {
                 </Div>
               </Div>
               <Div style={{ height: "70%" }}>
-                <Card
-                  id="Card"
-                  style={{
-                    display: "block",
-                    width: "28.125rem",
-                    height: "15.625rem",
-                    fontSize: "2rem",
-                    borderRadius: "0.625rem",
-                    margin: "1.875rem 0 0 0",
-                  }}
-                >
-                  <Div style={{ display: "block", position: "relative", borderRadius: "0.625rem" }}>
-                    <Div
-                      style={{
-                        position: "absolute",
-                        backgroundColor: "none",
-                        opacity: 1,
-                        top: "0",
-                        left: "0",
-                        zIndex: "3",
-                        flexDirection: "column",
-                        borderRadius: "0.625rem"
-                      }}
-                    >
-                      <Div style={{ alignItems: "end", padding: "0rem 1.125rem 0rem 1.125rem", height: "45%", boxSizing: "border-box" }}>
-                        <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
-                          박우찰
-                        </Div>
-                      </Div>
-                      <Div style={{ alignItems: "center", padding: "0rem 1.125rem 0rem 1.125rem", height: "20%", boxSizing: "border-box" }}>
-                        <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                          혁신적인 백수
-                        </Div>
-                      </Div>
-                      <Div style={{ alignItems: "start", padding: "0rem 1.125rem 0rem 1.125rem", height: "35%", boxSizing: "border-box" }}>
-                        <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
-                          방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람.
-                        </Div>
-                      </Div>
-                    </Div>
-                    <Div
-                      style={{
-                        position: "absolute",
-                        backgroundColor: "white",
-                        opacity: 0.8,
-                        top: "0",
-                        left: "0",
-                        zIndex: "1",
-                        flexDirection: "column",
-                        borderRadius: "0.625rem"
-                      }}
-                    />
-                    <Img src={WoochalDead}></Img>
+                <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
+                  <Div style={{ width: "100%" }}>
+                    <Div></Div>
                   </Div>
-                </Card>
+                </Div>
               </Div>
               <Div style={{ height: "15%", alignItems: "end" }}>
                 <Download onClick={downloadHandler} style={{ width: "13rem", height: "3.375rem", background: "#ffffff", borderRadius: "6.25rem", fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
@@ -211,7 +180,7 @@ const WebOutput = () => {
               </Div>
             </Div>
           </Div>
-          <Div style={{ width: "20%", height: "90vh" }}>
+          <Div style={{ width: "10%", height: "90vh" }}>
 
           </Div>
         </Div>
