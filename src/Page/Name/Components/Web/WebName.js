@@ -50,11 +50,18 @@ const WebName = () => {
         userNickname,
       };
       const response = await axios.post(
-        `http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/user/27/saveNickname`,
+        `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
+          "userID"
+        )}/saveNickname`,
         usernameData
       );
+      const chatRoomId = await axios.post(
+        `${process.env.REACT_APP_URL}/${localStorage.getItem(
+          "userID"
+        )}/chatRoom`
+      );
       console.log("서버 응답1(닉네임):", response.data.userNickname);
-      localStorage.setItem("nickname", response.data.userNickname);
+      console.log("서버 응답2(채팅룸):", chatRoomId.data);
       console.log(localStorage.getItem("nickname"));
     } catch (error) {
       console.log("닉네임 요청 에러:", error);
