@@ -27,19 +27,21 @@ const WebMyPage = () => {
       navigate("/mypage");
     };
 
-    const saveUserNickName = async (userNickname) =>{
-      try{
+    const saveUserNickName = async (userNickname) => {
+      try {
         const usernameData = {
-          userNickname
+          nickname: userNickname,
         };
         const response = await axios.post(
-          `${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/saveNickname`,
-          usernameData,
+          `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
+            "userID"
+          )}/saveNickname`,
+          usernameData
         );
-        console.log("서버 응답1(닉네임):",response.data.userNickname);
-        localStorage.setItem('nickname',response.data.userNickname);
-      }catch (error){
-        console.log("닉네임 요청 에러:",error);
+        console.log("서버 응답1(닉네임):", response.data.nickname);
+        console.log(localStorage.setItem("nickname", response.data.nickname));
+      } catch (error) {
+        console.log("닉네임 요청 에러:", error);
       }
     };
 
