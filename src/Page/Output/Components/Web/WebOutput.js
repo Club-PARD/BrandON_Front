@@ -8,14 +8,23 @@ import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import html2canvas from 'html2canvas';
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { recoilUserAllResults, } from "../../../../atom/loginAtom";
+import Brandon from "../../../../Assets/brandon_final.gif";
+import CardWhite from "../../../../Assets/Card_White.png";
+import CardBlue from "../../../../Assets/Card_Blue.png";
+import CardPurple from "../../../../Assets/Card_Purple.png";
+import CardPink from "../../../../Assets/Card_Pink.png";
 
 const WebOutput = () => {
 
+  const [userData, setUserData] = useRecoilState(recoilUserAllResults);
   const [chatroom, setChatroom] = useState([]);
   const getChatroomData = async () => {
     try {
+      const userID = localStorage.getItem("userID");
       const chatRoomId = localStorage.getItem("chatRoomId");
-      const data = await axios.get(`${process.env.REACT_APP_URL}/26/${chatRoomId}/myResult`)
+      const data = await axios.get(`${process.env.REACT_APP_URL}/${userID}/${chatRoomId}/myResult`)
       console.log(data.data);
       setChatroom(data.data)
     }
@@ -23,19 +32,28 @@ const WebOutput = () => {
       console.log(error);
     }
   }
+
+  const chatRoomId = localStorage.getItem("chatRoomId");
+
+  console.log(userData);
   console.log(chatroom);
+  console.log(chatRoomId);
 
   useEffect(() => {
-    getChatroomData()
-  }, [])
+    setChatroom(userData.chatRooms[chatRoomId - 1]);
+  }, [userData])
 
   const navigate = useNavigate();
-  const [toggle, setToggle] = useState(true);
-  const storyToggleHandler = () => {
-    setToggle(false);
+  const [toggle, setToggle] = useState(1);
+
+  const identityToggleHandler = () => {
+    setToggle(1);
   }
-  const conceptToggleHandler = () => {
-    setToggle(true);
+  const storyToggleHandler = () => {
+    setToggle(2);
+  }
+  const chatToggleHandler = () => {
+    setToggle(3);
   }
 
   const downloadHandler = () => {
@@ -59,204 +77,273 @@ const WebOutput = () => {
   const arrowHandler = () => {
     navigate("/history")
   }
+  const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
 
   return (
     <Div>
-      {toggle ? <Div style={{}}>
-        <Div style={{ width: "20%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
-          <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
-            <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
-          </Div>
-        </Div>
-        <Div style={{ width: "60%", height: "90vh", alignItems: "start" }}>
-          <Div style={{ flexDirection: "column", width: "41.875rem", height: "39.375rem", background: "", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
-            <Div style={{ height: "15%", alignItems: "start" }}>
-              <Div style={{ width: "27.5rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0" }}>
-                <Concept onClick={conceptToggleHandler} style={{ width: "13.125rem", height: "3.1875rem", margin: "0 0 0 0.5rem", background: "#ffffff", borderRadius: "1.875rem", boxShadow: "0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)", fontSize: "1.25rem", fontWeight: "600" }}>
-                  컨셉
-                </Concept>
-                <Story onClick={storyToggleHandler} style={{ width: "48%" }}>
-                  <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "end", margin: "0 5.4375rem 0 0" }}>스토리</Div>
-                </Story>
+      {{
+        1:
+          <Div style={{}}>
+            <Div style={{ width: "20%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+              <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
+                <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
               </Div>
             </Div>
-            <Div style={{ height: "60%", alignItems: "end", }}>
-              <Card id="Card"
-                style={{
-                  display: "block",
-                  width: "28.125rem",
-                  height: "15.625rem",
-                  fontSize: "2rem",
-                  borderRadius: "0.625rem",
-                  margin: "1.875rem 0 0.5rem 0",
-                }}
-              >
-                <Div style={{ display: "block", position: "relative", borderRadius: "0.625rem" }}>
-                  <Div
+            <Div style={{ width: "60%", height: "90vh", alignItems: "start" }}>
+              <Div style={{ flexDirection: "column", width: "41.875rem", height: "39.375rem", background: "", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
+                <Div style={{ height: "15%", alignItems: "start" }}>
+                  <Div style={{ width: "40.375rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0", padding: "0 0.5rem 0 0.5rem", boxSizing: "border-box" }}>
+                    <Concept onClick={identityToggleHandler} style={{ width: "33%", height: "3.1875rem", margin: "0 0 0 0", background: "#ffffff", borderRadius: "1.875rem", boxShadow: "0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)", fontSize: "1.25rem", fontWeight: "600" }}>
+                      아이덴티티
+                    </Concept>
+                    <Story onClick={storyToggleHandler} style={{ width: "34%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "center", margin: "0 0 0 0" }}>스토리</Div>
+                    </Story>
+                    <Chat onClick={chatToggleHandler} style={{ width: "33%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "end", margin: "0 4.3125rem 0 0" }}>채팅 기록</Div>
+                    </Chat>
+                  </Div>
+                </Div>
+                <Div style={{ height: "60%", alignItems: "end", }}>
+                  <Card id="Card"
                     style={{
-                      position: "absolute",
-                      backgroundColor: "none",
-                      opacity: 1,
-                      top: "0",
-                      left: "0",
-                      zIndex: "3",
-                      flexDirection: "column",
-                      borderRadius: "0.625rem"
+                      display: "block",
+                      width: "28.125rem",
+                      height: "15.625rem",
+                      fontSize: "2rem",
+                      borderRadius: "0.625rem",
+                      margin: "1.875rem 0 0.5rem 0",
                     }}
                   >
-                    <Div style={{ alignItems: "end", padding: "0rem 1.125rem 0rem 1.125rem", height: "45%", boxSizing: "border-box" }}>
-                      <Div style={{ fontSize: "1.5rem", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
-                        {chatroom.chatNickName}
+                    <Div style={{ display: "block", position: "relative" }}>
+                      <Div style={{
+                        position: "absolute",
+                        backgroundColor: "none",
+                        opacity: 1,
+                        top: "0",
+                        left: "0",
+                        zIndex: "3",
+                      }}
+                      >
+                        <Div style={{ width: "55.6%" }}></Div>
+                        <Div style={{ flexDirection: "column", width: "44.4%" }}>
+                          <Div style={{ alignItems: "end", padding: "0rem 0.875rem 0rem 0.875rem", height: "40%", boxSizing: "border-box" }}>
+                            <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
+                              {chatroom?.chatNickName}
+                            </Div>
+                          </Div>
+                          <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
+                            <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
+                              {chatroom?.brandCard?.brandJob || ""}
+                            </Div>
+                          </Div>
+                          <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
+                            <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
+                              {chatroom?.brandCard?.jobDetail || ""}
+                            </Div>
+                          </Div>
+                          <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
+                            <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[0]}</Div>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[1]}</Div>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[2]}</Div>
+                            </Div>
+                          </Div>
+                        </Div>
                       </Div>
-                    </Div>
-                    <Div style={{ alignItems: "center", padding: "0rem 1.125rem 0rem 1.125rem", height: "20%", boxSizing: "border-box" }}>
-                      <Div style={{ fontSize: "1.25rem", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                        {chatroom?.brandCard?.brandJob || ""}
-                      </Div>
-                    </Div>
-                    <Div style={{ alignItems: "start", padding: "0rem 1.125rem 0rem 1.125rem", height: "35%", boxSizing: "border-box" }}>
-                      <Div style={{ fontSize: "1.125rem", justifyContent: "start", alignItems: "bottom", height: "80%", lineHeight: "125%" }}>
-                        {chatroom?.brandCard?.jobDetail || ""}
-                      </Div>
-                    </Div>
-                  </Div>
-                  <Div
-                    style={{
-                      position: "absolute",
-                      backgroundColor: "white",
-                      opacity: 0.8,
-                      top: "0",
-                      left: "0",
-                      zIndex: "1",
-                      flexDirection: "column",
-                      borderRadius: "0.625rem"
-                    }}
-                  />
-                  <Img src={WoochalDead}></Img>
-                </Div>
-              </Card>
-            </Div>
-            <Div style={{ height: "25%", alignItems: "start" }}>
-              <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "1.9375rem 0 0 0" }}>
-                다운로드
-              </Download>
-            </Div>
-          </Div>
-        </Div>
-        <Div style={{ width: "20%", height: "90vh" }}>
 
-        </Div>
-      </Div>
-        :
-        <Div style={{ height: "", justifyContent: "start", alignItems: "start" }}>
-          <Div style={{ width: "10%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
-            <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
-              <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
-            </Div>
-          </Div>
-          <Div style={{ width: "80%", height: "", alignItems: "start" }}>
-            <Div style={{ flexDirection: "column", width: "100%", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
-              <Div style={{ height: "15%", alignItems: "start" }}>
-                <Div style={{ width: "27.5rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0" }}>
-                  <Concept onClick={conceptToggleHandler} style={{ width: "48%", }}>
-                    <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "start", margin: "0 0 0 6rem" }}>컨셉</Div>
-                  </Concept>
-                  <Story onClick={storyToggleHandler} style={{ width: "13.125rem", height: "3.1875rem", margin: "0 0.5rem 0 0", background: "#ffffff", borderRadius: "1.875rem", boxShadow: "0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)", fontSize: "1.25rem", fontWeight: "600" }}>
-                    스토리
-                  </Story>
+                      {<Img src={ImgList[(chatroom.chatRoomId - 1) % 3]}></Img>}
+                    </Div>
+                  </Card>
+                </Div>
+                <Div style={{ height: "25%", alignItems: "start" }}>
+                  <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "1.9375rem 0 0 0" }}>
+                    다운로드
+                  </Download>
                 </Div>
               </Div>
-              <Div style={{ height: "70%", margin: "4.375rem 0 4.375rem 0" }}>
-                <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
-                  <Div style={{ width: "100%", alignItems: "start" }}>
-                    <Div style={{ width: "60%", flexDirection: "column", }}>
-                      <Div style={{ height: "30%", color: "white", justifyContent: "start", alignItems: "center", padding: "1rem 0 2rem 0" }}><Div style={{ justifyContent: "start", fontSize: "3rem", fontWeight: "600" }}>전예람</Div></Div>
-                      <Div style={{ height: "20%", color: "white", justifyContent: "start", fontSize: "1.75rem", fontWeight: "600", padding: "0 0 2.5rem 0" }}>사회적 공익을 위한 디지털 마케팅 전략가</Div>
-                      <Div style={{ height: "50%", color: "#C9C9C9", justifyContent: "start", fontSize: "1.25rem" }}>마케팅에 대한 깊은 열정과 사회적 대의에 대한 헌신을 결합하여 혁신적
-                        이고 윤리적인 마케팅 전략을 추구하는 기업 및 NGO를 대상으로 사회적,
-                        환경적 대의를 증진하는 영향력 있는 솔루션을 제공하여 궁극적으로 더
-                        나은 세상을 만들고자 합니다.
-                      </Div>
-                    </Div>
-                    <Div style={{ width: "40%", justifyContent: "end", }}>
-                      <StoryImgTag src={StoryImg} />
-                    </Div>
+            </Div>
+            <Div style={{ width: "20%", height: "90vh" }}>
+
+            </Div>
+          </Div>
+        ,
+        2:
+          <Div style={{ height: "", justifyContent: "start", alignItems: "start" }}>
+            <Div style={{ width: "10%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+              <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
+                <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
+              </Div>
+            </Div>
+            <Div style={{ width: "80%", height: "", alignItems: "start" }}>
+              <Div style={{ flexDirection: "column", width: "100%", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
+                <Div style={{ height: "15%", alignItems: "start" }}>
+                  <Div style={{ width: "40.375rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0", padding: "0 0.5rem 0 0.5rem", boxSizing: "border-box" }}>
+                    <Concept onClick={identityToggleHandler} style={{ width: "33%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "start", margin: "0 0 0 3.875rem " }}>아이덴티티</Div>
+                    </Concept>
+                    <Story onClick={storyToggleHandler} style={{ width: "34%", height: "3.1875rem", margin: "0 0 0 0", background: "#ffffff", borderRadius: "1.875rem", boxShadow: "0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)", fontSize: "1.25rem", fontWeight: "600" }}>스토리
+                    </Story>
+                    <Chat onClick={chatToggleHandler} style={{ width: "33%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "end", margin: "0 4.3125rem 0 0" }}>채팅 기록</Div>
+                    </Chat>
                   </Div>
-                  <Hr />
-                  <Div style={{ height: "100%", flexDirection: "column" }}>
-                    <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 키워드</Div>
-                    <Div>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                </Div>
+                <Div style={{ height: "70%", margin: "4.375rem 0 4.375rem 0" }}>
+                  <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
+                    <Div style={{ width: "100%", alignItems: "start" }}>
+                      <Div style={{ width: "60%", flexDirection: "column", }}>
+                        <Div style={{ height: "30%", color: "white", justifyContent: "start", alignItems: "center", padding: "1rem 0 2rem 0" }}><Div style={{ justifyContent: "start", fontSize: "3rem", fontWeight: "600" }}>전예람</Div></Div>
+                        <Div style={{ height: "20%", color: "white", justifyContent: "start", fontSize: "1.75rem", fontWeight: "600", padding: "0 0 2.5rem 0" }}>사회적 공익을 위한 디지털 마케팅 전략가</Div>
+                        <Div style={{ height: "50%", color: "#C9C9C9", justifyContent: "start", fontSize: "1.25rem" }}>마케팅에 대한 깊은 열정과 사회적 대의에 대한 헌신을 결합하여 혁신적
+                          이고 윤리적인 마케팅 전략을 추구하는 기업 및 NGO를 대상으로 사회적,
+                          환경적 대의를 증진하는 영향력 있는 솔루션을 제공하여 궁극적으로 더
+                          나은 세상을 만들고자 합니다.
+                        </Div>
                       </Div>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                        <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
-                      </Div>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                        <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                      <Div style={{ width: "40%", justifyContent: "end", }}>
+                        <StoryImgTag src={StoryImg} />
                       </Div>
                     </Div>
-                  </Div>
-                  <Hr />
-                  <Div style={{ height: "100%", flexDirection: "column" }}>
-                    <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 스토리</Div>
+                    <Hr />
                     <Div style={{ height: "100%", flexDirection: "column" }}>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절</Div>
-                      </Div>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절</Div>
-                      </Div>
-                      <Div style={{ height: "100%", flexDirection: "column" }}>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                        <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>대학시절</Div>
+                      <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 키워드</Div>
+                      <Div>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                        </Div>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
+                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                        </Div>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
+                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                        </Div>
                       </Div>
                     </Div>
-                  </Div>
-                  <Hr />
-                  <Div style={{ height: "100%", flexDirection: "column" }}>
-                    <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 역량</Div>
-                    <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>언어, 코딩 능력, 5년차 ARMY</Div>
-                  </Div>
-                  <Hr />
-                  <Div style={{ height: "100%", flexDirection: "column" }}>
-                    <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 타겟</Div>
-                    <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>인구 통계: 25~50세의 기업 및 NGO, 중견 및 고위급 전문가.
-                      온라인 채널: LinkedIn, Twitter 및 전문 마케팅 포럼에서 활발히 활동 중입니다.
-                      관심사: 사회적 대의, 디지털 마케팅 트렌드, 윤리적 비즈니스 관행에 관심이 있습니다.
-                      행동 패턴: 혁신적이면서도 윤리적인 마케팅 솔루션을 추구하며, 협업 프로젝트에 개방적입니다.
-                      심리학적 특성: 가치 중심적이고, 사회적 의식이 있으며, 미래 지향적입니다.
-                      고객 피드백 및 참여: 실질적인 사회적 영향력과 혁신을 보여주는 전략에 반응합니다.
+                    <Hr />
+                    <Div style={{ height: "100%", flexDirection: "column" }}>
+                      <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 스토리</Div>
+                      <Div style={{ height: "100%", flexDirection: "column" }}>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절</Div>
+                        </Div>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절</Div>
+                        </Div>
+                        <Div style={{ height: "100%", flexDirection: "column" }}>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>대학시절</Div>
+                        </Div>
+                      </Div>
                     </Div>
-                  </Div>
-                  <Hr />
-                  <Div style={{ height: "100%", flexDirection: "column" }}>
-                    <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>온라인 콘텐츠 추천 방향</Div>
-                    <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>사회적, 환경적 대의를 증진하기 위한 혁신적인 디지털 마케팅 전략을 보여주는 콘텐츠 제작에 집중하세요. 사례 연구,
-                      웨비나, 링크드인 및 트위터와 같은 플랫폼의 대화형 포럼과 같은 형식을 활용하여 영감을 주면서도 유익한 정보를 제
-                      공해야 합니다. 디지털 마케팅 및 사회적 옹호 활동의 경험과 기술을 활용하여 인사이트와 조언을 제공하는 동시에 긍
-                      정적인 영향을 미치는 데 열정적인 커뮤니티와 소통합니다.
+                    <Hr />
+                    <Div style={{ height: "100%", flexDirection: "column" }}>
+                      <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 역량</Div>
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>언어, 코딩 능력, 5년차 ARMY</Div>
+                    </Div>
+                    <Hr />
+                    <Div style={{ height: "100%", flexDirection: "column" }}>
+                      <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 타겟</Div>
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>인구 통계: 25~50세의 기업 및 NGO, 중견 및 고위급 전문가.
+                        온라인 채널: LinkedIn, Twitter 및 전문 마케팅 포럼에서 활발히 활동 중입니다.
+                        관심사: 사회적 대의, 디지털 마케팅 트렌드, 윤리적 비즈니스 관행에 관심이 있습니다.
+                        행동 패턴: 혁신적이면서도 윤리적인 마케팅 솔루션을 추구하며, 협업 프로젝트에 개방적입니다.
+                        심리학적 특성: 가치 중심적이고, 사회적 의식이 있으며, 미래 지향적입니다.
+                        고객 피드백 및 참여: 실질적인 사회적 영향력과 혁신을 보여주는 전략에 반응합니다.
+                      </Div>
+                    </Div>
+                    <Hr />
+                    <Div style={{ height: "100%", flexDirection: "column" }}>
+                      <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>온라인 콘텐츠 추천 방향</Div>
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>사회적, 환경적 대의를 증진하기 위한 혁신적인 디지털 마케팅 전략을 보여주는 콘텐츠 제작에 집중하세요. 사례 연구,
+                        웨비나, 링크드인 및 트위터와 같은 플랫폼의 대화형 포럼과 같은 형식을 활용하여 영감을 주면서도 유익한 정보를 제
+                        공해야 합니다. 디지털 마케팅 및 사회적 옹호 활동의 경험과 기술을 활용하여 인사이트와 조언을 제공하는 동시에 긍
+                        정적인 영향을 미치는 데 열정적인 커뮤니티와 소통합니다.
+                      </Div>
                     </Div>
                   </Div>
                 </Div>
-              </Div>
-              <Div style={{ height: "15%", alignItems: "end" }}>
-                <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
-                  다운로드
-                </Download>
+                <Div style={{ height: "15%", alignItems: "end" }}>
+                  <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
+                    다운로드
+                  </Download>
+                </Div>
               </Div>
             </Div>
+            <Div style={{ width: "10%", height: "90vh" }}>
+            </Div>
           </Div>
-          <Div style={{ width: "10%", height: "90vh" }}>
-
+        ,
+        3:
+          <Div style={{ height: "", justifyContent: "start", alignItems: "start" }}>
+            <Div style={{ width: "10%", height: "90vh", justifyContent: "start", alignItems: "start" }}>
+              <Div style={{ width: "20%", height: "10%", justifyContent: "start", alignItems: "start", margin: "3.875rem 0 0 7.1875rem" }}>
+                <ArrowImg src={ButtonCard} style={{ margin: "0 0 0 0" }} onClick={arrowHandler} />
+              </Div>
+            </Div>
+            <Div style={{ width: "80%", height: "", alignItems: "start" }}>
+              <Div style={{ flexDirection: "column", width: "100%", borderRadius: "1.25rem", margin: "1.5625rem 0 0 0" }}>
+                <Div style={{ height: "15%", alignItems: "start" }}>
+                  <Div style={{ width: "40.375rem", height: "3.75rem", background: "#D9D9D9", borderRadius: "6.25rem", justifyContent: "space-between", margin: "1.4375rem 0 0 0", padding: "0 0.5rem 0 0.5rem", boxSizing: "border-box" }}>
+                    <Concept onClick={identityToggleHandler} style={{ width: "33%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "start", margin: "0 0 0 3.875rem" }}>아이덴티티</Div>
+                    </Concept>
+                    <Story onClick={storyToggleHandler} style={{ width: "34%" }}>
+                      <Div style={{ width: "100%", fontSize: "1.25rem", fontWeight: "600", color: "#ABABAB", justifyContent: "center", margin: "0 0 0 0" }}>스토리</Div>
+                    </Story>
+                    <Chat onClick={chatToggleHandler} style={{ width: "33%", height: "3.1875rem", margin: "0 0 0 0", background: "#ffffff", borderRadius: "1.875rem", boxShadow: "0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)", fontSize: "1.25rem", fontWeight: "600" }}>
+                      채팅 기록
+                    </Chat>
+                  </Div>
+                </Div>
+                <Div style={{ height: "70%", margin: "4.375rem 0 4.375rem 0" }}>
+                  <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.2)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
+                    <Div>
+                      <ChatContainerBrandon>
+                        <ChatName>
+                          <BrandonImg src={Brandon} alt="브랜든 이미지"></BrandonImg>
+                          <div style={{ width: "0.625rem" }} />
+                          <Body4>
+                            브랜딩 어시스턴트 <b>Brandon</b>
+                          </Body4>
+                        </ChatName>
+                        <div style={{ height: "0.625rem" }} />
+                        <ChatBubbleBrandon>
+                          <Div style={{ height: "50%", color: "white", justifyContent: "start", fontSize: "1rem" }}>마케팅에 대한 깊은 열정과 사회적 대의에 대한 헌신을 결합하여 혁신적
+                            이고 윤리적인 마케팅 전략을 추구하는 기업 및 NGO를 대상으로 사회적,
+                            환경적 대의를 증진하는 영향력 있는 솔루션을 제공하여 궁극적으로 더
+                            나은 세상을 만들고자 합니다.
+                          </Div>
+                        </ChatBubbleBrandon>
+                        <Div style={{ justifyContent: "end" }}>
+                          <ChatBubbleUser>
+                            <Div style={{ height: "50%", color: "white", justifyContent: "end", fontSize: "1rem" }}>마케팅에 대한 깊은 열정과 사회적 대의에 대한 헌신을 결합하여 혁신적
+                              이고 윤리적인 마케팅 전략을 추구하는 기업 및 NGO를 대상으로 사회적,
+                              환경적 대의를 증진하는 영향력 있는 솔루션을 제공하여 궁극적으로 더
+                              나은 세상을 만들고자 합니다.
+                            </Div>
+                          </ChatBubbleUser>
+                        </Div>
+                      </ChatContainerBrandon>
+                    </Div>
+                  </Div>
+                </Div>
+                <Div style={{ height: "15%", alignItems: "end" }}>
+                  <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
+                    다운로드
+                  </Download>
+                </Div>
+              </Div>
+            </Div>
+            <Div style={{ width: "10%", height: "90vh" }}>
+            </Div>
           </Div>
-        </Div>
-      }
+      }[toggle]}
     </Div >
   )
 };
@@ -281,7 +368,7 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  /* border: 0.0313rem solid black; */
+  border: 0.0313rem solid black;
   border-radius: 0rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
@@ -339,6 +426,30 @@ const Concept = styled.div`
 `;
 
 const Story = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0vh 0vh 0vh 0vh;
+  padding: 0vh 0vh 0vh 0vh;
+  /* border: 0.5px solid black; */
+  border-radius: 0rem;
+  box-sizing: content-box;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
+  font-weight: ${({ theme }) => theme.fontWeights.Header1};
+  line-height: ${({ theme }) => theme.LineHeight.Header1};
+  font-family: Pretendard;
+  /* color: ${({ theme }) => theme.colors.secondary}; */
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Chat = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -499,4 +610,64 @@ const Hr = styled.div`
   color: white;
   background-color: white;
   margin: 2.5rem 0 2.5rem 0;
+`;
+
+const ChatContainerBrandon = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 0.0313rem solid black;
+`;
+
+const ChatName = styled.div`
+  display: flex;
+  align-items: center;
+  color: white;
+`;
+
+const Body4 = styled.div`
+  font-size: ${({ theme }) => theme.Web_fontSizes.Body4};
+  font-weight: ${({ theme }) => theme.fontWeights.Body4};
+  line-height: ${({ theme }) => theme.LineHeight.Body4};
+  font-family: "Pretendard";
+`;
+
+const Text = styled.pre`
+  all: unset;
+  white-space: pre-wrap;
+  font-family: "Pretendard";
+  color: white;
+  font-size: 1rem;
+`;
+
+
+
+const ChatBubbleBrandon = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 48.75rem;
+  height: 100%;
+  margin: 0vh 0vh 0vh 0vh;  padding: 1.5rem;
+  border: 0.0313rem solid black;
+  border-radius: 0 0.625rem 0.625rem 0.625rem;
+  box-sizing: content-box;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
+  font-weight: ${({ theme }) => theme.fontWeights.Header1};
+  line-height: ${({ theme }) => theme.LineHeight.Header1};
+  font-family: Pretendard;
+  /* color: ${({ theme }) => theme.colors.secondary}; */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(calc(var(--text-field-blur, 6.25rem) / 2));
+`;
+
+const ChatBubbleUser = styled.div`
+  width: 48.75rem;
+  padding: 1.5rem;
+  margin: 3.125rem 0;
+  border-radius: 0.625rem 0.625rem 0 0.625rem;
+  background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(3.125rem);
+  border: 0.0313rem solid black;
 `;
