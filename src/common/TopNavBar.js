@@ -21,6 +21,7 @@ const TopNavBar = ({ isScrolled }) => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
+  const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -44,7 +45,7 @@ const TopNavBar = ({ isScrolled }) => {
       const jsonUserData = JSON.stringify(userData);
       console.log(jsonUserData);
       const response = await axios.post(
-        "http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google",
+        `${process.env.REACT_APP_URL}/login/google`,
         jsonUserData,
         {
           headers: {
@@ -55,6 +56,8 @@ const TopNavBar = ({ isScrolled }) => {
       console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
       setUserID(response.data.userId);
       localStorage.setItem("userID", response.data.userId);
+      localStorage.setItem("nickname", response.data.nickname);
+      setNickname(localStorage.getItem("nickname"));
       setIsFirstLoggedin(response.data.firstLogin);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
@@ -140,15 +143,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>홈</Body1>
@@ -159,15 +162,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>채팅</Body1>
@@ -178,15 +181,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>결과</Body1>
@@ -208,7 +211,7 @@ const TopNavBar = ({ isScrolled }) => {
                     }}
                   ></img>
                   <div style={{ width: "0.9375rem" }} />
-                  {localStorage.getItem("nickname")}
+                  {nickname}
                 </Body1>
               </button>
             </label>

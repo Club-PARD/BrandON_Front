@@ -46,21 +46,16 @@ const WebName = () => {
 
   const saveUserNickName = async (userNickname) => {
     try {
+      const usernameData = {
+        userNickname,
+      };
       const response = await axios.post(
-        `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
-          "userID"
-        )}/saveNickname`,
-        userNickname
+        `http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/user/27/saveNickname`,
+        usernameData
       );
-      const chatRoomId = await axios.post(
-        `${process.env.REACT_APP_URL}/${localStorage.getItem(
-          "userID"
-        )}/chatRoom`
-      );
-
       console.log("서버 응답1(닉네임):", response.data.userNickname);
       localStorage.setItem("nickname", response.data.userNickname);
-      console.log("서버 응답2(채팅룸):", chatRoomId.data);
+      console.log(localStorage.getItem("nickname"));
     } catch (error) {
       console.log("닉네임 요청 에러:", error);
     }
@@ -82,7 +77,7 @@ const WebName = () => {
           </Header>
 
           <BrandImg>
-            <img src="Frame97.png"></img>
+            <img src="Rectangle138.png"></img>
           </BrandImg>
 
           <IntroduceDiv>
@@ -133,34 +128,33 @@ const WelcomePont = styled.span`
   font-family: "Pretendard";
   font-size: 32px;
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fontWeights.Header3};
+  font-weight: 700;
   line-height: normal;
 `;
 const IntroducePont = styled.div`
   color: var(--Grey_Scale-0, #fff);
   font-family: "Pretendard";
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
+  font-size: 20px;
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fontWeights.Body4};
+  font-weight: 400;
   line-height: normal;
 `;
 const IntroduceBoldPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
   font-family: "Pretendard";
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
+  font-size: 20px;
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fontWeights.Header3};
+  font-weight: 700;
   line-height: normal;
 `;
 const ConfirmPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
   font-family: "Pretendard";
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
+  font-size: 18px;
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fontWeights.Body2};
+  font-weight: 500;
   line-height: normal;
 `;
-
 const Container = styled.div`
   display: flex;
   justify-content: center;

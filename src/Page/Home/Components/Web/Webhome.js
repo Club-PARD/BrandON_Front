@@ -22,7 +22,8 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
-  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
+  const [userAllResults, setUserAllResults] =
+    useRecoilState(recoilUserAllResults);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -48,6 +49,7 @@ const WebHome = () => {
       setUserID(response.data.userId.toString());
       setIsFirstLoggedin(response.data.firstLogin);
       localStorage.setItem("userID", response.data.userId.toString());
+      localStorage.setItem("nickname", response.data.nickname);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -112,40 +114,43 @@ const WebHome = () => {
 
   const getUserData = async () => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_URL}/user/${userID}/allResults`)
+      const data = await axios.get(
+        `${process.env.REACT_APP_URL}/user/${userID}/allResults`
+      );
       console.log(data.data);
       setUserAllResults(data.data);
       // setChatrooms(data.data.chatRooms)
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    console.log(userID)
-    getUserData()
-  }, [userID])
+    console.log(userID);
+    getUserData();
+  }, [userID]);
 
   useEffect(() => {
-    console.log(userAllResults)
-  }, [userAllResults])
+    console.log(userAllResults);
+  }, [userAllResults]);
 
   return (
     <Container>
-      <Overlay/>
+      <Overlay />
       <HeaderText>
-        <img style={{zIndex:'1'}} src="HomeCatchPrize.png"></img>
+        <img style={{ zIndex: "1" }} src="HomeCatchPrize.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/name">지금 바로 시작하기
+            <LoginLink to="/name">
+              지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
             </LoginLink>
           ) : (
-            <LoginLink to="/chat">지금 바로 시작하기
+            <LoginLink to="/chat">
+              지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
             </LoginLink>
           )}
@@ -163,17 +168,19 @@ const WebHome = () => {
       )}
 
       <OnBoading>
-        <img style={{zIndex:'1'}} src="Rectangle28.png"></img>
+        <img style={{ zIndex: "1" }} src="Rectangle28.png"></img>
       </OnBoading>
 
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/name">지금 바로 시작하기
+            <LoginLink to="/name">
+              지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
             </LoginLink>
           ) : (
-            <LoginLink to="/chat">지금 바로 시작하기
+            <LoginLink to="/chat">
+              지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
             </LoginLink>
           )}
@@ -235,9 +242,10 @@ const TestStart = styled.div`
   height: 51px;
   flex-shrink: 0;
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  background: rgba(255, 255, 255, 0.10);
-  box-shadow: -25.367px 25.367px 25.367px 0px rgba(255, 255, 255, 0.10) inset, 25.367px -25.367px 25.367px 0px rgba(194, 194, 194, 0.10) inset;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: -25.367px 25.367px 25.367px 0px rgba(255, 255, 255, 0.1) inset,
+    25.367px -25.367px 25.367px 0px rgba(194, 194, 194, 0.1) inset;
   backdrop-filter: blur(25.366666793823242px);
   display: flex;
   flex-direction: column;
