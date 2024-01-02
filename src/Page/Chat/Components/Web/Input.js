@@ -15,6 +15,10 @@ const Input = ({
   chatMessage,
 }) => {
   const [result, setResult] = useState({});
+  const [userID, setUserID] = useState(localStorage.getItem("userID"));
+  const [chatRoomId, setChatRoomId] = useState(
+    localStorage.getItem("chatRoomId")
+  );
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -60,8 +64,7 @@ const Input = ({
   const handleAnalyticsClick = async () => {
     try {
       const response = await axios.post(
-        process.env.REACT_APP_URL +
-          `/${userID}/${chatRoom.chatRoomId}/finishChat`,
+        process.env.REACT_APP_URL + `/${userID}/${chatRoomId}/finishChat`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -100,8 +103,7 @@ const Input = ({
     const brandCard = async () => {
       try {
         const response = await axios.post(
-          process.env.REACT_APP_URL +
-            `/${userID}/${chatRoom.chatRoomId}/brandCard`,
+          process.env.REACT_APP_URL + `/${userID}/${chatRoomId}/brandCard`,
           {
             identity: result.identity,
             identity_explanation: result.identity_explanation,
@@ -121,8 +123,7 @@ const Input = ({
     const brandStory = async () => {
       try {
         const response = await axios.post(
-          process.env.REACT_APP_URL +
-            `/${userID}/${chatRoom.chatRoomId}/brandStory`,
+          process.env.REACT_APP_URL + `/${userID}/${chatRoomId}/brandStory`,
           result,
           {
             headers: {
