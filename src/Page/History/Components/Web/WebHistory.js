@@ -17,6 +17,7 @@ const WebHistory = () => {
   console.log(chatrooms);
   console.log(chatrooms.length);
 
+
   useEffect(() => {
     setChatrooms(userData.chatRooms)
   }, [userData])
@@ -26,6 +27,7 @@ const WebHistory = () => {
   useEffect(() => {
     if (chatrooms && chatrooms.length > 0) {
       console.log(chatrooms[0]);
+      setSelectCardNum([chatrooms?.length - 1, chatrooms.length - 2, chatrooms.length - 3, chatrooms.length - 4])
       setSelectedCard([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]]);
     }
   }, [chatrooms])
@@ -190,7 +192,7 @@ const WebHistory = () => {
   ]);
 
   const [isNoCard, setIsNoCard] = useRecoilState(noCard);
-  const [selectCardNum, setSelectCardNum] = useState([0, 1, 2, 3]);
+  const [selectCardNum, setSelectCardNum] = useState([chatrooms?.length - 1, chatrooms.length - 2, chatrooms.length - 3, chatrooms.length - 4]);
   const [selectedCard, setSelectedCard] = useState([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]]);
   const navigate = useNavigate();
 
@@ -202,6 +204,10 @@ const WebHistory = () => {
   }, [chatrooms])
 
   console.log(isNoCard);
+  console.log(selectCardNum);
+  console.log(chatrooms.length);
+  console.log(selectCardNum[0]);
+  console.log(selectedCard[0]);
 
   const chatButtonHandler = () => {
     navigate("/chat");
@@ -214,11 +220,11 @@ const WebHistory = () => {
   }
 
   const rightButtonHandler = () => {
-    setSelectCardNum((prev) => (prev).map(num => num + 4))
+    setSelectCardNum((prev) => (prev).map(num => num - 4))
   }
 
   const leftButtonHandler = () => {
-    setSelectCardNum((prev) => (prev).map(num => num - 4))
+    setSelectCardNum((prev) => (prev).map(num => num + 4))
   }
 
   useEffect(() => {
@@ -253,7 +259,7 @@ const WebHistory = () => {
         :
         <Div>
           <Div style={{ width: "18%", justifyContent: "start", height: "50vh" }}>
-            {selectCardNum[0] === 0
+            {selectCardNum[0] + 1 === chatrooms.length
               ? ""
               :
               <Div style={{ position: "relative", width: "50%", justifyContent: "end" }}>
@@ -308,7 +314,7 @@ const WebHistory = () => {
             </Div>
           </Div>
           <Div style={{ width: "18%", justifyContent: "end", height: "50vh" }}>
-            {chatrooms[selectCardNum[3] + 1] === undefined
+            {selectCardNum[3] <= 0
               ? ""
               :
               <Div style={{ position: "relative", width: "50%", justifyContent: "end" }}>

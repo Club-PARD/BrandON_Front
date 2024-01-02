@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import OutputPage from "../Page/Output";
 import WebCheck from "../Page/Name/Components/Web/WebCheck";
 import MyPage from "../Page/MyPage";
+import WebError404 from "../Page/Error404/Components/Web/WebError404";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -33,8 +34,8 @@ const Router = () => {
     <Container home={pathname === "/"}>
       <ScrollToTop />
       {pathname === "/loading" ||
-      pathname === "/name" ||
-      pathname === "/check" ? null : (
+        pathname === "/name" ||
+        pathname === "/check" ? null : (
         <TopNavBar isScrolled={isScrolled} />
       )}
       <Main>
@@ -47,7 +48,8 @@ const Router = () => {
           <Route path="/name" element={<NamePage />} />
           <Route path="/check" element={<WebCheck />} />
           <Route path="/output" element={<OutputPage />} />
-          <Route path="/mypage" element={<MyPage/>} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/*" element={<WebError404 />} />
         </Routes>
       </Main>
     </Container>
