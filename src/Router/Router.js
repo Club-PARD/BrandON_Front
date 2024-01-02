@@ -10,6 +10,7 @@ import NamePage from "../Page/Name";
 import { useEffect, useState } from "react";
 import OutputPage from "../Page/Output";
 import WebCheck from "../Page/Name/Components/Web/WebCheck";
+import MyPage from "../Page/MyPage";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const Router = () => {
           <Route path="/name" element={<NamePage />} />
           <Route path="/check" element={<WebCheck />} />
           <Route path="/output" element={<OutputPage />} />
+          <Route path="/mypage" element={<MyPage/>} />
         </Routes>
       </Main>
     </Container>

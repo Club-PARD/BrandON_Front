@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -117,6 +117,10 @@ const TopNavBar = ({ isScrolled }) => {
     }, 200);
   };
 
+  useEffect(() => {
+    setNickname(localStorage.getItem("nickname"));
+  }, [localStorage.getItem("nickname")]);
+
   return (
     <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
@@ -217,7 +221,7 @@ const TopNavBar = ({ isScrolled }) => {
               <Ul>
                 <li style={{ marginBottom: "10px" }}>
                   <Link
-                    to="/history"
+                    to="/mypage"
                     style={{ all: "unset", cursor: "pointer" }}
                   >
                     마이페이지
