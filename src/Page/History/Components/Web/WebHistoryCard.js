@@ -42,12 +42,12 @@ const WebHistoryCard = (props) => {
             </Div>
             <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
               <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                {props.undefined === true ? "" : props.brandCard.brandJob}
+                {props.undefined === true ? "" : props.brandCard.identity}
               </Div>
             </Div>
             <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
               <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
-                {props.undefined === true ? "" : props.brandCard.jobDetail}
+                {props.undefined === true ? "" : props.brandCard.identity_explaination}
               </Div>
             </Div>
             <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
