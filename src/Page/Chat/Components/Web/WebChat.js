@@ -26,7 +26,7 @@ const WebChat = () => {
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    modelName: "gpt-3.5-turbo-16k",
+    modelName: "gpt-4-1106-preview",
     temperature: 0.2,
   });
 
@@ -77,7 +77,7 @@ const WebChat = () => {
   
   After ${user} has finished giving keywords, tell user that all the questions have ended and they can now recieve a ‘Brand Identity’ and ‘Brand Story’ about themselves by pressing the ‘start analysis’ button. 
   
-  1. When ${user} presses ‘start analysis’ button, comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 8 things below ([Identity], [Identity_explanation], [Brand_keywords], [Story_headlines], [Story_contents], [Competency], [Target], [Contents_recommendation]) in Korean as a JSON object.
+  2. When ${user} enters ‘start analysis’, comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 8 variables below ([Identity], [Identity_explanation], [Brand_keywords], [Story_headlines], [Story_contents], [Competency], [Target], [Contents_recommendation]) in Korean as a JSON object.
   
   {{
   
@@ -91,7 +91,7 @@ const WebChat = () => {
   
   [benefit] : Benefit that the ${user} can bring to the world and how the ${user} can make a positive impact.
   
-  [Brand_Keyword] : 6 [final_keywords] that best support [Identity] and [Identity explanation]
+  [Brand_Keywords] : 6 [final_keywords] that best support [Identity] and [Identity explanation]
   
   [keywords] : Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
   
@@ -113,11 +113,9 @@ const WebChat = () => {
   
   [Competency] : Comprehensively analyze all of the ${user}’s answers and provide ${user}'s differentiation and competitiveness. Touch upon all positive resources and abilities that ${user} uniquely possesses, such as knowledge, skills, experience, career, personality, academic background, characteristics that the ${user} has or will need to have in order to realize [Identity] and [Identity explanation]. Be elaborate.
   
-  [Target] : Comprehensively analyze all of the ${user}’s answers and define the target audience or industry that the [Identity] and [Identity explanation] would be most effective in terms of gathering attention or garnering partnerships. Give a few options for who the [Target] may be and elaborate on each [Target] option by giving demographics such as age, gender, income, occupation, and education, online channel [Target] is active in, such as Instagram, X, Facebook, Reddit, Youtube and other online SNS communities and channels, hobbies, interests, or activities [Target] engages in, behavioral patterns of [Target], psychographics such as values, attitudes, lifestyles, and beliefs, and engagement patterns such as how [Target] interacts with brands. Be elaborate.
+  [Target] : Comprehensively analyze all of the ${user}’s answers and define the target audience or industry that the [Identity] and [Identity explanation] would be most effective in terms of gathering attention or garnering partnerships. Give a few options for who the target audience may be and elaborate on each option by giving the following information: demographics such as age, gender, income, occupation, and education; online channel target audience is active in, such as Instagram, X, Facebook, Reddit, Youtube and other online SNS communities and channels; interests such as hobbies, interests, or activities target audience engages in; behavioral patterns of target audience; psychographics such as values, attitudes, lifestyles, and beliefs; engagement patterns such as how target audience interacts with brands. Be elaborate. [Target] should be in one paragraph.
   
-  [Target] should be in one paragraph.
-  
-  [Online_Content_Recommendation] : Analyze all of the ${user}’s answers and recommend a detailed direction for future online content that is appropriate for [Identity], [Identity explanation], and [Target]. This recommendation should be in one paragraph. This paragraph must have the following elements : theme, tone of voice, online content format, online channel, and how to use what the user has as experience, skill, values, characteristics for future online content. Be elaborate.
+  [Strategy] : Analyze all of the ${user}’s answers and recommend a detailed strategy for the ${user} to improve ${user}’s personal brand that is appropriate for [Identity], [Identity explanation], and [Target]. This recommendation should be in one paragraph. This paragraph must include how ${user} can use ${user}’s experience, skill, values, characteristics for future online content. Be elaborate.
   
   }}
   
@@ -125,7 +123,17 @@ const WebChat = () => {
   
   You must only ask questions. Do not answer your questions.
   
-  [Final] must be generated as a JSON object.`;
+  3. Generate [Final] in the following JSON format:
+  {{
+      "Identity" : here is [Identity],
+      "Identity_explanation" : here is [Identity explanation],
+      "Brand_Keywords" : here is [Brand Keyword],
+      "Story_headlines" : here is [Story_headlines],
+      "Story_contents" : here is [Story_contents],
+      "Competency" : here is [Competency],    
+      "Target" : here is [Target],
+      "Strategy" : here is [Strategy],
+  }}`;
 
   const humanTemplate = "{answer}";
 
