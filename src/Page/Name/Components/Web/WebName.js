@@ -49,7 +49,7 @@ const WebName = () => {
         userNickname
       };
       const response = await axios.post(
-        `http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/user/27/saveNickname`,
+        `${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/saveNickname`,
         usernameData,
       );
       console.log("서버 응답1(닉네임):",response.data.userNickname);

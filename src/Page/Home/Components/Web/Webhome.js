@@ -34,7 +34,7 @@ const WebHome = () => {
       const jsonUserData = JSON.stringify(userData);
 
       const response = await axios.post(
-        "http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google",
+        `${process.env.REACT_APP_URL}/login/google`,
         jsonUserData,
         {
           headers: {
@@ -140,7 +140,7 @@ const WebHome = () => {
       )}
 
       <OnBoading>
-        <img src="Rectangle28.png"></img>
+        <img style={{zIndex:'1'}} src="Rectangle28.png"></img>
       </OnBoading>
 
       {isLoggedIn ? (
