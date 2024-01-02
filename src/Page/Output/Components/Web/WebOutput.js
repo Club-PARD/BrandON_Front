@@ -33,14 +33,18 @@ const WebOutput = () => {
     }
   }
 
-  const chatRoomId = localStorage.getItem("chatRoomId");
+  const chatRoomIdS = localStorage.getItem("chatRoomId");
 
   console.log(userData);
   console.log(chatroom);
-  console.log(chatRoomId);
+  console.log(chatRoomIdS);
 
   useEffect(() => {
-    setChatroom(userData.chatRooms[chatRoomId - 1]);
+    for (let i = 0; i < userData.chatRooms.length; i++) {
+      if (userData.chatRooms[i].chatRoomId == chatRoomIdS) {
+        setChatroom(userData.chatRooms[i]);
+      }
+    }
   }, [userData])
 
   const navigate = useNavigate();
@@ -111,7 +115,6 @@ const WebOutput = () => {
                       width: "28.125rem",
                       height: "15.625rem",
                       fontSize: "2rem",
-                      borderRadius: "0.625rem",
                       margin: "1.875rem 0 0.5rem 0",
                     }}
                   >
@@ -134,25 +137,25 @@ const WebOutput = () => {
                           </Div>
                           <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
                             <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                              {chatroom?.brandCard?.brandJob || ""}
+                              {chatroom?.brandCard?.identity || ""}
                             </Div>
                           </Div>
                           <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
                             <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
-                              {chatroom?.brandCard?.jobDetail || ""}
+                              {chatroom?.brandCard?.identity_explanation || ""}
                             </Div>
                           </Div>
                           <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
                             <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[0]}</Div>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[1]}</Div>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom.brandStory.brandKeywords[2]}</Div>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[0]}</Div>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[1]}</Div>
+                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[2]}</Div>
                             </Div>
                           </Div>
                         </Div>
                       </Div>
 
-                      {<Img src={ImgList[(chatroom.chatRoomId - 1) % 3]}></Img>}
+                      {<Img src={ImgList[(chatroom.chatRoomId - 1) % 4]}></Img>}
                     </Div>
                   </Card>
                 </Div>
@@ -193,12 +196,11 @@ const WebOutput = () => {
                   <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
                     <Div style={{ width: "100%", alignItems: "start" }}>
                       <Div style={{ width: "60%", flexDirection: "column", }}>
-                        <Div style={{ height: "30%", color: "white", justifyContent: "start", alignItems: "center", padding: "1rem 0 2rem 0" }}><Div style={{ justifyContent: "start", fontSize: "3rem", fontWeight: "600" }}>전예람</Div></Div>
-                        <Div style={{ height: "20%", color: "white", justifyContent: "start", fontSize: "1.75rem", fontWeight: "600", padding: "0 0 2.5rem 0" }}>사회적 공익을 위한 디지털 마케팅 전략가</Div>
-                        <Div style={{ height: "50%", color: "#C9C9C9", justifyContent: "start", fontSize: "1.25rem" }}>마케팅에 대한 깊은 열정과 사회적 대의에 대한 헌신을 결합하여 혁신적
-                          이고 윤리적인 마케팅 전략을 추구하는 기업 및 NGO를 대상으로 사회적,
-                          환경적 대의를 증진하는 영향력 있는 솔루션을 제공하여 궁극적으로 더
-                          나은 세상을 만들고자 합니다.
+                        <Div style={{ height: "30%", color: "white", justifyContent: "start", alignItems: "center", padding: "1rem 0 2rem 0" }}>
+                          <Div style={{ justifyContent: "start", fontSize: "3rem", fontWeight: "600" }}>{chatroom?.chatNickName || ""}</Div>
+                        </Div>
+                        <Div style={{ height: "20%", color: "white", justifyContent: "start", fontSize: "1.75rem", fontWeight: "600", padding: "0 0 2.5rem 0" }}>{chatroom?.brandCard?.identity || ""}</Div>
+                        <Div style={{ height: "50%", color: "#C9C9C9", justifyContent: "start", fontSize: "1.25rem" }}>마케팅에 대한 깊은 열정과 사회적 {chatroom?.brandCard?.identity_explanation || ""}
                         </Div>
                       </Div>
                       <Div style={{ width: "40%", justifyContent: "end", }}>
@@ -209,17 +211,17 @@ const WebOutput = () => {
                     <Div style={{ height: "100%", flexDirection: "column" }}>
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 키워드</Div>
                       <Div>
-                        <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                        <Div style={{ height: "100%", flexDirection: "column", justifyContent: "space-between" }}>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.brandKeywords[0] || ""}</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.brandKeywords[3] || ""}</Div>
+                        </Div>
+                        <Div style={{ height: "100%", flexDirection: "column", alignItems: "start" }}>
+                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 0 0" }}>{chatroom?.brandStory?.brandKeywords[1] || ""}</Div>
+                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.brandKeywords[4] || ""}</Div>
                         </Div>
                         <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
-                        </Div>
-                        <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>핵심 가치와 신념</Div>
-                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>핵심 가치와 신념</Div>
+                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.brandKeywords[2] || ""}</Div>
+                          <Div style={{ justifyContent: "end", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.brandKeywords[5] || ""}</Div>
                         </Div>
                       </Div>
                     </Div>
@@ -576,7 +578,7 @@ const Img = styled.img`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "100%"};
   /* border: 1px solid #555555; */
-  border-radius: 0.625rem;
+  /* border-radius: 0.625rem; */
   position: ${(props) => props.position || ""};
   object-fit: cover;
   /* &:hover {

@@ -1,17 +1,23 @@
 import React from "react";
 import { atom } from "recoil";
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export const isLogined = atom({
   key: "isLogined",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 export const accessTokenState = atom({
   key: "accessTokenState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserID = atom({
   key: "recoilUserID",
   default: localStorage.getItem("userID"),
+  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserData = atom({
   key: "userData",
@@ -20,14 +26,17 @@ export const recoilUserData = atom({
     email: "",
     picture: "",
   },
+  effects_UNSTABLE: [persistAtom],
 });
 export const isFirstLogin = atom({
   key: "isFirstLogin",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 export const nickname = atom({
   key: "nickname",
   default: '',
+  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserAllResults = atom({
   key: "recoilUserAllResults",
@@ -38,35 +47,41 @@ export const recoilUserAllResults = atom({
     "nickname": "string",
     "chatRooms": [
       {
-        "chatRoomId": 0,
-        "userId": 0,
-        "finishChat": true,
-        "chatNickName": "string",
-        "keywords": [
-          "string"
-        ],
-        "answers": [
-          "string"
-        ],
+        "chatRoomId": 1,
+        "progress": 0,
+        "finishChat": false,
+        "chatNickName": "",
+        "keywords": [],
+        "answers": [],
+        "groupKeywords": {},
         "brandStory": {
-          "brandStoryId": 0,
-          "resources": [
-            "string"
+          "brandStoryId": 1,
+          "brandKeywords": [
+            "",
           ],
-          "slogan": "string",
-          "suggestions": [
-            "string"
+          "storyTitles": [
+            "",
           ],
-          "niches": [
-            "string"
-          ]
+          "storyTexts": [
+            "",
+          ],
+          "resources": "",
+          "target": "",
+          "suggestions": ""
         },
         "brandCard": {
           "brandCardId": 0,
-          "brandJob": "string",
-          "jobDetail": "string"
+          "identity": "",
+          "identity_explanation": ""
         }
       }
     ]
   },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const noCard = atom({
+  key: "noCard",
+  default: true,
+  effects_UNSTABLE: [persistAtom],
 });
