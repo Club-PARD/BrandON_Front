@@ -47,7 +47,7 @@ const WebName = () => {
   const saveUserNickName = async (userNickname) => {
     try {
       const usernameData = {
-        userNickname,
+        nickname: userNickname,
       };
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
@@ -60,9 +60,9 @@ const WebName = () => {
           "userID"
         )}/chatRoom`
       );
-      console.log("서버 응답1(닉네임):", response.data.userNickname);
+      console.log("서버 응답1(닉네임):", response.data.nickname);
+      console.log(localStorage.setItem("nickname", response.data.nickname));
       console.log("서버 응답2(채팅룸):", chatRoomId.data);
-      console.log(localStorage.getItem("nickname"));
     } catch (error) {
       console.log("닉네임 요청 에러:", error);
     }
