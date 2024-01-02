@@ -54,6 +54,7 @@ const TopNavBar = ({ isScrolled }) => {
       console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
       setUserID(response.data.userId);
       localStorage.setItem("userID", response.data.userId);
+      setIsFirstLoggedin(response.data.firstLogin);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -90,6 +91,7 @@ const TopNavBar = ({ isScrolled }) => {
     onSuccess: (res) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
+      console.log(isFirstLoggedin);
       if (isFirstLoggedin) {
         //FirstLogin이 true이면 이름 온보딩페이지
         navigate("/name");
