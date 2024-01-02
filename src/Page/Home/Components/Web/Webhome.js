@@ -34,7 +34,7 @@ const WebHome = () => {
       const jsonUserData = JSON.stringify(userData);
 
       const response = await axios.post(
-        "http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google",
+        `${process.env.REACT_APP_URL}/login/google`,
         jsonUserData,
         {
           headers: {
@@ -87,7 +87,7 @@ const WebHome = () => {
         navigate("/name");
       } else {
         //FirstLogin이 false이면 원래페이지
-        navigate("/chat");
+        navigate("/");
       }
     },
     onFailure: (err) => {
@@ -110,8 +110,9 @@ const WebHome = () => {
 
   return (
     <Container>
+      <Overlay/>
       <HeaderText>
-        <img src="HomeCatchPrize.png"></img>
+        <img style={{zIndex:'1'}} src="HomeCatchPrize.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
@@ -139,13 +140,13 @@ const WebHome = () => {
       )}
 
       <OnBoading>
-        <img src="Rectangle28.png"></img>
+        <img style={{zIndex:'1'}} src="Rectangle28.png"></img>
       </OnBoading>
 
       {isLoggedIn ? (
         <TestStart>
           {isFirstLoggedin ? (
-            <LoginLink to="/chat">지금 바로 시작하기
+            <LoginLink to="/name">지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
             </LoginLink>
           ) : (
@@ -186,26 +187,6 @@ const Header2 = styled.div`
   line-height: ${({ theme }) => theme.LineHeight.Header2};
   color: ${({ theme }) => theme.colors.accent};
   font-family: "Pretendard";
-`;
-
-const StyledText = styled.div`
-  color: var(--black, #101010);
-  text-align: center;
-  font-family: "Manrope";
-  font-size: 60px;
-  font-weight: 800;
-  line-height: normal;
-  letter-spacing: -2.4px;
-`;
-
-const ItalicPart = styled.span`
-  color: var(--black, #101010);
-  font-family: "Playfair Display";
-  font-size: 60px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -2.4px;
 `;
 
 const Container = styled.div`
@@ -258,4 +239,13 @@ const OnBoading = styled.div`
 
 const Arrow = styled.img`
   margin-left: 7%;
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 `;

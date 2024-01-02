@@ -94,7 +94,7 @@ const TopNavBar = ({ isScrolled }) => {
         navigate("/name");
       } else {
         //FirstLogin이 false이면 원래페이지
-        navigate("/chat");
+        navigate("/");
       }
     },
     onFailure: (err) => {
@@ -126,12 +126,9 @@ const TopNavBar = ({ isScrolled }) => {
 
       {!isLoggedIn && (
         <>
-          <button
-            style={{ all: "unset", color: "white", cursor: "pointer" }}
-            onClick={login}
-          >
-            구글 로그인
-          </button>
+          <LoginButton onClick={login}>
+            로그인
+          </LoginButton>
         </>
       )}
       {isLoggedIn && (
@@ -282,4 +279,24 @@ const Ul = styled.ul`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);
   border-radius: 5px;
+`;
+
+const LoginButton = styled.button`
+  display: flex;
+  padding: 8px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 300px;
+  background: var(--White, #FFF);
+  width: 82px;
+  height: 35px;
+  border: none;
+  color: var(--black, #101010);
+  font-family: 'Pretendard';
+  font-size: ${({ theme }) => theme.Web_fontSizes.Body1};
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
 `;
