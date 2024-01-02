@@ -278,7 +278,7 @@ const WebHistory = () => {
                   margin: "0 0 1.25rem 0",
                 }}
               >
-                <A>현재 1개의 {userData.nickname}의 브랜드 아이덴티티가 있어요</A>
+                <A>현재 {userData.chatRooms.length}개의 {userData.nickname}의 브랜드 아이덴티티가 있어요</A>
               </Div>
             </Div>
             <Div
