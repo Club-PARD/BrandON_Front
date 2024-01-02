@@ -4,6 +4,7 @@ import inputDisabled from "../../../../Assets/input_disabled.svg";
 import inputEnabled from "../../../../Assets/input_enabled.svg";
 import { InputBase, Paper, Tooltip } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Input = ({
   input,
@@ -12,13 +13,12 @@ const Input = ({
   wrapCount,
   setWrapCount,
   progress,
-  chatMessage,
+  chain,
 }) => {
+  const navigate = useNavigate();
   const [result, setResult] = useState({});
-  const [userID, setUserID] = useState(localStorage.getItem("userID"));
-  const [chatRoomId, setChatRoomId] = useState(
-    localStorage.getItem("chatRoomId")
-  );
+  const userID = localStorage.getItem("userID");
+  const chatRoomId = localStorage.getItem("chatRoomId");
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -76,7 +76,9 @@ const Input = ({
       console.error("서버 요청 에러:", error);
     }
 
-    const message = chatMessage[chatMessage.length - 1];
+    navigate("/loading");
+
+    const message = await chain.predict({ answer: "start analysis" });
     // 앞에서부터 "{"를 찾는 인덱스
     const startIndex = message.indexOf("{");
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { atom } from "recoil";
-import { recoilPersist } from 'recoil-persist';
+import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
@@ -35,47 +35,41 @@ export const isFirstLogin = atom({
 });
 export const nickname = atom({
   key: "nickname",
-  default: '',
+  default: "",
   effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserAllResults = atom({
   key: "recoilUserAllResults",
   default: {
-    "userId": 0,
-    "name": "string",
-    "email": "string",
-    "nickname": "string",
-    "chatRooms": [
+    userId: 0,
+    name: "string",
+    email: "string",
+    nickname: "string",
+    chatRooms: [
       {
-        "chatRoomId": 1,
-        "progress": 0,
-        "finishChat": false,
-        "chatNickName": "",
-        "keywords": [],
-        "answers": [],
-        "groupKeywords": {},
-        "brandStory": {
-          "brandStoryId": 1,
-          "brandKeywords": [
-            "",
-          ],
-          "storyTitles": [
-            "",
-          ],
-          "storyTexts": [
-            "",
-          ],
-          "resources": "",
-          "target": "",
-          "suggestions": ""
+        chatRoomId: 1,
+        progress: 0,
+        finishChat: false,
+        chatNickName: "",
+        keywords: [],
+        answers: [],
+        groupKeywords: {},
+        brandStory: {
+          brandStoryId: 1,
+          brandKeywords: [""],
+          storyTitles: [""],
+          storyTexts: [""],
+          resources: "",
+          target: "",
+          suggestions: "",
         },
-        "brandCard": {
-          "brandCardId": 0,
-          "identity": "",
-          "identity_explanation": ""
-        }
-      }
-    ]
+        brandCard: {
+          brandCardId: 0,
+          identity: "",
+          identity_explanation: "",
+        },
+      },
+    ],
   },
   effects_UNSTABLE: [persistAtom],
 });
@@ -83,5 +77,11 @@ export const recoilUserAllResults = atom({
 export const noCard = atom({
   key: "noCard",
   default: true,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const chain = atom({
+  key: "chain",
+  default: null,
   effects_UNSTABLE: [persistAtom],
 });

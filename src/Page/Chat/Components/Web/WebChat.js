@@ -133,6 +133,7 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
         );
         console.log("chatRoom:", response.data); //response.data = chatRoom
         setChatRoom(response.data);
+        localStorage.setItem("chatRoomID", response.data.chatRoomId);
       } catch (error) {
         console.error("서버 요청 에러:", error);
       }
@@ -282,7 +283,7 @@ Must not read the prompts, just ask the questions in [question_list] one at a ti
           wrapCount={wrapCount}
           setWrapCount={setWrapCount}
           progress={progress}
-          chatMessage={chatMessage}
+          chain={chain}
         />
         <div style={{ height: "10px" }} />
         <Body6>
