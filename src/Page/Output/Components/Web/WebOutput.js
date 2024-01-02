@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import BackgroundFinal from "../../../../Assets/Background_Final.png";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { recoilUserAllResults, } from "../../../../atom/loginAtom";
@@ -65,7 +67,7 @@ const WebOutput = () => {
     const element = document.getElementById('Card');
     if (element instanceof HTMLElement) {
       html2canvas(element).then((canvas) => {
-        onSaveAs(canvas.toDataURL('image/png'), 'card.png');
+        onSaveAs(canvas.toDataURL('image/png'), 'brandon.png');
       });
     }
   };
@@ -79,13 +81,105 @@ const WebOutput = () => {
     document.body.removeChild(link);
   };
 
+  const downloadImageHandler = () => {
+    const input = document.getElementById('pdf');
+
+    if (!input) {
+      console.error('Element with ID pdf not found');
+      return;
+    }
+
+    // 원래 배경색을 저장합니다.
+    const originalBackgroundColor = input.style.backgroundColor;
+
+    // 이미지 다운로드를 위해 배경색을 변경합니다.
+    input.style.backgroundColor = '#000000'; // 원하는 색상 코드로 변경하세요.
+    input.style.borderRadius = "0px"
+
+    html2canvas(input, {
+      scale: 1,
+      logging: true,
+      useCORS: true
+    })
+      .then((canvas) => {
+        // 캔버스에서 이미지 데이터 URL을 가져옵니다.
+        const imgData = canvas.toDataURL('image/png');
+
+        // 이미지 데이터 URL을 사용하여 이미지를 다운로드합니다.
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = 'brandonStory.png'; // 다운로드할 이미지의 파일 이름
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // 이미지 다운로드 후, 배경색을 원래 색상으로 복원합니다.
+        input.style.backgroundColor = originalBackgroundColor;
+      })
+      .catch((error) => {
+        console.error('Error creating image:', error);
+
+        // 에러가 발생한 경우에도 원래 색상으로 복원합니다.
+        input.style.backgroundColor = originalBackgroundColor;
+      });
+    input.style.borderRadius = "2.5rem"
+  }
+
+
+  const downloadPDFHandler2 = () => {
+    const input = document.getElementById('pdf2');
+
+    if (!input) {
+      console.error('Element with ID pdf not found');
+      return;
+    }
+
+    // 원래 배경색을 저장합니다.
+    const originalBackgroundColor = input.style.backgroundColor;
+
+    // PDF 다운로드를 위해 배경색을 변경합니다.
+    input.style.backgroundColor = '#222222'; // 원하는 색상 코드로 변경하세요.
+    input.style.borderRadius = "0px"
+
+    html2canvas(input, {
+      scale: 1,
+      logging: true,
+      useCORS: true
+    })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'px',
+          format: [canvas.width, canvas.height]
+        });
+
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save("brandon.pdf");
+
+        // PDF 다운로드 후, 배경색을 원래 색상으로 복원합니다.
+        input.style.backgroundColor = originalBackgroundColor;
+      })
+      .catch((error) => {
+        console.error('Error creating PDF:', error);
+
+        // 에러가 발생한 경우에도 원래 색상으로 복원합니다.
+        input.style.backgroundColor = originalBackgroundColor;
+      });
+    input.style.backgroundColor = '#000000';
+    input.style.borderRadius = "2.5rem"
+  }
+
+
+
+
   const arrowHandler = () => {
     navigate("/history")
   }
   const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
 
   return (
-    <Div>
+    <Div >
       {{
         1:
           <Div style={{}}>
@@ -194,7 +288,7 @@ const WebOutput = () => {
                   </Div>
                 </Div>
                 <Div style={{ height: "70%", margin: "4.375rem 0 4.375rem 0" }}>
-                  <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
+                  <Div id="pdf" style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.4)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
                     <Div style={{ width: "100%", alignItems: "start" }}>
                       <Div style={{ width: "60%", flexDirection: "column", }}>
                         <Div style={{ height: "30%", color: "white", justifyContent: "start", alignItems: "center", padding: "1rem 0 2rem 0" }}>
@@ -265,7 +359,7 @@ const WebOutput = () => {
                   </Div>
                 </Div>
                 <Div style={{ height: "15%", alignItems: "end" }}>
-                  <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
+                  <Download onClick={downloadImageHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
                     다운로드
                   </Download>
                 </Div>
@@ -298,7 +392,7 @@ const WebOutput = () => {
                   </Div>
                 </Div>
                 <Div style={{ height: "70%", margin: "4.375rem 0 4.375rem 0" }}>
-                  <Div style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.2)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
+                  <Div id="pdf2" style={{ flexDirection: "column", width: "100%", background: "rgba(0, 0, 0, 0.2)", borderRadius: "2.5rem", padding: "5.9375rem 7.1875rem 5.9375rem 7.1875rem", boxSizing: "border-box" }}>
                     <Div style={{ flexDirection: "column" }}>
                       {chatroom?.answers?.map((answer, key) => (
                         <ChatContainerBrandon>
@@ -331,7 +425,7 @@ const WebOutput = () => {
                   </Div>
                 </Div>
                 <Div style={{ height: "15%", alignItems: "end" }}>
-                  <Download onClick={downloadHandler} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
+                  <Download onClick={downloadPDFHandler2} style={{ fontSize: "1.25rem", fontWeight: "600", margin: "0 0 1.9375rem 0" }}>
                     다운로드
                   </Download>
                 </Div>
