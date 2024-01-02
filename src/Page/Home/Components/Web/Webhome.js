@@ -12,6 +12,7 @@ import {
   recoilUserID,
   recoilUserData,
   isFirstLogin,
+  recoilUserAllResults,
 } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
@@ -21,6 +22,7 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
+  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -107,6 +109,27 @@ const WebHome = () => {
       setIsLoggedIn(false);
     }
   }, []);
+
+  const getUserData = async () => {
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_URL}/user/${userID}/allResults`)
+      console.log(data.data);
+      setUserAllResults(data.data);
+      // setChatrooms(data.data.chatRooms)
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    console.log(userID)
+    getUserData()
+  }, [userID])
+
+  useEffect(() => {
+    console.log(userAllResults)
+  }, [userAllResults])
 
   return (
     <Container>

@@ -6,34 +6,22 @@ import ButtonCard from "../../../../Assets/Button_Card.png";
 import Brandon from "../../../../Assets/brandon_final.gif"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { recoilUserAllResults, } from "../../../../atom/loginAtom";
 
 const WebHistory = () => {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useRecoilState(recoilUserAllResults);
   const [chatrooms, setChatrooms] = useState([]);
-  const getUserData = async () => {
-    try {
-      const data = await axios.get(`${process.env.REACT_APP_URL}/user/26/allResults`)
-      console.log(data.data);
-      setUserData(data.data);
-      setChatrooms(data.data.chatRooms)
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
   console.log(userData);
   console.log(userData.chatRooms);
   console.log(chatrooms);
+  console.log(chatrooms.length);
 
   useEffect(() => {
-    getUserData()
-  }, [])
+    setChatrooms(userData.chatRooms)
+  }, [userData])
 
-  useEffect(() => {
-    if (chatrooms.length <= 0) {
-      setNoCard(false)
-    }
-  }, [])
+
 
   useEffect(() => {
     if (chatrooms && chatrooms.length > 0) {
@@ -48,16 +36,23 @@ const WebHistory = () => {
       imgURL: Woochal,
       brandCard: {
         name: "박우찰",
-        brandConcept: "혁신적인 백수",
-        conceptDetail: "방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람."
+        brandJob: "혁신적인 백수",
+        jobDetail: "방황하는 청소년들에게 인생 밑바닥의 예시를 몸소 보여줌으로써 청소년들에게 마음의 위안 또는 경각심을 주는 사람."
       },
       brandStory: {
-        storytelling: "",
-        resources: "",
-        slogan: "",
-        suggestion: "",
-        niche: "",
-      },
+        keywords: [
+          "string", "string2"
+        ],
+        storyTitle: [
+          "string", "string2"
+        ],
+        storyText: [
+          "string", "string2"
+        ],
+        resources: "string",
+        target: "string",
+        suggestions: "string"
+      }
     },
     {
       cardNum: 2,
@@ -199,6 +194,13 @@ const WebHistory = () => {
   const [selectedCard, setSelectedCard] = useState([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(chatrooms.length);
+    if (chatrooms && chatrooms.length > 0) {
+      setNoCard(false)
+    }
+  }, [chatrooms])
+
   const chatButtonHandler = () => {
     navigate("/chat");
   }
@@ -221,8 +223,7 @@ const WebHistory = () => {
     setSelectedCard([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]])
   }, [selectCardNum]);
 
-  // console.log(selectCardNum);
-  // console.log(cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]);
+  // console.log(selectedCard[0]?.brandStory);
 
   return (
     <Div>
@@ -277,7 +278,7 @@ const WebHistory = () => {
                   margin: "0 0 1.25rem 0",
                 }}
               >
-                <A>현재 1개의 {userData.nickname}의 브랜드 컨셉이 있어요</A>
+                <A>현재 1개의 {userData.nickname}의 브랜드 아이덴티티가 있어요</A>
               </Div>
             </Div>
             <Div
@@ -293,8 +294,12 @@ const WebHistory = () => {
                   {card === undefined ?
                     <WebHistoryCard undefined={true} />
                     :
-                    <WebHistoryCard undefined={false} card={card} cardNum={card.chatRoomId} name={card.chatNickName} imgURL={card.imgURL} brandCard={card.brandCard} brandConcept={card.brandStory} />}
-                  <Overlay onClick={(event) => cardClickHandler(event, card.chatRoomId)} />
+                    <Div>
+                      <WebHistoryCard undefined={false} card={card} cardNum={card?.chatRoomId} name={card?.chatNickName} imgURL={card?.imgURL} brandCard={card?.brandCard} brandStory={card?.brandStory} />
+                      <Overlay onClick={(event) => cardClickHandler(event, card?.chatRoomId)} />
+                    </Div>
+                  }
+
                 </Card>
               ))}
             </Div>
@@ -385,7 +390,7 @@ const Overlay = styled.div`
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
   /* border: 0.5px solid black; */
-  border-radius: 0.625rem;
+  border-radius: 0rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
   font-weight: ${({ theme }) => theme.fontWeights.Header1};
@@ -462,9 +467,15 @@ backdrop-filter: blur(1.5854rem);
 border-radius: 1.25rem;
 
 display: flex;
+
+&:hover {
+    cursor: pointer;
+    background: #2B2D36;
+  }
 `;
 
 const BrandonImg = styled.img`
   width: 2.25rem;
 
 `;
+

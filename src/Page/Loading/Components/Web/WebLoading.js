@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import BackgroundImg from "../../../../Assets/Loading_Background.jpg"
 import Brandon from "../../../../Assets/brandon_final.gif"
+import CardAnimation from "../../../../Assets/Card_Animation.gif"
+import CardAnimationBack from "../../../../Assets/Card_Animation_Back.png"
+import { useNavigate } from "react-router-dom";
 
 const WebLoading = () => {
 
@@ -13,6 +16,11 @@ const WebLoading = () => {
     "Brandon이 FAB 형태로 사용자님의 답변을 정리하고 있어요.",
     "Brandon이 분석을 토대로 명함을 제작하고 있어요.",
   ]
+
+  const navigate = useNavigate();
+  const chatButtonHandler = () => {
+    navigate("/output");
+  }
 
   // const [currentText, setCurrentText] = useState(TextList[0]);
   // const [index, setIndex] = useState(0);
@@ -44,6 +52,16 @@ const WebLoading = () => {
           <Text4 >{TextList[3]}</Text4>
         </Wrapper>
         <BrandonImg src={Brandon} style={{ zIndex: "3" }}></BrandonImg>
+        <CardOverlay style={{ zIndex: "4" }}></CardOverlay>
+        <CardGif src={CardAnimation} style={{ zIndex: "5" }}></CardGif>
+        <CardBackImg src={CardAnimationBack} style={{ zIndex: "6" }}></CardBackImg>
+        <Div style={{ height: "30vh", alignItems: "start", backgroundColor: "transparent" }}>
+          <Div style={{ height: "5vh", fontSize: "1.75rem", fontWeight: "300", color: "white", backgroundColor: "transparent", zIndex: "6" }}>
+            <Button onClick={chatButtonHandler}>
+              <Div style={{ width: "100%", justifyContent: "center", color: "white", fontFamily: "Pretendard Variable", fontStyle: "normal", fontWeight: "700", fontSize: "1.125rem", lineHeight: "1.3125rem", backgroundColor: "transparent", zIndex: "7" }}>눌러서 컨셉 확인하기</Div>
+            </Button>
+          </Div>
+        </Div>
 
       </Div>
     </Div>
@@ -70,7 +88,7 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  background-color: white;
+  /* background-color: transparent; */
   /* border: 0.5px solid black; */
   border-radius: 0px;
   box-sizing: content-box;
@@ -153,6 +171,66 @@ const textRemove = keyframes`
   }
 `;
 
+const CardIn = keyframes` 
+  0% {
+    transform: scale(0) translate(-50%, -50%);
+  }
+
+  25% {
+    transform: scale(1.2) translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  35% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+`;
+
+const CardOut = keyframes` 
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`;
+
+const CardOverlayIn = keyframes` 
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+`;
+
+const CardBackIn = keyframes` 
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const ButtonIn = keyframes` 
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -208,14 +286,72 @@ const Text4 = styled.div`
 `;
 
 const BrandonImg = styled.img`
-  width: 9.625rem;
-  height: 9.625rem;
+  width: 6.625rem;
+  height: 6.625rem;
   border-Radius: 62.5rem;
   position: absolute;
   object-fit: cover;
   opacity: 0;
-  top: 60%;
+  top: 57%;
   left: 50%;
   transform-origin: 0% 0%;
   animation: ${BrandonIn} 1.5s linear 1s forwards;
+`;
+
+
+const CardOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  object-fit: cover;
+  background-color: black;
+  opacity: 0;
+  animation: ${CardOverlayIn} 0.5s linear 18.6s forwards;
+`;
+
+const CardGif = styled.img`
+  width: 60rem;
+  position: absolute;
+  object-fit: cover;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 0%;
+  animation: ${CardIn} 1.5s linear 19s forwards, ${CardOut} 0.5s linear 22s forwards;
+`;
+
+const CardBackImg = styled.img`
+  width: 40.125rem;
+  position: absolute;
+  object-fit: cover;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${CardBackIn} 0.5s linear 23s forwards; 
+`;
+
+const Button = styled.button`
+  box-sizing: border-box;
+  position: absolute;
+  width: 20.3125rem;
+  height: 3.1875rem;
+  left: calc(50% - 20.3125rem/2 + 0.0313rem);
+  top: 37.125rem;
+  opacity:0;
+  background: #2B2D36;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 1.5854rem -1.5854rem 1.5854rem rgba(194, 194, 194, 0.1), inset -1.5854rem 1.5854rem 1.5854rem rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1.5854rem);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 1.25rem;
+
+  display: flex;
+
+  &:hover {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  animation: ${ButtonIn} 0.5s linear 23s forwards; 
 `;

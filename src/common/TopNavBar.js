@@ -38,10 +38,11 @@ const TopNavBar = ({ isScrolled }) => {
   };
 
   const sendUserDataToServer = async (userData) => {
+    console.log(userData);
     //유저의 구글정보를 서버로 보내서 디비에 저장
     try {
       const jsonUserData = JSON.stringify(userData);
-
+      console.log(jsonUserData);
       const response = await axios.post(
         "http://Soim-env.eba-v9sk9m3i.ap-northeast-2.elasticbeanstalk.com/login/google",
         jsonUserData,
@@ -139,15 +140,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>홈</Body1>
@@ -158,15 +159,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>채팅</Body1>
@@ -177,15 +178,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>결과</Body1>
