@@ -31,6 +31,7 @@ const TopNavBar = ({ isScrolled }) => {
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userID");
+    localStorage.removeItem("nickname");
     setAccessToken(null);
     setIsLoggedIn(false);
     navigate("/");
@@ -126,9 +127,7 @@ const TopNavBar = ({ isScrolled }) => {
 
       {!isLoggedIn && (
         <>
-          <LoginButton onClick={login}>
-            로그인
-          </LoginButton>
+          <LoginButton onClick={login}>로그인</LoginButton>
         </>
       )}
       {isLoggedIn && (
@@ -288,12 +287,12 @@ const LoginButton = styled.button`
   align-items: center;
   gap: 8px;
   border-radius: 300px;
-  background: var(--White, #FFF);
+  background: var(--White, #fff);
   width: 82px;
   height: 35px;
   border: none;
   color: var(--black, #101010);
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-size: ${({ theme }) => theme.Web_fontSizes.Body1};
   font-style: normal;
   font-weight: 700;
