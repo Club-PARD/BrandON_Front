@@ -10,6 +10,8 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage, HumanMessage } from "langchain/schema";
+import { useRecoilState } from "recoil";
+import { recoilUserAllResults } from "../../../../atom/loginAtom";
 
 const WebLoading = () => {
   document.body.style.overflow = "hidden";
@@ -21,10 +23,11 @@ const WebLoading = () => {
   const [isLoading, setIsLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const chatRoomId = localStorage.getItem("chatRoomID");
+  const [recoilResult, setRecoilResult] = useRecoilState(recoilUserAllResults);
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    modelName: "gpt-4-1106-preview",
+    modelName: "gpt-3.5-turbo-16k",
     temperature: 0.2,
   });
 
@@ -50,7 +53,7 @@ const WebLoading = () => {
   
   ${user}: Students or employees aspiring to become an online content maker or influencer, who don’t know how to build their own personal brand, explore and analyze themselves, how to create their own brand identity, nor how to take action after building their own personal brand.
   
-  1. You must ask 10 questions one by one to ${user} to analyze ${user} and help ${user} with personal branding. You will ask one question and wait for user’s response. If there is no response, do not continue the question. The questions should be very polite and you should give continuous compliments to the user. You should call user by ${user}. In first question, you should greet user and ask how ${user} feel right now. In second question, you should empathize with ${user}’s feeling and tell ${user} that you are going to start asking question about you in detail. Also tell the ${user} divide the answer with a slash (/), if ${user} has multiple answers. On later questions, you should ask questions in [question_list]. The questions from [question_list] should be single line spaced from your compliment or analysis. If you think ${user}’s answer is not enough for current question or if there is anything more to learn about the ${user} in the ${user}'s answer, please ask additional questions before asking next questions in [question_list]. Remember the question should be only in Korean. Do not forget that you should wait for user response after one question. Do not create a reply by yourself. 
+  1. You must ask 10 questions one by one to ${user} to analyze ${user} and help ${user} with personal branding. You will ask one question and wait for user’s response. If there is no response, do not continue the question. The questions should be very polite and you should give continuous compliments to the user. You should call user by ${user}. In first question, you should greet user and ask how ${user} feel right now. In second question, you should empathize with ${user}’s feeling and tell ${user} that you are going to start asking question about you in detail. Also tell the ${user} divide the answer with a slash (/), if ${user} has multiple answers. On later questions, you should ask questions in [question_list]. The questions from [question_list] should be single line spaced from your compliment or analysis. If you think ${user}’s answer is not enough for current question or if there is anything more to learn about the ${user} in the ${user}'s answer, please ask additional questions before asking next questions in [question_list]. Remember the question should be only in English. Do not forget that you should wait for user response after one question. Do not create a reply by yourself.
   
   [question_list] : {{
   
@@ -66,8 +69,6 @@ const WebLoading = () => {
   10. What challenges have ${user} overcome, and what did ${user} learn from them?
   
   }}
-  
-  Remember the question should be only in Korean.
   
   For each question, you should analyze ${user}’s answers and ask one creative tail question.
   
@@ -117,7 +118,7 @@ const WebLoading = () => {
   
   }}
   
-  Proceed in the following order. All of the process must be done in only Korean.
+  Proceed in the following order.
   
   You must only ask questions. Do not answer your questions.
   
@@ -198,7 +199,10 @@ const WebLoading = () => {
   useEffect(() => {
     const analysis = async () => {
       if (chatModelResult.length !== 0) {
-        const message = await chain.predict({ answer: "start analysis" });
+        let message = await chain.predict({ answer: "start analysis" });
+        if (message.includes("잠시만") || message.includes("기다려")) {
+          message = await chain.predict({ answer: "OK" });
+        }
         setIsLoading(false);
         console.log(message);
         // 앞에서부터 "{"를 찾는 인덱스
@@ -235,7 +239,7 @@ const WebLoading = () => {
             process.env.REACT_APP_URL + `/${userID}/${chatRoomId}/brandCard`,
             {
               identity: result.Identity,
-              identityExplanation: result.Identity_explanation,
+              identity_explanation: result.Identity_explanation,
             },
             {
               headers: {
@@ -272,6 +276,64 @@ const WebLoading = () => {
             }
           );
           console.log("brandStory:", response.data); //response.data = brandStory
+          setRecoilResult({
+            ...recoilResult,
+            chatRooms: [
+              ...recoilResult.chatRooms,
+              {
+                ...recoilResult.chatRooms[0],
+                chatRoomId: chatRoomId,
+                progress: 100,
+                finishChat: true,
+                chatNickName: user,
+                brandCard: {
+                  ...recoilResult.chatRooms[0].brandCard,
+                  identity: response.data.identity,
+                  identity_explanation: response.data.identityExplanation,
+                },
+                brandStory: {
+                  ...recoilResult.chatRooms[0].brandStory,
+                  identity: response.data.identity,
+                  identity_explanation: response.data.identityExplanation,
+                  brandKeywords: response.data.brandKeywords,
+                  storyHeadlines: response.data.storyHeadlines,
+                  storyContents: response.data.storyContents,
+                  competency: response.data.competency,
+                  target: response.data.target,
+                  contentsRecommendation: response.data.contentsRecommendation,
+                },
+              },
+            ],
+          });
+          console.log({
+            ...recoilResult,
+            chatRooms: [
+              ...recoilResult.chatRooms,
+              {
+                ...recoilResult.chatRooms[0],
+                chatRoomId: chatRoomId,
+                progress: 100,
+                finishChat: true,
+                chatNickName: user,
+                brandCard: {
+                  ...recoilResult.chatRooms[0].brandCard,
+                  identity: response.data.identity,
+                  identity_explanation: response.data.identityExplanation,
+                },
+                brandStory: {
+                  ...recoilResult.chatRooms[0].brandStory,
+                  identity: response.data.identity,
+                  identity_explanation: response.data.identityExplanation,
+                  brandKeywords: response.data.brandKeywords,
+                  storyHeadlines: response.data.storyHeadlines,
+                  storyContents: response.data.storyContents,
+                  competency: response.data.competency,
+                  target: response.data.target,
+                  contentsRecommendation: response.data.contentsRecommendation,
+                },
+              },
+            ],
+          });
         } catch (error) {
           console.error("서버 요청 에러:", error);
         }

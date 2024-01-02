@@ -26,7 +26,7 @@ const WebChat = () => {
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    modelName: "gpt-4-1106-preview",
+    modelName: "gpt-3.5-turbo-16k",
     temperature: 0.2,
   });
 
@@ -52,7 +52,7 @@ const WebChat = () => {
   
   ${user}: Students or employees aspiring to become an online content maker or influencer, who don’t know how to build their own personal brand, explore and analyze themselves, how to create their own brand identity, nor how to take action after building their own personal brand.
   
-  1. You must ask 10 questions one by one to ${user} to analyze ${user} and help ${user} with personal branding. You will ask one question and wait for user’s response. If there is no response, do not continue the question. The questions should be very polite and you should give continuous compliments to the user. You should call user by ${user}. In first question, you should greet user and ask how ${user} feel right now. In second question, you should empathize with ${user}’s feeling and tell ${user} that you are going to start asking question about you in detail. Also tell the ${user} divide the answer with a slash (/), if ${user} has multiple answers. On later questions, you should ask questions in [question_list]. The questions from [question_list] should be single line spaced from your compliment or analysis. If you think ${user}’s answer is not enough for current question or if there is anything more to learn about the ${user} in the ${user}'s answer, please ask additional questions before asking next questions in [question_list]. Remember the question should be only in Korean. Do not forget that you should wait for user response after one question. Do not create a reply by yourself. 
+  1. You must ask 10 questions one by one to ${user} to analyze ${user} and help ${user} with personal branding. You will ask one question and wait for user’s response. If there is no response, do not continue the question. The questions should be very polite and you should give continuous compliments to the user. You should call user by ${user}. In first question, you should greet user and ask how ${user} feel right now. In second question, you should empathize with ${user}’s feeling and tell ${user} that you are going to start asking question about you in detail. Also tell the ${user} divide the answer with a slash (/), if ${user} has multiple answers. On later questions, you should ask questions in [question_list]. The questions from [question_list] should be single line spaced from your compliment or analysis. If you think ${user}’s answer is not enough for current question or if there is anything more to learn about the ${user} in the ${user}'s answer, please ask additional questions before asking next questions in [question_list]. Remember the question should be only in English. Do not forget that you should wait for user response after one question. Do not create a reply by yourself.
   
   [question_list] : {{
   
@@ -68,8 +68,6 @@ const WebChat = () => {
   10. What challenges have ${user} overcome, and what did ${user} learn from them?
   
   }}
-  
-  Remember the question should be only in Korean.
   
   For each question, you should analyze ${user}’s answers and ask one creative tail question.
   
@@ -119,7 +117,7 @@ const WebChat = () => {
   
   }}
   
-  Proceed in the following order. All of the process must be done in only Korean.
+  Proceed in the following order.
   
   You must only ask questions. Do not answer your questions.
   
@@ -281,16 +279,18 @@ const WebChat = () => {
     setChatMessage([...chatMessage, input, res]);
     if (
       progress === 90 &&
-      (!res.includes("{") || !res.includes("}") || !res.includes(":"))
+      (!res.includes("Group") ||
+        !res.includes("keywords") ||
+        !res.includes("start analysis"))
     ) {
       setProgress((prev) => prev - 10);
     }
 
     if (
       progress !== 90 &&
-      res.includes("{") &&
-      res.includes("}") &&
-      res.includes(":")
+      res.includes("Group") &&
+      res.includes("keywords") &&
+      res.includes("start analysis")
     ) {
       setProgress(100);
     }
