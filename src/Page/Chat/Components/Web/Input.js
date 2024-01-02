@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import inputDisabled from "../../../../Assets/input_disabled.svg";
 import inputEnabled from "../../../../Assets/input_enabled.svg";
 import { InputBase, Paper, Tooltip } from "@mui/material";
+import axios from "axios";
 
 const Input = ({
   input,
@@ -13,6 +14,8 @@ const Input = ({
   progress,
   chatMessage,
 }) => {
+  const [result, setResult] = useState({});
+
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -55,28 +58,6 @@ const Input = ({
   };
 
   const handleAnalyticsClick = async () => {
-    const message = chatMessage[chatMessage.length - 1];
-    // 앞에서부터 "{"를 찾는 인덱스
-    const startIndex = message.indexOf("{");
-
-    // 뒤에서부터 "}"를 찾는 인덱스
-    const endIndex = message.lastIndexOf("}");
-
-    if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
-      // "{"와 "}" 사이의 문자열 추출
-      const jsonString = message.slice(startIndex, endIndex + 1).trim();
-
-      try {
-        // 추출된 JSON 문자열을 파싱
-        const parsedObject = JSON.parse(jsonString);
-        console.log("JSON 객체:", parsedObject);
-      } catch (error) {
-        console.error("JSON 파싱 오류:", error);
-      }
-    } else {
-      console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
-    }
-
     try {
       const response = await axios.post(
         process.env.REACT_APP_URL +
@@ -91,7 +72,73 @@ const Input = ({
     } catch (error) {
       console.error("서버 요청 에러:", error);
     }
+
+    const message = chatMessage[chatMessage.length - 1];
+    // 앞에서부터 "{"를 찾는 인덱스
+    const startIndex = message.indexOf("{");
+
+    // 뒤에서부터 "}"를 찾는 인덱스
+    const endIndex = message.lastIndexOf("}");
+
+    if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+      // "{"와 "}" 사이의 문자열 추출
+      const jsonString = message.slice(startIndex, endIndex + 1).trim();
+
+      try {
+        // 추출된 JSON 문자열을 파싱
+        const parsedObject = JSON.parse(jsonString);
+        setResult(parsedObject);
+      } catch (error) {
+        console.error("JSON 파싱 오류:", error);
+      }
+    } else {
+      console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
+    }
   };
+
+  useEffect(() => {
+    const brandCard = async () => {
+      try {
+        const response = await axios.post(
+          process.env.REACT_APP_URL +
+            `/${userID}/${chatRoom.chatRoomId}/brandCard`,
+          {
+            identity: result.identity,
+            identity_explanation: result.identity_explanation,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("brandCard:", response.data); //response.data = brandCard
+      } catch (error) {
+        console.error("서버 요청 에러:", error);
+      }
+    };
+
+    const brandStory = async () => {
+      try {
+        const response = await axios.post(
+          process.env.REACT_APP_URL +
+            `/${userID}/${chatRoom.chatRoomId}/brandStory`,
+          result,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("brandStory:", response.data); //response.data = brandStory
+      } catch (error) {
+        console.error("서버 요청 에러:", error);
+      }
+    };
+
+    brandCard();
+    brandStory();
+  }, [result]);
 
   return (
     <>
