@@ -217,7 +217,7 @@ const TopNavBar = ({ isScrolled }) => {
               <Ul>
                 <li style={{ marginBottom: "10px" }}>
                   <Link
-                    to="/history"
+                    to="/mypage"
                     style={{ all: "unset", cursor: "pointer" }}
                   >
                     마이페이지
