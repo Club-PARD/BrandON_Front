@@ -24,7 +24,8 @@ const WebMyPage = () => {
     const handleConfirmButton = () =>{
       setUserNickname(text);
       saveUserNickName(text);
-      navigate("/mypage");
+      alert("변경되었습니다.");
+      navigate("/");
     };
 
     const saveUserNickName = async (userNickname) => {
@@ -103,7 +104,7 @@ const WebMyPage = () => {
 
             <ButtonDiv>
               <Button disabled={text.length < 1} onClick={handleConfirmButton}>
-                <ConfirmPont>확인</ConfirmPont>
+                <ConfirmPont>변경</ConfirmPont>
               </Button>
           </ButtonDiv>
 

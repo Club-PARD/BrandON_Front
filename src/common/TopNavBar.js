@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -116,6 +116,10 @@ const TopNavBar = ({ isScrolled }) => {
       setDropdownView(false);
     }, 200);
   };
+
+  useEffect(() => {
+    setNickname(localStorage.getItem("nickname"));
+  }, [localStorage.getItem("nickname")]);
 
   return (
     <Div scrolled={isScrolled}>
