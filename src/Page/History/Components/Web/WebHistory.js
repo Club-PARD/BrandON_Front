@@ -196,10 +196,12 @@ const WebHistory = () => {
 
   useEffect(() => {
     console.log(chatrooms.length);
-    if (chatrooms && chatrooms.length > 0) {
+    if (chatrooms && chatrooms.length > 0 && chatrooms[0].finishChat == true) {
       setIsNoCard(false)
     }
   }, [chatrooms])
+
+  console.log(isNoCard);
 
   const chatButtonHandler = () => {
     navigate("/chat");
@@ -293,11 +295,12 @@ const WebHistory = () => {
                 <Card>
                   {card === undefined ?
                     <WebHistoryCard undefined={true} />
-                    :
-                    <Div>
-                      <WebHistoryCard undefined={false} card={card} cardNum={card?.chatRoomId} name={card?.chatNickName} imgURL={card?.imgURL} brandCard={card?.brandCard} brandStory={card?.brandStory} />
-                      <Overlay onClick={(event) => cardClickHandler(event, card?.chatRoomId)} />
-                    </Div>
+                    : card.finishChat ?
+                      <Div>
+                        <WebHistoryCard undefined={false} card={card} cardNum={card?.chatRoomId} name={card?.chatNickName} imgURL={card?.imgURL} brandCard={card?.brandCard} brandStory={card?.brandStory} />
+                        <Overlay onClick={(event) => cardClickHandler(event, card?.chatRoomId)} />
+                      </Div>
+                      : <WebHistoryCard undefined={true} />
                   }
 
                 </Card>
