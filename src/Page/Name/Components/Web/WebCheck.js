@@ -51,7 +51,8 @@ const WebCheck = () => {
             <Container2>
                 <HeaderDiv>
                     <HeaderPont>Brand ON 서비스 약관 동의</HeaderPont>
-                    <SubHeaderPont>이용약관에 동의해주세요</SubHeaderPont>
+                    <SubHeaderPont>서비스의 이용을 위한 최초 1회의 약관 동의와 
+                    개인정보 수집에 대한 동의가 필요합니다.</SubHeaderPont>
                 </HeaderDiv>
 
                 <AgreeDiv>
@@ -101,45 +102,48 @@ export default WebCheck;
 const HeaderPont = styled.div`
     color: var(--White, #FFF);
     font-family: 'Pretendard';
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.Web_fontSizes.Header3};
     font-style: normal;
-    font-weight: 700;
+    font-weight: ${({ theme }) => theme.fontWeights.Header3};
     line-height: normal;
 `;
 const SubHeaderPont = styled.div`
-    color: var(--White, #FFF);
+    color: var(--stroke, #D2D2D2);
+    text-align: center;
     font-family: 'Pretendard';
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-align: center;
-    margin-top: 2px;
+    margin-top: 13px;
+    width: 56%;
+    height: 100%;
 `;
 const AllAgreePont = styled.span`
     color: var(--White, #FFF);
     font-family: 'Pretendard';
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: 700;
+    font-weight: ${({ theme }) => theme.fontWeights.Header3};
     line-height: normal;
     margin-left: 18px;
 `;
 const AgreePont = styled.div`
     color: var(--White, #FFF);
     font-family: 'Pretendard';
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: 500;
+    font-weight: ${({ theme }) => theme.fontWeights.Body2};
     line-height: normal;
     margin-left: 18px;
     margin-right: auto;
 `;
 const ConfirmPont = styled.div`
     font-family: 'Pretendard';
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.Web_fontSizes.Header2};;
     font-style: normal;
-    font-weight: 500;
+    font-weight: ${({ theme }) => theme.fontWeights.Body2};
     line-height: normal;
 `;
 
@@ -191,13 +195,17 @@ const Confirm = styled.button`
     }
 `;
 const HeaderDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 9%;
 `;
 const AgreeDiv = styled.div`
     width: 66%;
     display: flex;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 8%;
 `;
 const CheckBox = styled.input`
     width: 24px;
@@ -237,8 +245,9 @@ const AgreeDiv3 = styled.div`
 const MoreInfo = styled.a`
     color: var(--Gray-10, #ABABAB);
     font-family: 'Pretendard';
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: 500;
+    font-weight: ${({ theme }) => theme.fontWeights.Body2};
     line-height: normal;
+    cursor: pointer;
 `;

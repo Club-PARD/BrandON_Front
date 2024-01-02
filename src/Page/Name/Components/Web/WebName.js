@@ -79,7 +79,7 @@ const WebName = () => {
         </Header>
 
         <BrandImg>
-          <img src="Rectangle138.png"></img>
+          <img src="Frame97.png"></img>
         </BrandImg>
 
         <IntroduceDiv>
@@ -129,34 +129,35 @@ const WelcomePont = styled.span`
   font-family: 'Pretendard';
   font-size: 32px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fontWeights.Header3};
   line-height: normal;
   
 `;
 const IntroducePont = styled.div`
   color: var(--Grey_Scale-0, #FFF);
   font-family: 'Pretendard';
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
   font-style: normal;
-  font-weight: 400;
+  font-weight: ${({ theme }) => theme.fontWeights.Body4};
   line-height: normal;
 `;
 const IntroduceBoldPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #FFF));
   font-family: 'Pretendard';
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header4};
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fontWeights.Header3};
   line-height: normal;
 `;
 const ConfirmPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #FFF));
   font-family: 'Pretendard';
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
   font-style: normal;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fontWeights.Body2};
   line-height: normal;
 `;
+
 const Container =styled.div`
   display: flex;
   justify-content: center;
