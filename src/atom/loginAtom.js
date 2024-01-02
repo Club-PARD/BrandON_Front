@@ -1,4 +1,3 @@
-import React from "react";
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
@@ -77,11 +76,5 @@ export const recoilUserAllResults = atom({
 export const noCard = atom({
   key: "noCard",
   default: true,
-  effects_UNSTABLE: [persistAtom],
-});
-
-export const chain = atom({
-  key: "chain",
-  default: null,
   effects_UNSTABLE: [persistAtom],
 });
