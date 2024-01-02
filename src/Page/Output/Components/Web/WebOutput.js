@@ -210,13 +210,13 @@ const WebOutput = () => {
                     <Hr />
                     <Div style={{ height: "100%", flexDirection: "column" }}>
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 키워드</Div>
-                      <Div>
+                      <Div style={{ alignItems: "start" }}>
                         <Div style={{ height: "100%", flexDirection: "column", justifyContent: "space-between" }}>
                           <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.brandKeywords[0] || ""}</Div>
                           <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.brandKeywords[3] || ""}</Div>
                         </Div>
-                        <Div style={{ height: "100%", flexDirection: "column", alignItems: "start" }}>
-                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 0 0" }}>{chatroom?.brandStory?.brandKeywords[1] || ""}</Div>
+                        <Div style={{ height: "100%", flexDirection: "column", justifyContent: "start" }}>
+                          <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.brandKeywords[1] || ""}</Div>
                           <Div style={{ justifyContent: "center", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.brandKeywords[4] || ""}</Div>
                         </Div>
                         <Div style={{ height: "100%", flexDirection: "column" }}>
@@ -230,42 +230,35 @@ const WebOutput = () => {
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 스토리</Div>
                       <Div style={{ height: "100%", flexDirection: "column" }}>
                         <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절 대학시절</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.storyTitles[0] || ""}</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.storyTexts[0] || ""}</Div>
                         </Div>
                         <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>대학시절</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.storyTitles[1] || ""}</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", margin: "0 0 2.5rem 0" }}>{chatroom?.brandStory?.storyTexts[1] || ""}</Div>
                         </Div>
                         <Div style={{ height: "100%", flexDirection: "column" }}>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>사회변화</Div>
-                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>대학시절</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.5rem", fontWeight: "600", }}>{chatroom?.brandStory?.storyTitles[2] || ""}</Div>
+                          <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>{chatroom?.brandStory?.storyTexts[2] || ""}</Div>
                         </Div>
                       </Div>
                     </Div>
                     <Hr />
                     <Div style={{ height: "100%", flexDirection: "column" }}>
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 역량</Div>
-                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>언어, 코딩 능력, 5년차 ARMY</Div>
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem", width: "" }}>{chatroom?.brandStory?.resources || ""}
+                      </Div>
                     </Div>
                     <Hr />
                     <Div style={{ height: "100%", flexDirection: "column" }}>
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>브랜드 타겟</Div>
-                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>인구 통계: 25~50세의 기업 및 NGO, 중견 및 고위급 전문가.
-                        온라인 채널: LinkedIn, Twitter 및 전문 마케팅 포럼에서 활발히 활동 중입니다.
-                        관심사: 사회적 대의, 디지털 마케팅 트렌드, 윤리적 비즈니스 관행에 관심이 있습니다.
-                        행동 패턴: 혁신적이면서도 윤리적인 마케팅 솔루션을 추구하며, 협업 프로젝트에 개방적입니다.
-                        심리학적 특성: 가치 중심적이고, 사회적 의식이 있으며, 미래 지향적입니다.
-                        고객 피드백 및 참여: 실질적인 사회적 영향력과 혁신을 보여주는 전략에 반응합니다.
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>{chatroom?.brandStory?.target || ""}
                       </Div>
                     </Div>
                     <Hr />
                     <Div style={{ height: "100%", flexDirection: "column" }}>
                       <Div style={{ justifyContent: "start", color: "white", fontSize: "2rem", fontWeight: "600", margin: "0 0 2.5rem 0" }}>온라인 콘텐츠 추천 방향</Div>
-                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>사회적, 환경적 대의를 증진하기 위한 혁신적인 디지털 마케팅 전략을 보여주는 콘텐츠 제작에 집중하세요. 사례 연구,
-                        웨비나, 링크드인 및 트위터와 같은 플랫폼의 대화형 포럼과 같은 형식을 활용하여 영감을 주면서도 유익한 정보를 제
-                        공해야 합니다. 디지털 마케팅 및 사회적 옹호 활동의 경험과 기술을 활용하여 인사이트와 조언을 제공하는 동시에 긍
-                        정적인 영향을 미치는 데 열정적인 커뮤니티와 소통합니다.
+                      <Div style={{ justifyContent: "start", color: "#C9C9C9", fontSize: "1.25rem" }}>{chatroom?.brandStory?.suggestions || ""}
                       </Div>
                     </Div>
                   </Div>
@@ -370,7 +363,7 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  border: 0.0313rem solid black;
+  /* border: 0.0313rem solid black; */
   border-radius: 0rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
