@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import OutputPage from "../Page/Output";
 import WebCheck from "../Page/Name/Components/Web/WebCheck";
 import MyPage from "../Page/MyPage";
-import WebError404 from "../Page/Error404/Components/Web/WebError404";
+import Error404Page from "../Page/Error404";
 
 const Router = () => {
   const { pathname } = useLocation();
@@ -49,7 +49,7 @@ const Router = () => {
           <Route path="/check" element={<WebCheck />} />
           <Route path="/output" element={<OutputPage />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/*" element={<WebError404 />} />
+          <Route path="/*" element={<Error404Page />} />
         </Routes>
       </Main>
     </Container>

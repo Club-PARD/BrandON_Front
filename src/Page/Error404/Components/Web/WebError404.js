@@ -1,34 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useRecoilState } from "recoil";
-import { recoilUserAllResults, } from "../../../../atom/loginAtom";
-import Brandon from "../../../../Assets/brandon_final.gif";
-import CardWhite from "../../../../Assets/Card_White.png";
-import CardBlue from "../../../../Assets/Card_Blue.png";
-import CardPurple from "../../../../Assets/Card_Purple.png";
-import CardPink from "../../../../Assets/Card_Pink.png";
 
 const WebError404 = () => {
-
-  const [userData, setUserData] = useRecoilState(recoilUserAllResults);
-  const [chatroom, setChatroom] = useState([]);
-
-  const chatRoomIdS = localStorage.getItem("chatRoomId");
-
-  console.log(userData);
-  console.log(chatroom);
-  console.log(chatroom.answers);
-  console.log(chatRoomIdS);
-
-  useEffect(() => {
-    for (let i = 0; i < userData.chatRooms.length; i++) {
-      if (userData.chatRooms[i].chatRoomId == chatRoomIdS) {
-        setChatroom(userData.chatRooms[i]);
-      }
-    }
-  }, [userData])
 
   const navigate = useNavigate();
 
