@@ -54,7 +54,7 @@ const Input = ({
     }
   };
 
-  const handleAnalyticsClick = () => {
+  const handleAnalyticsClick = async () => {
     const message = chatMessage[chatMessage.length - 1];
     // 앞에서부터 "{"를 찾는 인덱스
     const startIndex = message.indexOf("{");
@@ -75,6 +75,21 @@ const Input = ({
       }
     } else {
       console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
+    }
+
+    try {
+      const response = await axios.post(
+        process.env.REACT_APP_URL +
+          `/${userID}/${chatRoom.chatRoomId}/finishChat`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
+    } catch (error) {
+      console.error("서버 요청 에러:", error);
     }
   };
 
