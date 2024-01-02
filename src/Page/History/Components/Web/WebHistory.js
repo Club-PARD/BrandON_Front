@@ -7,7 +7,7 @@ import Brandon from "../../../../Assets/brandon_final.gif"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { recoilUserAllResults, } from "../../../../atom/loginAtom";
+import { recoilUserAllResults, noCard } from "../../../../atom/loginAtom";
 
 const WebHistory = () => {
   const [userData, setUserData] = useRecoilState(recoilUserAllResults);
@@ -189,15 +189,15 @@ const WebHistory = () => {
     },
   ]);
 
-  const [noCard, setNoCard] = useState(true);
+  const [isNoCard, setIsNoCard] = useRecoilState(noCard);
   const [selectCardNum, setSelectCardNum] = useState([0, 1, 2, 3]);
-  const [selectedCard, setSelectedCard] = useState([cards[selectCardNum[0]], cards[selectCardNum[1]], cards[selectCardNum[2]], cards[selectCardNum[3]]]);
+  const [selectedCard, setSelectedCard] = useState([chatrooms[selectCardNum[0]], chatrooms[selectCardNum[1]], chatrooms[selectCardNum[2]], chatrooms[selectCardNum[3]]]);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(chatrooms.length);
     if (chatrooms && chatrooms.length > 0) {
-      setNoCard(false)
+      setIsNoCard(false)
     }
   }, [chatrooms])
 
@@ -227,7 +227,7 @@ const WebHistory = () => {
 
   return (
     <Div>
-      {noCard ?
+      {isNoCard ?
         <Div style={{ flexDirection: "column" }}>
           <Div style={{ height: "40vh", alignItems: "end" }}>
             <Div style={{ height: "10vh", fontSize: "2.5rem", fontWeight: "600", color: "white" }}>

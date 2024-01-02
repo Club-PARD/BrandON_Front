@@ -11,8 +11,8 @@ const WebHistoryCard = (props) => {
 
   const [card, setCard] = useState({ null_safety: "" });
   const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
-  // console.log(props.brandStory);
-  // console.log(props.brandStory.brandKeywords);
+  console.log(props.brandStory);
+  console.log(props.brandCard);
 
   return (
     <Div
@@ -42,25 +42,25 @@ const WebHistoryCard = (props) => {
             </Div>
             <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
               <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                {props.undefined === true ? "" : props.brandCard.identity}
+                {props.undefined === true ? "" : props.brandCard?.identity}
               </Div>
             </Div>
             <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
               <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
-                {props.undefined === true ? "" : props.brandCard.identity_explaination}
+                {props.undefined === true ? "" : props.brandCard?.identity_explanation}
               </Div>
             </Div>
             <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
               <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory.brandKeywords[0]}</Div>
-                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory.brandKeywords[1]}</Div>
-                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory.brandKeywords[2]}</Div>
+                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
+                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
+                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
               </Div>
             </Div>
           </Div>
         </Div>
 
-        {props.undefined === true ? <Img src={CardDefault}></Img> : <Img src={ImgList[(props.cardNum - 1) % 3]}></Img>}
+        {props.undefined === true ? <Img src={CardDefault}></Img> : <Img src={ImgList[(props.cardNum - 1) % 4]}></Img>}
       </Div>
     </Div>
   );
