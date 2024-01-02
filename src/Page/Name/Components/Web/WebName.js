@@ -52,9 +52,12 @@ const WebName = () => {
         `${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/saveNickname`,
         usernameData,
       );
+      const chatRoomId = await axios.post(
+        `${process.env.REACT_APP_URL}/${localStorage.getItem("userID")}/chatRoom`);
+
       console.log("서버 응답1(닉네임):",response.data.userNickname);
       localStorage.setItem('nickname',response.data.userNickname);
-      console.log(localStorage.getItem('nickname'));
+      console.log("서버 응답2(채팅룸):",chatRoomId.data);
     }catch (error){
       console.log("닉네임 요청 에러:",error);
     }
