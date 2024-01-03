@@ -6,17 +6,14 @@ const { persistAtom } = recoilPersist();
 export const isLogined = atom({
   key: "isLogined",
   default: false,
-  effects_UNSTABLE: [persistAtom],
 });
 export const accessTokenState = atom({
   key: "accessTokenState",
   default: null,
-  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserID = atom({
   key: "recoilUserID",
   default: localStorage.getItem("userID"),
-  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserData = atom({
   key: "userData",
@@ -25,17 +22,14 @@ export const recoilUserData = atom({
     email: "",
     picture: "",
   },
-  effects_UNSTABLE: [persistAtom],
 });
 export const isFirstLogin = atom({
   key: "isFirstLogin",
-  default: false,
-  effects_UNSTABLE: [persistAtom],
+  default: null,
 });
 export const nickname = atom({
   key: "nickname",
   default: "",
-  effects_UNSTABLE: [persistAtom],
 });
 export const recoilUserAllResults = atom({
   key: "recoilUserAllResults",

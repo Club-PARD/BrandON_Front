@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -13,7 +13,6 @@ import {
   recoilUserAllResults,
   noCard,
 } from "../atom/loginAtom";
-import { useState } from "react";
 
 const TopNavBar = ({ isScrolled }) => {
   const navigate = useNavigate();
@@ -24,10 +23,9 @@ const TopNavBar = ({ isScrolled }) => {
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
-  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
+  const [userAllResults, setUserAllResults] =
+    useRecoilState(recoilUserAllResults);
   const [noCardR, setNoCard] = useRecoilState(noCard);
-  const [afterLogin, setAfterLogin] = useState(null);
-
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -40,7 +38,7 @@ const TopNavBar = ({ isScrolled }) => {
     setAccessToken(null);
     setIsLoggedIn(false);
     setNoCard(true);
-    setIsFirstLoggedin(true);
+    setIsFirstLoggedin(null);
     setUserAllResults({
       userId: 0,
       name: "string",
@@ -73,7 +71,7 @@ const TopNavBar = ({ isScrolled }) => {
           },
         },
       ],
-    },)
+    });
     navigate("/");
   };
 
@@ -100,7 +98,6 @@ const TopNavBar = ({ isScrolled }) => {
       console(response.data.firstLogin);
       setIsFirstLoggedin(response.data.firstLogin);
       localStorage.setItem("afterLogin", true);
-      setAfterLogin(true);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -151,8 +148,6 @@ const TopNavBar = ({ isScrolled }) => {
     },
   });
 
-
-
   const handleClickContainer = () => {
     setDropdownView(!isDropdownView);
   };
@@ -168,23 +163,13 @@ const TopNavBar = ({ isScrolled }) => {
   }, [localStorage.getItem("nickname")]);
 
   useEffect(() => {
-    if (afterLogin !== null) {
-      console.log("로그인 관련 로그");
-      if (!localStorage.getItem("afterLogin")) {
-        console.log("로그인 전 렌더링");
-        return;
-      }
-      else {
-        console.log("로그인 후 렌더링");
-        console.log(isFirstLoggedin);
-        if (isFirstLoggedin) {
-          navigate("/name");
-        }
+    console.log(isFirstLoggedin);
+    if (isFirstLoggedin !== null) {
+      if (isFirstLoggedin) {
+        navigate("/name");
       }
     }
-    console.log(localStorage.getItem("afterLogin"))
-  }, [afterLogin]);
-
+  }, [isFirstLoggedin]);
 
   return (
     <Div scrolled={isScrolled}>
@@ -210,15 +195,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>홈</Body1>
@@ -229,15 +214,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>채팅</Body1>
@@ -248,15 +233,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "#8F2EFF",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "#8F2EFF",
+                  }
                 : {
-                  all: "unset",
-                  cursor: "pointer",
-                  color: "white",
-                }
+                    all: "unset",
+                    cursor: "pointer",
+                    color: "white",
+                  }
             }
           >
             <Body1>결과</Body1>

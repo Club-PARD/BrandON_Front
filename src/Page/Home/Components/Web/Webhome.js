@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useRecoilState } from "recoil";
@@ -22,9 +22,8 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
-  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
-  const [afterLogin, setAfterLogin] = useState(false);
-
+  const [userAllResults, setUserAllResults] =
+    useRecoilState(recoilUserAllResults);
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
@@ -50,7 +49,6 @@ const WebHome = () => {
       setIsFirstLoggedin(response.data.firstLogin);
       localStorage.setItem("userID", response.data.userId.toString());
       localStorage.setItem("nickname", response.data.nickname);
-      setAfterLogin(true);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -132,25 +130,13 @@ const WebHome = () => {
   }, [userID]);
 
   useEffect(() => {
-    console.log(userAllResults);
-  }, [userAllResults]);
-
-  useEffect(() => {
-    console.log("로그인 관련 로그");
-    if (!afterLogin) {
-      console.log("로그인 전 렌더링");
-      return;
-    }
-    else {
-      console.log("로그인 후 렌더링");
-      console.log(isFirstLoggedin);
+    console.log(isFirstLoggedin);
+    if (isFirstLoggedin !== null) {
       if (isFirstLoggedin) {
         navigate("/name");
       }
     }
-  }, [afterLogin])
-
-  console.log(afterLogin);
+  }, [isFirstLoggedin]);
 
   return (
     <Container>
@@ -270,8 +256,8 @@ const TestStart = styled.div`
   justify-content: center;
   text-align: center;
   margin-top: 55px;
-  &:hover{
-    background-color: #2B2D36;
+  &:hover {
+    background-color: #2b2d36;
   }
 `;
 
