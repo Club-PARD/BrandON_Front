@@ -284,18 +284,15 @@ const WebLoading = () => {
             chatRooms: [
               ...recoilResult.chatRooms,
               {
-                ...recoilResult.chatRooms[0],
                 chatRoomId: chatRoomId,
                 progress: 100,
                 finishChat: true,
                 chatNickName: user,
                 brandCard: {
-                  ...recoilResult.chatRooms[0].brandCard,
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
                 },
                 brandStory: {
-                  ...recoilResult.chatRooms[0].brandStory,
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
                   brandKeywords: response.data.brandKeywords,
@@ -313,18 +310,15 @@ const WebLoading = () => {
             chatRooms: [
               ...recoilResult.chatRooms,
               {
-                ...recoilResult.chatRooms[0],
                 chatRoomId: chatRoomId,
                 progress: 100,
                 finishChat: true,
                 chatNickName: user,
                 brandCard: {
-                  ...recoilResult.chatRooms[0].brandCard,
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
                 },
                 brandStory: {
-                  ...recoilResult.chatRooms[0].brandStory,
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
                   brandKeywords: response.data.brandKeywords,
