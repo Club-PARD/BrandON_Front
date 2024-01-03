@@ -234,6 +234,26 @@ const WebLoading = () => {
   }, [chatModelResult]);
 
   useEffect(() => {
+    const chatNickName = async () => {
+      if (!result.init) {
+        try {
+          const response = await axios.post(
+            process.env.REACT_APP_URL +
+              `/${userID}/${chatRoomId}/saveChatNickName`,
+            { chatNickName: user },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log("chatNickname:", response.data); //response.data = brandCard
+        } catch (error) {
+          console.error("서버 요청 에러:", error);
+        }
+      }
+    };
+
     const brandCard = async () => {
       if (!result.init) {
         try {
@@ -339,6 +359,7 @@ const WebLoading = () => {
       }
     };
 
+    chatNickName();
     brandCard();
     brandStory();
   }, [result]);
