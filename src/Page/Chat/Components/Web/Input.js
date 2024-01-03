@@ -13,6 +13,7 @@ const Input = ({
   wrapCount,
   setWrapCount,
   progress,
+  isLoading,
 }) => {
   const navigate = useNavigate();
   const userID = localStorage.getItem("userID");
@@ -181,6 +182,7 @@ const Input = ({
       >
         <InputBase
           id="myInput"
+          disabled={isLoading}
           multiline
           maxRows={4}
           onKeyDown={handleKeyDown}

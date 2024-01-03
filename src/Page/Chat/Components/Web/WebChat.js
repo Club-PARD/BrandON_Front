@@ -320,6 +320,7 @@ const WebChat = () => {
           wrapCount={wrapCount}
           setWrapCount={setWrapCount}
           progress={progress}
+          isLoading={isLoading}
         />
         <div style={{ height: "10px" }} />
         <Body6>
