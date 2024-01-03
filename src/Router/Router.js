@@ -34,8 +34,8 @@ const Router = () => {
     <Container home={pathname === "/"}>
       <ScrollToTop />
       {pathname === "/loading" ||
-        pathname === "/name" ||
-        pathname === "/check" ? null : (
+      pathname === "/name" ||
+      pathname === "/check" ? null : (
         <TopNavBar isScrolled={isScrolled} />
       )}
       <Main>
