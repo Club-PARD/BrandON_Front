@@ -88,11 +88,9 @@ const WebName = () => {
           </BrandImg>
 
           <IntroduceDiv>
-            <IntroducePont>사용하시기 전에,</IntroducePont>
-            <IntroducePont>
-              <IntroduceBoldPont>브랜드 스토리</IntroduceBoldPont>와
-              <IntroduceBoldPont> 브랜드 아이덴티티</IntroduceBoldPont>에 들어갈
-              이름을 입력해주세요.
+            
+            <IntroducePont>입력하신 이름이 최종
+              <IntroduceBoldPont> 브랜드 아이덴티티 카드</IntroduceBoldPont>에 사용될 예정이에요.
             </IntroducePont>
           </IntroduceDiv>
 
@@ -147,6 +145,7 @@ const IntroducePont = styled.div`
   font-weight: 400;
   line-height: normal;
   margin-bottom: 2%;
+  margin-top: 5%;
 `;
 const IntroduceBoldPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
