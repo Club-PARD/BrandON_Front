@@ -18,7 +18,7 @@ const WebChat = () => {
   const [chatModelResult, setChatModelResult] = useState([]);
   const [chatMessage, setChatMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(100);
   const [wrapCount, setWrapCount] = useState(0);
   const userID = localStorage.getItem("userID");
   const [chatRoom, setChatRoom] = useState({ answers: [], init: true });
@@ -337,6 +337,6 @@ const Column = styled.div`
 
 const Body6 = styled.div`
   font-size: ${({ theme }) => theme.Web_fontSizes.Body6};
-  font-weight: ${({ theme }) => theme.fontWeights.Body6};
+  font-weight: 400;
   line-height: ${({ theme }) => theme.LineHeight.Body6};
 `;

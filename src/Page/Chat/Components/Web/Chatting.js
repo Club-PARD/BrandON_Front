@@ -118,7 +118,7 @@ const LeftRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 200%;
+  height: 300%;
 `;
 
 const RightRow = styled.div`
@@ -126,7 +126,7 @@ const RightRow = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 300%;
 `;
 
 const BrandonIn = keyframes` 
@@ -165,24 +165,27 @@ const Body4 = styled.div`
 `;
 
 const ChatBubbleBrandon = styled.div`
-  width: 48.75rem;
+  max-width: 48.75rem;
   padding: 1.5rem;
   border-radius: 0 0.625rem 0.625rem 0.625rem;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(calc(var(--text-field-blur, 6.25rem) / 2));
+  font-weight: 300;
 `;
 
 const ChatBubbleUser = styled.div`
-  width: 48.75rem;
+  max-width: 48.75rem;
   padding: 1.5rem;
   margin: 3.125rem 0;
   border-radius: 0.625rem 0.625rem 0 0.625rem;
   background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(3.125rem);
+  font-weight: 400;
 `;
 
 const Text = styled.pre`
   all: unset;
   white-space: pre-wrap;
   font-family: "Pretendard";
+  line-height: 1.7;
 `;

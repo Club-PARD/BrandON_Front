@@ -138,6 +138,7 @@ const Input = ({
           display: "flex",
           alignItems: "center",
           width: "56.25rem",
+          padding: "0 5px",
           zIndex: 3,
           borderRadius: "10px",
           border: "none",
@@ -235,4 +236,9 @@ const FloatingButton = styled.button`
   border-radius: 10px;
   background-color: var(--Primary, #8f2eff);
   font-weight: 700;
+
+  &:hover {
+    background-color: #7925d1;
+    border-color: #7925d1;
+  }
 `;
