@@ -25,6 +25,13 @@ const WebLoading = () => {
   const chatRoomId = localStorage.getItem("chatRoomID");
   const [recoilResult, setRecoilResult] = useRecoilState(recoilUserAllResults);
 
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+  })
+
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
     modelName: "gpt-3.5-turbo-16k",
@@ -183,6 +190,8 @@ const WebLoading = () => {
 
     getRoom();
   }, []);
+
+
 
   useEffect(() => {
     if (!chatRoom.init) {

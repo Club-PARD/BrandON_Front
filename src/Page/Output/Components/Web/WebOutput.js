@@ -21,6 +21,7 @@ import CardPink from "../../../../Assets/Card_Pink.png";
 const WebOutput = () => {
   // const [userData, setUserData] = useRecoilState(recoilUserAllResults);
   const [chatroom, setChatroom] = useState([]);
+  const [badAccess, setBadAccess] = useState(false);
 
   const getChatroomData = async () => {
     try {
@@ -33,19 +34,30 @@ const WebOutput = () => {
       setChatroom(data.data);
     } catch (error) {
       console.log(error);
+      setBadAccess(true);
     }
   };
 
   const chatRoomIdS = localStorage.getItem("chatRoomID");
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+    getChatroomData();
+  }, [])
+
+  useEffect(() => {
+    if (badAccess) {
+      alert("잘못된 접근입니다.");
+      navigate("/");
+    }
+  }, [badAccess])
 
   // console.log(userData);
   console.log(chatroom);
   // console.log(chatroom.answers);
   console.log(chatRoomIdS);
-
-  useEffect(() => {
-    getChatroomData();
-  }, []);
 
   // useEffect(() => {
   //   for (let i = 0; i < userData.chatRooms.length; i++) {
