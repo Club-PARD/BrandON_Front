@@ -138,7 +138,7 @@ const WebHome = () => {
     <Container>
       <Overlay />
       <HeaderText>
-        <img style={{ zIndex: "1" }} src="HomeCatchPrize.png"></img>
+        <img style={{ zIndex: "1" }} src="catchPrize.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
@@ -252,6 +252,9 @@ const TestStart = styled.div`
   justify-content: center;
   text-align: center;
   margin-top: 55px;
+  &:hover{
+    background-color: #2B2D36;
+  }
 `;
 
 const LoginLink = styled(Link)`
@@ -266,6 +269,7 @@ const LoginLink = styled(Link)`
 
 const OnBoading = styled.div`
   margin-top: 78px;
+  z-index: 1;
 `;
 
 const Arrow = styled.img`
@@ -279,4 +283,5 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 `;
