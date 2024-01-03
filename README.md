@@ -1,7 +1,6 @@
-# ![header](https://capsule-render.vercel.app/api?type=rounded&text=BrandOn&fontAlign=25&fontSize=60&desc=Personal%20Branding%20Service&descAlign=60&descAlignY=50&color=0:feac5e,50:c779d0,100:4bc0c8&fontColor=ffffff&animation=twinkling)
-
+# <img src="https://github.com/seongju1015/image/assets/122343583/06ecbc17-1f86-4ab1-bb23-c737409477bc">
 <br>
-<img src="https://github.com/seongju1015/practiceReadme/assets/122343583/919842a9-5fd7-4613-aff2-11a0f5c89374)">
+<img src="https://github.com/seongju1015/image/assets/122343583/2d37f667-3c74-4b93-8786-fa74453577bb">
 <br>
 
 ## 💻 개발환경 및 언어
