@@ -110,7 +110,7 @@ const WebOutput = () => {
     const originalBackgroundColor = input.style.backgroundColor;
 
     // 이미지 다운로드를 위해 배경색을 변경합니다.
-    input.style.backgroundColor = "#000000"; // 원하는 색상 코드로 변경하세요.
+    input.style.backgroundColor = "#111111"; // 원하는 색상 코드로 변경하세요.
     input.style.borderRadius = "0px";
 
     html2canvas(input, {
@@ -140,6 +140,7 @@ const WebOutput = () => {
         input.style.backgroundColor = originalBackgroundColor;
       });
     input.style.borderRadius = "2.5rem";
+    input.style.backgroundColor = "#000000";
   };
 
   const downloadPDFHandler2 = () => {
@@ -326,7 +327,7 @@ const WebOutput = () => {
                               style={{
                                 alignItems: "end",
                                 padding: "0rem 0.875rem 0rem 0.875rem",
-                                height: "40%",
+                                height: "35%",
                                 boxSizing: "border-box",
                               }}
                             >
@@ -339,6 +340,7 @@ const WebOutput = () => {
                                     alignItems: "bottom",
                                     height: "20%",
                                     color: "white",
+                                    margin: "0 0 0.5rem 0",
                                   }}
                                 >
                                   {chatroom?.chatNickName}
@@ -351,6 +353,7 @@ const WebOutput = () => {
                                     justifyContent: "start",
                                     alignItems: "bottom",
                                     height: "20%",
+                                    margin: "0 0 0.5rem 0",
                                   }}
                                 >
                                   {chatroom?.chatNickName}
@@ -454,7 +457,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -468,7 +471,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -482,7 +485,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -505,7 +508,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                     }}
                                   >
                                     {"#" +
@@ -518,7 +521,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                     }}
                                   >
                                     {"#" +
@@ -531,7 +534,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.05rem 0 0",
+                                      margin: "0 0.3rem 0 0",
                                     }}
                                   >
                                     {"#" +
@@ -573,7 +576,6 @@ const WebOutput = () => {
               <Div
                 style={{
                   width: "10%",
-
                   justifyContent: "start",
                   alignItems: "start",
                 }}
@@ -1149,7 +1151,7 @@ const WebOutput = () => {
                                       justifyContent: "start",
                                       fontSize: "1rem",
                                       fontWeight: "300",
-                                      lineHeight: "1.9rem",
+                                      lineHeight: "1.7",
                                     }}
                                   >
                                     {answer}
@@ -1165,7 +1167,8 @@ const WebOutput = () => {
                                       color: "white",
                                       justifyContent: "end",
                                       fontSize: "1rem",
-                                      lineHeight: "1.9rem",
+                                      lineHeight: "1.7",
+                                      fontWeight: "400",
                                     }}
                                   >
                                     {answer}
@@ -1493,7 +1496,7 @@ const ChatBubbleBrandon = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 48.75rem;
+  max-width: 48.75rem;
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 1.5rem;
@@ -1510,7 +1513,7 @@ const ChatBubbleBrandon = styled.div`
 `;
 
 const ChatBubbleUser = styled.div`
-  width: 48.75rem;
+  max-width: 48.75rem;
   padding: 1.5rem;
   margin: 3.125rem 0;
   border-radius: 0.625rem 0.625rem 0 0.625rem;
