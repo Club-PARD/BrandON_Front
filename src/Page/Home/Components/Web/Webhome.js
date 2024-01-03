@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useRecoilState } from "recoil";
@@ -22,8 +22,8 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
-  const [userAllResults, setUserAllResults] =
-    useRecoilState(recoilUserAllResults);
+  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
+  const [afterLogin, setAfterLogin] = useState(false);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -50,6 +50,7 @@ const WebHome = () => {
       setIsFirstLoggedin(response.data.firstLogin);
       localStorage.setItem("userID", response.data.userId.toString());
       localStorage.setItem("nickname", response.data.nickname);
+      setAfterLogin(true);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -86,13 +87,13 @@ const WebHome = () => {
     onSuccess: (res) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
-      if (isFirstLoggedin) {
-        //FirstLogin이 true이면 이름 온보딩페이지
-        navigate("/name");
-      } else {
-        //FirstLogin이 false이면 원래페이지
-        navigate("/");
-      }
+      // if (isFirstLoggedin) {
+      //   //FirstLogin이 true이면 이름 온보딩페이지
+      //   navigate("/name");
+      // } else {
+      //   //FirstLogin이 false이면 원래페이지
+      //   navigate("/");
+      // }
     },
     onFailure: (err) => {
       console.log(err);
@@ -133,6 +134,23 @@ const WebHome = () => {
   useEffect(() => {
     console.log(userAllResults);
   }, [userAllResults]);
+
+  useEffect(() => {
+    console.log("로그인 관련 로그");
+    if (!afterLogin) {
+      console.log("로그인 전 렌더링");
+      return;
+    }
+    else {
+      console.log("로그인 후 렌더링");
+      console.log(isFirstLoggedin);
+      if (isFirstLoggedin) {
+        navigate("/name");
+      }
+    }
+  }, [afterLogin])
+
+  console.log(afterLogin);
 
   return (
     <Container>

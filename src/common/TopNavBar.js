@@ -10,6 +10,8 @@ import {
   recoilUserID,
   recoilUserData,
   isFirstLogin,
+  recoilUserAllResults,
+  noCard,
 } from "../atom/loginAtom";
 import { useState } from "react";
 
@@ -22,6 +24,10 @@ const TopNavBar = ({ isScrolled }) => {
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
+  const [userAllResults, setUserAllResults] = useRecoilState(recoilUserAllResults);
+  const [noCardR, setNoCard] = useRecoilState(noCard);
+  const [afterLogin, setAfterLogin] = useState(null);
+
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -33,6 +39,41 @@ const TopNavBar = ({ isScrolled }) => {
     localStorage.clear();
     setAccessToken(null);
     setIsLoggedIn(false);
+    setNoCard(true);
+    setIsFirstLoggedin(true);
+    setUserAllResults({
+      userId: 0,
+      name: "string",
+      email: "string",
+      nickname: "string",
+      chatRooms: [
+        {
+          chatRoomId: 1,
+          progress: 0,
+          finishChat: false,
+          chatNickName: "",
+          keywords: [],
+          answers: [],
+          groupKeywords: {},
+          brandCard: {
+            brandCardId: 0,
+            identity: "",
+            identity_explanation: "",
+          },
+          brandStory: {
+            brandStoryId: 1,
+            identity: "",
+            identity_explanation: "",
+            brandKeywords: [""],
+            storyHeadlines: [""],
+            storyContents: [""],
+            competency: "",
+            target: "",
+            contentsRecommendation: "",
+          },
+        },
+      ],
+    },)
     navigate("/");
   };
 
@@ -56,7 +97,10 @@ const TopNavBar = ({ isScrolled }) => {
       localStorage.setItem("userID", response.data.userId);
       localStorage.setItem("nickname", response.data.nickname);
       setNickname(localStorage.getItem("nickname"));
+      console(response.data.firstLogin);
       setIsFirstLoggedin(response.data.firstLogin);
+      localStorage.setItem("afterLogin", true);
+      setAfterLogin(true);
     } catch (error) {
       console.error("서버 요청 에러2:", error);
     }
@@ -94,18 +138,20 @@ const TopNavBar = ({ isScrolled }) => {
       setAccessToken(res.access_token);
       handleLogin(res.access_token); //억세스 토큰을 로컬스토리지에 저장하고 악시오스로 구글에게 보냄.
       console.log(isFirstLoggedin);
-      if (isFirstLoggedin) {
-        //FirstLogin이 true이면 이름 온보딩페이지
-        navigate("/name");
-      } else {
-        //FirstLogin이 false이면 원래페이지
-        navigate("/");
-      }
+      // if (isFirstLoggedin) {
+      //   //FirstLogin이 true이면 이름 온보딩페이지
+      //   navigate("/name");
+      // } else {
+      //   //FirstLogin이 false이면 원래페이지
+      //   navigate("/");
+      // }
     },
     onFailure: (err) => {
       console.log(err);
     },
   });
+
+
 
   const handleClickContainer = () => {
     setDropdownView(!isDropdownView);
@@ -120,6 +166,25 @@ const TopNavBar = ({ isScrolled }) => {
   useEffect(() => {
     setNickname(localStorage.getItem("nickname"));
   }, [localStorage.getItem("nickname")]);
+
+  useEffect(() => {
+    if (afterLogin !== null) {
+      console.log("로그인 관련 로그");
+      if (!localStorage.getItem("afterLogin")) {
+        console.log("로그인 전 렌더링");
+        return;
+      }
+      else {
+        console.log("로그인 후 렌더링");
+        console.log(isFirstLoggedin);
+        if (isFirstLoggedin) {
+          navigate("/name");
+        }
+      }
+    }
+    console.log(localStorage.getItem("afterLogin"))
+  }, [afterLogin]);
+
 
   return (
     <Div scrolled={isScrolled}>
@@ -145,15 +210,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>홈</Body1>
@@ -164,15 +229,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>채팅</Body1>
@@ -183,15 +248,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#8F2EFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>결과</Body1>
