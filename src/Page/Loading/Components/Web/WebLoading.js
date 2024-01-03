@@ -10,8 +10,6 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage, HumanMessage } from "langchain/schema";
-import { useRecoilState } from "recoil";
-import { recoilUserAllResults } from "../../../../atom/loginAtom";
 
 const WebLoading = () => {
   const navigate = useNavigate();
@@ -21,14 +19,13 @@ const WebLoading = () => {
   const [isLoading, setIsLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const chatRoomId = localStorage.getItem("chatRoomID");
-  const [recoilResult, setRecoilResult] = useRecoilState(recoilUserAllResults);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
       alert("로그인이 필요합니다.");
       navigate("/");
     }
-  })
+  });
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -188,8 +185,6 @@ const WebLoading = () => {
 
     getRoom();
   }, []);
-
-
 
   useEffect(() => {
     if (!chatRoom.init) {
