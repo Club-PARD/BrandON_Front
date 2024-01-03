@@ -226,26 +226,54 @@ const WebOutput = () => {
                         <Div style={{ width: "55.6%" }}></Div>
                         <Div style={{ flexDirection: "column", width: "44.4%" }}>
                           <Div style={{ alignItems: "end", padding: "0rem 0.875rem 0rem 0.875rem", height: "40%", boxSizing: "border-box" }}>
-                            <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
-                              {chatroom?.chatNickName}
-                            </Div>
+                            {(chatroom.chatRoomId - 1) % 4 >= 2
+                              ? <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%", color: "white" }}>
+                                {chatroom?.chatNickName}
+                              </Div>
+                              : <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
+                                {chatroom?.chatNickName}
+                              </Div>
+                            }
                           </Div>
                           <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
-                            <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                              {chatroom?.brandCard?.identity || ""}
-                            </Div>
+                            {(chatroom.chatRoomId - 1) % 4 >= 2
+                              ?
+                              <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%", color: "white" }}>
+                                {chatroom?.brandCard?.identity || ""}
+                              </Div>
+                              :
+                              <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
+                                {chatroom?.brandCard?.identity || ""}
+                              </Div>
+                            }
                           </Div>
                           <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
-                            <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
-                              {chatroom?.brandCard?.identity_explanation || ""}
-                            </Div>
+                            {(chatroom.chatRoomId - 1) % 4 >= 2
+                              ?
+                              <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%", color: "white" }}>
+                                {chatroom?.brandCard?.identity_explanation || ""}
+                              </Div>
+                              :
+                              <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
+                                {chatroom?.brandCard?.identity_explanation || ""}
+                              </Div>
+                            }
                           </Div>
                           <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
-                            <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[0]}</Div>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[1]}</Div>
-                              <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[2]}</Div>
-                            </Div>
+                            {(chatroom.chatRoomId - 1) % 4 >= 2
+                              ?
+                              <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{"#" + chatroom?.brandStory?.brandKeywords[0]}</Div>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{"#" + chatroom?.brandStory?.brandKeywords[1]}</Div>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{"#" + chatroom?.brandStory?.brandKeywords[2]}</Div>
+                              </Div>
+                              :
+                              <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[0]}</Div>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[1]}</Div>
+                                <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{"#" + chatroom?.brandStory?.brandKeywords[2]}</Div>
+                              </Div>
+                            }
                           </Div>
                         </Div>
                       </Div>
