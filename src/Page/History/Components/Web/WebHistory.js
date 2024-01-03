@@ -10,17 +10,34 @@ import { useRecoilState } from "recoil";
 import { recoilUserAllResults, noCard } from "../../../../atom/loginAtom";
 
 const WebHistory = () => {
-  const [userData, setUserData] = useRecoilState(recoilUserAllResults);
+  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useRecoilState(recoilUserAllResults);
   const [chatrooms, setChatrooms] = useState([]);
   console.log(userData);
   console.log(userData.chatRooms);
   console.log(chatrooms);
   console.log(chatrooms.length);
 
+  const getChatroomData = async () => {
+    try {
+      const userID = localStorage.getItem("userID");
+      const data = await axios.get(`${process.env.REACT_APP_URL}/user/${userID}/allResults`)
+      console.log(data.data);
+      setUserData(data.data);
+      setChatrooms(data.data.chatRooms);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    setChatrooms(userData.chatRooms)
-  }, [userData])
+    getChatroomData();
+  }, [])
+
+  // useEffect(() => {
+  //   setChatrooms(userData.chatRooms)
+  // }, [userData])
 
 
 
@@ -286,7 +303,7 @@ const WebHistory = () => {
                   margin: "0 0 1.25rem 0",
                 }}
               >
-                <A>현재 {userData.chatRooms.length}개의 {userData.nickname}의 브랜드 아이덴티티가 있어요</A>
+                <A>현재 {userData?.chatRooms?.length}개의 <A style={{ fontWeight: "600" }}>{userData?.nickname}</A>님의 브랜드 아이덴티티가 있어요</A>
               </Div>
             </Div>
             <Div

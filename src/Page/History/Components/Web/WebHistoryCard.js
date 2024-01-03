@@ -75,15 +75,15 @@ const WebHistoryCard = (props) => {
               {(props.cardNum - 1) % 4 >= 2
                 ?
                 <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
                 </Div>
                 :
                 <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.5rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
+                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.625rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
                 </Div>}
 
             </Div>
