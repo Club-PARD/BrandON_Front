@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import inputDisabled from "../../../../Assets/input_disabled.svg";
 import inputEnabled from "../../../../Assets/input_enabled.svg";

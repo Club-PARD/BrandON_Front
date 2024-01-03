@@ -270,7 +270,7 @@ const WebChat = () => {
     };
 
     autoSave();
-  }, [progress]);
+  }, [res]);
 
   const handleSubmit = async () => {
     setPreInput(input);
@@ -279,23 +279,14 @@ const WebChat = () => {
     setIsLoading(true);
     const res = await chain.predict({ answer: input });
     setChatMessage([...chatMessage, input, res]);
-    if (
-      progress === 90 &&
-      (!res.includes("분석 시작") ||
-        !res.includes("브랜드 아이덴티티") ||
-        !res.includes("브랜드 스토리"))
-    ) {
-      setProgress(90);
-    } else if (progress < 100) {
+    if (progress < 100) {
+      if (progress === 90 && !res.includes("✨")) {
+        setProgress((prev) => prev - 10);
+      }
       setProgress((prev) => prev + 10);
     }
 
-    if (
-      progress !== 90 &&
-      res.includes("분석 시작") &&
-      res.includes("브랜드 아이덴티티") &&
-      res.includes("브랜드 스토리")
-    ) {
+    if (progress !== 90 && res.includes("✨")) {
       setProgress(100);
     }
 
