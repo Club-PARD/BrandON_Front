@@ -454,7 +454,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -468,7 +468,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -482,7 +482,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                       color: "white",
                                     }}
                                   >
@@ -505,7 +505,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                     }}
                                   >
                                     {"#" +
@@ -518,7 +518,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                     }}
                                   >
                                     {"#" +
@@ -531,7 +531,7 @@ const WebOutput = () => {
                                       fontWeight: "600",
                                       justifyContent: "start",
                                       alignItems: "start",
-                                      margin: "0 0.625rem 0 0",
+                                      margin: "0 0.05rem 0 0",
                                     }}
                                   >
                                     {"#" +
