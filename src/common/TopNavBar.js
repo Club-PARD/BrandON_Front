@@ -125,7 +125,7 @@ const TopNavBar = ({ isScrolled }) => {
     <Div scrolled={isScrolled}>
       <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
         <img
-          src="NavLogo.png"
+          src="Nav Logo.png"
           alt="Brand On 로고"
           width={180}
           style={{ marginTop: "10px" }}

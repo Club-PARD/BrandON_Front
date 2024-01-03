@@ -107,13 +107,13 @@ const HeaderPont = styled.div`
     font-weight: ${({ theme }) => theme.fontWeights.Header3};
     line-height: normal;
 `;
-const SubHeaderPont = styled.div`
+const SubHeaderPont = styled.span`
     color: var(--stroke, #D2D2D2);
     text-align: center;
     font-family: 'Pretendard';
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
     text-align: center;
     margin-top: 13px;
@@ -125,7 +125,7 @@ const AllAgreePont = styled.span`
     font-family: 'Pretendard';
     font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: ${({ theme }) => theme.fontWeights.Header3};
+    font-weight: 600;
     line-height: normal;
     margin-left: 18px;
 `;
@@ -134,7 +134,7 @@ const AgreePont = styled.div`
     font-family: 'Pretendard';
     font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: ${({ theme }) => theme.fontWeights.Body2};
+    font-weight: 400;
     line-height: normal;
     margin-left: 18px;
     margin-right: auto;
@@ -206,6 +206,7 @@ const AgreeDiv = styled.div`
     display: flex;
     align-items: center;
     margin-top: 8%;
+    //background-color: skyblue;
 `;
 const CheckBox = styled.input`
     width: 24px;
@@ -214,6 +215,9 @@ const CheckBox = styled.input`
     appearance: none;
     border: 2px solid gainsboro;
     border-radius: 0.35rem;
+    padding:0;
+    display: flex;
+    justify-content: center;
     
     &:checked {
     border-color: transparent;
@@ -247,7 +251,7 @@ const MoreInfo = styled.a`
     font-family: 'Pretendard';
     font-size: ${({ theme }) => theme.Web_fontSizes.Body1};;
     font-style: normal;
-    font-weight: ${({ theme }) => theme.fontWeights.Body2};
+    font-weight: 400;
     line-height: normal;
     cursor: pointer;
 `;

@@ -20,7 +20,7 @@ const Counter = ({ value, maxLength }) => (
       marginLeft: "-17%",
     }}
   >
-    {value.length}/{maxLength}글자
+    {value.length} / {maxLength} 글자
   </span>
 );
 
@@ -79,12 +79,12 @@ const WebName = () => {
       <Container>
         <Container2>
           <Header>
-            <HeaderImg src="NavLogo.png"></HeaderImg>
+            <HeaderImg src="onboadingLogo.png"></HeaderImg>
             <WelcomePont>에 오신 걸 환영합니다.</WelcomePont>
           </Header>
 
           <BrandImg>
-            <img src="Rectangle138.png"></img>
+            <img src="Frame133.png"></img>
           </BrandImg>
 
           <IntroduceDiv>
@@ -114,6 +114,7 @@ const WebName = () => {
               </Button>
             </ButtonDiv>
           </WriteNameDiv>
+
         </Container2>
       </Container>
     </>
@@ -135,7 +136,7 @@ const WelcomePont = styled.span`
   font-family: "Pretendard";
   font-size: 32px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
 `;
 const IntroducePont = styled.div`
@@ -145,6 +146,7 @@ const IntroducePont = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 2%;
 `;
 const IntroduceBoldPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
@@ -217,6 +219,9 @@ const InputDiv = styled.div`
   flex: 0 0 79%;
   height: 100%;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const InputName = styled.input`
   border-radius: 10px;

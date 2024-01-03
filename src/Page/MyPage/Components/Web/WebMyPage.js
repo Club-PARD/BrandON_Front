@@ -50,6 +50,7 @@ const WebMyPage = () => {
       try{
         const response = await axios.get(`${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/myProfile`);
         setUserEmail(response.data.email);
+        setUserNickname(response.data.nickname);
       }catch (error){
         console.log("이메일 요청 에러:",error);
       }
@@ -90,7 +91,7 @@ const WebMyPage = () => {
                 value={text}  
                 onChange={handleInputChange}
                 maxLength={maxLength}
-                placeholder="이름을 입력해주세요"></InputName>
+                placeholder={userNickname}></InputName>
                 <Counter value={text} maxLength={maxLength}></Counter>
             </InputDiv>
 
@@ -195,7 +196,7 @@ const InputDiv = styled.div`
     width: 73%;
     height: 10%;
     padding:0;
-    margin-top: 5%;
+    margin-top: 3%;
 `;
 const InputName = styled.input`
   border-radius: 10px;
@@ -229,7 +230,7 @@ const Counter = ({value, maxLength}) => (
       fontWeight: '500',
       lineHeight: 'normal',
       marginLeft:'-17%'}}>
-      {value.length}/{maxLength}글자
+      {value.length} / {maxLength} 글자
     </span>
 );
 const NameDiv =styled.div`
@@ -245,7 +246,7 @@ const EmailDiv = styled.div`
 const EmailInputDiv = styled.div`
   width:73%;
   height: 10%;
-  margin-top: 5%;
+  margin-top: 3%;
 `;
 const EmailInput = styled.input`
   border-radius: 10px;
@@ -255,12 +256,13 @@ const EmailInput = styled.input`
   background-color: transparent;
   color: var(--Grey_Scale-0, #FFF);
   padding-left: 4%;
+  cursor:not-allowed;
   &::placeholder {
     color: var(--White, #FFF);
     font-family: 'Pretendard';
     font-size: 20px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal; 
   }
   &:disabled {
@@ -273,13 +275,13 @@ const ButtonDiv =styled.div`
   height: 5%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 5%;
+  margin-top: 7%;
 `;
 const Button = styled.button`
   width: 113px;
   height: 55px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1.5px solid rgba(255, 255, 255, 0.40);
   background-color: #8F2EFF;
   cursor:pointer;
   box-shadow: -25.367px 25.367px 25.367px 0px rgba(255, 255, 255, 0.10) inset, 25.367px -25.367px 25.367px 0px rgba(194, 194, 194, 0.10) inset;
