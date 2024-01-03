@@ -18,7 +18,7 @@ const WebChat = () => {
   const [chatModelResult, setChatModelResult] = useState([]);
   const [chatMessage, setChatMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(0);
   const [wrapCount, setWrapCount] = useState(0);
   const userID = localStorage.getItem("userID");
   const [chatRoom, setChatRoom] = useState({ answers: [], init: true });
