@@ -142,7 +142,7 @@ const WebHome = () => {
     <Container>
       <Overlay />
       <HeaderText>
-        <img style={{ zIndex: "1" }} src="catchPrize.png"></img>
+        <img style={{ zIndex: "1" }} src="finalHomeCztchpqize.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
