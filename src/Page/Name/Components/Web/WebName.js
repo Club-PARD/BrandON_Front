@@ -84,7 +84,7 @@ const WebName = () => {
           </Header>
 
           <BrandImg>
-            <img src="Frame133.png"></img>
+            <img src="Frame134.png" style={{width:'450px', height:'250px'}}></img>
           </BrandImg>
 
           <IntroduceDiv>
@@ -220,7 +220,7 @@ const InputDiv = styled.div`
   height: 100%;
   padding: 0;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 `;
 const InputName = styled.input`
