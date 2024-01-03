@@ -279,15 +279,16 @@ const WebLoading = () => {
             }
           );
           console.log("brandStory:", response.data); //response.data = brandStory
-          setRecoilResult({
+          /* setRecoilResult({
             ...recoilResult,
             chatRooms: [
               ...recoilResult.chatRooms,
               {
-                chatRoomId: chatRoomId,
+                chatRoomId: parseInt(chatRoomId),
                 progress: 100,
                 finishChat: true,
                 chatNickName: user,
+                answers: chatRoom.answers,
                 brandCard: {
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
@@ -310,10 +311,11 @@ const WebLoading = () => {
             chatRooms: [
               ...recoilResult.chatRooms,
               {
-                chatRoomId: chatRoomId,
+                chatRoomId: parseInt(chatRoomId),
                 progress: 100,
                 finishChat: true,
                 chatNickName: user,
+                answers: chatRoom.answers,
                 brandCard: {
                   identity: response.data.identity,
                   identity_explanation: response.data.identityExplanation,
@@ -330,7 +332,7 @@ const WebLoading = () => {
                 },
               },
             ],
-          });
+          }); */
         } catch (error) {
           console.error("서버 요청 에러:", error);
         }
