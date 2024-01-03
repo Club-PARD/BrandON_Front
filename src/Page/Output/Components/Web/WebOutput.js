@@ -200,7 +200,7 @@ const WebOutput = () => {
               <Div
                 style={{
                   width: "20%",
-                  height: "90vh",
+                  height: "94.5vh",
                   justifyContent: "start",
                   alignItems: "start",
                 }}
@@ -221,9 +221,7 @@ const WebOutput = () => {
                   />
                 </Div>
               </Div>
-              <Div
-                style={{ width: "60%", height: "90vh", alignItems: "start" }}
-              >
+              <Div style={{ width: "60%", alignItems: "start" }}>
                 <Div
                   style={{
                     flexDirection: "column",
@@ -562,13 +560,12 @@ const WebOutput = () => {
                   </Div>
                 </Div>
               </Div>
-              <Div style={{ width: "20%", height: "90vh" }}></Div>
+              <Div style={{ width: "20%" }}></Div>
             </Div>
           ),
           2: (
             <Div
               style={{
-                height: "",
                 justifyContent: "start",
                 alignItems: "start",
               }}
@@ -576,7 +573,7 @@ const WebOutput = () => {
               <Div
                 style={{
                   width: "10%",
-                  height: "90vh",
+
                   justifyContent: "start",
                   alignItems: "start",
                 }}
@@ -597,7 +594,7 @@ const WebOutput = () => {
                   />
                 </Div>
               </Div>
-              <Div style={{ width: "80%", height: "", alignItems: "start" }}>
+              <Div style={{ width: "80%", alignItems: "start" }}>
                 <Div
                   style={{
                     flexDirection: "column",
@@ -1007,13 +1004,12 @@ const WebOutput = () => {
                   </Div>
                 </Div>
               </Div>
-              <Div style={{ width: "10%", height: "90vh" }}></Div>
+              <Div style={{ width: "10%" }}></Div>
             </Div>
           ),
           3: (
             <Div
               style={{
-                height: "",
                 justifyContent: "start",
                 alignItems: "start",
               }}
@@ -1021,7 +1017,7 @@ const WebOutput = () => {
               <Div
                 style={{
                   width: "10%",
-                  height: "90vh",
+
                   justifyContent: "start",
                   alignItems: "start",
                 }}
@@ -1042,7 +1038,7 @@ const WebOutput = () => {
                   />
                 </Div>
               </Div>
-              <Div style={{ width: "80%", height: "", alignItems: "start" }}>
+              <Div style={{ width: "80%", alignItems: "start" }}>
                 <Div
                   style={{
                     flexDirection: "column",
@@ -1196,7 +1192,7 @@ const WebOutput = () => {
                   </Div>
                 </Div>
               </Div>
-              <Div style={{ width: "10%", height: "90vh" }}></Div>
+              <Div style={{ width: "10%" }}></Div>
             </Div>
           ),
         }[toggle]

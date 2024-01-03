@@ -132,7 +132,7 @@ const WebChat = () => {
       "Story_contents" : here is [Story_contents],
       "Competency" : here is [Competency],    
       "Target" : here is [Target],
-      "Strategy" : here is [Strategy],
+      "Strategy" : here is [Strategy]
   }}`;
 
   const humanTemplate = "{answer}";

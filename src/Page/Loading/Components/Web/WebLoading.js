@@ -14,8 +14,6 @@ import { useRecoilState } from "recoil";
 import { recoilUserAllResults } from "../../../../atom/loginAtom";
 
 const WebLoading = () => {
-  document.body.style.overflow = "hidden";
-
   const navigate = useNavigate();
   const [result, setResult] = useState({ init: true });
   const [chatModelResult, setChatModelResult] = useState([]);
@@ -140,7 +138,7 @@ const WebLoading = () => {
       "Story_contents" : here is [Story_contents],
       "Competency" : here is [Competency],    
       "Target" : here is [Target],
-      "Strategy" : here is [Strategy],
+      "Strategy" : here is [Strategy]
   }}`;
 
   const humanTemplate = "{answer}";
@@ -391,7 +389,7 @@ const WebLoading = () => {
   // }, []);
 
   return (
-    <Div>
+    <Div style={{ overflow: "hidden" }}>
       <Div style={{ display: "relative" }}>
         {/* <Img src={BackgroundImg} style={{ zIndex: "0" }}></Img> */}
         {/* <Div style={{ backgroundColor: "black", opacity: "60%", position: "absolute", height: "100%", top: "0", left: "0", zIndex: "1", }}></Div> */}
