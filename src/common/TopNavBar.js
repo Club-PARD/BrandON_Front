@@ -192,15 +192,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#A95AFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>홈</Body1>
@@ -211,15 +211,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#A95AFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>채팅</Body1>
@@ -230,15 +230,15 @@ const TopNavBar = ({ isScrolled }) => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "#A95AFF",
+                }
                 : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
+                  all: "unset",
+                  cursor: "pointer",
+                  color: "white",
+                }
             }
           >
             <Body1>결과</Body1>

@@ -84,7 +84,7 @@ const WebOutput = () => {
     const element = document.getElementById("Card");
     if (element instanceof HTMLElement) {
       html2canvas(element).then((canvas) => {
-        onSaveAs(canvas.toDataURL("image/png"), "brandon.png");
+        onSaveAs(canvas.toDataURL("image/png"), "BrandON_Identity.png");
       });
     }
   };
@@ -125,7 +125,7 @@ const WebOutput = () => {
         // 이미지 데이터 URL을 사용하여 이미지를 다운로드합니다.
         const link = document.createElement("a");
         link.href = imgData;
-        link.download = "brandonStory.png"; // 다운로드할 이미지의 파일 이름
+        link.download = "BrandON_Story.png"; // 다운로드할 이미지의 파일 이름
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -172,7 +172,7 @@ const WebOutput = () => {
         });
 
         pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-        pdf.save("brandon.pdf");
+        pdf.save("BrandON_ChatLog.pdf");
 
         // PDF 다운로드 후, 배경색을 원래 색상으로 복원합니다.
         input.style.backgroundColor = originalBackgroundColor;
@@ -978,7 +978,7 @@ const WebOutput = () => {
                             margin: "0 0 2.5rem 0",
                           }}
                         >
-                          온라인 콘텐츠 추천 방향
+                          브랜드 성장 전략
                         </Div>
                         <Div
                           style={{
@@ -987,7 +987,7 @@ const WebOutput = () => {
                             fontSize: "1.25rem",
                           }}
                         >
-                          {chatroom?.brandStory?.contentsRecommendation || ""}
+                          {chatroom?.brandStory?.strategy || ""}
                         </Div>
                       </Div>
                     </Div>
