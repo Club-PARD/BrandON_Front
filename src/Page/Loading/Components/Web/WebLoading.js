@@ -225,10 +225,6 @@ const WebLoading = () => {
     const analysis = async () => {
       if (chatModelResult.length !== 0) {
         let message = await chain.predict({ answer: "start analysis" });
-        if (message.includes("잠시만") || message.includes("기다려")) {
-          message = await chain.predict({ answer: "OK" });
-        }
-        setIsLoading(false);
         console.log(message);
         // 앞에서부터 "{"를 찾는 인덱스
         const startIndex = message.indexOf("{");
@@ -384,6 +380,7 @@ const WebLoading = () => {
     chatNickName();
     brandCard();
     brandStory();
+    setIsLoading(false);
   }, [result]);
 
   // const [currentText, setCurrentText] = useState(TextList[0]);
