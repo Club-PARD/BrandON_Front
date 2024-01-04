@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import Brandon from "../../../../Assets/brandon_final.gif";
 import CardAnimation from "../../../../Assets/Card_Animation.gif";
 import CardAnimationBack from "../../../../Assets/Card_Animation_Back.png";
@@ -49,7 +49,7 @@ const WebLoading = () => {
   
   [Target] = string
   
-  [Contents_recommendation] = string
+  [Strategy] = string
   
   I am building a service that helps people discover their purpose in life, their passions, their strengths and unique selling points they do not know they have, in a chat with GPT, and you'll be the one asking the questions. From now on, act as a personal branding counselor who helps ${user} find who they are and help ${user} build their personal brand. You have been doing this job for more than 20 years and you are a top expert in this field. With your help, ${user} should have fully explored themselves, know who they are, understand how to start and continue their personal branding, find a direction or a niche for their own brand identity and how to brand themselves in the future.
   
@@ -80,7 +80,7 @@ const WebLoading = () => {
   
   After ${user} has finished giving keywords, tell user that all the questions have ended and they can now recieve a ‘Brand Identity’ and ‘Brand Story’ about themselves by pressing the ‘start analysis’ button. 
   
-  2. When ${user} enters ‘start analysis’, comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 8 variables below ([Identity], [Identity_explanation], [Brand_keywords], [Story_headlines], [Story_contents], [Competency], [Target], [Contents_recommendation]) in Korean as a JSON object.
+  2. When ${user} enters ‘start analysis’, comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 8 variables below ([Identity], [Identity_explanation], [Brand_keywords], [Story_headlines], [Story_contents], [Competency], [Target], [Strategy]) in Korean as a JSON object.
   
   {{
   
@@ -158,12 +158,87 @@ const WebLoading = () => {
     memory: memory,
   });
 
-  const TextList = [
-    "Brandon이 사용자님의 답변을 확인했어요.",
-    "Brandon이 MBTI를 근거로 사용자님의 답변을 분석하고 있어요.",
-    "Brandon이 FAB 형태로 사용자님의 답변을 정리하고 있어요.",
-    "Brandon이 분석을 토대로 명함을 제작하고 있어요.",
+  const TextListMust = [
+    "안녕하세요! 저는 브랜딩 어시스턴트 Brandon이에요.",
+    "저는 20년 경력이 있는 퍼스널 브랜딩 전문가로 학습됐어요.",
+    "지금부터 사용자님의 답변 분석을 시작할게요.",
+    "사용자님의 답변을 확인하고 있어요.",
+    "사용자님의 답변을 분석중이에요.",
   ];
+
+  const TextListRandom = [
+    "과거 20년간의 퍼스널 브랜딩 분석자료들과 대조하고 있어요.",
+    "전세계 퍼스널 브랜딩 전문가들에게 자문을 구하고 있어요.",
+    "개성 있는 브랜드 아이덴티티를 만들어내고 있어요.",
+    "흥미로운 브랜드 스토리를 구상하고 있어요.",
+    "전세계의 유명인사들의 브랜딩을 노하우를 담아내고 있어요.",
+    "퍼스널 브랜딩은 꾸준함이 생명이에요.",
+    "퍼스널 브랜딩의 힘은 스토리에 있어요.",
+    "사용자님만의 독특한 브랜드 가치를 발굴하고 있어요.",
+    "사용자님의 장점을 브랜드 스토리에 통합하고 있어요.",
+    "시장 트렌드와 사용자님의 브랜드를 매칭 중이에요.",
+    "사용자님의 브랜드가 돋보일 수 있는 전략을 수립하고 있어요.",
+    "사용자님의 브랜드를 잘 나타낼 수 있는 키워드를 생성하고 있어요.",
+    "사용자님의 브랜드가 강력한 영향력을 발휘할 수 있도록 준비 중이에요.",
+    "인상적인 브랜드 메시지를 작성 중이에요.",
+    "사용자님의 브랜드에 알맞는 카드 디자인을 선택 중이에요.",
+    "브랜드 인지도를 높이기 위한 전략을 마련 중이에요.",
+    "사용자님의 경험과 성과를 브랜드 스토리로 변환하고 있어요.",
+    "브랜드의 지속 가능한 성장을 위한 전략적 계획을 수립 중이에요.",
+    "사용자님의 역량을 파악하는 중이에요.",
+    "사용자님의 브랜드가 목표 타겟에게 어떻게 인식될지 분석 중이에요.",
+    "타겟 청중 분석을 통해 사용자님의 브랜드 포지셔닝을 최적화하고 있어요.",
+    "사용자님의 개인 경험을 브랜드 스토리로 전환하고 있어요.",
+    "글로벌 브랜드 트렌드를 분석하여 사용자님의 브랜드를 조정하고 있어요.",
+    "사용자님의 브랜드 이야기를 위한 특별한 향신료를 찾아내는 중이에요.",
+    "사용자님의 브랜드 생성을 위해 소셜 미디어를 탐험 중이에요.",
+    "사용자님의 경험에서 숨겨진 보석같은 브랜드를 발굴하고 있어요.",
+    "사용자님의 브랜드를 빛나게 다듬고 있어요.",
+    "브랜드의 퍼즐 조각을 맞추며 완벽한 그림을 그리고 있어요.",
+    "사용자님의 브랜드 정체성에 풍부한 색채를 더하고 있어요.",
+  ]
+
+
+  const [currentText, setCurrentText] = useState('');
+  const [TextListRandomMixed, setTextListRandomMixed] = useState([...TextListRandom]);
+
+  useEffect(() => {
+
+    const shuffleArray = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    const shuffledArray = [...TextListRandom];
+
+    shuffleArray(shuffledArray);
+
+    setTextListRandomMixed(shuffledArray);
+  }, []);
+  console.log(TextListRandomMixed);
+
+
+  // useEffect(() => {
+
+  //   const selectRandomText = () => {
+  //     const randomIndex = Math.floor(Math.random() * TextListRandom.length);
+  //     setCurrentText(TextListRandom[randomIndex]);
+  //   };
+
+
+  //   const interval = setInterval(selectRandomText, 5000);
+
+
+  //   selectRandomText();
+
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  // console.log(currentText);
 
   const chatButtonHandler = () => {
     navigate("/output");
@@ -241,7 +316,7 @@ const WebLoading = () => {
         try {
           const response = await axios.post(
             process.env.REACT_APP_URL +
-              `/${userID}/${chatRoomId}/saveChatNickName`,
+            `/${userID}/${chatRoomId}/saveChatNickName`,
             { chatNickName: user },
             {
               headers: {
@@ -288,7 +363,6 @@ const WebLoading = () => {
               identityExplanation: result.Identity_explanation,
               competency: result.Competency,
               target: result.Target,
-              contentsRecommendation: result.Online_Content_Recommendation,
               brandKeywords: result.Brand_Keywords,
               storyHeadlines: result.Story_headlines,
               storyContents: result.Story_contents,
@@ -323,7 +397,7 @@ const WebLoading = () => {
                   storyContents: response.data.storyContents,
                   competency: response.data.competency,
                   target: response.data.target,
-                  contentsRecommendation: response.data.contentsRecommendation,
+                  strategy: response.data.strategy,
                 },
               },
             ],
@@ -350,7 +424,7 @@ const WebLoading = () => {
                   storyContents: response.data.storyContents,
                   competency: response.data.competency,
                   target: response.data.target,
-                  contentsRecommendation: response.data.contentsRecommendation,
+                  strategy: response.data.strategy,
                 },
               },
             ],
@@ -386,14 +460,14 @@ const WebLoading = () => {
   return (
     <Div style={{ overflow: "hidden" }}>
       <Div style={{ display: "relative" }}>
-        {/* <Img src={BackgroundImg} style={{ zIndex: "0" }}></Img> */}
-        {/* <Div style={{ backgroundColor: "black", opacity: "60%", position: "absolute", height: "100%", top: "0", left: "0", zIndex: "1", }}></Div> */}
         <Wrapper>
-          {/* <Text key={animationKey}>{currentText}</Text> */}
-          <Text>{TextList[0]}</Text>
-          <Text2>{TextList[1]}</Text2>
-          <Text3>{TextList[2]}</Text3>
-          <Text4>{TextList[3]}</Text4>
+          {TextListMust.map((text, index) => (
+            <Text key={text} delay1={2 + 5.5 * index} delay2={7 + 5.5 * index}>{text}</Text>
+          ))}
+          {TextListRandomMixed.map((text, index) => (
+            <Text key={text} delay1={27 + 5.5 * index} delay2={32 + 5.5 * index}>{text}</Text>
+          ))}
+          <Alert>Brandon이 분석하는데 약 2~3분의 시간이 소요될 수 있습니다.</Alert>
         </Wrapper>
         <BrandonImg src={Brandon} style={{ zIndex: "3" }}></BrandonImg>
         {!isLoading && (
@@ -513,6 +587,21 @@ const BrandonIn = keyframes`
   }
 `;
 
+const apper = keyframes` 
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const lineUp = keyframes` 
   0% {
     opacity: 0;
@@ -531,6 +620,7 @@ const lineUp = keyframes`
   }
 `;
 
+
 const textRemove = keyframes` 
   0% {
     opacity: 1;
@@ -540,7 +630,7 @@ const textRemove = keyframes`
     opacity: 1;
   }
 
-  50% {
+  65% {
     opacity: 0;
   }
  
@@ -640,31 +730,26 @@ const Wrapper = styled.div`
   display: grid;
   place-items: center;
 `;
+
 const Text = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s ease-out 2s forwards,
-    ${textRemove} 1s ease-in 6s forwards;
-`;
-
-const Text2 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 6.2s forwards,
-    ${textRemove} 1s ease-in 10.2s forwards;
-`;
-
-const Text3 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 10.4s forwards,
-    ${textRemove} 1s ease-in 14.4s forwards;
+  animation: ${lineUp} 2s ease-out ${props => props.delay1}s forwards, ${textRemove} 1s ease-in ${props => props.delay2}s forwards;
 `;
 
 const Text4 = styled.div`
   position: absolute;
   opacity: 0;
   animation: ${lineUp} 2s steps(30, end) 14.6s forwards;
+`;
+
+const Alert = styled.div`
+  position: absolute;
+  font-size: 0.9375rem;
+  color: #aaaaaa;
+  top: 100%;
+  opacity: 0;
+  animation: ${apper} 5s ease-out 0.5s forwards;
 `;
 
 const BrandonImg = styled.img`
@@ -688,7 +773,7 @@ const CardOverlay = styled.div`
   object-fit: cover;
   background-color: black;
   opacity: 0;
-  animation: ${CardOverlayIn} 0.5s linear 18.6s forwards;
+  animation: ${CardOverlayIn} 0.5s linear 118.6s forwards;
 `;
 
 const CardGif = styled.img`
@@ -699,7 +784,7 @@ const CardGif = styled.img`
   top: 50%;
   left: 50%;
   transform-origin: 0% 0%;
-  animation: ${CardIn} 1.5s linear 19s forwards,
+  animation: ${CardIn} 1.5s linear 119s forwards,
     ${CardOut} 0.5s linear 22s forwards;
 `;
 
@@ -711,7 +796,7 @@ const CardBackImg = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: ${CardBackIn} 0.5s linear 23s forwards;
+  animation: ${CardBackIn} 0.5s linear 123s forwards;
 `;
 
 const Button = styled.button`
@@ -736,5 +821,5 @@ const Button = styled.button`
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
   }
-  animation: ${ButtonIn} 0.5s linear 23s forwards;
+  animation: ${ButtonIn} 0.5s linear 123s forwards;
 `;
