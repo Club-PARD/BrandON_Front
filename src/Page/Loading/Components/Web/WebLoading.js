@@ -257,7 +257,7 @@ const WebLoading = () => {
         try {
           const response = await axios.post(
             process.env.REACT_APP_URL +
-              `/${userID}/${chatRoomId}/saveChatNickName`,
+            `/${userID}/${chatRoomId}/saveChatNickName`,
             { chatNickName: user },
             {
               headers: {
@@ -724,7 +724,7 @@ const CardOverlay = styled.div`
   object-fit: cover;
   background-color: black;
   opacity: 0;
-  animation: ${CardOverlayIn} 0.5s linear 118.6s forwards;
+  animation: ${CardOverlayIn} 0.5s linear forwards;
 `;
 
 const CardGif = styled.img`
@@ -735,8 +735,8 @@ const CardGif = styled.img`
   top: 50%;
   left: 50%;
   transform-origin: 0% 0%;
-  animation: ${CardIn} 1.5s linear 119s forwards,
-    ${CardOut} 0.5s linear 22s forwards;
+  animation: ${CardIn} 1.5s linear  forwards,
+    ${CardOut} 0.5s linear forwards;
 `;
 
 const CardBackImg = styled.img`
@@ -747,7 +747,7 @@ const CardBackImg = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: ${CardBackIn} 0.5s linear 123s forwards;
+  animation: ${CardBackIn} 0.5s linear forwards;
 `;
 
 const Button = styled.button`
@@ -772,5 +772,5 @@ const Button = styled.button`
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
   }
-  animation: ${ButtonIn} 0.5s linear 123s forwards;
+  animation: ${ButtonIn} 0.5s linear forwards;
 `;
