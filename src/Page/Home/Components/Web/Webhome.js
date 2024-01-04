@@ -112,23 +112,23 @@ const WebHome = () => {
     }
   }, []);
 
-  const getUserData = async () => {
-    try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_URL}/user/${userID}/allResults`
-      );
-      console.log(data.data);
-      setUserAllResults(data.data);
-      // setChatrooms(data.data.chatRooms)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getUserData = async () => {
+  //   try {
+  //     const data = await axios.get(
+  //       `${process.env.REACT_APP_URL}/user/${userID}/allResults`
+  //     );
+  //     console.log(data.data);
+  //     setUserAllResults(data.data);
+  //     // setChatrooms(data.data.chatRooms)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    console.log(userID);
-    getUserData();
-  }, [userID]);
+  // useEffect(() => {
+  //   console.log(userID);
+  //   getUserData();
+  // }, [userID]);
 
   useEffect(() => {
     console.log(isFirstLoggedin);
@@ -248,9 +248,8 @@ const HeaderText = styled.div`
 
 const HeaderImg = styled.img`
   width: 100vw;
-
   z-index: 2;
-  margin-top: -15%;
+  margin-top: -10%;
 `;
 
 const TestStart = styled.div`
@@ -268,6 +267,7 @@ const TestStart = styled.div`
   justify-content: center;
   text-align: center;
   margin-top: 55px;
+  z-index: 4;
   &:hover {
     background-color: #2b2d36;
   }
