@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import CardWhite from "../../../../Assets/Card_White.png";
 import CardBlue from "../../../../Assets/Card_Blue.png";
@@ -8,7 +7,6 @@ import CardPurple from "../../../../Assets/Card_Purple.png";
 import CardPink from "../../../../Assets/Card_Pink.png";
 
 const WebHistoryCard = (props) => {
-
   const [card, setCard] = useState({ null_safety: "" });
   const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
   console.log(props.brandStory);
@@ -24,84 +22,270 @@ const WebHistoryCard = (props) => {
       }}
     >
       <Div style={{ display: "block", position: "relative" }}>
-        <Div style={{
-          position: "absolute",
-          backgroundColor: "none",
-          opacity: 1,
-          top: "0",
-          left: "0",
-          zIndex: "3",
-        }}
+        <Div
+          style={{
+            position: "absolute",
+            backgroundColor: "none",
+            opacity: 1,
+            top: "0",
+            left: "0",
+            zIndex: "3",
+          }}
         >
           <Div style={{ width: "55.6%" }}></Div>
           <Div style={{ flexDirection: "column", width: "44.4%" }}>
-            <Div style={{ alignItems: "end", padding: "0rem 0.875rem 0rem 0.875rem", height: "40%", boxSizing: "border-box" }}>
-              {(props.cardNum - 1) % 4 >= 2
-                ?
-                <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%", color: "white" }}>
+            <Div
+              style={{
+                alignItems: "end",
+                padding: "0rem 0.875rem 0rem 0.875rem",
+                height: "40%",
+                boxSizing: "border-box",
+              }}
+            >
+              {(props.cardNum - 1) % 4 >= 2 ? (
+                <Div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    justifyContent: "start",
+                    alignItems: "bottom",
+                    height: "20%",
+                    color: "white",
+                  }}
+                >
                   {props.undefined === true ? "" : props.name}
                 </Div>
-                :
-                <Div style={{ fontSize: "1.5rem", fontWeight: "600", justifyContent: "start", alignItems: "bottom", height: "20%" }}>
+              ) : (
+                <Div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    justifyContent: "start",
+                    alignItems: "bottom",
+                    height: "20%",
+                  }}
+                >
                   {props.undefined === true ? "" : props.name}
                 </Div>
-              }
+              )}
             </Div>
-            <Div style={{ alignItems: "center", padding: "0.4rem 0.875rem 0rem 0.875rem", height: "10%", boxSizing: "border-box" }}>
-              {(props.cardNum - 1) % 4 >= 2
-                ?
-                <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%", color: "white" }}>
-                  {props.undefined === true ? "" :
-                    props.brandCard?.identity.length > 15 ? props.brandCard?.identity.substring(0, 15) : props.brandCard?.identity}
+            <Div
+              style={{
+                alignItems: "center",
+                padding: "0.4rem 0.875rem 0rem 0.875rem",
+                height: "10%",
+                boxSizing: "border-box",
+              }}
+            >
+              {(props.cardNum - 1) % 4 >= 2 ? (
+                <Div
+                  style={{
+                    fontSize: "0.875rem",
+                    fontWeight: "500",
+                    justifyContent: "start",
+                    alignItems: "bottom",
+                    height: "100%",
+                    color: "white",
+                  }}
+                >
+                  {props.undefined === true
+                    ? ""
+                    : props.brandCard?.identity.length > 15
+                    ? props.brandCard?.identity.substring(0, 15)
+                    : props.brandCard?.identity}
                 </Div>
-                :
-                <Div style={{ fontSize: "0.875rem", fontWeight: "500", justifyContent: "start", alignItems: "bottom", height: "100%" }}>
-                  {props.undefined === true ? "" :
-                    props.brandCard?.identity.length > 15 ? props.brandCard?.identity.substring(0, 15) : props.brandCard?.identity}
+              ) : (
+                <Div
+                  style={{
+                    fontSize: "0.875rem",
+                    fontWeight: "500",
+                    justifyContent: "start",
+                    alignItems: "bottom",
+                    height: "100%",
+                  }}
+                >
+                  {props.undefined === true
+                    ? ""
+                    : props.brandCard?.identity.length > 15
+                    ? props.brandCard?.identity.substring(0, 15)
+                    : props.brandCard?.identity}
                 </Div>
-              }
-
+              )}
             </Div>
-            <Div style={{ alignItems: "start", padding: "1rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
-              {(props.cardNum - 1) % 4 >= 2
-                ?
-                <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%", color: "white" }}>
-                  {props.undefined === true ? "" :
-                    props.brandCard?.identity_explanation.length > 70 ? props.brandCard?.identity_explanation.substring(0, 70) : props.brandCard?.identity_explanation}
+            <Div
+              style={{
+                alignItems: "start",
+                padding: "1rem 0.875rem 0rem 0.875rem",
+                height: "25%",
+                boxSizing: "border-box",
+              }}
+            >
+              {(props.cardNum - 1) % 4 >= 2 ? (
+                <Div
+                  style={{
+                    fontSize: "0.625rem",
+                    fontWeight: "400",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    height: "80%",
+                    lineHeight: "125%",
+                    color: "white",
+                  }}
+                >
+                  {props.undefined === true
+                    ? ""
+                    : props.brandCard?.identity_explanation.length > 70
+                    ? props.brandCard?.identity_explanation.substring(0, 70)
+                    : props.brandCard?.identity_explanation}
                 </Div>
-                :
-                <Div style={{ fontSize: "0.625rem", fontWeight: "400", justifyContent: "start", alignItems: "start", height: "80%", lineHeight: "125%" }}>
-                  {props.undefined === true ? "" :
-                    props.brandCard?.identity_explanation.length > 70 ? props.brandCard?.identity_explanation.substring(0, 70) : props.brandCard?.identity_explanation}
-                </Div>}
+              ) : (
+                <Div
+                  style={{
+                    fontSize: "0.625rem",
+                    fontWeight: "400",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    height: "80%",
+                    lineHeight: "125%",
+                  }}
+                >
+                  {props.undefined === true
+                    ? ""
+                    : props.brandCard?.identity_explanation.length > 70
+                    ? props.brandCard?.identity_explanation.substring(0, 70)
+                    : props.brandCard?.identity_explanation}
+                </Div>
+              )}
             </Div>
-            <Div style={{ alignItems: "start", padding: "0rem 0.875rem 0rem 0.875rem", height: "25%", boxSizing: "border-box" }}>
-              {(props.cardNum - 1) % 4 >= 2
-                ?
-                <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0", color: "white" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
+            <Div
+              style={{
+                alignItems: "start",
+                padding: "0rem 0.875rem 0rem 0.875rem",
+                height: "25%",
+                boxSizing: "border-box",
+              }}
+            >
+              {(props.cardNum - 1) % 4 >= 2 ? (
+                <Div
+                  style={{
+                    height: "80%",
+                    lineHeight: "125%",
+                    justifyContent: "start",
+                  }}
+                >
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                      color: "white",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[0]}
+                  </Div>
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                      color: "white",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[1]}
+                  </Div>
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                      color: "white",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[2]}
+                  </Div>
                 </Div>
-                :
-                <Div style={{ height: "80%", lineHeight: "125%", justifyContent: "start" }}>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[0]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[1]}</Div>
-                  <Div style={{ width: "fit-content", fontSize: "0.65rem", fontWeight: "600", justifyContent: "start", alignItems: "start", margin: "0 0.05rem 0 0" }}>{props.undefined === true ? "" : "#" + props.brandStory?.brandKeywords[2]}</Div>
-                </Div>}
-
+              ) : (
+                <Div
+                  style={{
+                    height: "80%",
+                    lineHeight: "125%",
+                    justifyContent: "start",
+                  }}
+                >
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[0]}
+                  </Div>
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[1]}
+                  </Div>
+                  <Div
+                    style={{
+                      width: "fit-content",
+                      fontSize: "0.65rem",
+                      fontWeight: "600",
+                      justifyContent: "start",
+                      alignItems: "start",
+                      margin: "0 0.05rem 0 0",
+                    }}
+                  >
+                    {props.undefined === true
+                      ? ""
+                      : "#" + props.brandStory?.brandKeywords[2]}
+                  </Div>
+                </Div>
+              )}
             </Div>
           </Div>
         </Div>
 
-        {props.undefined === true ? <Img src={CardDefault}></Img> : <Img src={ImgList[(props.cardNum - 1) % 4]}></Img>}
+        {props.undefined === true ? (
+          <Img src={CardDefault}></Img>
+        ) : (
+          <Img src={ImgList[(props.cardNum - 1) % 4]}></Img>
+        )}
       </Div>
     </Div>
   );
 };
 
 export default WebHistoryCard;
-
 
 const Div = styled.div`
   display: flex;

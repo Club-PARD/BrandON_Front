@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import WebHistoryCard from "./WebHistoryCard";
-import Woochal from "../../../../Assets/Woochal.png";
 import ButtonCard from "../../../../Assets/Button_Card.png";
 import Brandon from "../../../../Assets/brandon_final.gif";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { recoilUserAllResults, noCard } from "../../../../atom/loginAtom";
+import { noCard } from "../../../../atom/loginAtom";
 
 const WebHistory = () => {
   const [userData, setUserData] = useState({});
@@ -61,7 +60,6 @@ const WebHistory = () => {
       ]);
     }
   }, [chatrooms]);
-
 
   const [isNoCard, setIsNoCard] = useRecoilState(noCard);
   const [selectCardNum, setSelectCardNum] = useState([
@@ -183,7 +181,7 @@ const WebHistory = () => {
           </Div>
         </Div>
       ) : (
-        <Div >
+        <Div>
           <Div
             style={{ width: "18%", justifyContent: "start", height: "50vh" }}
           >
@@ -238,7 +236,7 @@ const WebHistory = () => {
               backgroundColor: "",
             }}
           >
-            <Div style={{ height: "5vh", }}>
+            <Div style={{ height: "5vh" }}>
               <Div
                 style={{
                   fontSize: "1.5rem",
@@ -258,7 +256,7 @@ const WebHistory = () => {
                 boxSizing: "border-box",
                 borderRadius: "0.625rem",
                 gridGap: "1.875rem 2.5rem",
-                height: "60vh"
+                height: "60vh",
               }}
             >
               {selectedCard.map((card, index) => (

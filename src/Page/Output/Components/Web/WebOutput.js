@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Woochal from "../../../../Assets/Woochal.png";
 import ButtonCard from "../../../../Assets/Arrow.png";
 import StoryImg from "../../../../Assets/Story_Img.png";
 import { useNavigate } from "react-router-dom";
-import WoochalDead from "../../../../Assets/Woochal_Dead.png";
-import CardDefault from "../../../../Assets/Card_Default.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { recoilUserAllResults } from "../../../../atom/loginAtom";
 import Brandon from "../../../../Assets/brandon_final.gif";
 import CardWhite from "../../../../Assets/Card_White.png";
 import CardBlue from "../../../../Assets/Card_Blue.png";
