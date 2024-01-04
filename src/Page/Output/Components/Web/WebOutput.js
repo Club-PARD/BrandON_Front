@@ -45,14 +45,14 @@ const WebOutput = () => {
       navigate("/");
     }
     getChatroomData();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (badAccess) {
       alert("잘못된 접근입니다.");
       navigate("/");
     }
-  }, [badAccess])
+  }, [badAccess]);
 
   // console.log(userData);
   console.log(chatroom);
@@ -1154,7 +1154,7 @@ const WebOutput = () => {
                                       lineHeight: "1.7",
                                     }}
                                   >
-                                    {answer}
+                                    <Pre>{answer}</Pre>
                                   </Div>
                                 </ChatBubbleBrandon>
                               </ChatContainerBrandon>
@@ -1171,7 +1171,7 @@ const WebOutput = () => {
                                       fontWeight: "400",
                                     }}
                                   >
-                                    {answer}
+                                    <Pre>{answer}</Pre>
                                   </Div>
                                 </ChatBubbleUser>
                               </Div>
@@ -1483,7 +1483,7 @@ const Body4 = styled.div`
   font-family: "Pretendard";
 `;
 
-const Text = styled.pre`
+const Pre = styled.pre`
   all: unset;
   white-space: pre-wrap;
   font-family: "Pretendard";
@@ -1520,4 +1520,11 @@ const ChatBubbleUser = styled.div`
   background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(3.125rem);
   /* border: 0.0313rem solid black; */
+`;
+
+const Text = styled.pre`
+  all: unset;
+  white-space: pre-wrap;
+  font-family: "Pretendard";
+  line-height: 1.7;
 `;

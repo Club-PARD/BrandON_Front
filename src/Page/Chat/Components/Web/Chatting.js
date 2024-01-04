@@ -5,6 +5,12 @@ import Brandon from "../../../../Assets/brandon_final.gif";
 const Chatting = ({ chatMessage, isLoading, preInput }) => {
   const chatRef = useRef(null);
 
+  const TextList = [
+    "답변을 확인했어요!",
+    "답변을 분석하고 있어요.",
+    "질문을 생성하고 있어요.",
+  ];
+
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [chatMessage, isLoading, preInput]);
@@ -60,7 +66,9 @@ const Chatting = ({ chatMessage, isLoading, preInput }) => {
               </ChatName>
               <div style={{ height: "0.625rem" }} />
               <ChatBubbleBrandon>
-                분석 중이다. 기다려라. 이 짜식아.
+                <UxWriting1>{TextList[0]}</UxWriting1>
+                <UxWriting2>{TextList[1]}</UxWriting2>
+                <UxWriting3>{TextList[2]}</UxWriting3>
               </ChatBubbleBrandon>
             </ChatContainerBrandon>
           </LeftRow>
@@ -78,7 +86,7 @@ const Chatting = ({ chatMessage, isLoading, preInput }) => {
             </ChatName>
             <div style={{ height: "0.625rem" }} />
             <ChatBubbleBrandon>
-              로딩 중이다. 기다려라. 이 짜식아.
+              로딩 중이에요. 잠시만 기다려주세요!
             </ChatBubbleBrandon>
           </ChatContainerBrandon>
         </LeftRow>
@@ -166,6 +174,7 @@ const Body4 = styled.div`
 
 const ChatBubbleBrandon = styled.div`
   max-width: 48.75rem;
+  min-width: 200px;
   padding: 1.5rem;
   border-radius: 0 0.625rem 0.625rem 0.625rem;
   background: rgba(0, 0, 0, 0.5);
@@ -188,4 +197,44 @@ const Text = styled.pre`
   white-space: pre-wrap;
   font-family: "Pretendard";
   line-height: 1.7;
+`;
+
+const fadeIn = keyframes` 
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const out = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const UxWriting1 = styled.div`
+  margin-top: -10px;
+  opacity: 0;
+  animation: ${fadeIn} 2s ease-in-out 0s forwards, ${out} 0s linear 4s forwards;
+  position: absolute;
+`;
+
+const UxWriting2 = styled.div`
+  margin-top: -10px;
+  opacity: 0;
+  animation: ${fadeIn} 2s steps(30, end) 4.2s forwards,
+    ${out} 0s linear 8s forwards;
+  position: absolute;
+`;
+
+const UxWriting3 = styled.div`
+  margin-top: -10px;
+  opacity: 0;
+  animation: ${fadeIn} 2s steps(30, end) 8.4s forwards;
+  position: absolute;
 `;
