@@ -642,6 +642,12 @@ const Text = styled.div`
   animation: ${lineUp} 2s ease-out ${props => props.delay1}s forwards, ${textRemove} 1s ease-in ${props => props.delay2}s forwards;
 `;
 
+const Text4 = styled.div`
+  position: absolute;
+  opacity: 0;
+  animation: ${lineUp} 2s ease-out 188.5s forwards;
+`;
+
 const Alert = styled.div`
   position: absolute;
   font-size: 0.9375rem;
