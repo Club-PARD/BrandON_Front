@@ -241,7 +241,7 @@ const TopNavBar = ({ isScrolled }) => {
                   }
             }
           >
-            <Body1>결과</Body1>
+            <Body1>기록</Body1>
           </NavLink>
           <div style={{ width: "4.25rem" }} />
           <div onBlur={handleBlurContainer} style={{ marginTop: "3px" }}>

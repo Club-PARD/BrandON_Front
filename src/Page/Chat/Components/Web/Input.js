@@ -187,7 +187,7 @@ const Input = ({
           multiline
           maxRows={4}
           onKeyDown={handleKeyDown}
-          placeholder="Message Brandon..."
+          placeholder="구체적이고 다양한 답변을 작성할수록 Brandon의 분석 정확도가 높아져요."
           value={input}
           onChange={handleInputChange}
           onInput={handleOnInput}
