@@ -417,7 +417,7 @@ const WebLoading = () => {
             </Text>
           ))}
           <Alert>
-            Brandon이 분석하는데 약 2~3분의 시간이 소요될 수 있습니다.
+            Brandon이 분석하는데 약 3분 이상의 시간이 소요될 수 있습니다.
           </Alert>
         </Wrapper>
         <BrandonImg src={Brandon} style={{ zIndex: "3" }}></BrandonImg>
@@ -686,12 +686,6 @@ const Text = styled.div`
   opacity: 0;
   animation: ${lineUp} 2s ease-out ${(props) => props.delay1}s forwards,
     ${textRemove} 1s ease-in ${(props) => props.delay2}s forwards;
-`;
-
-const Text4 = styled.div`
-  position: absolute;
-  opacity: 0;
-  animation: ${lineUp} 2s steps(30, end) 14.6s forwards;
 `;
 
 const Alert = styled.div`
