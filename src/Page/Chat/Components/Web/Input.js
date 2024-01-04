@@ -225,10 +225,10 @@ const FloatingButton = styled.button`
   align-items: center;
   position: fixed;
   bottom: calc(
-    (90px + (100vh - 700px) / 2) +
-      (${(props) => (props.wrapCount ? props.wrapCount : 0)} * 20px)
+    (5.625rem + (100vh - 43.75rem) / 8) +
+      (${(props) => (props.wrapCount ? props.wrapCount : 0)} * 17px)
   );
-  right: calc(175px + (100vw - 1250px) / 2);
+  right: calc(10.9375rem + (100vw - 78.125rem) / 2);
   color: #fff;
   border: 1px solid #8f2eff;
   padding: 8px 16px 8px 12px;

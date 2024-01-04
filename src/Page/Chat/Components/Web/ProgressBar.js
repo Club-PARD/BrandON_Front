@@ -6,7 +6,7 @@ const ProgressBar = ({ progress }) => {
     <Container>
       <Row>
         <Caption2>나 이해도</Caption2>
-        <div style={{ width: "8px" }} />
+        <div style={{ width: "0.5rem" }} />
         <div
           style={{
             width: "18.75rem",
@@ -39,7 +39,7 @@ const Container = styled.div`
   position: fixed;
   top: 72px;
   left: calc(50vw - 238px);
-  width: 476px;
+  width: 29.75rem;
   padding: 18px 34px;
   border-radius: 300px;
   background: rgba(0, 0, 0, 0.2);
