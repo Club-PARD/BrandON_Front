@@ -13,6 +13,8 @@ import {
   recoilUserData,
   isFirstLogin,
   recoilUserAllResults,
+  chatPrompt,
+  analysisPrompt,
 } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
@@ -22,6 +24,8 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
+  const [, setChatPrompt] = useRecoilState(chatPrompt);
+  const [, setAnalysisPrompt] = useRecoilState(analysisPrompt);
   const [userAllResults, setUserAllResults] =
     useRecoilState(recoilUserAllResults);
   const handleLogin = (token) => {
@@ -53,6 +57,7 @@ const WebHome = () => {
       console.error("서버 요청 에러2:", error);
     }
   };
+
   const sendUserDataToGoogle = async (token) => {
     //구글에게 억세스토큰 보내서 사용자정보 받아옴
     try {
@@ -98,6 +103,17 @@ const WebHome = () => {
     },
   });
 
+  const getPrompt = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_URL}/prompt`);
+      console.log(response.data);
+      setChatPrompt(response.data.chatPrompt);
+      setAnalysisPrompt(response.data.analysisPrompt);
+    } catch (error) {
+      console.error("서버 요청 에러:", error);
+    }
+  };
+
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
     const storedToken = localStorage.getItem("accessToken");
@@ -106,6 +122,7 @@ const WebHome = () => {
       setAccessToken(storedToken);
       setIsLoggedIn(true);
       sendUserDataToGoogle(storedToken);
+      getPrompt();
     } else {
       setIsLoggedIn(false);
     }

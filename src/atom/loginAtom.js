@@ -78,3 +78,15 @@ export const noCard = atom({
   default: true,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const chatPrompt = atom({
+  key: "chatPrompt",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const analysisPrompt = atom({
+  key: "analysisPrompt",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
