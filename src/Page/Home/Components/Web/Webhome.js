@@ -143,7 +143,7 @@ const WebHome = () => {
     <Container>
       <Overlay />
       <HeaderText>
-        <img style={{ zIndex: "1" }} src="finalHomeCztchpqize.png"></img>
+        <img style={{ zIndex: "1" }} src="home_catchphrase.png"></img>
       </HeaderText>
 
       {isLoggedIn ? (
@@ -151,12 +151,12 @@ const WebHome = () => {
           {isFirstLoggedin ? (
             <LoginLink to="/name">
               지금 바로 시작하기
-              <Arrow src="Arrow2.png"></Arrow>
+              <Arrow src="arrow.png"></Arrow>
             </LoginLink>
           ) : (
             <LoginLink to="/chat">
               지금 바로 시작하기
-              <Arrow src="Arrow2.png"></Arrow>
+              <Arrow src="arrow.png"></Arrow>
             </LoginLink>
           )}
         </TestStart>
@@ -167,12 +167,12 @@ const WebHome = () => {
             onClick={login}
           >
             지금 바로 시작하기
-            <Arrow src="Arrow2.png"></Arrow>
+            <Arrow src="arrow.png"></Arrow>
           </button>
         </TestStart>
       )}
 
-      <HeaderImg src="sjsjsj.png"></HeaderImg>
+      <HeaderImg src="onboarding.png"></HeaderImg>
 
       {/* <OnBoading>
         <img style={{ zIndex: "1", width:"100vw", marginTop:"-18%"}} src="home mockup a.png"></img>
@@ -184,12 +184,12 @@ const WebHome = () => {
             {isFirstLoggedin ? (
               <LoginLink to="/name">
                 지금 바로 시작하기
-                <Arrow src="Arrow2.png"></Arrow>
+                <Arrow src="arrow.png"></Arrow>
               </LoginLink>
             ) : (
               <LoginLink to="/chat">
                 지금 바로 시작하기
-                <Arrow src="Arrow2.png"></Arrow>
+                <Arrow src="arrow.png"></Arrow>
               </LoginLink>
             )}
           </TestStart>
@@ -200,12 +200,11 @@ const WebHome = () => {
               onClick={login}
             >
               지금 바로 시작하기
-              <Arrow src="Arrow2.png"></Arrow>
+              <Arrow src="arrow.png"></Arrow>
             </button>
           </TestStart>
         )}
       </Bottom>
-      
     </Container>
   );
 };
@@ -249,7 +248,7 @@ const HeaderText = styled.div`
 
 const HeaderImg = styled.img`
   width: 100vw;
-  
+
   z-index: 2;
   margin-top: -15%;
 `;
@@ -288,7 +287,7 @@ const OnBoading = styled.div`
   margin-top: 78px;
   z-index: 1;
   border: 1px solid black;
-  background-color: transparent
+  background-color: transparent;
 `;
 
 const Arrow = styled.img`
@@ -305,7 +304,7 @@ const Overlay = styled.div`
   backdrop-filter: blur(5px);
 `;
 
-const Bottom =styled.div`
+const Bottom = styled.div`
   width: 100vw;
   height: 200px;
   background-color: black;

@@ -8,7 +8,6 @@ import WoochalDead from "../../../../Assets/Woochal_Dead.png";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import BackgroundFinal from "../../../../Assets/Background_Final.png";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { recoilUserAllResults } from "../../../../atom/loginAtom";

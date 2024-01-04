@@ -172,11 +172,11 @@ const TopNavBar = ({ isScrolled }) => {
 
   return (
     <>
-      {isDesktopOrMobile === true ?
+      {isDesktopOrMobile === true ? (
         <Div scrolled={isScrolled}>
           <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
             <img
-              src="Nav Logo.png"
+              src="Nav_logo.png"
               alt="Brand On 로고"
               width={180}
               style={{ marginTop: "10px" }}
@@ -184,7 +184,7 @@ const TopNavBar = ({ isScrolled }) => {
           </Link>
           <div style={{ flex: 1 }} />
         </Div>
-        :
+      ) : (
         <Div scrolled={isScrolled}>
           <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
             <img
@@ -208,15 +208,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>홈</Body1>
@@ -227,15 +227,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>채팅</Body1>
@@ -246,15 +246,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>기록</Body1>
@@ -299,8 +299,7 @@ const TopNavBar = ({ isScrolled }) => {
             </>
           )}
         </Div>
-      }
-
+      )}
     </>
   );
 };

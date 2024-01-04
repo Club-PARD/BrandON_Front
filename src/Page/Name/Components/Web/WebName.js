@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
 import { useEffect } from "react";
 import axios from "axios";
 import { nickname, recoilUserID } from "../../../../atom/loginAtom";
@@ -79,18 +78,22 @@ const WebName = () => {
       <Container>
         <Container2>
           <Header>
-            <HeaderImg src="onboadingLogo.png"></HeaderImg>
+            <HeaderImg src="onboarding_logo.png"></HeaderImg>
             <WelcomePont>에 오신 걸 환영합니다.</WelcomePont>
           </Header>
 
           <BrandImg>
-            <img src="Frame134.png" style={{width:'450px', height:'250px'}}></img>
+            <img
+              src="brandon_card.png"
+              style={{ width: "450px", height: "250px" }}
+            ></img>
           </BrandImg>
 
           <IntroduceDiv>
-            
-            <IntroducePont>입력하신 이름이 최종
-              <IntroduceBoldPont> 브랜드 아이덴티티 카드</IntroduceBoldPont>에 사용될 예정이에요.
+            <IntroducePont>
+              입력하신 이름이 최종
+              <IntroduceBoldPont> 브랜드 아이덴티티 카드</IntroduceBoldPont>에
+              사용될 예정이에요.
             </IntroducePont>
           </IntroduceDiv>
 
@@ -112,7 +115,6 @@ const WebName = () => {
               </Button>
             </ButtonDiv>
           </WriteNameDiv>
-
         </Container2>
       </Container>
     </>
