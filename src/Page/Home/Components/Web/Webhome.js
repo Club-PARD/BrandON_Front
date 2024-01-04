@@ -147,7 +147,7 @@ const WebHome = () => {
       </HeaderText>
 
       {isLoggedIn ? (
-        <TestStart>
+        <TestStart style={{ cursor: "pointer" }}>
           {isFirstLoggedin ? (
             <LoginLink to="/name">
               지금 바로 시작하기
@@ -161,11 +161,8 @@ const WebHome = () => {
           )}
         </TestStart>
       ) : (
-        <TestStart>
-          <button
-            style={{ all: "unset", color: "white", cursor: "pointer" }}
-            onClick={login}
-          >
+        <TestStart style={{ cursor: "pointer" }}>
+          <button style={{ all: "unset", color: "white" }} onClick={login}>
             지금 바로 시작하기
             <Arrow src="arrow.png"></Arrow>
           </button>
@@ -173,8 +170,8 @@ const WebHome = () => {
       )}
 
       <picture style={{ zIndex: 2 }}>
-      <Image srcset="onboarding.webp" type="image/webp"/>
-      <HeaderImg src="onboarding.png"/>
+        <Image srcset="onboarding.webp" type="image/webp" />
+        <HeaderImg src="onboarding.png" />
       </picture>
 
       {/* <OnBoading>
@@ -183,7 +180,7 @@ const WebHome = () => {
 
       <Bottom>
         {isLoggedIn ? (
-          <TestStart>
+          <TestStart style={{ cursor: "pointer" }}>
             {isFirstLoggedin ? (
               <LoginLink to="/name">
                 지금 바로 시작하기
@@ -197,11 +194,8 @@ const WebHome = () => {
             )}
           </TestStart>
         ) : (
-          <TestStart>
-            <button
-              style={{ all: "unset", color: "white", cursor: "pointer" }}
-              onClick={login}
-            >
+          <TestStart style={{ cursor: "pointer" }}>
+            <button style={{ all: "unset", color: "white" }} onClick={login}>
               지금 바로 시작하기
               <Arrow src="arrow.png"></Arrow>
             </button>
