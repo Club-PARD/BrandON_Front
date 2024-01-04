@@ -183,7 +183,7 @@ const WebHistory = () => {
           </Div>
         </Div>
       ) : (
-        <Div>
+        <Div >
           <Div
             style={{ width: "18%", justifyContent: "start", height: "50vh" }}
           >
@@ -233,10 +233,12 @@ const WebHistory = () => {
             style={{
               flexDirection: "column",
               width: "58.75rem",
-              margin: "3rem 0 0 0",
+              margin: "-3rem 0 0 0",
+              height: "50rem",
+              backgroundColor: "",
             }}
           >
-            <Div style={{}}>
+            <Div style={{ height: "5vh", }}>
               <Div
                 style={{
                   fontSize: "1.5rem",
@@ -256,6 +258,7 @@ const WebHistory = () => {
                 boxSizing: "border-box",
                 borderRadius: "0.625rem",
                 gridGap: "1.875rem 2.5rem",
+                height: "60vh"
               }}
             >
               {selectedCard.map((card, index) => (
@@ -352,7 +355,7 @@ const Div = styled.div`
   height: 100%;
   margin: 0vh 0vh 0vh 0vh;
   padding: 0vh 0vh 0vh 0vh;
-  border: 0.5px solid black;
+  /* border: 0.5px solid black; */
   border-radius: 0rem;
   box-sizing: content-box;
   font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
