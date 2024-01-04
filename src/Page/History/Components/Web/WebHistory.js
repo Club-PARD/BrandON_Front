@@ -394,7 +394,7 @@ const WebHistory = () => {
             style={{
               flexDirection: "column",
               width: "58.75rem",
-              margin: "5rem 0 0 0",
+              margin: "3rem 0 0 0",
             }}
           >
             <Div style={{}}>
