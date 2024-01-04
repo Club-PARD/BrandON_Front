@@ -35,6 +35,7 @@ const TopNavBar = ({ isScrolled }) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
     sendUserDataToGoogle(token);
+    getPrompt();
   };
 
   const handleLogout = () => {
@@ -178,7 +179,6 @@ const TopNavBar = ({ isScrolled }) => {
       setAccessToken(storedToken);
       setIsLoggedIn(true);
       sendUserDataToGoogle(storedToken);
-      getPrompt();
     } else {
       setIsLoggedIn(false);
     }

@@ -33,6 +33,7 @@ const WebHome = () => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
     sendUserDataToGoogle(token);
+    getPrompt();
   };
 
   const sendUserDataToServer = async (userData) => {
@@ -123,7 +124,6 @@ const WebHome = () => {
       setAccessToken(storedToken);
       setIsLoggedIn(true);
       sendUserDataToGoogle(storedToken);
-      getPrompt();
     } else {
       setIsLoggedIn(false);
     }
