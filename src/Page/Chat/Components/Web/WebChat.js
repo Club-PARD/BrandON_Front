@@ -215,7 +215,10 @@ const WebChat = () => {
       if (
         progress === 90 &&
         !res.includes("✨") &&
-        !res.includes("semi_output")
+        !res.includes("semi_output") &&
+        !res.includes("브랜드 아이덴티티") &&
+        !res.includes("브랜드 스토리") &&
+        !res.includes('"')
       ) {
         setProgress((prev) => prev - 10);
       }
@@ -224,7 +227,11 @@ const WebChat = () => {
 
     if (
       progress !== 90 &&
-      (res.includes("✨") || res.includes("semi_output"))
+      (res.includes("✨") ||
+        res.includes("semi_output") ||
+        res.includes("브랜드 아이덴티티") ||
+        res.includes("브랜드 스토리") ||
+        res.includes('"'))
     ) {
       setProgress(100);
     }

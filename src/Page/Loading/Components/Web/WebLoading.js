@@ -145,22 +145,21 @@ const WebLoading = () => {
     "사용자님의 브랜드를 빛나게 다듬고 있어요.",
     "브랜드의 퍼즐 조각을 맞추며 완벽한 그림을 그리고 있어요.",
     "사용자님의 브랜드 정체성에 풍부한 색채를 더하고 있어요.",
-  ]
+  ];
 
-
-  const [currentText, setCurrentText] = useState('');
-  const [TextListRandomMixed, setTextListRandomMixed] = useState([...TextListRandom]);
+  const [currentText, setCurrentText] = useState("");
+  const [TextListRandomMixed, setTextListRandomMixed] = useState([
+    ...TextListRandom,
+  ]);
 
   useEffect(() => {
-
     const shuffleArray = (array) => {
       for (let i = array.length - 1; i > 0; i--) {
-
         const j = Math.floor(Math.random() * (i + 1));
 
         [array[i], array[j]] = [array[j], array[i]];
       }
-    }
+    };
     const shuffledArray = [...TextListRandom];
 
     shuffleArray(shuffledArray);
@@ -169,7 +168,6 @@ const WebLoading = () => {
   }, []);
   console.log(TextListRandomMixed);
 
-
   // useEffect(() => {
 
   //   const selectRandomText = () => {
@@ -177,12 +175,9 @@ const WebLoading = () => {
   //     setCurrentText(TextListRandom[randomIndex]);
   //   };
 
-
   //   const interval = setInterval(selectRandomText, 5000);
 
-
   //   selectRandomText();
-
 
   //   return () => clearInterval(interval);
   // }, []);
@@ -228,9 +223,6 @@ const WebLoading = () => {
     const analysis = async () => {
       if (chatModelResult.length !== 0) {
         let message = await chain.predict({ answer: "start analysis" });
-        if (message.includes("잠시만") || message.includes("기다려")) {
-          message = await chain.predict({ answer: "OK" });
-        }
         setIsLoading(false);
         console.log(message);
         // 앞에서부터 "{"를 찾는 인덱스
@@ -265,7 +257,7 @@ const WebLoading = () => {
         try {
           const response = await axios.post(
             process.env.REACT_APP_URL +
-            `/${userID}/${chatRoomId}/saveChatNickName`,
+              `/${userID}/${chatRoomId}/saveChatNickName`,
             { chatNickName: user },
             {
               headers: {
@@ -411,12 +403,22 @@ const WebLoading = () => {
       <Div style={{ display: "relative" }}>
         <Wrapper>
           {TextListMust.map((text, index) => (
-            <Text key={text} delay1={2 + 5.5 * index} delay2={7 + 5.5 * index}>{text}</Text>
+            <Text key={text} delay1={2 + 5.5 * index} delay2={7 + 5.5 * index}>
+              {text}
+            </Text>
           ))}
           {TextListRandomMixed.map((text, index) => (
-            <Text key={text} delay1={27 + 5.5 * index} delay2={32 + 5.5 * index}>{text}</Text>
+            <Text
+              key={text}
+              delay1={27 + 5.5 * index}
+              delay2={32 + 5.5 * index}
+            >
+              {text}
+            </Text>
           ))}
-          <Alert>Brandon이 분석하는데 약 2~3분의 시간이 소요될 수 있습니다.</Alert>
+          <Alert>
+            Brandon이 분석하는데 약 2~3분의 시간이 소요될 수 있습니다.
+          </Alert>
         </Wrapper>
         <BrandonImg src={Brandon} style={{ zIndex: "3" }}></BrandonImg>
         {!isLoading && (
@@ -569,7 +571,6 @@ const lineUp = keyframes`
   }
 `;
 
-
 const textRemove = keyframes` 
   0% {
     opacity: 1;
@@ -683,7 +684,8 @@ const Wrapper = styled.div`
 const Text = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s ease-out ${props => props.delay1}s forwards, ${textRemove} 1s ease-in ${props => props.delay2}s forwards;
+  animation: ${lineUp} 2s ease-out ${(props) => props.delay1}s forwards,
+    ${textRemove} 1s ease-in ${(props) => props.delay2}s forwards;
 `;
 
 const Text4 = styled.div`
