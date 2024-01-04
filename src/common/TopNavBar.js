@@ -13,6 +13,7 @@ import {
   recoilUserAllResults,
   noCard,
 } from "../atom/loginAtom";
+import { useMediaQuery } from "react-responsive";
 
 const TopNavBar = ({ isScrolled }) => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const TopNavBar = ({ isScrolled }) => {
   const [userAllResults, setUserAllResults] =
     useRecoilState(recoilUserAllResults);
   const [noCardR, setNoCard] = useRecoilState(noCard);
+  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -169,120 +171,137 @@ const TopNavBar = ({ isScrolled }) => {
   }, [isFirstLoggedin]);
 
   return (
-    <Div scrolled={isScrolled}>
-      <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
-        <img
-          src="Nav Logo.png"
-          alt="Brand On 로고"
-          width={180}
-          style={{ marginTop: "10px" }}
-        />
-      </Link>
-      <div style={{ flex: 1 }} />
+    <>
+      {isDesktopOrMobile === true ?
+        <Div scrolled={isScrolled}>
+          <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
+            <img
+              src="Nav Logo.png"
+              alt="Brand On 로고"
+              width={180}
+              style={{ marginTop: "10px" }}
+            />
+          </Link>
+          <div style={{ flex: 1 }} />
+        </Div>
+        :
+        <Div scrolled={isScrolled}>
+          <Link to="/" style={{ all: "unset", cursor: "pointer" }}>
+            <img
+              src="Nav Logo.png"
+              alt="Brand On 로고"
+              width={180}
+              style={{ marginTop: "10px" }}
+            />
+          </Link>
+          <div style={{ flex: 1 }} />
 
-      {!isLoggedIn && (
-        <>
-          <LoginButton onClick={login}>로그인</LoginButton>
-        </>
-      )}
-      {isLoggedIn && (
-        <>
-          <NavLink
-            to="/"
-            style={({ isActive }) =>
-              isActive
-                ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
-                : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
-            }
-          >
-            <Body1>홈</Body1>
-          </NavLink>
-          <div style={{ width: "66px" }} />
-          <NavLink
-            to="/chat"
-            style={({ isActive }) =>
-              isActive
-                ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
-                : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
-            }
-          >
-            <Body1>채팅</Body1>
-          </NavLink>
-          <div style={{ width: "66px" }} />
-          <NavLink
-            to="/history"
-            style={({ isActive }) =>
-              isActive
-                ? {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "#8F2EFF",
-                  }
-                : {
-                    all: "unset",
-                    cursor: "pointer",
-                    color: "white",
-                  }
-            }
-          >
-            <Body1>기록</Body1>
-          </NavLink>
-          <div style={{ width: "4.25rem" }} />
-          <div onBlur={handleBlurContainer} style={{ marginTop: "3px" }}>
-            <label onClick={handleClickContainer}>
-              <button
-                style={{ all: "unset", color: "white", cursor: "pointer" }}
+          {!isLoggedIn && (
+            <>
+              <LoginButton onClick={login}>로그인</LoginButton>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <NavLink
+                to="/"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
+                    : {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
+                }
               >
-                <Body1>
-                  <img
-                    src={userData.picture}
-                    alt="프로필 사진"
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      borderRadius: "30px",
-                    }}
-                  ></img>
-                  <div style={{ width: "0.9375rem" }} />
-                  {nickname}
-                </Body1>
-              </button>
-            </label>
-            {isDropdownView && (
-              <Ul>
-                <li style={{ marginBottom: "10px" }}>
-                  <Link
-                    to="/mypage"
-                    style={{ all: "unset", cursor: "pointer" }}
+                <Body1>홈</Body1>
+              </NavLink>
+              <div style={{ width: "66px" }} />
+              <NavLink
+                to="/chat"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
+                    : {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
+                }
+              >
+                <Body1>채팅</Body1>
+              </NavLink>
+              <div style={{ width: "66px" }} />
+              <NavLink
+                to="/history"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
+                    : {
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
+                }
+              >
+                <Body1>기록</Body1>
+              </NavLink>
+              <div style={{ width: "4.25rem" }} />
+              <div onBlur={handleBlurContainer} style={{ marginTop: "3px" }}>
+                <label onClick={handleClickContainer}>
+                  <button
+                    style={{ all: "unset", color: "white", cursor: "pointer" }}
                   >
-                    마이페이지
-                  </Link>
-                </li>
-                <li style={{ cursor: "pointer" }} onClick={handleLogout}>
-                  로그아웃
-                </li>
-              </Ul>
-            )}
-          </div>
-        </>
-      )}
-    </Div>
+                    <Body1>
+                      <img
+                        src={userData.picture}
+                        alt="프로필 사진"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "30px",
+                        }}
+                      ></img>
+                      <div style={{ width: "0.9375rem" }} />
+                      {nickname}
+                    </Body1>
+                  </button>
+                </label>
+                {isDropdownView && (
+                  <Ul>
+                    <li style={{ marginBottom: "10px" }}>
+                      <Link
+                        to="/mypage"
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        마이페이지
+                      </Link>
+                    </li>
+                    <li style={{ cursor: "pointer" }} onClick={handleLogout}>
+                      로그아웃
+                    </li>
+                  </Ul>
+                )}
+              </div>
+            </>
+          )}
+        </Div>
+      }
+
+    </>
   );
 };
 

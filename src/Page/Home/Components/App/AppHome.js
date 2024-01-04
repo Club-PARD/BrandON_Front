@@ -6,7 +6,8 @@ import Brandon from "../../../../Assets/brandon_final.gif";
 const AppHome = () => {
   return (
     <Div>
-      <Div style={{ flexDirection: "column" }}>
+      <Overlay />
+      <Div style={{ flexDirection: "column", zIndex: "9" }}>
         <Div style={{ height: "50vh", alignItems: "center", flexDirection: "column" }}>
           <Div style={{ height: "50vh", color: "white", flexDirection: "column", justifyContent: "end", }}>
             <Div style={{ height: "4vh", fontSize: "1.225rem", fontWeight: "300", }}>모바일 환경은 개발 예정 중에 있습니다.</Div>
@@ -66,4 +67,14 @@ const BrandonImg = styled.img`
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 `;
