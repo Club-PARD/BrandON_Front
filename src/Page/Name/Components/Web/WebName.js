@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { nickname, recoilUserID } from "../../../../atom/loginAtom";
+import { isFirstLogin, nickname, recoilUserID } from "../../../../atom/loginAtom";
 import { useRecoilState } from "recoil";
 
 const Counter = ({ value, maxLength }) => (
@@ -29,6 +29,7 @@ const WebName = () => {
   const navigate = useNavigate();
   const [userNickname, setUserNickname] = useRecoilState(nickname);
   const [userId, setUserId] = useRecoilState(recoilUserID);
+  const [, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
@@ -40,6 +41,7 @@ const WebName = () => {
   const handleConfirmButton = () => {
     setUserNickname(text);
     saveUserNickName(text);
+    setIsFirstLoggedin(false);
     navigate("/check");
   };
 
@@ -60,7 +62,7 @@ const WebName = () => {
         )}/chatRoom`
       );
       console.log("서버 응답1(닉네임):", response.data.nickname);
-      console.log(localStorage.setItem("nickname", response.data.nickname));
+      localStorage.setItem("nickname", response.data.nickname);
       console.log("서버 응답2(채팅룸):", chatRoomId.data);
     } catch (error) {
       console.log("닉네임 요청 에러:", error);

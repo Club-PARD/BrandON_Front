@@ -29,7 +29,7 @@ export const recoilUserData = atom({
 });
 export const isFirstLogin = atom({
   key: "isFirstLogin",
-  default: false,
+  default: null,
   effects_UNSTABLE: [persistAtom],
 });
 export const nickname = atom({
