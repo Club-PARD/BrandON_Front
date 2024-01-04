@@ -172,35 +172,40 @@ const WebHome = () => {
         </TestStart>
       )}
 
-      <OnBoading>
-        <img style={{ zIndex: "1" }} src="Rectangle28.png"></img>
-      </OnBoading>
+      <HeaderImg src="sjsjsj.png"></HeaderImg>
 
-      {isLoggedIn ? (
-        <TestStart>
-          {isFirstLoggedin ? (
-            <LoginLink to="/name">
+      {/* <OnBoading>
+        <img style={{ zIndex: "1", width:"100vw", marginTop:"-18%"}} src="home mockup a.png"></img>
+      </OnBoading> */}
+
+      <Bottom>
+        {isLoggedIn ? (
+          <TestStart>
+            {isFirstLoggedin ? (
+              <LoginLink to="/name">
+                지금 바로 시작하기
+                <Arrow src="Arrow2.png"></Arrow>
+              </LoginLink>
+            ) : (
+              <LoginLink to="/chat">
+                지금 바로 시작하기
+                <Arrow src="Arrow2.png"></Arrow>
+              </LoginLink>
+            )}
+          </TestStart>
+        ) : (
+          <TestStart>
+            <button
+              style={{ all: "unset", color: "white", cursor: "pointer" }}
+              onClick={login}
+            >
               지금 바로 시작하기
               <Arrow src="Arrow2.png"></Arrow>
-            </LoginLink>
-          ) : (
-            <LoginLink to="/chat">
-              지금 바로 시작하기
-              <Arrow src="Arrow2.png"></Arrow>
-            </LoginLink>
-          )}
-        </TestStart>
-      ) : (
-        <TestStart>
-          <button
-            style={{ all: "unset", color: "white", cursor: "pointer" }}
-            onClick={login}
-          >
-            지금 바로 시작하기
-            <Arrow src="Arrow2.png"></Arrow>
-          </button>
-        </TestStart>
-      )}
+            </button>
+          </TestStart>
+        )}
+      </Bottom>
+      
     </Container>
   );
 };
@@ -229,7 +234,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 28px;
+  /* padding: 28px; */
 `;
 
 const HeaderText = styled.div`
@@ -240,6 +245,13 @@ const HeaderText = styled.div`
   justify-content: center;
   text-align: center;
   margin-top: 132px;
+`;
+
+const HeaderImg = styled.img`
+  width: 100vw;
+  
+  z-index: 2;
+  margin-top: -15%;
 `;
 
 const TestStart = styled.div`
@@ -275,6 +287,8 @@ const LoginLink = styled(Link)`
 const OnBoading = styled.div`
   margin-top: 78px;
   z-index: 1;
+  border: 1px solid black;
+  background-color: transparent
 `;
 
 const Arrow = styled.img`
@@ -289,4 +303,14 @@ const Overlay = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
+`;
+
+const Bottom =styled.div`
+  width: 100vw;
+  height: 200px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  margin-top: -18%;
+  z-index: 3;
 `;

@@ -22,11 +22,15 @@
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JAVA-ED8B00?style=flat&logo=Openjdk&logoColor=white"/>
 </p>
 <br>
 
  ## 🔎 페이지 별 기능
- * <p>홈 화면</p>
+* <p>홈 화면</p>
+   프로덕트에 대한 소개와 채팅을 시작할 수 있는 버튼이 있는 페이지
+   <br><p>✨홈 화면✨</p>
+   <img width="600" alt="sjsjsj" src="https://github.com/seongju1015/image/assets/122343583/e576af88-08b7-4153-8c58-45c58559c83c"><br>
 
  * <p>로그인</p>
    <처음 로그인이 아닌 경우><br>
