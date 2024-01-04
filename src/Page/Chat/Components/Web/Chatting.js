@@ -65,7 +65,7 @@ const Chatting = ({ chatMessage, isLoading, preInput }) => {
                 </Body4>
               </ChatName>
               <div style={{ height: "0.625rem" }} />
-              <ChatBubbleBrandon>
+              <ChatBubbleBrandon style={{ padding: "37px 24px" }}>
                 <UxWriting1>{TextList[0]}</UxWriting1>
                 <UxWriting2>{TextList[1]}</UxWriting2>
                 <UxWriting3>{TextList[2]}</UxWriting3>

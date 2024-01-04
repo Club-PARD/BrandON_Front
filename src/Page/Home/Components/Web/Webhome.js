@@ -13,8 +13,6 @@ import {
   recoilUserData,
   isFirstLogin,
   recoilUserAllResults,
-  chatPrompt,
-  analysisPrompt,
 } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
@@ -24,16 +22,12 @@ const WebHome = () => {
   const [userID, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
-  const [, setChatPrompt] = useRecoilState(chatPrompt);
-  const [, setAnalysisPrompt] = useRecoilState(analysisPrompt);
   const [userAllResults, setUserAllResults] =
     useRecoilState(recoilUserAllResults);
-
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
     sendUserDataToGoogle(token);
-    getPrompt();
   };
 
   const sendUserDataToServer = async (userData) => {
@@ -104,17 +98,6 @@ const WebHome = () => {
       console.log(err);
     },
   });
-
-  const getPrompt = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_URL}/prompt`);
-      console.log(response.data);
-      setChatPrompt(response.data.questionPrompt);
-      setAnalysisPrompt(response.data.answerPrompt);
-    } catch (error) {
-      console.error("서버 요청 에러:", error);
-    }
-  };
 
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 accessToken 확인

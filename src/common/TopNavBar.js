@@ -12,8 +12,6 @@ import {
   isFirstLogin,
   recoilUserAllResults,
   noCard,
-  chatPrompt,
-  analysisPrompt,
 } from "../atom/loginAtom";
 
 const TopNavBar = ({ isScrolled }) => {
@@ -28,14 +26,11 @@ const TopNavBar = ({ isScrolled }) => {
   const [userAllResults, setUserAllResults] =
     useRecoilState(recoilUserAllResults);
   const [noCardR, setNoCard] = useRecoilState(noCard);
-  const [, setChatPrompt] = useRecoilState(chatPrompt);
-  const [, setAnalysisPrompt] = useRecoilState(analysisPrompt);
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
     sendUserDataToGoogle(token);
-    getPrompt();
   };
 
   const handleLogout = () => {
@@ -150,17 +145,6 @@ const TopNavBar = ({ isScrolled }) => {
     },
   });
 
-  const getPrompt = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_URL}/prompt`);
-      console.log(response.data);
-      setChatPrompt(response.data.questionPrompt);
-      setAnalysisPrompt(response.data.answerPrompt);
-    } catch (error) {
-      console.error("서버 요청 에러:", error);
-    }
-  };
-
   const handleClickContainer = () => {
     setDropdownView(!isDropdownView);
   };
@@ -170,19 +154,6 @@ const TopNavBar = ({ isScrolled }) => {
       setDropdownView(false);
     }, 200);
   };
-
-  useEffect(() => {
-    // 페이지 로드 시 로컬 스토리지에서 accessToken 확인
-    const storedToken = localStorage.getItem("accessToken");
-
-    if (storedToken) {
-      setAccessToken(storedToken);
-      setIsLoggedIn(true);
-      sendUserDataToGoogle(storedToken);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
 
   useEffect(() => {
     setNickname(localStorage.getItem("nickname"));
@@ -223,7 +194,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "#A95AFF",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
@@ -242,7 +213,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "#A95AFF",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
@@ -261,7 +232,7 @@ const TopNavBar = ({ isScrolled }) => {
                 ? {
                     all: "unset",
                     cursor: "pointer",
-                    color: "#A95AFF",
+                    color: "#8F2EFF",
                   }
                 : {
                     all: "unset",
