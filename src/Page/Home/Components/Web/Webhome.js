@@ -28,6 +28,7 @@ const WebHome = () => {
   const [, setAnalysisPrompt] = useRecoilState(analysisPrompt);
   const [userAllResults, setUserAllResults] =
     useRecoilState(recoilUserAllResults);
+
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
@@ -107,8 +108,8 @@ const WebHome = () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL}/prompt`);
       console.log(response.data);
-      setChatPrompt(response.data.chatPrompt);
-      setAnalysisPrompt(response.data.analysisPrompt);
+      setChatPrompt(response.data.questionPrompt);
+      setAnalysisPrompt(response.data.answerPrompt);
     } catch (error) {
       console.error("서버 요청 에러:", error);
     }
