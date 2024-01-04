@@ -10,8 +10,6 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ChatPromptTemplate, MessagesPlaceholder } from "langchain/prompts";
 import { ConversationChain } from "langchain/chains";
 import { AIMessage, HumanMessage } from "langchain/schema";
-import { useRecoilState } from "recoil";
-import { analysisPrompt } from "../../../../atom/loginAtom";
 
 const WebLoading = () => {
   const navigate = useNavigate();
@@ -21,7 +19,6 @@ const WebLoading = () => {
   const [isLoading, setIsLoading] = useState(true);
   const userID = localStorage.getItem("userID");
   const chatRoomId = localStorage.getItem("chatRoomID");
-  const [template] = useRecoilState(analysisPrompt);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
@@ -37,6 +34,58 @@ const WebLoading = () => {
   });
 
   const user = localStorage.getItem("nickname");
+
+  const template = `When ${user} enters ‘start analysis’, comprehensively analyze all of ${user}’s answers and generate [Final] content that contains 8 variables below ([Identity], [Identity_explanation], [Brand_keywords], [Story_headlines], [Story_contents], [Competency], [Target], [Contents_recommendation]) in Korean as a JSON object.
+
+  [Identity] : Based on all the answers of the ${user}, generate original job title that insightfully pinpoints what should be emphasized considering ${user}'s main characteristics, mission, goals in ${user}’s answers. This job title should be able to give ${user} a good position to gather an audience in ${user}’s field of interest. [identity] must be less than 15 korean characters including blank spaces.
+  
+  [Identity explanation] : Comprehensively analyze all of the ${user}’s answers and generate a sentence that weaves together three elements ([reason], [target], [benefit]) into one sentence. Do not show the three elements below.
+  
+  [reason] : ${user}’s experiences or characteristics that can be used to support [Identity], [Identity explanation], and [benefit].
+  
+  [target] : Target audiences or partners that the ${user} can serve and help.
+  
+  [benefit] : Benefit that the ${user} can bring to the others and how the ${user} can make a positive impact.
+  
+  [Brand Keyword] : 6 [final_keywords] that best support [Identity] and [Identity explanation]
+  
+  [keywords] : Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
+  
+  [final_keywords] : Sum of [keywords] and additional user input keywords.
+  
+  [messages] : Brand messages for ${user} using each group’s keywords in [Groups]. There should be one brand message per group and each message should be less than 10 words. [Messages] should represent the ${user}.
+  
+  [Groups] : Grouped [final_keywords] based on similarity and context. Each group should have [messages].
+  
+  [Story_headlines] : List of creative and short headlines for each paragraph of [observation], [reflection], [insight].
+  
+  [Story_contents] : List of each paragraph for [observation], [reflection], [insight].
+  
+  [observation] : Write an elaborate paragraph with a detailed description of experiences and events that were pivotal to ${user}’s discovery of [Identity] and [Identity explanation].
+  
+  [reflection] : Write an elaborate paragraph with a detailed and precise reflection about ${user}’s [observation], describing thoughts and feelings ${user} had during and after ${user}’s experiences.
+  
+  [insight] : Write an elaborate paragraph with insights that the ${user} gathered through [reflection] that ultimately leads to discovering the most essential reason for becoming [Identity] and [Identity explanation].
+  
+  [Competency] : Comprehensively analyze all of the ${user}’s answers and provide ${user}'s differentiation and competitiveness based on specialized strengths. Touch upon all positive resources and abilities that ${user} uniquely possesses, such as knowledge, skills, experience, career, personality, academic background, characteristics that the ${user} has or will need to have in order to realize [Identity] and [Identity explanation]. Be elaborate.
+  
+  [Target] : Comprehensively analyze all of the ${user}’s answers and define the target audience or industry that the [Identity] and [Identity explanation] would be most effective in terms of gathering attention or garnering partnerships. Give a few options for who the target audience may be and elaborate on each option by giving the following information: demographics such as age, gender, income, occupation, and education; online channel target audience is active in, such as Instagram, X, Facebook, Reddit, Youtube and other online SNS communities and channels; interests such as hobbies, interests, or activities target audience engages in; behavioral patterns of target audience; psychographics such as values, attitudes, lifestyles, and beliefs; engagement patterns such as how target audience interacts with brands. Be elaborate. [Target] should be in one paragraph.
+  
+  [Strategy] : Analyze all of the ${user}’s answers and recommend a detailed strategy for the ${user} to improve ${user}’s personal brand that is appropriate for [Identity], [Identity explanation], and [Target]. Give recommendations such as books and online resources for learning, experiences or events ${user} can attend, online content user can make or write, education user can recieve, and communities ${user} can join. This recommendation should be in one paragraph. Be elaborate.
+  
+  Proceed in the following order. All of the process must be done in only Korean. Double check your grammar before asking. You must only ask questions. Do not answer your questions. Do not act as ${user}. You are always Questioner. 
+  
+  Generate [Final] in the following JSON format: after [Strategy] in json format never put comma
+  {{
+    "Identity" : here is [Identity],
+    "Identity_explanation" : here is [Identity explanation],
+    "Brand_Keywords" : here is [Brand Keyword],
+    "Story_headlines": here is [Story_headlines],
+    "Story_contents": here is [Story_contents],
+    "Competency": here is [Competency],
+    "Target": here is [Target],
+    "Strategy": here is [Strategy]
+  }}`;
 
   const humanTemplate = "{answer}";
 
@@ -96,24 +145,23 @@ const WebLoading = () => {
     "사용자님의 브랜드를 빛나게 다듬고 있어요.",
     "브랜드의 퍼즐 조각을 맞추며 완벽한 그림을 그리고 있어요.",
     "사용자님의 브랜드 정체성에 풍부한 색채를 더하고 있어요.",
-  ]
+  ];
 
-  const lastText = "거의 다 완성되었어요! 조금만 기다려 주세요."
+  const lastText = "거의 다 완성되었어요! 조금만 기다려 주세요.";
 
-
-  const [currentText, setCurrentText] = useState('');
-  const [TextListRandomMixed, setTextListRandomMixed] = useState([...TextListRandom]);
+  const [currentText, setCurrentText] = useState("");
+  const [TextListRandomMixed, setTextListRandomMixed] = useState([
+    ...TextListRandom,
+  ]);
 
   useEffect(() => {
-
     const shuffleArray = (array) => {
       for (let i = array.length - 1; i > 0; i--) {
-
         const j = Math.floor(Math.random() * (i + 1));
 
         [array[i], array[j]] = [array[j], array[i]];
       }
-    }
+    };
     const shuffledArray = [...TextListRandom];
 
     shuffleArray(shuffledArray);
@@ -122,7 +170,6 @@ const WebLoading = () => {
   }, []);
   console.log(TextListRandomMixed);
 
-
   // useEffect(() => {
 
   //   const selectRandomText = () => {
@@ -130,12 +177,9 @@ const WebLoading = () => {
   //     setCurrentText(TextListRandom[randomIndex]);
   //   };
 
-
   //   const interval = setInterval(selectRandomText, 5000);
 
-
   //   selectRandomText();
-
 
   //   return () => clearInterval(interval);
   // }, []);
@@ -218,7 +262,7 @@ const WebLoading = () => {
         try {
           const response = await axios.post(
             process.env.REACT_APP_URL +
-            `/${userID}/${chatRoomId}/saveChatNickName`,
+              `/${userID}/${chatRoomId}/saveChatNickName`,
             { chatNickName: user },
             {
               headers: {
@@ -364,10 +408,18 @@ const WebLoading = () => {
       <Div style={{ display: "relative" }}>
         <Wrapper>
           {TextListMust.map((text, index) => (
-            <Text key={text} delay1={2 + 5.5 * index} delay2={7 + 5.5 * index}>{text}</Text>
+            <Text key={text} delay1={2 + 5.5 * index} delay2={7 + 5.5 * index}>
+              {text}
+            </Text>
           ))}
           {TextListRandomMixed.map((text, index) => (
-            <Text key={text} delay1={29.5 + 5.5 * index} delay2={34.5 + 5.5 * index}>{text}</Text>
+            <Text
+              key={text}
+              delay1={29.5 + 5.5 * index}
+              delay2={34.5 + 5.5 * index}
+            >
+              {text}
+            </Text>
           ))}
           <Alert>
             Brandon이 분석하는데 약 3분 이상의 시간이 소요될 수 있습니다.
@@ -525,7 +577,6 @@ const lineUp = keyframes`
   }
 `;
 
-
 const textRemove = keyframes` 
   0% {
     opacity: 1;
@@ -639,7 +690,8 @@ const Wrapper = styled.div`
 const Text = styled.div`
   position: absolute;
   opacity: 0;
-  animation: ${lineUp} 2s ease-out ${props => props.delay1}s forwards, ${textRemove} 1s ease-in ${props => props.delay2}s forwards;
+  animation: ${lineUp} 2s ease-out ${(props) => props.delay1}s forwards,
+    ${textRemove} 1s ease-in ${(props) => props.delay2}s forwards;
 `;
 
 const Text4 = styled.div`
