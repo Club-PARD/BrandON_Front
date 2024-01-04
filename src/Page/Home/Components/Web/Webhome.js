@@ -172,7 +172,10 @@ const WebHome = () => {
         </TestStart>
       )}
 
-      <HeaderImg src="onboarding.png"></HeaderImg>
+      <picture style={{ zIndex: 2 }}>
+      <Image srcset="onboarding.webp" type="image/webp"/>
+      <HeaderImg src="onboarding.png"/>
+      </picture>
 
       {/* <OnBoading>
         <img style={{ zIndex: "1", width:"100vw", marginTop:"-18%"}} src="home mockup a.png"></img>
@@ -248,7 +251,11 @@ const HeaderText = styled.div`
 
 const HeaderImg = styled.img`
   width: 100vw;
-  z-index: 2;
+  margin-top: -10%;
+`;
+
+const Image = styled.source`
+  width: 100vw;
   margin-top: -10%;
 `;
 
