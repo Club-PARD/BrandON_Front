@@ -110,7 +110,7 @@ const Column = styled.div`
   overflow-y: scroll;
   z-index: 10;
 
-  &::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background-color: transparent; /* 스크롤 바의 배경 색상 (투명으로 설정하여 숨김) */
   }
 `;
