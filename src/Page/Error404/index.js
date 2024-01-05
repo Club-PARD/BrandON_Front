@@ -4,7 +4,7 @@ import AppError404 from "./Components/App/AppError404";
 import WebError404 from "./Components/Web/WebError404";
 
 const Error404Page = () => {
-  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
+  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:1023px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
   return (
     <>

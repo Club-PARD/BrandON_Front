@@ -26,7 +26,7 @@ const TopNavBar = ({ isScrolled }) => {
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
   const [, setUserAllResults] = useRecoilState(recoilUserAllResults);
   const [, setNoCard] = useRecoilState(noCard);
-  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
+  const isDesktopOrMobile = useMediaQuery({ query: "(max-width:1023px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
@@ -213,15 +213,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>홈</Body1>
@@ -232,15 +232,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>채팅</Body1>
@@ -251,15 +251,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "#8F2EFF",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "#8F2EFF",
+                      }
                     : {
-                      all: "unset",
-                      cursor: "pointer",
-                      color: "white",
-                    }
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "white",
+                      }
                 }
               >
                 <Body1>기록</Body1>

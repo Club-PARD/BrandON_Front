@@ -8,14 +8,14 @@ const AppName = () => {
       <Div style={{ flexDirection: "column" }}>
         <Div
           style={{
-            height: "50vh",
+            height: "45vh",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
           <Div
             style={{
-              height: "50vh",
+              height: "100%",
               color: "white",
               flexDirection: "column",
               justifyContent: "end",
