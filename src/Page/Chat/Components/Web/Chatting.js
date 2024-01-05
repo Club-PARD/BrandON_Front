@@ -103,9 +103,9 @@ const Column = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 56.25rem;
-  padding: 56px 0 0 0;
+  padding: 3.5rem 0 0 0;
   min-height: 60vh;
-  height: calc(100% + 56px);
+  height: calc(100% + 3.5rem);
   color: white;
   overflow-y: scroll;
   z-index: 10;
