@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { isFirstLogin, nickname, recoilUserID } from "../../../../atom/loginAtom";
+import {
+  isFirstLogin,
+  nickname,
+  recoilUserID,
+} from "../../../../atom/loginAtom";
 import { useRecoilState } from "recoil";
 
 const Counter = ({ value, maxLength }) => (

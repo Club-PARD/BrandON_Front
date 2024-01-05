@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Brandon from "../../../../Assets/brandon_final.gif";
 import CardAnimation from "../../../../Assets/Card_Animation.gif";
 import CardAnimationBack from "../../../../Assets/Card_Animation_Back.png";

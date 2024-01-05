@@ -18,12 +18,10 @@ import {
 const WebHome = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [userID, setUserID] = useRecoilState(recoilUserID);
-  const [userData, setUserData] = useRecoilState(recoilUserData);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setUserID] = useRecoilState(recoilUserID);
+  const [, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
-  const [userAllResults, setUserAllResults] =
-    useRecoilState(recoilUserAllResults);
   const handleLogin = (token) => {
     localStorage.setItem("accessToken", token);
     setIsLoggedIn(true);
