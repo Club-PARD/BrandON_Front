@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CardDefault from "../../../../Assets/Card_Default.png";
 import CardWhite from "../../../../Assets/Card_White.png";
@@ -7,7 +7,6 @@ import CardPurple from "../../../../Assets/Card_Purple.png";
 import CardPink from "../../../../Assets/Card_Pink.png";
 
 const WebHistoryCard = (props) => {
-  const [card, setCard] = useState({ null_safety: "" });
   const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
   console.log(props.brandStory);
   console.log(props.brandCard);

@@ -1124,7 +1124,7 @@ const WebOutput = () => {
                       <Div style={{ flexDirection: "column" }}>
                         {chatroom?.answers?.map((answer, key) => (
                           <ChatContainerBrandon>
-                            {key % 2 == 0 ? (
+                            {key % 2 === 0 ? (
                               <ChatContainerBrandon>
                                 <ChatName>
                                   <BrandonImg
@@ -1199,15 +1199,6 @@ const WebOutput = () => {
 };
 
 export default WebOutput;
-
-// theme 파일 폰트 적용 방법 + style-components 사용
-const Header1 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  color: ${({ theme }) => theme.colors.secondary};
-  font-family: "Pretendard";
-`;
 
 const Div = styled.div`
   display: flex;
@@ -1356,65 +1347,6 @@ const Download = styled.div`
   }
 `;
 
-const Overlay = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 0vh 0vh 0vh 0vh;
-  padding: 0vh 0vh 0vh 0vh;
-  /* border: 0.5px solid black; */
-  border-radius: 0.625rem;
-  box-sizing: content-box;
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  font-family: Pretendard;
-  position: absolute;
-  background-color: black;
-  opacity: 0;
-  top: 0;
-  /* left: 0; */
-  z-index: 3;
-  &:hover {
-    opacity: 0.3;
-  }
-`;
-
-const Overlay2 = styled.div`
-  /* Rectangle 154 */
-`;
-
-const A = styled.a`
-  color: white;
-  /* mix-blend-mode: soft-light; */
-  justify-content: start;
-  align-items: start;
-  width: 100%;
-  /* letter-Spacing: -px */
-`;
-
-const Button = styled.button`
-  box-sizing: border-box;
-  position: absolute;
-  width: 20.3125rem;
-  height: 3.1875rem;
-  left: calc(50% - 20.3125rem / 2 + 0.0313rem);
-  top: 33.125rem;
-
-  background: rgba(255, 255, 255, 0.1);
-  border: 0.0625rem solid rgba(255, 255, 255, 0.2);
-  box-shadow: inset 1.5854rem -1.5854rem 1.5854rem rgba(194, 194, 194, 0.1),
-    inset -1.5854rem 1.5854rem 1.5854rem rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1.5854rem);
-  /* Note: backdrop-filter has minimal browser support */
-  border-radius: 1.25rem;
-
-  display: flex;
-`;
-
 const BrandonImg = styled.img`
   width: 2.25rem;
 `;
@@ -1514,11 +1446,4 @@ const ChatBubbleUser = styled.div`
   background: var(--ver-2-text-field, rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(3.125rem);
   /* border: 0.0313rem solid black; */
-`;
-
-const Text = styled.pre`
-  all: unset;
-  white-space: pre-wrap;
-  font-family: "Pretendard";
-  line-height: 1.7;
 `;
