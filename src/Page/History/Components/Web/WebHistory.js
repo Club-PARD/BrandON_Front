@@ -165,7 +165,6 @@ const WebHistory = () => {
                     justifyContent: "start",
                     margin: "0.125rem 0 0 1.25rem",
                     color: "white",
-                    fontFamily: "Pretendard Variable",
                     fontStyle: "normal",
                     fontWeight: "700",
                     fontSize: "1.125rem",
