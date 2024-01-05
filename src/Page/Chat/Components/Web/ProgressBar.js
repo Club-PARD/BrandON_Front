@@ -38,7 +38,7 @@ const Container = styled.div`
   z-index: 100;
   position: fixed;
   top: 72px;
-  left: calc(50vw - 238px);
+  left: calc(50vw - 14.875rem);
   width: 29.75rem;
   padding: 18px 34px;
   border-radius: 300px;

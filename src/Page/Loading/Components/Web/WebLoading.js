@@ -316,6 +316,7 @@ const WebLoading = () => {
             }
           );
           console.log("brandStory:", response.data); //response.data = brandStory
+          setIsLoading(false);
           /* setRecoilResult({
             ...recoilResult,
             chatRooms: [
@@ -379,7 +380,6 @@ const WebLoading = () => {
     chatNickName();
     brandCard();
     brandStory();
-    setIsLoading(false);
   }, [result]);
 
   // const [currentText, setCurrentText] = useState(TextList[0]);
