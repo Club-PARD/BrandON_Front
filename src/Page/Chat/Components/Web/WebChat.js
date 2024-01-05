@@ -36,7 +36,7 @@ const WebChat = () => {
   
   ${user}: Students or employees aspiring to become an online content maker or influencer, who don’t know how to build their own personal brand, explore and analyze themselves, how to create their own brand identity, nor how to take action after building their own personal brand.
   
-  [question_list] : {{ What industry or community does ${user} belong to, what are you doing there, and why do you want to do it? / What are ${user}’s core values and how do they shape ${user}’s life and work? / What are ${user}’s unique strong points and how do ${user} utilize them in ${user} career or projects? / What are ${user}’s passions and interests, and how do they manifest in ${user}’s daily activities? / How do ${user}’s friends and colleagues describe ${user}? 3개 이상 알려주세요 / What achievements are ${user} most proud of? Tell us how you did it and what you learned from the experience / What challenges have ${user} overcome, and what did ${user} learn from them? / Can ${user} describe pivotal events in ${user} life and how it influenced ${user}? What did those events teach ${user} about yourself? Please tell me as much as possible. It will help me with my analysis of you. / What are ${user}’s long-term career or life goals? / What is the personality or aspect of ${user} that ${user}  want others to see? }}
+  [question_list] : {{ What industry or community does ${user} belong to, what are you doing there, and why do you want to do it? / What are ${user}’s core values and how do they shape ${user}’s life and work? / What are ${user}’s unique strong points and how do ${user} utilize them in ${user} career or projects? / What are ${user}’s interests or what does ${user} passionate about, and how do they manifest in ${user}’s daily activities? / How do ${user}’s friends and colleagues describe ${user}? 3개 이상 알려주세요 / What achievements are ${user} most proud of? Tell us how you did it and what you learned from the experience / What challenges have ${user} overcome, and what did ${user} learn from them? / Can ${user} describe pivotal events in ${user} life and how it influenced ${user}? What did those events teach ${user} about yourself? Please tell me as much as possible. It will help me with my analysis of you. / What are ${user}’s long-term career or life goals? / What is the personality or aspect of ${user} that ${user}  want others to see? }}
   
   All process below should be done in Korean. All process below should be done in Korean. All process below should be done in Korean. All process below should be done in Korean. All process below should be done in Korean.
   
@@ -83,11 +83,13 @@ const WebChat = () => {
         const response = await axios.get(
           process.env.REACT_APP_URL + `/user/${userID}/recentChatRoom`
         );
-        console.log("chatRoom:", response.data); //response.data = chatRoom
+        // console.log("chatRoom:", response.data); //response.data = chatRoom
         setChatRoom(response.data);
         localStorage.setItem("chatRoomID", response.data.chatRoomId);
       } catch (error) {
-        console.error("서버 요청 에러:", error);
+        // console.error("서버 요청 에러:", error);
+        alert("채팅방 정보를 불러오는데 실패했습니다.")
+        navigate("/")
       }
     };
 
@@ -100,7 +102,7 @@ const WebChat = () => {
         const response = await axios.post(
           process.env.REACT_APP_URL + `/${userID}/chatRoom`
         );
-        console.log("chatRoom:", response.data); //response.data = chatRoomId
+        // console.log("chatRoom:", response.data); //response.data = chatRoomId
         localStorage.setItem("chatRoomID", response.data);
         setChatRoom({
           answers: [],
@@ -114,7 +116,9 @@ const WebChat = () => {
           progress: 0,
         });
       } catch (error) {
-        console.error("서버 요청 에러:", error);
+        // console.error("서버 요청 에러:", error);
+        alert("채팅룸 생성에 실패하였습니다.")
+        navigate("/")
       }
     };
 
@@ -135,9 +139,11 @@ const WebChat = () => {
             },
           }
         );
-        console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
+        // console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
       } catch (error) {
-        console.error("서버 요청 에러:", error);
+        // console.error("서버 요청 에러:", error);
+        alert("응답 저장에 실패하였습니다.");
+        navigate("/");
       }
     };
 
@@ -179,9 +185,11 @@ const WebChat = () => {
               },
             }
           );
-          console.log("chatRoom:", response.data); //response.data = chatRoomId
+          // console.log("chatRoom:", response.data); //response.data = chatRoomId
         } catch (error) {
-          console.error("서버 요청 에러:", error);
+          // console.error("서버 요청 에러:", error);
+          alert("응답 저장에 실패하였습니다.");
+          navigate("/");
         }
       }
     };
@@ -210,8 +218,8 @@ const WebChat = () => {
 
     if (
       progress !== 90 &&
-      (res.includes("✨") ||
-        res.includes("브랜드 아이덴티티") ||
+      (res.includes("✨") &&
+        res.includes("브랜드 아이덴티티") &&
         res.includes("브랜드 스토리"))
     ) {
       setProgress(100);

@@ -77,11 +77,11 @@ const TopNavBar = ({ isScrolled }) => {
   };
 
   const sendUserDataToServer = async (userData) => {
-    console.log(userData);
+    // console.log(userData);
     //유저의 구글정보를 서버로 보내서 디비에 저장
     try {
       const jsonUserData = JSON.stringify(userData);
-      console.log(jsonUserData);
+      // console.log(jsonUserData);
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/login/google`,
         jsonUserData,
@@ -91,14 +91,16 @@ const TopNavBar = ({ isScrolled }) => {
           },
         }
       );
-      console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
+      // console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
       setUserID(response.data.userId);
       localStorage.setItem("userID", response.data.userId);
       localStorage.setItem("nickname", response.data.nickname);
       setNickname(localStorage.getItem("nickname"));
       setIsFirstLoggedin(response.data.firstLogin);
     } catch (error) {
-      console.error("서버 요청 에러2:", error);
+      // console.error("서버 요청 에러2:", error);
+      alert("유저 정보 저장에 실패하였습니다.");
+      navigate("/");
     }
   };
   const sendUserDataToGoogle = async (token) => {
@@ -112,7 +114,7 @@ const TopNavBar = ({ isScrolled }) => {
           },
         }
       );
-      console.log("서버 응답:", response.data);
+      // console.log("서버 응답:", response.data);
       setUserData({
         name: response.data.name,
         email: response.data.email,
@@ -124,7 +126,9 @@ const TopNavBar = ({ isScrolled }) => {
         picture: response.data.picture,
       }); // 빋은 데이터를 서버로 보내서 디비에 저장
     } catch (error) {
-      console.error("서버 요청 에러:", error);
+      // console.error("서버 요청 에러:", error);
+      alert("사용자 정보 요청에 실패하였습니다.");
+      navigate("/");
     }
   };
 
@@ -142,7 +146,9 @@ const TopNavBar = ({ isScrolled }) => {
       // }
     },
     onFailure: (err) => {
-      console.log(err);
+      // console.log(err);
+      alert("구글 로그인에 실패하였습니다.");
+      navigate("/");
     },
   });
 
@@ -161,7 +167,7 @@ const TopNavBar = ({ isScrolled }) => {
   }, [localStorage.getItem("nickname")]);
 
   useEffect(() => {
-    console.log(isFirstLoggedin);
+    // console.log(isFirstLoggedin);
     if (isFirstLoggedin !== null) {
       if (isFirstLoggedin) {
         navigate("/name");
@@ -207,15 +213,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "#8F2EFF",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
                     : {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "white",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
                 }
               >
                 <Body1>홈</Body1>
@@ -226,15 +232,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "#8F2EFF",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
                     : {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "white",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
                 }
               >
                 <Body1>채팅</Body1>
@@ -245,15 +251,15 @@ const TopNavBar = ({ isScrolled }) => {
                 style={({ isActive }) =>
                   isActive
                     ? {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "#8F2EFF",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "#8F2EFF",
+                    }
                     : {
-                        all: "unset",
-                        cursor: "pointer",
-                        color: "white",
-                      }
+                      all: "unset",
+                      cursor: "pointer",
+                      color: "white",
+                    }
                 }
               >
                 <Body1>기록</Body1>

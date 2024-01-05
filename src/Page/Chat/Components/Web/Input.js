@@ -70,9 +70,11 @@ const Input = ({
           },
         }
       );
-      console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
+      // console.log("chatRoom:", response.data); //response.data = chatRoomAnswers
     } catch (error) {
-      console.error("서버 요청 에러:", error);
+      // console.error("서버 요청 에러:", error);
+      alert("서버 요청에 실패하였습니다.");
+      navigate("/");
     }
 
     navigate("/loading");
@@ -91,12 +93,12 @@ const Input = ({
           style={
             progress < 100
               ? {
-                  backgroundColor: `rgba(255, 255, 255, 0.10)`,
-                  border: `1px solid rgba(255, 255, 255, 0.30)`,
-                  backdropFilter: `blur(25.366666793823242px)`,
-                  cursor: "not-allowed",
-                  color: "#D2D2D2",
-                }
+                backgroundColor: `rgba(255, 255, 255, 0.10)`,
+                border: `1px solid rgba(255, 255, 255, 0.30)`,
+                backdropFilter: `blur(25.366666793823242px)`,
+                cursor: "not-allowed",
+                color: "#D2D2D2",
+              }
               : { cursor: "pointer" }
           }
           wrapCount={wrapCount}

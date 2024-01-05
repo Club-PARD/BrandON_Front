@@ -8,8 +8,6 @@ import CardPink from "../../../../Assets/Card_Pink.png";
 
 const WebHistoryCard = (props) => {
   const ImgList = [CardWhite, CardPink, CardPurple, CardBlue];
-  console.log(props.brandStory);
-  console.log(props.brandCard);
 
   return (
     <Div
@@ -90,8 +88,8 @@ const WebHistoryCard = (props) => {
                   {props.undefined === true
                     ? ""
                     : props.brandCard?.identity.length > 15
-                    ? props.brandCard?.identity.substring(0, 15)
-                    : props.brandCard?.identity}
+                      ? props.brandCard?.identity.substring(0, 15)
+                      : props.brandCard?.identity}
                 </Div>
               ) : (
                 <Div
@@ -106,8 +104,8 @@ const WebHistoryCard = (props) => {
                   {props.undefined === true
                     ? ""
                     : props.brandCard?.identity.length > 15
-                    ? props.brandCard?.identity.substring(0, 15)
-                    : props.brandCard?.identity}
+                      ? props.brandCard?.identity.substring(0, 15)
+                      : props.brandCard?.identity}
                 </Div>
               )}
             </Div>
@@ -134,8 +132,8 @@ const WebHistoryCard = (props) => {
                   {props.undefined === true
                     ? ""
                     : props.brandCard?.identity_explanation.length > 70
-                    ? props.brandCard?.identity_explanation.substring(0, 70)
-                    : props.brandCard?.identity_explanation}
+                      ? props.brandCard?.identity_explanation.substring(0, 70)
+                      : props.brandCard?.identity_explanation}
                 </Div>
               ) : (
                 <Div
@@ -151,8 +149,8 @@ const WebHistoryCard = (props) => {
                   {props.undefined === true
                     ? ""
                     : props.brandCard?.identity_explanation.length > 70
-                    ? props.brandCard?.identity_explanation.substring(0, 70)
-                    : props.brandCard?.identity_explanation}
+                      ? props.brandCard?.identity_explanation.substring(0, 70)
+                      : props.brandCard?.identity_explanation}
                 </Div>
               )}
             </Div>

@@ -24,15 +24,14 @@ const WebOutput = () => {
       const data = await axios.get(
         `${process.env.REACT_APP_URL}/${userID}/${chatRoomId}/myResult`
       );
-      console.log(data.data);
+      // console.log(data.data);
       setChatroom(data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setBadAccess(true);
     }
   };
 
-  const chatRoomIdS = localStorage.getItem("chatRoomID");
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
       alert("로그인이 필요합니다.");
@@ -48,18 +47,6 @@ const WebOutput = () => {
     }
   }, [badAccess]);
 
-  // console.log(userData);
-  console.log(chatroom);
-  // console.log(chatroom.answers);
-  console.log(chatRoomIdS);
-
-  // useEffect(() => {
-  //   for (let i = 0; i < userData.chatRooms.length; i++) {
-  //     if (userData.chatRooms[i].chatRoomId == chatRoomIdS) {
-  //       setChatroom(userData.chatRooms[i]);
-  //     }
-  //   }
-  // }, [userData])
 
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(1);
@@ -95,11 +82,6 @@ const WebOutput = () => {
   const downloadImageHandler = () => {
     const input = document.getElementById("pdf");
 
-    if (!input) {
-      console.error("Element with ID pdf not found");
-      return;
-    }
-
     // 원래 배경색을 저장합니다.
     const originalBackgroundColor = input.style.backgroundColor;
 
@@ -128,7 +110,7 @@ const WebOutput = () => {
         input.style.backgroundColor = originalBackgroundColor;
       })
       .catch((error) => {
-        console.error("Error creating image:", error);
+        // console.error("Error creating image:", error);
 
         // 에러가 발생한 경우에도 원래 색상으로 복원합니다.
         input.style.backgroundColor = originalBackgroundColor;
@@ -139,11 +121,6 @@ const WebOutput = () => {
 
   const downloadPDFHandler2 = () => {
     const input = document.getElementById("pdf2");
-
-    if (!input) {
-      console.error("Element with ID pdf not found");
-      return;
-    }
 
     // 원래 배경색을 저장합니다.
     const originalBackgroundColor = input.style.backgroundColor;
@@ -172,7 +149,7 @@ const WebOutput = () => {
         input.style.backgroundColor = originalBackgroundColor;
       })
       .catch((error) => {
-        console.error("Error creating PDF:", error);
+        // console.error("Error creating PDF:", error);
 
         // 에러가 발생한 경우에도 원래 색상으로 복원합니다.
         input.style.backgroundColor = originalBackgroundColor;

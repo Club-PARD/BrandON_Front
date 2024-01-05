@@ -12,10 +12,6 @@ const WebHistory = () => {
   const [userData, setUserData] = useState({});
   // const [userData, setUserData] = useRecoilState(recoilUserAllResults);
   const [chatrooms, setChatrooms] = useState([]);
-  console.log(userData);
-  console.log(userData.chatRooms);
-  console.log(chatrooms);
-  console.log(chatrooms.length);
 
   const getChatroomData = async () => {
     try {
@@ -23,11 +19,13 @@ const WebHistory = () => {
       const data = await axios.get(
         `${process.env.REACT_APP_URL}/user/${userID}/allResults`
       );
-      console.log(data.data);
+      // console.log(data.data);
       setUserData(data.data);
       setChatrooms(data.data.chatRooms);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      alert("데이터를 불러오는데 실패하였습니다.");
+      navigate("/");
     }
   };
 
@@ -45,7 +43,6 @@ const WebHistory = () => {
 
   useEffect(() => {
     if (chatrooms && chatrooms.length > 0) {
-      console.log(chatrooms[0]);
       setSelectCardNum([
         chatrooms?.length - 1,
         chatrooms.length - 2,
@@ -77,24 +74,16 @@ const WebHistory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(chatrooms.length);
     if (chatrooms && chatrooms.length > 0 && chatrooms[0].finishChat === true) {
       setIsNoCard(false);
     }
   }, [chatrooms]);
-
-  console.log(isNoCard);
-  console.log(selectCardNum);
-  console.log(chatrooms.length);
-  console.log(selectCardNum[0]);
-  console.log(selectedCard[0]);
 
   const chatButtonHandler = () => {
     navigate("/chat");
   };
 
   const cardClickHandler = (event, e) => {
-    console.log(e);
     localStorage.setItem("chatRoomID", e);
     navigate("/output");
   };
@@ -116,7 +105,6 @@ const WebHistory = () => {
     ]);
   }, [selectCardNum]);
 
-  // console.log(selectedCard[0]?.brandStory);
 
   return (
     <Div>

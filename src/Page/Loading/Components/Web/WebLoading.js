@@ -50,14 +50,6 @@ const WebLoading = () => {
   
   [Brand Keyword] : 6 [final_keywords] that best support [Identity] and [Identity explanation]
   
-  [keywords] : Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
-  
-  [final_keywords] : Sum of [keywords] and additional user input keywords.
-  
-  [messages] : Brand messages for ${user} using each group’s keywords in [Groups]. There should be one brand message per group and each message should be less than 10 words. [Messages] should represent the ${user}.
-  
-  [Groups] : Grouped [final_keywords] based on similarity and context. Each group should have [messages].
-  
   [Story_headlines] : List of creative and short headlines for each paragraph of [observation], [reflection], [insight].
   
   [Story_contents] : List of each paragraph for [observation], [reflection], [insight].
@@ -88,6 +80,8 @@ const WebLoading = () => {
     "Target": here is [Target],
     "Strategy": here is [Strategy]
   }}
+
+  Do not use variables in [] for [Final] contents. For example, in Strategy contents, do not include [identity] by word itself. Replace it with other korean words.
   
   Do not ever never put comma after [Strategy] in [Final] JSON object. Do not ever never put comma after [Strategy] in [Final] JSON object. Do not ever never put comma after [Strategy] in [Final] JSON object.
   `;
@@ -172,7 +166,7 @@ const WebLoading = () => {
 
     setTextListRandomMixed(shuffledArray);
   }, []);
-  console.log(TextListRandomMixed);
+  // console.log(TextListRandomMixed);
 
   // useEffect(() => {
 
@@ -200,11 +194,13 @@ const WebLoading = () => {
         const response = await axios.get(
           process.env.REACT_APP_URL + `/user/${userID}/recentChatRoom`
         );
-        console.log("chatRoom:", response.data); //response.data = chatRoom
+        // console.log("chatRoom:", response.data); //response.data = chatRoom
         setChatRoom(response.data);
         localStorage.setItem("chatRoomID", response.data.chatRoomId);
       } catch (error) {
-        console.error("서버 요청 에러:", error);
+        // console.error("서버 요청 에러:", error);
+        alert("서버 요청 에러");
+        navigate("/")
       }
     };
 
@@ -229,7 +225,7 @@ const WebLoading = () => {
     const analysis = async () => {
       if (chatModelResult.length !== 0) {
         let message = await chain.predict({ answer: "start analysis" });
-        console.log(message);
+        // console.log(message);
         // 앞에서부터 "{"를 찾는 인덱스
         const startIndex = message.indexOf("{");
 
@@ -245,10 +241,10 @@ const WebLoading = () => {
             const parsedObject = JSON.parse(jsonString);
             setResult(parsedObject);
           } catch (error) {
-            console.error("JSON 파싱 오류:", error);
+            // console.error("JSON 파싱 오류:", error);
           }
         } else {
-          console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
+          // console.log('"{", "}" 사이의 부분이 발견되지 않았습니다.');
         }
       }
     };
@@ -270,9 +266,11 @@ const WebLoading = () => {
               },
             }
           );
-          console.log("chatNickname:", response.data); //response.data = brandCard
+          // console.log("chatNickname:", response.data); //response.data = brandCard
         } catch (error) {
           console.error("서버 요청 에러:", error);
+          alert("닉네임 저장 실패하였습니다.");
+          navigate("/");
         }
       }
     };
@@ -292,9 +290,11 @@ const WebLoading = () => {
               },
             }
           );
-          console.log("brandCard:", response.data); //response.data = brandCard
+          // console.log("brandCard:", response.data); //response.data = brandCard
         } catch (error) {
-          console.error("서버 요청 에러:", error);
+          // console.error("서버 요청 에러:", error);
+          alert("브랜드 카드 저장에 실패하였습니다.");
+          navigate("/");
         }
       }
     };
@@ -320,7 +320,7 @@ const WebLoading = () => {
               },
             }
           );
-          console.log("brandStory:", response.data); //response.data = brandStory
+          // console.log("brandStory:", response.data); //response.data = brandStory
           setIsLoading(false);
           /* setRecoilResult({
             ...recoilResult,
@@ -378,6 +378,8 @@ const WebLoading = () => {
           }); */
         } catch (error) {
           console.error("서버 요청 에러:", error);
+          alert("브랜드 스토리 저장 실패하였습니다.");
+          navigate("/");
         }
       }
     };
