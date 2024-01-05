@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <>
       {isDesktopOrMobile === true ? (
-        <div>
+        <div style={{ overflowY: "hidden" }}>
           <AppHome />
         </div>
       ) : (
