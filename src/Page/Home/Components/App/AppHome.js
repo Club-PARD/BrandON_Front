@@ -9,7 +9,7 @@ const AppHome = () => {
       <Div style={{ flexDirection: "column", zIndex: "9" }}>
         <Div
           style={{
-            height: "50vh",
+            height: "45vh",
             alignItems: "center",
             flexDirection: "column",
           }}
