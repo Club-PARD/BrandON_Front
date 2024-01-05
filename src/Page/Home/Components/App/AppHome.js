@@ -46,7 +46,6 @@ const AppHome = () => {
             <BrandonImg src={Brandon} />
           </Div>
         </Div>
-        <Div style={{ height: "35vh", alignItems: "center" }}></Div>
       </Div>
     </Div>
   );
