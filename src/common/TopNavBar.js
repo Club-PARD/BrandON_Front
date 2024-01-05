@@ -18,15 +18,14 @@ import { useMediaQuery } from "react-responsive";
 const TopNavBar = ({ isScrolled }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLogined);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
   const [isDropdownView, setDropdownView] = useState(false);
-  const [userID, setUserID] = useRecoilState(recoilUserID);
+  const [, setUserID] = useRecoilState(recoilUserID);
   const [userData, setUserData] = useRecoilState(recoilUserData);
   const [isFirstLoggedin, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
   const [nickname, setNickname] = useState(localStorage.getItem("nickname"));
-  const [userAllResults, setUserAllResults] =
-    useRecoilState(recoilUserAllResults);
-  const [noCardR, setNoCard] = useRecoilState(noCard);
+  const [, setUserAllResults] = useRecoilState(recoilUserAllResults);
+  const [, setNoCard] = useRecoilState(noCard);
   const isDesktopOrMobile = useMediaQuery({ query: "(max-width:768px)" }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
 
   const handleLogin = (token) => {
@@ -320,14 +319,6 @@ const Div = styled.div`
   backdrop-filter: ${(props) => (props.scrolled ? "blur(50px)" : "none")};
   transition: background-color 0.5s;
   color: white;
-`;
-
-const Header1 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  color: white;
-  font-family: "Pretendard";
 `;
 
 const Body1 = styled.div`
