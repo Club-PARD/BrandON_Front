@@ -4,11 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import {
-  isFirstLogin,
-  nickname,
-  recoilUserID,
-} from "../../../../atom/loginAtom";
+import { isFirstLogin, nickname } from "../../../../atom/loginAtom";
 import { useRecoilState } from "recoil";
 
 const Counter = ({ value, maxLength }) => (
@@ -31,8 +27,7 @@ const WebName = () => {
   const [text, setText] = useState("");
   const maxLength = 7;
   const navigate = useNavigate();
-  const [userNickname, setUserNickname] = useRecoilState(nickname);
-  const [userId, setUserId] = useRecoilState(recoilUserID);
+  const [, setUserNickname] = useRecoilState(nickname);
   const [, setIsFirstLoggedin] = useRecoilState(isFirstLogin);
 
   const handleInputChange = (event) => {
@@ -91,6 +86,7 @@ const WebName = () => {
           <BrandImg>
             <img
               src="brandon_card.png"
+              alt="브랜든 브랜드 아이덴티티 카드"
               style={{ width: "450px", height: "250px" }}
             ></img>
           </BrandImg>
@@ -129,14 +125,6 @@ const WebName = () => {
 
 export default WebName;
 
-// theme 파일 폰트 적용 방법 + style-components 사용
-const Header1 = styled.div`
-  font-size: ${(props) => props.theme.Web_fontSizes.Header1};
-  font-weight: ${(props) => props.theme.fontWeights.Header1};
-  line-height: ${(props) => props.theme.LineHeight.Header1};
-  color: ${(props) => props.theme.colors.secondary};
-  font-family: "Pretendard";
-`;
 const WelcomePont = styled.span`
   color: var(--Grey_Scale-0, #fff);
   font-family: "Pretendard";
@@ -145,6 +133,7 @@ const WelcomePont = styled.span`
   font-weight: 600;
   line-height: normal;
 `;
+
 const IntroducePont = styled.div`
   color: var(--Grey_Scale-0, #fff);
   font-family: "Pretendard";
@@ -155,6 +144,7 @@ const IntroducePont = styled.div`
   margin-bottom: 2%;
   margin-top: 5%;
 `;
+
 const IntroduceBoldPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
   font-family: "Pretendard";
@@ -163,6 +153,7 @@ const IntroduceBoldPont = styled.span`
   font-weight: 700;
   line-height: normal;
 `;
+
 const ConfirmPont = styled.span`
   color: var(--White, var(--Grey_Scale-0, #fff));
   font-family: "Pretendard";
@@ -171,10 +162,12 @@ const ConfirmPont = styled.span`
   font-weight: 500;
   line-height: normal;
 `;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const Container2 = styled.div`
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -189,6 +182,7 @@ const Container2 = styled.div`
   justify-content: space-between;
   margin-top: 24px;
 `;
+
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -197,11 +191,13 @@ const Header = styled.div`
   padding: 0;
   margin-top: 8%;
 `;
+
 const HeaderImg = styled.img`
   width: 29%;
   //width:257px;
   margin-right: 2%;
 `;
+
 const BrandImg = styled.div`
   display: flex;
   flex-direction: row;
@@ -213,6 +209,7 @@ const IntroduceDiv = styled.div`
   height: 9%;
   margin-left: 13%;
 `;
+
 const WriteNameDiv = styled.div`
   width: 74%;
   height: 8%;
@@ -222,6 +219,7 @@ const WriteNameDiv = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
 const InputDiv = styled.div`
   flex: 0 0 79%;
   height: 100%;
@@ -230,6 +228,7 @@ const InputDiv = styled.div`
   justify-content: start;
   align-items: center;
 `;
+
 const InputName = styled.input`
   border-radius: 10px;
   border: 1.5px solid var(--White, #fff);
@@ -253,12 +252,14 @@ const InputName = styled.input`
     line-height: normal;
   }
 `;
+
 const ButtonDiv = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
 `;
+
 const Button = styled.button`
   width: 82%;
   height: 100%;

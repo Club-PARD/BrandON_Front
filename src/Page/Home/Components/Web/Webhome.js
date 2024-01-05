@@ -12,7 +12,6 @@ import {
   recoilUserID,
   recoilUserData,
   isFirstLogin,
-  recoilUserAllResults,
 } from "../../../../atom/loginAtom";
 
 const WebHome = () => {
@@ -141,7 +140,11 @@ const WebHome = () => {
     <Container>
       <Overlay />
       <HeaderText>
-        <img style={{ zIndex: "1" }} src="home_catchphrase.png"></img>
+        <img
+          style={{ zIndex: "1" }}
+          alt="Main 캐치프레이즈"
+          src="home_catchphrase.png"
+        ></img>
       </HeaderText>
 
       {isLoggedIn ? (
@@ -206,23 +209,6 @@ const WebHome = () => {
 
 export default WebHome;
 
-// theme 파일 폰트 적용 방법 + style-components 사용
-const Header1 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  color: ${({ theme }) => theme.colors.text};
-  font-family: "Pretendard";
-`;
-
-const Header2 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header2};
-  font-weight: ${({ theme }) => theme.fontWeights.Header2};
-  line-height: ${({ theme }) => theme.LineHeight.Header2};
-  color: ${({ theme }) => theme.colors.accent};
-  font-family: "Pretendard";
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -280,13 +266,6 @@ const LoginLink = styled(Link)`
   font-weight: ${({ theme }) => theme.fontWeights.Header4};
   line-height: normal;
   text-decoration: none;
-`;
-
-const OnBoading = styled.div`
-  margin-top: 78px;
-  z-index: 1;
-  border: 1px solid black;
-  background-color: transparent;
 `;
 
 const Arrow = styled.img`

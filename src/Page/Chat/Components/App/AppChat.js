@@ -1,39 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import Brandon from "../../../../Assets/brandon_final.gif";
 
 const AppChat = () => {
   return (
     <Div>
       <Div style={{ flexDirection: "column" }}>
-        <Div style={{ height: "50vh", alignItems: "center", flexDirection: "column" }}>
-          <Div style={{ height: "50vh", color: "white", flexDirection: "column", justifyContent: "end", }}>
-            <Div style={{ height: "4vh", fontSize: "1.225rem", fontWeight: "300", }}>모바일 환경은 준비 중입니다.</Div>
-            <Div style={{ height: "4vh", fontSize: "1.225rem", fontWeight: "300", }}>데스크톱 환경에서 사용해 주세요.</Div>
+        <Div
+          style={{
+            height: "50vh",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Div
+            style={{
+              height: "50vh",
+              color: "white",
+              flexDirection: "column",
+              justifyContent: "end",
+            }}
+          >
+            <Div
+              style={{ height: "4vh", fontSize: "1.225rem", fontWeight: "300" }}
+            >
+              모바일 환경은 준비 중입니다.
+            </Div>
+            <Div
+              style={{ height: "4vh", fontSize: "1.225rem", fontWeight: "300" }}
+            >
+              데스크톱 환경에서 사용해 주세요.
+            </Div>
           </Div>
-          <Div style={{ height: "10vh", fontSize: "4.5rem", fontWeight: "900", color: "white", margin: "0 0 0 0", letterSpacing: "-0.1875rem" }}>
+          <Div
+            style={{
+              height: "10vh",
+              fontSize: "4.5rem",
+              fontWeight: "900",
+              color: "white",
+              margin: "0 0 0 0",
+              letterSpacing: "-0.1875rem",
+            }}
+          >
             <BrandonImg src={Brandon} />
           </Div>
         </Div>
-        <Div style={{ height: "35vh", alignItems: "center" }}>
-
-        </Div>
+        <Div style={{ height: "35vh", alignItems: "center" }}></Div>
       </Div>
     </Div>
   );
 };
 
 export default AppChat;
-
-// theme 파일 폰트 적용 방법 + style-components 사용
-const Header1 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  color: ${({ theme }) => theme.colors.primary};
-  font-family: "Pretendard";
-`;
 
 const Div = styled.div`
   display: flex;

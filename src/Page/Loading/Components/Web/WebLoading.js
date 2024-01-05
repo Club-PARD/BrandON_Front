@@ -149,7 +149,6 @@ const WebLoading = () => {
 
   const lastText = "거의 다 완성되었어요! 조금만 기다려 주세요.";
 
-  const [currentText, setCurrentText] = useState("");
   const [TextListRandomMixed, setTextListRandomMixed] = useState([
     ...TextListRandom,
   ]);
@@ -478,15 +477,6 @@ const WebLoading = () => {
 
 export default WebLoading;
 
-// theme 파일 폰트 적용 방법 + style-components 사용
-const Header1 = styled.div`
-  font-size: ${({ theme }) => theme.Web_fontSizes.Header1};
-  font-weight: ${({ theme }) => theme.fontWeights.Header1};
-  line-height: ${({ theme }) => theme.LineHeight.Header1};
-  color: ${({ theme }) => theme.colors.secondary};
-  font-family: "Pretendard";
-`;
-
 const Div = styled.div`
   display: flex;
   flex-direction: row;
@@ -508,17 +498,6 @@ const Div = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
   overflow: visible;
-`;
-
-const A = styled.a``;
-
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  object-fit: cover;
-  top: 0%;
-  left: 0%;
 `;
 
 const BrandonIn = keyframes` 
