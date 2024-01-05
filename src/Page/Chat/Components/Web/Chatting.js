@@ -178,7 +178,7 @@ const Body4 = styled.div`
 
 const ChatBubbleBrandon = styled.div`
   max-width: 48.75rem;
-  min-width: 200px;
+  min-width: 12.5rem;
   padding: 1.5rem;
   border-radius: 0 0.625rem 0.625rem 0.625rem;
   background: rgba(0, 0, 0, 0.5);
