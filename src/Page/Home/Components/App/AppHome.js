@@ -4,7 +4,7 @@ import Brandon from "../../../../Assets/brandon_final.gif";
 
 const AppHome = () => {
   return (
-    <Div>
+    <Div style={{ overflow: "hidden" }}>
       <Overlay />
       <Div style={{ flexDirection: "column", zIndex: "9" }}>
         <Div
@@ -16,10 +16,10 @@ const AppHome = () => {
         >
           <Div
             style={{
-              height: "50vh",
+              height: "100%",
               color: "white",
               flexDirection: "column",
-              justifyContent: "end",
+              justifyContent: "flex-end",
             }}
           >
             <Div
