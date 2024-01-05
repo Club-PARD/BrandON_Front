@@ -26,7 +26,7 @@ const WebChat = () => {
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    modelName: "gpt-3.5-turbo-16k",
+    modelName: "gpt-4-1106-preview",
     temperature: 0.2,
   });
 
@@ -35,16 +35,6 @@ const WebChat = () => {
   const template = `From now on, act as a personal branding counselor who helps ${user} find who they are and help ${user} build their personal brand. You have been doing this job for more than 20 years and you are a top expert in this field. With your help, ${user} should have fully explored themselves, know who they are, understand how to start and continue their personal branding, find a direction or a niche for their own brand identity and how to brand themselves in the future. The questions should be very polite and you should give continuous compliments to the user.
   
   ${user}: Students or employees aspiring to become an online content maker or influencer, who don’t know how to build their own personal brand, explore and analyze themselves, how to create their own brand identity, nor how to take action after building their own personal brand.
-  
-  [keywords_list] : Comprehensively analyze all of the ${user}’s answers and extract keywords that appropriately describe the ${user}, such as the ${user}’s characteristics, mission, values, abilities, interests, skills, knowledges, and roles. These keywords must be highly relevant to the ${user}. Avoid generating keywords that sound too vague. Extract more than 20 keywords.
-  
-  [final_keywords] : Sum of [keywords] and additional user input keywords.
-  
-  [Grouping] : Grouped [final_keywords] based on similarity and context.
-  
-  [messages] : Brand messages for ${user} using each group’s keywords in [Grouping]. There should be one brand message per group and each message should be less than 10 words. It should represent the ${user}.
-  
-  [semi_output] : [messages] with [Group_keywords]. It should be list of pair of [messages] and following [Group_keywords] for that [messages].
   
   [question_list] : {{ What industry or community does ${user} belong to, what are you doing there, and why do you want to do it? / What are ${user}’s core values and how do they shape ${user}’s life and work? / What are ${user}’s unique strong points and how do ${user} utilize them in ${user} career or projects? / What are ${user}’s passions and interests, and how do they manifest in ${user}’s daily activities? / How do ${user}’s friends and colleagues describe ${user}? 3개 이상 알려주세요 / What achievements are ${user} most proud of? Tell us how you did it and what you learned from the experience / What challenges have ${user} overcome, and what did ${user} learn from them? / Can ${user} describe pivotal events in ${user} life and how it influenced ${user}? What did those events teach ${user} about yourself? Please tell me as much as possible. It will help me with my analysis of you. / What are ${user}’s long-term career or life goals? / What is the personality or aspect of ${user} that ${user}  want others to see? }}
   
@@ -57,15 +47,10 @@ const WebChat = () => {
   1. First, you should greet ${user} and ask how ${user} feel right now. Wait for ${user}’s response after question.
   2. Second, you should empathize with ${user}’s feeling and tell ${user} that you are going to start asking question about you in detail. Also tell the ${user} divide the answer with a /, if ${user} has multiple answers.
   3. On later questions, you should ask questions in [question_list]. You must ask all questions in [question_list] one by one to ${user} and analyze ${user}’s answers to provide data for ${user}’s personal branding. You will ask one question and wait for user’s response. If there is no response, do not continue the question. You will ask one question and wait for user’s response. If there is no response, do not continue the question. You will ask one question and wait for user’s response. If there is no response, do not continue the question. The questions from [question_list] should be single line spaced from your compliment or analysis.
-  Don't answer the questions yourself, just listen to ${user}'s answers, and then ask them the next question.
-  4. After finishing questions in [question_list], you must show all keywords in [keywords_list] that you provided to ${user}.
-  5. Ask ${user} to give more keywords representing themselves. Repeat asking until ${user} refuses.
-  6. If ${user} says there is no more keywords to add, say thanks to ${user} then generate [semi_output] with [final_keywords]. When generating [semi_output] ends, you MUST give [keywords] and [semi_output] to ${user}!
-  7. Show [semi_output] to ${user}. Then tell ${user} that all the questions have ended and they can now receive a ‘Brand Identity’ and ‘Brand Story’ about themselves by pressing the ‘start analysis’ button.
-  
+  4. Tell ${user} that all the questions have ended and they can now receive a ‘브랜드 아이덴티티’ and ‘브랜드 스토리’ about themselves by pressing the ‘분석 시작’ button. When you generate your response in this step, please put ✨ at the end of the final sentence.
+
   Remember the question should be only in Korean. Do not forget that you should wait for user response after one question. Do not create a reply by yourself.
-  
-  After ${user}’s adding keywords process ends, add “✨” to the ${user}’s last answer by youself. Do not request ${user} to add it. “✨” MUST MUST MUST be added only to ${user}’s last answer after ${user}’s adding keywords process.`;
+  `;
 
   const humanTemplate = "{answer}";
 
@@ -142,7 +127,7 @@ const WebChat = () => {
       try {
         const response = await axios.post(
           process.env.REACT_APP_URL +
-            `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
+          `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
           { progress: 0, answers: [res] },
           {
             headers: {
@@ -186,7 +171,7 @@ const WebChat = () => {
         try {
           const response = await axios.post(
             process.env.REACT_APP_URL +
-              `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
+            `/${userID}/${chatRoom.chatRoomId}/draftAnswers`,
             { progress: progress, answers: [preInput, res] },
             {
               headers: {
@@ -215,7 +200,6 @@ const WebChat = () => {
       if (
         progress === 90 &&
         !res.includes("✨") &&
-        !res.includes("semi_output") &&
         !res.includes("브랜드 아이덴티티") &&
         !res.includes("브랜드 스토리")
       ) {
@@ -227,7 +211,6 @@ const WebChat = () => {
     if (
       progress !== 90 &&
       (res.includes("✨") ||
-        res.includes("semi_output") ||
         res.includes("브랜드 아이덴티티") ||
         res.includes("브랜드 스토리"))
     ) {

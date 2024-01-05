@@ -373,7 +373,7 @@ const WebOutput = () => {
                                     color: "white",
                                   }}
                                 >
-                                  {chatroom?.brandCard?.identity || ""}
+                                  {chatroom?.brandCard?.identity.length > 15 ? chatroom?.brandCard?.identity.substring(0, 15) : chatroom?.brandCard?.identity || ""}
                                 </Div>
                               ) : (
                                 <Div
@@ -385,7 +385,7 @@ const WebOutput = () => {
                                     height: "100%",
                                   }}
                                 >
-                                  {chatroom?.brandCard?.identity || ""}
+                                  {chatroom?.brandCard?.identity.length > 15 ? chatroom?.brandCard?.identity.substring(0, 15) : chatroom?.brandCard?.identity || ""}
                                 </Div>
                               )}
                             </Div>
@@ -409,8 +409,7 @@ const WebOutput = () => {
                                     color: "white",
                                   }}
                                 >
-                                  {chatroom?.brandCard?.identity_explanation ||
-                                    ""}
+                                  {chatroom?.brandCard?.identity_explanation.length > 70 ? chatroom?.brandCard?.identity_explanation.substring(0, 15) : chatroom?.brandCard?.identity_explanation || ""}
                                 </Div>
                               ) : (
                                 <Div
@@ -423,8 +422,7 @@ const WebOutput = () => {
                                     lineHeight: "125%",
                                   }}
                                 >
-                                  {chatroom?.brandCard?.identity_explanation ||
-                                    ""}
+                                  {chatroom?.brandCard?.identity_explanation.length > 70 ? chatroom?.brandCard?.identity_explanation.substring(0, 15) : chatroom?.brandCard?.identity_explanation || ""}
                                 </Div>
                               )}
                             </Div>
