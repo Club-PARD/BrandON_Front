@@ -60,11 +60,13 @@ const WebName = () => {
           "userID"
         )}/chatRoom`
       );
-      console.log("서버 응답1(닉네임):", response.data.nickname);
+      // console.log("서버 응답1(닉네임):", response.data.nickname);
       localStorage.setItem("nickname", response.data.nickname);
-      console.log("서버 응답2(채팅룸):", chatRoomId.data);
+      // console.log("서버 응답2(채팅룸):", chatRoomId.data);
     } catch (error) {
-      console.log("닉네임 요청 에러:", error);
+      // console.log("닉네임 요청 에러:", error);
+      alert("유저 이름 저장에 실패하였습니다.");
+      navigate("/");
     }
   };
 

@@ -41,13 +41,15 @@ const WebHome = () => {
           },
         }
       );
-      console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
+      // console.log("서버 응답2:", response.data); //response.data = 유저 아이디.
       setUserID(response.data.userId.toString());
       setIsFirstLoggedin(response.data.firstLogin);
       localStorage.setItem("userID", response.data.userId.toString());
       localStorage.setItem("nickname", response.data.nickname);
     } catch (error) {
-      console.error("서버 요청 에러2:", error);
+      // console.error("서버 요청 에러2:", error);
+      alert("서버 저장에 실패하였습니다.");
+      navigate("/");
     }
   };
 
@@ -62,7 +64,7 @@ const WebHome = () => {
           },
         }
       );
-      console.log("서버 응답:", response.data);
+      // console.log("서버 응답:", response.data);
       setUserData({
         name: response.data.name,
         email: response.data.email,
@@ -74,7 +76,9 @@ const WebHome = () => {
         picture: response.data.picture,
       }); // 빋은 데이터를 서버로 보내서 디비에 저장
     } catch (error) {
-      console.error("서버 요청 에러:", error);
+      // console.error("서버 요청 에러:", error);
+      alert("구글 계정 데이터 요청에 실패하였습니다.");
+      navigate("/");
     }
   };
 
@@ -92,7 +96,9 @@ const WebHome = () => {
       // }
     },
     onFailure: (err) => {
-      console.log(err);
+      // console.log(err);
+      alert("구글 로그인에 실패하였습니다.");
+      navigate("/");
     },
   });
 
@@ -128,7 +134,7 @@ const WebHome = () => {
   // }, [userID]);
 
   useEffect(() => {
-    console.log(isFirstLoggedin);
+    // console.log(isFirstLoggedin);
     if (isFirstLoggedin !== null) {
       if (isFirstLoggedin) {
         navigate("/name");

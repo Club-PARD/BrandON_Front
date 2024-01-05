@@ -1,84 +1,88 @@
 import React from "react";
 import styled from "styled-components";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { nickname,recoilUserID } from "../../../../atom/loginAtom";
+import { nickname, recoilUserID } from "../../../../atom/loginAtom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 
 const WebMyPage = () => {
 
-    const [text, setText] = useState('');
-    const maxLength = 7; 
-    const navigate = useNavigate();
-    const [userNickname,setUserNickname] = useRecoilState(nickname);
-    const [userEmail, setUserEmail] = useState();
+  const [text, setText] = useState('');
+  const maxLength = 7;
+  const navigate = useNavigate();
+  const [userNickname, setUserNickname] = useRecoilState(nickname);
+  const [userEmail, setUserEmail] = useState();
 
-    const handleInputChange = (event) => {
-        const inputValue = event.target.value;
-        if (inputValue.length <= maxLength) {
-          setText(inputValue);
-        }
-    };
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value;
+    if (inputValue.length <= maxLength) {
+      setText(inputValue);
+    }
+  };
 
-    const handleConfirmButton = () =>{
-      setUserNickname(text);
-      saveUserNickName(text);
-      alert("변경되었습니다.");
+  const handleConfirmButton = () => {
+    setUserNickname(text);
+    saveUserNickName(text);
+    alert("변경되었습니다.");
+    navigate("/");
+  };
+
+  const saveUserNickName = async (userNickname) => {
+    try {
+      const usernameData = {
+        nickname: userNickname,
+      };
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
+          "userID"
+        )}/saveNickname`,
+        usernameData
+      );
+      // console.log("서버 응답1(닉네임):", response.data.nickname);
+      // console.log(localStorage.setItem("nickname", response.data.nickname));
+    } catch (error) {
+      // console.log("닉네임 요청 에러:", error);
+      alert("닉네임 저장에 실패하였습니다.");
       navigate("/");
-    };
+    }
+  };
 
-    const saveUserNickName = async (userNickname) => {
-      try {
-        const usernameData = {
-          nickname: userNickname,
-        };
-        const response = await axios.post(
-          `${process.env.REACT_APP_URL}/user/${localStorage.getItem(
-            "userID"
-          )}/saveNickname`,
-          usernameData
-        );
-        console.log("서버 응답1(닉네임):", response.data.nickname);
-        console.log(localStorage.setItem("nickname", response.data.nickname));
-      } catch (error) {
-        console.log("닉네임 요청 에러:", error);
-      }
-    };
+  const getUserEmail = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/myProfile`);
+      setUserEmail(response.data.email);
+      setUserNickname(response.data.nickname);
+    } catch (error) {
+      // console.log("이메일 요청 에러:", error);
+      alert("유저 정보 로딩에 실패하였습니다.");
+      navigate("/");
+    }
+  };
 
-    const getUserEmail = async () =>{
-      try{
-        const response = await axios.get(`${process.env.REACT_APP_URL}/user/${localStorage.getItem("userID")}/myProfile`);
-        setUserEmail(response.data.email);
-        setUserNickname(response.data.nickname);
-      }catch (error){
-        console.log("이메일 요청 에러:",error);
-      }
-    };
-
-    useEffect(() => {
-      if (localStorage.getItem("accessToken") === null) {
-        alert("로그인이 필요합니다.");
-        navigate("/");
-      }
-      else{
-        getUserEmail();
-      }
-    }, []);
-    return (
-      <>
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
+    else {
+      getUserEmail();
+    }
+  }, []);
+  return (
+    <>
       <Container>
         <Container2>
 
-        <HeaderPont>프로필 설정</HeaderPont>
-        
-        <Container3>
+          <HeaderPont>프로필 설정</HeaderPont>
+
+          <Container3>
 
             <IntroduceDiv>
-                <IntroducePont>
-                    <IntroduceBoldPont>브랜드 아이덴티티</IntroduceBoldPont>와
-                    <IntroduceBoldPont> 브랜드 스토리</IntroduceBoldPont>에 들어갈 이름을 입력해주세요.
-                </IntroducePont>
+              <IntroducePont>
+                <IntroduceBoldPont>브랜드 아이덴티티</IntroduceBoldPont>와
+                <IntroduceBoldPont> 브랜드 스토리</IntroduceBoldPont>에 들어갈 이름을 입력해주세요.
+              </IntroducePont>
             </IntroduceDiv>
 
             <NameDiv>
@@ -86,13 +90,13 @@ const WebMyPage = () => {
             </NameDiv>
 
             <InputDiv>
-                <InputName  
+              <InputName
                 type="text"
-                value={text}  
+                value={text}
                 onChange={handleInputChange}
                 maxLength={maxLength}
                 placeholder={userNickname}></InputName>
-                <Counter value={text} maxLength={maxLength}></Counter>
+              <Counter value={text} maxLength={maxLength}></Counter>
             </InputDiv>
 
             <EmailDiv>
@@ -107,21 +111,21 @@ const WebMyPage = () => {
               <Button disabled={text.length < 1} onClick={handleConfirmButton}>
                 <ConfirmPont>변경</ConfirmPont>
               </Button>
-          </ButtonDiv>
+            </ButtonDiv>
 
-        </Container3>
+          </Container3>
 
         </Container2>
       </Container>
-        
-      </>
-    );
+
+    </>
+  );
 };
-  
+
 export default WebMyPage;
-  
-  // theme 파일 폰트 적용 방법 + style-components 사용
-  const Header1 = styled.div`
+
+// theme 파일 폰트 적용 방법 + style-components 사용
+const Header1 = styled.div`
     font-size: ${(props) => props.theme.Web_fontSizes.Header1};
     font-weight: ${(props) => props.theme.fontWeights.Header1};
     line-height: ${(props) => props.theme.LineHeight.Header1};
@@ -162,7 +166,7 @@ const ConfirmPont = styled.span`
   line-height: normal;
 `;
 
-const Container =styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -221,19 +225,20 @@ const InputName = styled.input`
     line-height: normal;  
   }
 `;
-const Counter = ({value, maxLength}) => (
-    <span style={{
-      color: 'var(--Grey_Scale-0, #FFF)',
-      fontFamily: 'Pretendard',
-      fontSize: '16px',
-      fontStyle: 'normal',
-      fontWeight: '500',
-      lineHeight: 'normal',
-      marginLeft:'-17%'}}>
-      {value.length} / {maxLength} 글자
-    </span>
+const Counter = ({ value, maxLength }) => (
+  <span style={{
+    color: 'var(--Grey_Scale-0, #FFF)',
+    fontFamily: 'Pretendard',
+    fontSize: '16px',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 'normal',
+    marginLeft: '-17%'
+  }}>
+    {value.length} / {maxLength} 글자
+  </span>
 );
-const NameDiv =styled.div`
+const NameDiv = styled.div`
   width: 73%;
   height: 5%;
   margin-top: 52px;
@@ -270,7 +275,7 @@ const EmailInput = styled.input`
     background: var(--Gray-10, #ABABAB);
   }
 `;
-const ButtonDiv =styled.div`
+const ButtonDiv = styled.div`
   width: 73%;
   height: 5%;
   display: flex;
