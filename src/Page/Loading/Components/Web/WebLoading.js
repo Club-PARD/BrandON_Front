@@ -29,7 +29,7 @@ const WebLoading = () => {
 
   const chatModel = new ChatOpenAI({
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    modelName: "gpt-3.5-turbo-16k",
+    modelName: "gpt-4-1106-preview",
     temperature: 0.2,
   });
 
